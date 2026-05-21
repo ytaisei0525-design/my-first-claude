@@ -315,35 +315,43 @@ body{font-family:'Noto Sans JP','Segoe UI',sans-serif;background:#1a1f2b;padding
     <h2>山火事被害の深刻化とWUIリスク</h2>
   </div>
   <div class="sb">
-    <div class="g3" style="flex:1;">
-      <div class="card">
-        <div class="stat">
-          <div class="stat-num">5<span class="u">倍</span></div>
-          <div class="stat-lbl">大規模山火事の増加</div>
-          <div class="stat-sub">過去30年間における焼失面積の拡大</div>
+    <div class="g21" style="flex:1;">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="g3" style="flex:0 0 auto;">
+          <div class="card">
+            <div class="stat" style="padding:10px;">
+              <div class="stat-num" style="font-size:60px;">5<span class="u" style="font-size:26px;">倍</span></div>
+              <div class="stat-lbl" style="font-size:16px;">大規模山火事の増加</div>
+              <div class="stat-sub" style="font-size:13px;">過去30年で焼失面積拡大</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat" style="padding:10px;">
+              <div class="stat-num" style="font-size:48px;">400<span class="u" style="font-size:22px;">万km²</span></div>
+              <div class="stat-lbl" style="font-size:16px;">年間焼失面積（世界）</div>
+              <div class="stat-sub" style="font-size:13px;">気候変動・干ばつが要因</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat" style="padding:10px;">
+              <div class="stat-num" style="font-size:54px;">4500<span class="u" style="font-size:22px;">万人</span></div>
+              <div class="stat-lbl" style="font-size:16px;">米国WUI居住者</div>
+              <div class="stat-sub" style="font-size:13px;">境界帯のリスク層</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="stat">
-          <div class="stat-num">400<span class="u">万 km²</span></div>
-          <div class="stat-lbl">年間焼失面積（世界）</div>
-          <div class="stat-sub">気候変動・干ばつ・WUI拡大が原因</div>
+        <div class="card outline" style="padding:14px 18px;gap:6px;flex:0 0 auto;">
+          <div style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">用語</div>
+          <div style="font-size:16px;color:var(--ink);"><strong>WUI</strong>（Wildland-Urban Interface）：野生地と都市の境界帯。山火事被害が住宅に直接及ぶ高リスク領域</div>
         </div>
+        <div class="co" style="font-size:16px;"><i class="fas fa-triangle-exclamation"></i> 気候変動により乾燥・強風期間が延長 → 従来の消火戦略では対応が追いつかない</div>
       </div>
-      <div class="card">
-        <div class="stat">
-          <div class="stat-num">4500<span class="u">万人</span></div>
-          <div class="stat-lbl">米国WUI居住者</div>
-          <div class="stat-sub">都市と野域の境界に住むリスク層</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="img-box" style="flex:1;">
+          <img src="figs/fig3c_timelapse.png" alt="Wildfire flame contact">
         </div>
+        <div style="font-size:12px;color:var(--muted);text-align:center;font-style:italic;">直炎接触下での燃焼過程<br>（本研究の燃焼試験より）</div>
       </div>
-    </div>
-    <div class="g2" style="flex:0 0 auto;">
-      <div class="card outline" style="padding:14px 18px;gap:6px;">
-        <div style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">用語</div>
-        <div style="font-size:17px;color:var(--ink);"><strong>WUI</strong>（Wildland-Urban Interface）：野生地と都市の境界帯。山火事被害が住宅に直接及ぶ高リスク領域</div>
-      </div>
-      <div class="co"><i class="fas fa-triangle-exclamation"></i> 気候変動により乾燥・強風期間が延長 → 従来の消火戦略では対応が追いつかない状況</div>
     </div>
   </div>
   <div class="sf"></div>
@@ -395,43 +403,53 @@ body{font-family:'Noto Sans JP','Segoe UI',sans-serif;background:#1a1f2b;padding
     <h2>既存の山火事対策と、その本質的な限界</h2>
   </div>
   <div class="sb">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th style="width:22%;">技術</th>
-          <th style="width:30%;">主成分</th>
-          <th style="width:30%;">特徴</th>
-          <th style="width:18%;">限界</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="em">水のみ</td>
-          <td>H₂O</td>
-          <td>蒸発潜熱による冷却</td>
-          <td class="ng">即座に流失・蒸発</td>
-        </tr>
-        <tr>
-          <td class="em">Phos-Chek（長期難燃剤）</td>
-          <td>リン酸アンモニウム + 着色剤</td>
-          <td>樹木・地表に直接散布</td>
-          <td class="ng">土壌・水系への残留性</td>
-        </tr>
-        <tr>
-          <td class="em">AquaGel-K（市販WEG）</td>
-          <td>架橋ポリアクリレート（吸水ポリマー）</td>
-          <td>水を高濃度に保持し付着性向上</td>
-          <td class="ng">水蒸発後は保護機能が消失</td>
-        </tr>
-        <tr style="background:var(--soft);">
-          <td class="em star">本研究 WEG（HEC+MC/CSP）</td>
-          <td>セルロース系ポリマー + コロイダルシリカ粒子</td>
-          <td>加熱時にエアロゲル層を自己形成</td>
-          <td class="ok">水蒸発後も継続保護</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="key"><i class="fas fa-arrow-right"></i> 課題：既存WEGは「水のキャリア」止まりで、水分喪失と同時に保護機能が失われる</div>
+    <div class="g21" style="flex:1;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <table class="tbl" style="flex-shrink:0;">
+          <thead>
+            <tr>
+              <th style="width:24%;">技術</th>
+              <th style="width:28%;">主成分</th>
+              <th style="width:28%;">特徴</th>
+              <th style="width:20%;">限界</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="em">水のみ</td>
+              <td>H₂O</td>
+              <td>蒸発潜熱による冷却</td>
+              <td class="ng">即座に流失・蒸発</td>
+            </tr>
+            <tr>
+              <td class="em">Phos-Chek</td>
+              <td>リン酸アンモニウム + 着色剤</td>
+              <td>樹木・地表に直接散布</td>
+              <td class="ng">土壌・水系への残留性</td>
+            </tr>
+            <tr>
+              <td class="em">AquaGel-K（市販WEG）</td>
+              <td>架橋ポリアクリレート</td>
+              <td>水を高濃度に保持</td>
+              <td class="ng">水蒸発後は保護機能消失</td>
+            </tr>
+            <tr style="background:var(--soft);">
+              <td class="em star">本研究 WEG</td>
+              <td>セルロース系 + コロイダルシリカ</td>
+              <td>加熱でエアロゲル層を自己形成</td>
+              <td class="ok">水蒸発後も継続保護</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="key" style="flex-shrink:0;"><i class="fas fa-arrow-right"></i> 課題：既存WEGは「水のキャリア」止まりで、水分喪失と同時に保護機能が失われる</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="img-box" style="flex:1;">
+          <img src="figs/fig3d_photos.png" alt="300s comparison">
+        </div>
+        <div style="font-size:12px;color:var(--muted);text-align:center;font-style:italic;">300秒後の比較：Water（炭化）vs 本研究WEG（表面保護）</div>
+      </div>
+    </div>
   </div>
   <div class="sf"></div>
   <div class="sn">6 / 36</div>
@@ -444,26 +462,36 @@ body{font-family:'Noto Sans JP','Segoe UI',sans-serif;background:#1a1f2b;padding
     <h2>本研究の核心：熱活性化エアロゲル形成</h2>
   </div>
   <div class="sb">
-    <div class="g2">
-      <div class="card" style="gap:14px;">
-        <div style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">設計コンセプト</div>
-        <ul class="list">
-          <li><i class="fas fa-circle"></i>セルロースポリマー(HEC, MC, MHEC)が水溶性のゲル骨格を形成</li>
-          <li><i class="fas fa-circle"></i>コロイダルシリカ粒子(CSP)を均一分散</li>
-          <li><i class="fas fa-circle"></i>加熱時に水が発泡 → 多孔構造を作る</li>
-          <li><i class="fas fa-circle"></i>シリカ粒子が焼結し silica aerogel 層に転換</li>
-        </ul>
+    <div class="g32" style="flex:1;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="g2" style="flex:1;">
+          <div class="card" style="gap:14px;">
+            <div style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">設計コンセプト</div>
+            <ul class="list sm">
+              <li><i class="fas fa-circle"></i>セルロースポリマー(HEC, MC, MHEC)が水溶性ゲル骨格を形成</li>
+              <li><i class="fas fa-circle"></i>コロイダルシリカ粒子(CSP)を均一分散</li>
+              <li><i class="fas fa-circle"></i>加熱時に水が発泡 → 多孔構造を作る</li>
+              <li><i class="fas fa-circle"></i>シリカ粒子が焼結し silica aerogel 層に転換</li>
+            </ul>
+          </div>
+          <div class="card dark" style="gap:14px;">
+            <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:1.5px;text-transform:uppercase;">3つの革新ポイント</div>
+            <ul class="list white sm">
+              <li><i class="fas fa-circle"></i>水分依存からの脱却：熱でアクティブ化する固体保護層</li>
+              <li><i class="fas fa-circle"></i>持続可能な原料：天然由来かつ食品添加物グレード</li>
+              <li><i class="fas fa-circle"></i>既存散布インフラと互換：噴霧可能な剪断希薄化流体</li>
+            </ul>
+          </div>
+        </div>
+        <div class="co" style="flex-shrink:0;"><i class="fas fa-lightbulb"></i> "Heat-Activated Formation of Silica Aerogels" — 火炎接触をトリガーに、ゲル自身がエアロゲル断熱材へ変態する</div>
       </div>
-      <div class="card dark" style="gap:14px;">
-        <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:1.5px;text-transform:uppercase;">3つの革新ポイント</div>
-        <ul class="list white">
-          <li><i class="fas fa-circle"></i>水分依存からの脱却：熱でアクティブ化する固体保護層</li>
-          <li><i class="fas fa-circle"></i>持続可能な原料：セルロース誘導体は天然由来かつ食品添加物グレード</li>
-          <li><i class="fas fa-circle"></i>既存散布インフラと互換：シア-シニング流体として噴霧可能</li>
-        </ul>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="img-box" style="flex:1;">
+          <img src="figs/fig5a_mechanism.png" alt="Aerogel formation mechanism">
+        </div>
+        <div style="font-size:12px;color:var(--muted);text-align:center;font-style:italic;">Figure 5a：CSP焼結によるエアロゲル形成の3段階（プレビュー）</div>
       </div>
     </div>
-    <div class="co"><i class="fas fa-lightbulb"></i> "Heat-Activated Formation of Silica Aerogels" — 火炎接触をトリガーに、ゲル自身がエアロゲル断熱材へ変態する</div>
   </div>
   <div class="sf"></div>
   <div class="sn">7 / 36</div>
