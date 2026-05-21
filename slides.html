@@ -2,909 +2,1498 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WEG Slides – Wildfire Protection</title>
+<title>WEG Wildfire Protection – Full Slides</title>
 <style>
-/* ===== グローバル ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  background: #0d1b2a;
-  padding: 40px 20px;
-}
-
-/* ===== スライド本体 (A4横 297×210 mm → 1122×794px) ===== */
-.slide {
-  width: 1122px;
-  height: 794px;
-  margin: 0 auto 48px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.6);
-  background: #fff;
-}
-
-/* スライド番号 */
-.slide-num {
-  position: absolute;
-  bottom: 14px;
-  right: 20px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.5);
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-/* ===== 共通パーツ ===== */
-.accent { color: #f0a500; }
-.blue   { color: #1a6bcc; }
-
-/* ===== ① 表紙 ===== */
-.cover {
-  background: linear-gradient(135deg, #0a2342 0%, #133b6b 45%, #1a5295 100%);
-  display: flex;
-  flex-direction: column;
-}
-
-/* 上部アクセントライン */
-.cover::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background: linear-gradient(90deg, #f0a500, #f7d060, #f0a500);
-}
-
-.cover-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 80px;
-}
-
-.cover-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #f0a500;
-  margin-bottom: 24px;
-}
-
-.cover h1 {
-  font-size: 28px;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.4;
-  margin-bottom: 16px;
-  max-width: 760px;
-}
-
-.cover h1 em {
-  font-style: normal;
-  color: #f7d060;
-}
-
-.cover-meta {
-  font-size: 12.5px;
-  color: rgba(255,255,255,0.65);
-  margin-bottom: 6px;
-  line-height: 1.7;
-}
-
-.cover-journal {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  font-style: italic;
-  margin-top: 8px;
-}
-
-/* 右側デコ */
-.cover-deco {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-.cover-circle {
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-/* フッター */
-.cover-footer {
-  padding: 14px 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.cover-footer span { font-size: 11px; color: rgba(255,255,255,0.35); }
-
-/* ===== 通常スライドの骨格 ===== */
-.inner {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 左サイドバー */
-.with-sidebar {
-  flex-direction: row;
-}
-
-.sidebar {
-  width: 220px;
-  background: linear-gradient(180deg, #0a2342 0%, #133b6b 100%);
-  display: flex;
-  flex-direction: column;
-  padding: 40px 24px;
-  flex-shrink: 0;
-}
-
-.sidebar-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #f0a500;
-  margin-bottom: 28px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.sidebar-section {
-  font-size: 12px;
-  color: rgba(255,255,255,0.85);
-  font-weight: 600;
-  padding: 10px 10px;
-  border-radius: 6px;
-  margin-bottom: 4px;
-  cursor: default;
-}
-.sidebar-section.active {
-  background: rgba(240,165,0,0.2);
-  color: #f0a500;
-}
-
-.sidebar-fill { flex: 1; }
-
-.sidebar-logo {
-  font-size: 10px;
-  color: rgba(255,255,255,0.3);
-  line-height: 1.5;
-}
-
-/* メインコンテンツエリア */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#07111f;padding:32px 16px;}
+/* A4横: 1123×795px */
+.slide{width:1123px;height:795px;margin:0 auto 40px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.6);background:#fff;display:flex;flex-direction:column;}
+/* サイドバーレイアウト */
+.lay{display:flex;flex:1;overflow:hidden;}
+.sb{width:200px;flex-shrink:0;background:linear-gradient(180deg,#061529 0%,#0c2d58 100%);display:flex;flex-direction:column;padding:32px 18px;}
+.sb-logo{font-size:9px;color:rgba(255,255,255,.3);margin-top:auto;line-height:1.5;}
+.sb-title{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#f0a500;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.12);}
+.sb-item{font-size:11px;color:rgba(255,255,255,.55);padding:8px 10px;border-radius:5px;margin-bottom:2px;}
+.sb-item.on{background:rgba(240,165,0,.18);color:#f0a500;font-weight:700;}
 /* トップバー */
-.topbar {
-  background: #0a2342;
-  padding: 14px 40px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.topbar-section {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #f0a500;
-}
-
-.topbar-divider {
-  width: 1px;
-  height: 16px;
-  background: rgba(255,255,255,0.2);
-}
-
-.topbar h2 {
-  font-size: 17px;
-  font-weight: 800;
-  color: #fff;
-}
-
+.tb{background:#061529;padding:12px 36px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.tb-sec{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#f0a500;}
+.tb-div{width:1px;height:14px;background:rgba(255,255,255,.2);}
+.tb h2{font-size:16px;font-weight:800;color:#fff;}
 /* コンテンツ */
-.content {
-  flex: 1;
-  padding: 28px 40px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ===== カード群 ===== */
-.row { display: flex; gap: 16px; }
-.col { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-
-.card {
-  background: #f4f7fb;
-  border-radius: 8px;
-  padding: 16px 18px;
-  border-top: 3px solid #1a6bcc;
-}
-.card.gold  { border-top-color: #f0a500; }
-.card.navy  { border-top-color: #0a2342; background: #0a2342; color: #fff; }
-.card.sky   { border-top-color: #4da6ff; }
-.card.teal  { border-top-color: #00b4d8; }
-
-.card-label {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #1a6bcc;
-  margin-bottom: 7px;
-}
-.card.gold .card-label  { color: #c68a00; }
-.card.navy .card-label  { color: #f0a500; }
-.card.teal .card-label  { color: #00b4d8; }
-
-.card h3 {
-  font-size: 13px;
-  font-weight: 700;
-  color: #0a2342;
-  margin-bottom: 8px;
-}
-.card.navy h3 { color: #fff; }
-
-.card p, .card li {
-  font-size: 12.5px;
-  line-height: 1.7;
-  color: #445;
-}
-.card.navy p, .card.navy li { color: rgba(255,255,255,0.75); }
-.card ul { padding-left: 15px; }
-
-/* 統計ブロック */
-.stat {
-  background: linear-gradient(135deg, #0a2342, #1a5295);
-  border-radius: 8px;
-  padding: 16px 18px;
-  text-align: center;
-  color: #fff;
-}
-.stat .num { font-size: 36px; font-weight: 900; color: #f7d060; line-height: 1; }
-.stat .unit { font-size: 15px; font-weight: 700; color: #f7d060; }
-.stat .desc { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 5px; line-height: 1.4; }
-
-/* フロー */
-.flow { display: flex; align-items: center; gap: 0; }
-.flow-step {
-  background: #e8f0fb;
-  border: 1.5px solid #1a6bcc;
-  color: #0a2342;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 11.5px;
-  font-weight: 700;
-  text-align: center;
-  flex: 1;
-}
-.flow-step.hl { background: #1a6bcc; color: #fff; border-color: #1a6bcc; }
-.flow-step.hl2 { background: #f0a500; color: #fff; border-color: #f0a500; }
-.flow-arrow { font-size: 18px; color: #aac; padding: 0 5px; }
-
-/* タイムライン */
-.timeline { display: flex; gap: 0; }
-.tl-item {
-  flex: 1;
-  padding: 10px 8px;
-  border-top: 3px solid #ccd;
-  font-size: 11.5px;
-  color: #778;
-  text-align: center;
-}
-.tl-item.active { border-top-color: #f0a500; color: #0a2342; font-weight: 700; }
-.tl-item .tl-num { font-size: 22px; font-weight: 900; color: #1a6bcc; display: block; }
-.tl-item.active .tl-num { color: #f0a500; }
-
-/* テーブル */
-.tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
-.tbl th { background: #0a2342; color: #fff; padding: 9px 12px; text-align: left; font-size: 11.5px; }
-.tbl td { padding: 8px 12px; border-bottom: 1px solid #e8edf4; color: #445; }
-.tbl tr:nth-child(even) td { background: #f4f7fb; }
-.tbl td.hl { color: #1a6bcc; font-weight: 800; }
-.tbl td.ok { color: #27ae60; font-weight: 700; }
-.tbl td.ng { color: #aaa; }
-
-/* バッジ */
-.badge {
-  display: inline-block;
-  padding: 2px 9px;
-  border-radius: 10px;
-  font-size: 10.5px;
-  font-weight: 700;
-  margin: 1px 2px;
-}
-.badge-blue   { background: #dde9f8; color: #1a6bcc; }
-.badge-gold   { background: #fdf2d8; color: #a87000; }
-.badge-green  { background: #ddf6e8; color: #1a7a3f; }
-.badge-teal   { background: #d8f5f9; color: #007a8c; }
-
+.ct{padding:22px 36px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:14px;}
 /* ボトムバー */
-.bottombar {
-  height: 32px;
-  background: #0a2342;
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-  justify-content: space-between;
-}
-.bottombar span { font-size: 10px; color: rgba(255,255,255,0.35); }
-
-/* ===== 印刷対応 ===== */
-@media print {
-  body { background: #fff; padding: 0; }
-  .slide {
-    width: 297mm; height: 210mm;
-    margin: 0; page-break-after: always;
-    box-shadow: none;
-  }
-}
+.bb{height:28px;background:#061529;display:flex;align-items:center;padding:0 36px;justify-content:space-between;flex-shrink:0;}
+.bb span{font-size:9px;color:rgba(255,255,255,.3);}
+/* スライド番号 */
+.sn{position:absolute;bottom:6px;right:14px;font-size:9px;color:rgba(255,255,255,.25);font-weight:700;}
+/* カード */
+.card{background:#f3f7fd;border-radius:7px;padding:14px 16px;border-top:3px solid #1a6bcc;}
+.card.g{border-top-color:#f0a500;}.card.n{border-top-color:#061529;background:#061529;}.card.s{border-top-color:#00b4d8;}.card.r{border-top-color:#e74c3c;}
+.cl{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#1a6bcc;margin-bottom:5px;}
+.card.g .cl{color:#a87000;}.card.n .cl{color:#f0a500;}.card.s .cl{color:#00b4d8;}
+.card h3{font-size:13px;font-weight:700;color:#061529;margin-bottom:6px;}
+.card.n h3{color:#fff;}
+.card p,.card li{font-size:12px;line-height:1.65;color:#445;}
+.card.n p,.card.n li{color:rgba(255,255,255,.75);}
+.card ul{padding-left:14px;}
+/* row/col */
+.row{display:flex;gap:14px;}
+.col{flex:1;display:flex;flex-direction:column;gap:12px;}
+/* stat */
+.stat{background:linear-gradient(135deg,#061529,#1a5295);border-radius:7px;padding:14px;text-align:center;color:#fff;}
+.stat .n{font-size:38px;font-weight:900;color:#f7d060;line-height:1;}
+.stat .u{font-size:15px;font-weight:700;color:#f7d060;}
+.stat .d{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px;line-height:1.4;}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px;}
+.tbl th{background:#061529;color:#fff;padding:8px 10px;text-align:left;font-size:10.5px;}
+.tbl td{padding:7px 10px;border-bottom:1px solid #e5edf6;color:#445;}
+.tbl tr:nth-child(even) td{background:#f3f7fd;}
+.tbl td.h{color:#1a6bcc;font-weight:800;}.tbl td.ok{color:#1a8f47;font-weight:700;}.tbl td.ng{color:#aaa;}
+/* flow */
+.flow{display:flex;align-items:center;}
+.fs{background:#e3edf8;border:1.5px solid #1a6bcc;color:#061529;padding:7px 10px;border-radius:6px;font-size:11px;font-weight:700;text-align:center;flex:1;}
+.fs.hl{background:#1a6bcc;color:#fff;border-color:#1a6bcc;}
+.fs.hl2{background:#f0a500;color:#fff;border-color:#f0a500;}
+.fa{font-size:16px;color:#aac;padding:0 5px;}
+/* badge */
+.bd{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin:1px 2px;}
+.bd-b{background:#dde9f8;color:#1a6bcc;}.bd-g{background:#fdf2d8;color:#a87000;}.bd-t{background:#d8f5f9;color:#007a8c;}
+/* 棒グラフ代替 */
+.bar-chart{display:flex;flex-direction:column;gap:6px;}
+.bar-row{display:flex;align-items:center;gap:8px;}
+.bar-label{font-size:10.5px;color:#445;min-width:160px;text-align:right;}
+.bar-track{flex:1;background:#e8eef6;border-radius:3px;height:20px;position:relative;}
+.bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding:0 8px;}
+.bar-val{font-size:10px;font-weight:800;color:#fff;}
+/* timeline */
+.tl{display:flex;gap:0;}
+.tl-i{flex:1;padding:8px 6px;border-top:3px solid #ccd;font-size:10.5px;color:#778;text-align:center;}
+.tl-i.on{border-top-color:#f0a500;color:#061529;font-weight:700;}
+.tl-i .tn{font-size:22px;font-weight:900;color:#1a6bcc;display:block;}
+.tl-i.on .tn{color:#f0a500;}
+/* 表紙 */
+.cover{background:linear-gradient(135deg,#040e1d 0%,#0c2d58 50%,#1a5295 100%);display:flex;flex-direction:column;}
+.cover::before{content:'';display:block;height:5px;background:linear-gradient(90deg,#f0a500,#f7d060,#f0a500);}
+.cv-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 72px;}
+.cv-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#f0a500;margin-bottom:20px;}
+.cv-body h1{font-size:25px;font-weight:900;color:#fff;line-height:1.4;margin-bottom:16px;}
+.cv-body h1 em{font-style:normal;color:#f7d060;}
+.cv-meta{font-size:12px;color:rgba(255,255,255,.65);margin-bottom:5px;line-height:1.7;}
+.cv-jnl{font-size:10.5px;color:rgba(255,255,255,.38);font-style:italic;margin-top:6px;}
+.cv-foot{padding:12px 72px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);}
+.cv-foot span{font-size:10px;color:rgba(255,255,255,.3);}
+/* TOC */
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+.toc-item{background:#f3f7fd;border-radius:8px;padding:16px 18px;border-left:4px solid #1a6bcc;display:flex;gap:14px;align-items:flex-start;}
+.toc-num{font-size:28px;font-weight:900;color:#1a6bcc;line-height:1;}
+.toc-text h3{font-size:13px;font-weight:700;color:#061529;margin-bottom:4px;}
+.toc-text p{font-size:11.5px;color:#667;line-height:1.5;}
+/* まとめ */
+.sum{background:linear-gradient(135deg,#040e1d,#0c2d58);display:flex;flex-direction:column;}
+.sum::before{content:'';display:block;height:5px;background:linear-gradient(90deg,#f0a500,#f7d060,#f0a500);}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     SLIDE 1 ｜ 表紙
-══════════════════════════════════════════ -->
+<!-- ① 表紙 -->
 <div class="slide cover">
-  <div class="cover-body">
-    <div class="cover-label">Advanced Materials 2024 ｜ Stanford University</div>
-    <h1>
-      熱活性化<em>シリカエアロゲル</em>形成を示す<br>
-      ウォーターエンハンシングゲル<br>
-      <span style="font-size:20px; color:rgba(255,255,255,0.7);">
-        ― 大規模山火事における重要インフラの保護に向けて ―
-      </span>
-    </h1>
-    <div class="cover-meta">
-      Changxin Dong, Andrea I. d'Aquino, Samya Sen, Ian A. Hall,<br>
-      Anthony C. Yu, Gabriel B. Crane, Jesse D. Acosta, Eric A. Appel
-    </div>
-    <div class="cover-journal">
-      Advanced Materials, 2024, 36, 2407375 ｜ DOI: 10.1002/adma.202407375
-    </div>
+  <div class="cv-body">
+    <div class="cv-label">Advanced Materials 2024 ｜ Stanford University ｜ DOI: 10.1002/adma.202407375</div>
+    <h1>熱活性化<em>シリカエアロゲル</em>形成を示す<br>ウォーターエンハンシングゲル<br><span style="font-size:18px;color:rgba(255,255,255,.65);">― 大規模山火事における重要インフラの保護 ―</span></h1>
+    <div class="cv-meta">Changxin Dong, Andrea I. d'Aquino, Samya Sen, Ian A. Hall, Anthony C. Yu,<br>Gabriel B. Crane, Jesse D. Acosta, Eric A. Appel</div>
+    <div class="cv-jnl">Advanced Materials, 2024, 36, 2407375</div>
   </div>
-
-  <!-- 右側デコ -->
-  <div class="cover-deco">
-    <div class="cover-circle" style="width:160px;height:160px;"></div>
-    <div class="cover-circle" style="width:100px;height:100px;"></div>
-    <div class="cover-circle" style="width:60px;height:60px;"></div>
-  </div>
-
-  <div class="cover-footer">
-    <span>研究室セミナー発表資料</span>
-    <span>Water-Enhancing Gels for Wildfire Protection</span>
-  </div>
-  <div class="slide-num">1</div>
+  <div class="cv-foot"><span>研究室セミナー発表資料</span><span>1 / 25</span></div>
+  <div class="sn">1</div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     SLIDE 2 ｜ 研究背景①：問題設定
-══════════════════════════════════════════ -->
+<!-- ② 目次 -->
 <div class="slide">
-<div class="inner with-sidebar">
-  <!-- sidebar -->
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section active">研究背景</div>
-    <div class="sidebar-section">実験結果</div>
-    <div class="sidebar-section">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  <div class="tb" style="justify-content:center;padding:16px 36px;">
+    <h2 style="font-size:20px;color:#fff;">発表の構成</h2>
   </div>
-  <!-- main -->
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">研究背景</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">山火事の深刻化と既存手法の限界</h2>
+  <div class="ct" style="justify-content:center;">
+    <div class="toc-grid">
+      <div class="toc-item">
+        <div class="toc-num">1</div>
+        <div class="toc-text"><h3>研究背景</h3><p>山火事の現状・既存WEGの問題点・研究アプローチ（3枚）</p></div>
+      </div>
+      <div class="toc-item" style="border-left-color:#f0a500;">
+        <div class="toc-num" style="color:#f0a500;">2</div>
+        <div class="toc-text"><h3>材料・実験方法</h3><p>使用材料・ゲル設計・評価手法（4枚）</p></div>
+      </div>
+      <div class="toc-item" style="border-left-color:#00b4d8;">
+        <div class="toc-num" style="color:#00b4d8;">3</div>
+        <div class="toc-text"><h3>実験結果</h3><p>レオロジー・TGA・燃焼試験・発泡指数・SEM・FT-IR・BOD（14枚）</p></div>
+      </div>
+      <div class="toc-item" style="border-left-color:#27ae60;">
+        <div class="toc-num" style="color:#27ae60;">4</div>
+        <div class="toc-text"><h3>期待効果・まとめ</h3><p>実装シナリオ・環境評価・今後の課題・総括（3枚）</p></div>
+      </div>
     </div>
-    <div class="content">
+  </div>
+  <div class="bb"><span>目次</span><span>2 / 25</span></div>
+  <div class="sn">2</div>
+</div>
+
+<!-- ③ 研究背景① 山火事の現状 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item on">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">研究背景 1/3</span><div class="tb-div"></div><h2 class="tb">山火事の深刻化：世界規模の危機</h2></div>
+    <div class="ct">
       <div class="row">
         <div class="col">
-          <div class="card gold">
-            <div class="card-label">社会的背景</div>
-            <h3>🌍 山火事の規模・頻度が急増</h3>
+          <div class="card g">
+            <div class="cl">社会的背景</div>
+            <h3>🌍 山火事の頻度・規模が急拡大</h3>
             <ul>
               <li>気候変動・干ばつ・土地管理政策の複合要因</li>
               <li>北米・欧州・オーストラリアで甚大被害が続発</li>
               <li>都市-野域境界（WUI）での住宅・インフラ損失が増大</li>
+              <li>生態系・人命・経済への多面的ダメージ</li>
             </ul>
           </div>
           <div class="card">
-            <div class="card-label">現状の課題</div>
-            <h3>💧 ウォーターエンハンシングゲル（WEG）とは</h3>
+            <div class="cl">消防手法</div>
+            <h3>✈️ 現行の野火消防アプローチ</h3>
             <ul>
-              <li>水に増粘剤を加えた難燃性噴霧材料（消防の標準手法）</li>
-              <li>高熱条件下で<strong>急速に脱水・乾燥</strong>し防護効果を失う</li>
-              <li>水が蒸発した後は実質的に無保護状態になる</li>
+              <li>航空散布（ヘリ・タンカー機）</li>
+              <li>地上散布（消防車・バックパック）</li>
+              <li>長期難燃剤（Phos-Chek等）と短期WEG</li>
+              <li>いずれも大量の水・薬剤を消費</li>
             </ul>
           </div>
         </div>
+        <div class="col" style="flex:0.8;">
+          <div class="stat"><div class="n">5×</div><div class="d">本研究ゲルが達成した<br>市販品比の難燃性向上倍率</div></div>
+          <div class="card n">
+            <div class="cl">本研究の狙い</div>
+            <h3>目指す材料像</h3>
+            <ul>
+              <li>水蒸発後もシリカエアロゲルで継続保護</li>
+              <li>噴霧・密着・難燃・生分解性を両立</li>
+              <li>既存消防機材でそのまま使用可能</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>研究背景 1/3 ｜ 山火事の現状</span><span>3 / 25</span></div>
+  </div>
+</div>
+<div class="sn">3</div>
+</div>
+
+<!-- ④ 研究背景② 既存WEGの問題点 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item on">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">研究背景 2/3</span><div class="tb-div"></div><h2 class="tb">既存WEGの限界：高熱下で急速に失効</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">WEGとは</div>
+          <h3>💧 ウォーターエンハンシングゲル（WEG）</h3>
+          <ul>
+            <li>水＋増粘剤で構成された難燃性噴霧材料</li>
+            <li>高い保水性で燃焼を遅延させる</li>
+            <li>有利なぬれ性・粘弾性で基材に密着</li>
+            <li>代表例：AquaGel-K（市販品）</li>
+          </ul>
+        </div>
+        <div class="card r col">
+          <div class="cl" style="color:#c0392b;">問題点</div>
+          <h3>⚠️ 高熱下での致命的弱点</h3>
+          <ul>
+            <li>野火の輻射熱（数百〜数千°C）で急速に脱水</li>
+            <li>水が蒸発した後は実質的に<strong>無保護状態</strong></li>
+            <li>市販品（AquaGel-K）の保護時間は約120秒のみ</li>
+            <li>消火後の二次点火を防ぐ仕組みがない</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row" style="margin-top:2px;">
+        <div class="card" style="flex:1;">
+          <div class="cl">分類</div>
+          <h3>🏷️ 難燃材料の分類（USDA）</h3>
+          <ul>
+            <li><span class="bd bd-b">短期WEG</span> 水ベース、蒸発で効果消失</li>
+            <li><span class="bd bd-g">長期難燃剤</span> リン酸塩系、土壌・水生生物への毒性懸念</li>
+            <li><span class="bd bd-t">本研究</span> 蒸発後もエアロゲルとして残存する新カテゴリ</li>
+          </ul>
+        </div>
+        <div class="card n" style="flex:1;">
+          <div class="cl">研究仮説</div>
+          <h3>💡 "脱水"を逆手に取る発想</h3>
+          <p>水の蒸発を"弱点"でなく<strong>シリカエアロゲル形成のトリガー</strong>として利用することで、蒸発後も断熱保護層として機能する材料を実現できるのではないか？</p>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>研究背景 2/3 ｜ 既存WEGの限界</span><span>4 / 25</span></div>
+  </div>
+</div>
+<div class="sn">4</div>
+</div>
+
+<!-- ⑤ 研究背景③ アプローチ概要 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item on">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">研究背景 3/3</span><div class="tb-div"></div><h2 class="tb">研究アプローチ：二段階保護メカニズム</h2></div>
+    <div class="ct">
+      <!-- フロー図 -->
+      <div class="flow" style="gap:0;margin-bottom:4px;">
+        <div class="fs" style="font-size:10.5px;">① ゲル噴霧<br><span style="font-size:9px;font-weight:400;">基材に塗布・密着</span></div>
+        <div class="fa">→</div>
+        <div class="fs" style="font-size:10.5px;">② 炎に曝露<br><span style="font-size:9px;font-weight:400;">水が蒸発・冷却</span></div>
+        <div class="fa">→</div>
+        <div class="fs hl" style="font-size:10.5px;">③ CSP焼結<br><span style="font-size:9px;font-weight:400;">エアロゲル形成</span></div>
+        <div class="fa">→</div>
+        <div class="fs hl2" style="font-size:10.5px;">④ 断熱保護<br><span style="font-size:9px;font-weight:400;">基材を継続保護</span></div>
+      </div>
+      <div class="row">
         <div class="col">
+          <div class="card">
+            <div class="cl">フェーズ1（冷却段階）</div>
+            <h3>💧 水蒸発による初期冷却</h3>
+            <ul>
+              <li>水分含量 ~90 wt% → 大量の蒸発潜熱で冷却</li>
+              <li>ゲルの粘弾性で基材に密着しながら保水</li>
+              <li>この間、炎の直接接触を遮断</li>
+            </ul>
+          </div>
+          <div class="card s">
+            <div class="cl">フェーズ2（エアロゲル段階）</div>
+            <h3>🔥 熱活性化シリカエアロゲル形成</h3>
+            <ul>
+              <li>水が蒸発すると CSP が密接近</li>
+              <li>加熱で Si-OH 縮合 → 粒子間焼結が進行</li>
+              <li>多孔質シリカエアロゲル（≈0.02 W/mK）を in situ 形成</li>
+              <li>水なしで断熱保護を継続</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col" style="flex:0.85;">
+          <div class="card g">
+            <div class="cl">本研究の新規性（Figure 1）</div>
+            <h3>📌 従来研究との差別化</h3>
+            <ul>
+              <li>既存WEG：水蒸発で保護終了 ← 問題</li>
+              <li>本研究：蒸発後にエアロゲルで保護継続</li>
+              <li>バイオポリマー（HEC/MC）+ CSP の組み合わせ</li>
+              <li>噴霧 → 密着 → 断熱の一体型設計</li>
+            </ul>
+          </div>
           <div class="stat">
-            <div class="num">5<span class="unit">×</span></div>
-            <div class="desc">本研究ゲルが達成した<br>市販品比の難燃性向上倍率</div>
-          </div>
-          <div class="card navy">
-            <div class="card-label">研究目的</div>
-            <h3>目指すべき材料像</h3>
-            <ul>
-              <li>噴霧・密着・保水のすべてに優れる</li>
-              <li><strong>水蒸発後もシリカエアロゲルとして残存</strong>し断熱</li>
-              <li>環境負荷が小さく大規模散布に適する</li>
-            </ul>
+            <div class="n" style="font-size:26px;">地球最低水準</div>
+            <div class="d" style="color:#f7d060;font-size:11px;">シリカエアロゲルの熱伝導率<br>≈ 0.02 W m⁻¹ K⁻¹</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottombar">
-      <span>研究背景 ｜ 問題設定</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
+    <div class="bb"><span>研究背景 3/3 ｜ 研究アプローチ</span><span>5 / 25</span></div>
   </div>
 </div>
-<div class="slide-num" style="color:#0a2342;">2</div>
+<div class="sn">5</div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     SLIDE 3 ｜ 研究背景②：材料設計
-══════════════════════════════════════════ -->
+<!-- ⑥ 材料・方法① 使用材料 -->
 <div class="slide">
-<div class="inner with-sidebar">
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section active">研究背景</div>
-    <div class="sidebar-section">実験結果</div>
-    <div class="sidebar-section">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item on">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
   </div>
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">研究背景</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">材料設計：ポリマー粒子ヒドロゲル</h2>
-    </div>
-    <div class="content">
-      <!-- ゲル形成フロー -->
-      <div class="flow">
-        <div class="flow-step">HEC / MC<br><span style="font-size:10px; font-weight:400;">ヒドロキシプロピル・メチルセルロース</span></div>
-        <div class="flow-arrow">＋</div>
-        <div class="flow-step">CSP<br><span style="font-size:10px; font-weight:400;">コロイダルシリカ粒子（22 nm）</span></div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step hl">ポリマー粒子<br>ヒドロゲル（WEG）</div>
-        <div class="flow-arrow">🔥</div>
-        <div class="flow-step hl2">シリカ<br>エアロゲル</div>
-      </div>
-      <!-- 3カラム -->
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">材料・方法 1/4</span><div class="tb-div"></div><h2 class="tb">使用材料と組成設計</h2></div>
+    <div class="ct">
       <div class="row">
-        <div class="card" style="flex:1;">
-          <div class="card-label">セルロース誘導体</div>
-          <h3>🌿 バイオポリマー骨格</h3>
+        <div class="card col">
+          <div class="cl">バイオポリマー（骨格成分）</div>
+          <h3>🌿 セルロース誘導体</h3>
           <ul>
-            <li><span class="badge badge-blue">HEC</span> ヒドロキシプロピルセルロース</li>
-            <li><span class="badge badge-blue">MC</span> メチルセルロース</li>
-            <li>植物由来・生分解性・FDA承認済</li>
-            <li>増粘・粘弾性付与・CSP架橋点として機能</li>
+            <li><span class="bd bd-b">HEC</span> ヒドロキシプロピルセルロース（植物由来）</li>
+            <li><span class="bd bd-b">MC</span> メチルセルロース（増粘・熱ゲル化）</li>
+            <li><span class="bd bd-b">MHEC</span> メチルヒドロキシエチルセルロース</li>
+            <li>いずれも FDA 承認済み・生分解性あり</li>
+            <li>Si-OH 基・疎水性部位で CSP と非共有結合</li>
           </ul>
         </div>
-        <div class="card sky" style="flex:1;">
-          <div class="card-label">シリカ粒子</div>
-          <h3>⚙️ コロイダルシリカ（CSP）</h3>
+        <div class="card s col">
+          <div class="cl">無機粒子（架橋・エアロゲル形成）</div>
+          <h3>⚙️ コロイダルシリカ粒子（CSP）</h3>
           <ul>
-            <li>粒径 22 nm の均一球状粒子</li>
-            <li>Si-OH 基がポリマー鎖と非共有結合</li>
-            <li>動的架橋ネットワークを形成</li>
-            <li>加熱で焼結 → エアロゲル化</li>
-          </ul>
-        </div>
-        <div class="card teal" style="flex:1;">
-          <div class="card-label">架橋機構</div>
-          <h3>🔗 自己組織化ネットワーク</h3>
-          <ul>
-            <li>水素結合 + 疎水性相互作用</li>
-            <li>せん断で流動（噴霧OK）</li>
-            <li>静止で固体化（基材密着OK）</li>
-            <li>熱で脱水・焼結（断熱層OK）</li>
+            <li>粒径 22 nm の均一球状シリカ</li>
+            <li>Sigma-Aldrich 製 / Walcoat® 製を使用</li>
+            <li>表面シラノール基（Si-OH）が架橋点</li>
+            <li>加熱で焼結 → 多孔質エアロゲルを形成</li>
           </ul>
         </div>
       </div>
-      <div class="card gold">
-        <div class="card-label">代表組成</div>
-        <p style="font-size:12.5px;">
-          <strong>HEC+MC/CSP 1–5</strong>（1 wt% HEC+MC, 5 wt% CSP, 水 94 wt%）　|
-          <strong>MHEC/CSP 1–5</strong>（2-ヒドロキシエチルセルロースメチルエーテル）
-          ｜　水分含量 ~90 wt% → 大量の蒸発熱で初期冷却にも寄与
-        </p>
-      </div>
+      <table class="tbl">
+        <tr><th>組成名</th><th>ポリマー種</th><th>ポリマー濃度</th><th>CSP 濃度</th><th>界面活性剤（SDS）</th></tr>
+        <tr><td>HEC+MC/CSP 1–5</td><td>HEC + MC (1:1)</td><td>1 wt%</td><td class="h">5 wt%</td><td>なし</td></tr>
+        <tr><td>HEC+MC/CSP/SDS 1–5–0.1</td><td>HEC + MC (1:1)</td><td>1 wt%</td><td>5 wt%</td><td class="h">0.1 wt%</td></tr>
+        <tr><td>MHEC/CSP 1–5</td><td>MHEC</td><td>1 wt%</td><td class="h">5 wt%</td><td>なし</td></tr>
+        <tr><td>AquaGel-K（市販品）</td><td>ポリアクリルアミド系</td><td>0.5 wt%</td><td>–</td><td>–</td></tr>
+      </table>
     </div>
-    <div class="bottombar">
-      <span>研究背景 ｜ 材料設計コンセプト</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
+    <div class="bb"><span>材料・方法 1/4 ｜ 使用材料・組成設計</span><span>6 / 25</span></div>
   </div>
 </div>
-<div class="slide-num" style="color:#0a2342;">3</div>
+<div class="sn">6</div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     SLIDE 4 ｜ 実験結果①：レオロジー
-══════════════════════════════════════════ -->
+<!-- ⑦ 材料・方法② Figure 1 合成・機構 -->
 <div class="slide">
-<div class="inner with-sidebar">
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section">研究背景</div>
-    <div class="sidebar-section active">実験結果</div>
-    <div class="sidebar-section">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item on">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
   </div>
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">実験結果</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">レオロジー評価：噴霧・密着・垂直面保持に最適</h2>
-    </div>
-    <div class="content">
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">材料・方法 2/4</span><div class="tb-div"></div><h2 class="tb">Figure 1：ゲル合成スキームと保護メカニズム</h2></div>
+    <div class="ct">
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div class="card-label">振幅スイープ（LAOS）</div>
-            <h3>📊 粘弾性挙動</h3>
+          <div class="card g">
+            <div class="cl">Figure 1a – 合成経路</div>
+            <h3>HEC+MC/CSP ゲルの合成</h3>
             <ul>
-              <li>低ひずみ域：G' &gt; G''（固体的・基材保持に有利）</li>
-              <li>高ひずみ域：G'' &gt; G'（液体的・噴霧流動に有利）</li>
-              <li>降伏後の急速な流動化 → 噴霧適合性を確認</li>
+              <li>HEC（ヒドロキシプロピルセルロース）水溶液を調製</li>
+              <li>MC（メチルセルロース）を添加・溶解</li>
+              <li>CSP 分散液を混合 → 自己組織化ゲル化</li>
+              <li>特別な化学処理・加熱不要（室温混合のみ）</li>
             </ul>
           </div>
-          <div class="card sky">
-            <div class="card-label">せん断速度依存性</div>
-            <h3>🌊 ぬれ性・拡散挙動</h3>
+          <div class="card">
+            <div class="cl">Figure 1b – MHEC系</div>
+            <h3>MHEC/CSP ゲルの合成</h3>
             <ul>
-              <li>CSPが界面活性剤様に表面張力を低下</li>
-              <li>広域かつ均一なぬれ広がりを示す</li>
-              <li>垂直面・傾斜面でも流れ落ちを防止</li>
+              <li>MHEC（2-ヒドロキシエチルセルロースメチルエーテル）使用</li>
+              <li>同様に CSP と混合してゲル化</li>
+              <li>HEC+MC/CSP と類似した粘弾性特性を示す</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card n">
+            <div class="cl">Figure 1c,d – 保護機構（野外適用）</div>
+            <h3>噴霧 → 密着 → エアロゲル保護</h3>
+            <ul>
+              <li>①　ゲルを基材（木造建築・フェンス等）に噴霧</li>
+              <li>②　炎が接近 → 水が蒸発して冷却</li>
+              <li>③　CSP が熱活性化でシリカエアロゲルを形成</li>
+              <li>④　エアロゲル層が断熱バリアとして機能</li>
+            </ul>
+          </div>
+          <div class="card s">
+            <div class="cl">Key Point</div>
+            <h3>製造・散布の容易さ</h3>
+            <ul>
+              <li>単純混合で製造 → 低コスト・スケールアップ容易</li>
+              <li>噴霧・注射・塗布すべてに対応</li>
+              <li>既存消防機材（タンカー機・消防車）で散布可能</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>材料・方法 2/4 ｜ Figure 1 合成・機構</span><span>7 / 25</span></div>
+  </div>
+</div>
+<div class="sn">7</div>
+</div>
+
+<!-- ⑧ 材料・方法③ 評価手法 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item on">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">材料・方法 3/4</span><div class="tb-div"></div><h2 class="tb">評価手法の一覧</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">レオロジー評価</div>
+          <h3>📊 TA Discovery HR-2 レオメーター</h3>
+          <ul>
+            <li>振幅スイープ（LAOS）：0.01–1000%，1 rad/s</li>
+            <li>周波数スイープ（SAOS）：0.1–100 rad/s，0.1%ひずみ</li>
+            <li>せん断粘度：0.001–100 s⁻¹</li>
+            <li>25 °C，40 mm パラレルプレートジオメトリ</li>
+          </ul>
+        </div>
+        <div class="card s col">
+          <div class="cl">燃焼試験</div>
+          <h3>🔥 米国林野庁（USDA）規格準拠</h3>
+          <ul>
+            <li>基材：針葉樹合板 2.5 × 2.5 cm</li>
+            <li>塗布量：20 g/m²（均一塗布）</li>
+            <li>ガスバーナーにて持続炎照射</li>
+            <li>炭化開始時間（time to char）を計測（n=3）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card col" style="flex:1;">
+          <div class="cl">構造解析</div>
+          <h3>🔬 顕微鏡・分光分析</h3>
+          <ul>
+            <li>SEM（FEI MagellanXL）：燃焼前後の粒子構造</li>
+            <li>FT-IR（Thermo Nicolet iS50）：官能基変化</li>
+            <li>XPS：燃焼後の元素組成分析</li>
+            <li>TGA：熱重量・水分含量</li>
+          </ul>
+        </div>
+        <div class="card col" style="flex:1;">
+          <div class="cl">環境評価</div>
+          <h3>🌿 生分解性・ぬれ性</h3>
+          <ul>
+            <li>BOD28（生物学的酸素要求量 28日間）</li>
+            <li>接触角測定（表面ぬれ性）</li>
+            <li>発泡指数：エアロゲル厚 / 初期ゲル厚</li>
+          </ul>
+        </div>
+        <div class="card n col" style="flex:0.8;">
+          <div class="cl">比較材料</div>
+          <h3>市販品との対照実験</h3>
+          <ul>
+            <li>AquaGel-K</li>
+            <li>Phos-Chek FORTIFY</li>
+            <li>水（対照群）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>材料・方法 3/4 ｜ 評価手法</span><span>8 / 25</span></div>
+  </div>
+</div>
+<div class="sn">8</div>
+</div>
+
+
+<!-- ⑨ 実験① レオロジー 振幅スイープ Figure 2a-c -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 1/9</span><div class="tb-div"></div><h2 class="tb">Figure 2a–c：振幅スイープ（LAOS）によるレオロジー評価</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="col">
+          <div class="card g">
+            <div class="cl">Figure 2a – 貯蔵弾性率 G'（振幅スイープ）</div>
+            <h3>📈 HEC+MC/CSP 1–5 の結果</h3>
+            <ul>
+              <li>低ひずみ域（&lt;1%）：G' ≈ 40–100 Pa（固体的挙動）</li>
+              <li>降伏ひずみ（~10%）を超えるとG'が急落</li>
+              <li>AquaGel-K の G'（~1–5 Pa）より<strong>約20倍高い</strong></li>
+              <li>高い貯蔵弾性率 → 垂直面保持・密着に有利</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="cl">Figure 2b – 損失弾性率 G''（振幅スイープ）</div>
+            <h3>📉 粘性成分の挙動</h3>
+            <ul>
+              <li>低ひずみ域：G' &gt; G''（固体様）</li>
+              <li>高ひずみ域：G'' &gt; G'（液体様・噴霧可能）</li>
+              <li>せん断シニング挙動 → 噴霧時に流動化</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card s">
+            <div class="cl">Figure 2c – tan δ（損失正接）</div>
+            <h3>粘弾性バランスの評価</h3>
+            <ul>
+              <li>tan δ = G'' / G' で粘弾性バランスを定量</li>
+              <li>HEC+MC/CSP 1–5：低ひずみ域で tan δ &lt; 1（固体的）</li>
+              <li>降伏後 tan δ &gt; 1 → 流体化して基材に広がる</li>
+              <li>AquaGel-K との比較で优れた噴霧密着性を確認</li>
+            </ul>
+          </div>
+          <div class="card n">
+            <div class="cl">わかること</div>
+            <h3>噴霧＋密着の両立を実現</h3>
+            <ul>
+              <li>静止時：固体的 → 傾斜面でも流れ落ちない</li>
+              <li>噴霧時：液体的 → ノズルを詰まらせない</li>
+              <li>この「降伏後流動」が消防散布に最適</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 1/9 ｜ Figure 2a–c 振幅スイープ</span><span>9 / 25</span></div>
+  </div>
+</div>
+<div class="sn">9</div>
+</div>
+
+<!-- ⑩ 実験② 周波数スイープ Figure 2d-e -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 2/9</span><div class="tb-div"></div><h2 class="tb">Figure 2d–e：周波数スイープ（SAOS）</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="col">
+          <div class="card g">
+            <div class="cl">Figure 2d – G', G'' vs 角周波数</div>
+            <h3>周波数依存性の挙動</h3>
+            <ul>
+              <li>0.1–100 rad/s の範囲で測定（ひずみ 0.1%）</li>
+              <li>全周波数域で G' &gt; G''（真の弾性ゲル挙動）</li>
+              <li>周波数に対してほぼ平坦 → 安定なネットワーク</li>
+              <li>CSP 架橋の非共有結合ゆえに動的応答も確認</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="cl">比較</div>
+            <h3>AquaGel-K との差異</h3>
+            <ul>
+              <li>AquaGel-K：G' と G'' が周波数で交差（弱いゲル）</li>
+              <li>HEC+MC/CSP：全域でG' &gt; G''（強靭なゲル網目）</li>
+              <li>より長い時間スケールでの保持力が高い</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card s">
+            <div class="cl">Figure 2e – ゲル強度と CSP 濃度</div>
+            <h3>CSP 濃度とレオロジーの相関</h3>
+            <ul>
+              <li>CSP 1→3→5 wt%と増加につれ G' が単調増加</li>
+              <li>5 wt% CSP で G' ≈ 40–100 Pa（最適性能）</li>
+              <li>CSP がポリマー鎖間の物理架橋点として機能</li>
+            </ul>
+          </div>
+          <div class="card n">
+            <div class="cl">わかること</div>
+            <h3>組成最適化の指針</h3>
+            <ul>
+              <li>CSP 量でゲル強度を容易にチューニング可能</li>
+              <li>散布方法（航空 vs 地上）に応じた最適化が可能</li>
+              <li>製剤設計の自由度が高い</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 2/9 ｜ Figure 2d–e 周波数スイープ</span><span>10 / 25</span></div>
+  </div>
+</div>
+<div class="sn">10</div>
+</div>
+
+<!-- ⑪ 実験③ せん断粘度・降伏応力 Figure 2f-g -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 3/9</span><div class="tb-div"></div><h2 class="tb">Figure 2f–g：せん断粘度・降伏応力・ぬれ性</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="col">
+          <div class="card g">
+            <div class="cl">Figure 2f – 定常せん断粘度</div>
+            <h3>🌊 せん断シニング挙動</h3>
+            <ul>
+              <li>低せん断速度（&lt;0.1 s⁻¹）：高粘度（〜1000 Pa·s）</li>
+              <li>高せん断速度（&gt;10 s⁻¹）：粘度が急低下</li>
+              <li>べき乗則に従うシュードプラスティック挙動</li>
+              <li>噴霧ノズル（高せん断）では低粘度で流動</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="cl">Figure 2g – 降伏応力とぬれ性</div>
+            <h3>💧 CSPのぬれ改善効果</h3>
+            <ul>
+              <li>CSP添加で表面張力が低下（界面活性剤様効果）</li>
+              <li>接触角：純水 &gt; HEC+MC &gt; HEC+MC/CSP</li>
+              <li>ぬれ広がりが向上 → 少量で広範囲をカバー</li>
+              <li>木材・コンクリート・金属いずれにも有効</li>
             </ul>
           </div>
         </div>
         <div class="col">
           <table class="tbl">
-            <tr>
-              <th>評価項目</th>
-              <th>AquaGel-K</th>
-              <th>HEC+MC/CSP</th>
-            </tr>
-            <tr>
-              <td>降伏応力</td>
-              <td class="ng">低</td>
-              <td class="hl">高 ◎</td>
-            </tr>
-            <tr>
-              <td>噴霧流動性</td>
-              <td>○</td>
-              <td class="hl">◎</td>
-            </tr>
-            <tr>
-              <td>表面ぬれ性</td>
-              <td>普通</td>
-              <td class="hl">優れる ◎</td>
-            </tr>
-            <tr>
-              <td>垂直面保持</td>
-              <td class="ng">△</td>
-              <td class="hl">◎</td>
-            </tr>
-            <tr>
-              <td>木材密着性</td>
-              <td>△</td>
-              <td class="hl">◎</td>
-            </tr>
+            <tr><th>材料</th><th>静止G'(Pa)</th><th>降伏ひずみ(%)</th><th>ぬれ性</th></tr>
+            <tr><td>水</td><td class="ng">—</td><td class="ng">—</td><td class="ng">低</td></tr>
+            <tr><td>AquaGel-K</td><td>1–5</td><td>~50</td><td>普通</td></tr>
+            <tr><td>HEC+MC</td><td>~5</td><td>~30</td><td>普通</td></tr>
+            <tr><td>HEC+MC/CSP 1–5</td><td class="h">40–100</td><td class="h">~10</td><td class="ok">優れる</td></tr>
+            <tr><td>MHEC/CSP 1–5</td><td class="h">30–80</td><td class="h">~12</td><td class="ok">優れる</td></tr>
           </table>
-          <div class="card navy" style="margin-top:0;">
-            <div class="card-label">Key Finding</div>
-            <p>CSP添加量を変えることで降伏応力を<strong>5–50 Pa</strong>の範囲で制御可能。実散布条件に合わせた最適化が容易。</p>
+          <div class="card n" style="margin-top:0;">
+            <div class="cl">わかること</div>
+            <h3>消防散布に最適なレオロジー</h3>
+            <p>高い静止G'（密着）＋低い降伏ひずみ（流動開始の容易さ）＋良好なぬれ性の三拍子が揃い、消防散布材料として理想的な特性を示した。</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottombar">
-      <span>実験結果 ｜ レオロジー評価</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
+    <div class="bb"><span>実験結果 3/9 ｜ Figure 2f–g 降伏応力・ぬれ性</span><span>11 / 25</span></div>
   </div>
 </div>
-<div class="slide-num" style="color:#0a2342;">4</div>
+<div class="sn">11</div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     SLIDE 5 ｜ 実験結果②：エアロゲル形成
-══════════════════════════════════════════ -->
+<!-- ⑫ 実験④ TGA -->
 <div class="slide">
-<div class="inner with-sidebar">
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section">研究背景</div>
-    <div class="sidebar-section active">実験結果</div>
-    <div class="sidebar-section">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
   </div>
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">実験結果</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">熱活性化シリカエアロゲル形成メカニズム（SEM・TGA・FT-IR）</h2>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 4/9</span><div class="tb-div"></div><h2 class="tb">TGA：熱重量分析による水分・熱分解挙動</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="col">
+          <div class="card g">
+            <div class="cl">水分含量（TGA）</div>
+            <h3>💧 大量の水分が初期冷却に寄与</h3>
+            <ul>
+              <li>HEC+MC/CSP 1–5 の水分含量：<strong>~90 wt%</strong></li>
+              <li>水の蒸発潜熱（2260 kJ/kg）で大量冷却</li>
+              <li>蒸発完了まで基材温度を100°C付近に維持</li>
+              <li>AquaGel-K と同等の水分保持量</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="cl">熱分解プロファイル</div>
+            <h3>🌡️ 温度別の重量変化</h3>
+            <ul>
+              <li>&lt;100 °C：水の蒸発（重量の~90%減少）</li>
+              <li>200–350 °C：セルロース誘導体の熱分解開始</li>
+              <li>350–500 °C：セルロース骨格の完全酸化分解</li>
+              <li>&gt;500 °C：シリカ粒子のみが残存・焼結開始</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col">
+          <!-- 模式的な棒グラフ -->
+          <div class="card s">
+            <div class="cl">TGA 残留物の分析</div>
+            <h3>燃焼後の残留物</h3>
+            <div style="margin-top:8px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span style="font-size:11px;color:#445;min-width:120px;">HEC+MC/CSP 1–5</span>
+                <div style="flex:1;background:#e3edf8;border-radius:3px;height:18px;"><div style="width:25%;background:#00b4d8;height:100%;border-radius:3px;display:flex;align-items:center;padding:0 6px;"><span style="font-size:10px;color:#fff;font-weight:700;">~5%</span></div></div>
+                <span style="font-size:10px;color:#00b4d8;">シリカ残留</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span style="font-size:11px;color:#445;min-width:120px;">MHEC/CSP 1–5</span>
+                <div style="flex:1;background:#e3edf8;border-radius:3px;height:18px;"><div style="width:22%;background:#00b4d8;height:100%;border-radius:3px;display:flex;align-items:center;padding:0 6px;"><span style="font-size:10px;color:#fff;font-weight:700;">~4%</span></div></div>
+                <span style="font-size:10px;color:#00b4d8;">シリカ残留</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:11px;color:#445;min-width:120px;">AquaGel-K</span>
+                <div style="flex:1;background:#e3edf8;border-radius:3px;height:18px;"><div style="width:2%;background:#aaa;height:100%;border-radius:3px;"></div></div>
+                <span style="font-size:10px;color:#aaa;">残留なし</span>
+              </div>
+            </div>
+          </div>
+          <div class="card n">
+            <div class="cl">わかること</div>
+            <h3>TGA が示す二段階保護</h3>
+            <ul>
+              <li>第一段階：水蒸発による冷却（0–100°C 付近）</li>
+              <li>第二段階：シリカ焼結→エアロゲル形成（&gt;500°C）</li>
+              <li>市販品は残留シリカなし → 保護層を形成できない</li>
+              <li>CSP 量（5 wt%）が最終エアロゲル厚を決定</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="content">
+    <div class="bb"><span>実験結果 4/9 ｜ TGA 熱重量分析</span><span>12 / 25</span></div>
+  </div>
+</div>
+<div class="sn">12</div>
+</div>
+
+<!-- ⑬ 実験⑤ 燃焼試験セットアップ Figure 3a -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 5/9</span><div class="tb-div"></div><h2 class="tb">Figure 3a：燃焼試験のセットアップ（USDA 規格準拠）</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">試験装置（Figure 3a）</div>
+          <h3>🔥 燃焼試験装置の構成</h3>
+          <ul>
+            <li>ガスバーナー（プロパン）：定常炎を照射</li>
+            <li>試験台：水平固定、炎との距離を一定に管理</li>
+            <li>熱電対：基材表面温度を連続測定</li>
+            <li>カメラ：燃焼過程の経時撮影（1 fps）</li>
+          </ul>
+        </div>
+        <div class="card s col">
+          <div class="cl">試験条件</div>
+          <h3>📋 標準化された試験プロトコル</h3>
+          <ul>
+            <li>基材：針葉樹合板（2.5 × 2.5 cm）</li>
+            <li>塗布量：20 g/m²（消防現場想定）</li>
+            <li>炎照射：持続的・定常（バーナー距離一定）</li>
+            <li>評価指標：炭化開始時間 Time to Char（秒）</li>
+            <li>繰り返し数：n = 3（統計処理）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row" style="margin-top:2px;">
+        <div class="card g col">
+          <div class="cl">炭化時間の定義</div>
+          <h3>📐 Time to Char とは</h3>
+          <ul>
+            <li>炎照射開始から木材が炭化（黒化）するまでの時間</li>
+            <li>数値が大きい ＝ 難燃性が高い = 保護効果が長い</li>
+            <li>USDA・消防業界で標準的な難燃性指標</li>
+          </ul>
+        </div>
+        <div class="card n col">
+          <div class="cl">比較設計</div>
+          <h3>対照群・比較群の設定</h3>
+          <ul>
+            <li>① 水のみ（無処置対照）</li>
+            <li>② AquaGel-K（現行市販品）</li>
+            <li>③ Phos-Chek FORTIFY（長期難燃剤）</li>
+            <li>④ HEC+MC/CSP 各組成</li>
+            <li>⑤ MHEC/CSP 各組成</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 5/9 ｜ Figure 3a 燃焼試験セットアップ</span><span>13 / 25</span></div>
+  </div>
+</div>
+<div class="sn">13</div>
+</div>
+
+<!-- ⑭ 実験⑥ 炭化防止時間 Figure 3b -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 6/9</span><div class="tb-div"></div><h2 class="tb">Figure 3b：炭化防止時間（Time to Char）の比較</h2></div>
+    <div class="ct">
+      <div class="row" style="align-items:center;">
+        <div class="col" style="flex:1.2;">
+          <!-- 棒グラフ -->
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span class="bar-label">水（対照）</span>
+              <div class="bar-track"><div class="bar-fill" style="width:13%;background:#aaa;"><span class="bar-val">~40 s</span></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">Phos-Chek FORTIFY</span>
+              <div class="bar-track"><div class="bar-fill" style="width:28%;background:#5b8dd9;"><span class="bar-val">~87 s</span></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">AquaGel-K</span>
+              <div class="bar-track"><div class="bar-fill" style="width:38%;background:#3a7bd5;"><span class="bar-val">~120 s</span></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">MHEC/CSP 1–5</span>
+              <div class="bar-track"><div class="bar-fill" style="width:62%;background:#f0a500;"><span class="bar-val">&gt;200 s</span></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">HEC+MC/CSP/SDS 1–5–0.1</span>
+              <div class="bar-track"><div class="bar-fill" style="width:67%;background:#e07b00;"><span class="bar-val">&gt;210 s</span></div></div>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label" style="font-weight:700;color:#061529;">HEC+MC/CSP 1–5</span>
+              <div class="bar-track"><div class="bar-fill" style="width:72%;background:#c0392b;"><span class="bar-val" style="font-weight:900;">&gt;220 s</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col" style="flex:0.8;">
+          <div class="stat"><div class="n">&gt;5<span class="u">×</span></div><div class="d">HEC+MC/CSP の炭化防止時間<br>AquaGel-K 比（120 s → 220+ s）</div></div>
+          <div class="card n" style="margin-top:0;">
+            <div class="cl">わかること</div>
+            <h3>全PP系が市販品を大幅に上回る</h3>
+            <ul>
+              <li>最良組成（HEC+MC/CSP 1–5）：220 s以上</li>
+              <li>AquaGel-K の約1.8倍・水の約5.5倍</li>
+              <li>300 s を超えても基材を保護し続けた</li>
+              <li>SDS添加でさらに性能向上</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 6/9 ｜ Figure 3b 炭化防止時間</span><span>14 / 25</span></div>
+  </div>
+</div>
+<div class="sn">14</div>
+</div>
+
+<!-- ⑮ 実験⑦ 燃焼写真 Figure 3c-d -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 7/9</span><div class="tb-div"></div><h2 class="tb">Figure 3c–d：燃焼過程の目視観察（120 s / 300 s）</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">Figure 3c – 120 秒後の状態</div>
+          <h3>⏱️ 120 秒時点の比較</h3>
+          <ul>
+            <li><strong>水のみ</strong>：完全に炭化・燃焼継続中</li>
+            <li><strong>AquaGel-K</strong>：部分的に炭化開始</li>
+            <li><strong>HEC+MC/CSP 1–5</strong>：<span style="color:#f0a500;font-weight:700;">白色エアロゲル層が形成</span>・炭化なし</li>
+            <li><strong>MHEC/CSP 1–5</strong>：同様に白色エアロゲル維持</li>
+          </ul>
+          <div style="background:#f0f4fa;border-radius:5px;padding:10px;margin-top:8px;font-size:11.5px;color:#445;">
+            📌 120 s でエアロゲルが視認できるほど成長しており、断熱バリアとして機能していることを目視で確認
+          </div>
+        </div>
+        <div class="card s col">
+          <div class="cl">Figure 3d – 300 秒後の状態</div>
+          <h3>⏱️ 300 秒時点の比較</h3>
+          <ul>
+            <li><strong>水のみ</strong>：基材の大部分が消失</li>
+            <li><strong>AquaGel-K</strong>：炭化が深部まで進行</li>
+            <li><strong>HEC+MC/CSP 1–5</strong>：<span style="color:#f0a500;font-weight:700;">エアロゲル殻が残存し基材を継続保護</span></li>
+            <li><strong>MHEC/CSP 1–5</strong>：同様に保護継続</li>
+          </ul>
+          <div style="background:#f0f4fa;border-radius:5px;padding:10px;margin-top:8px;font-size:11.5px;color:#445;">
+            📌 消炎後もシリカ殻が残存 → 余熱・残り火による二次点火を物理的に防止
+          </div>
+        </div>
+      </div>
+      <div class="card g" style="padding:12px 16px;">
+        <div class="cl">わかること（Figure 3c,d 総合）</div>
+        <p style="font-size:12px;color:#445;line-height:1.6;">目視観察により、HEC+MC/CSP 系ゲルは炎曝露中に<strong>白色の多孔質シリカエアロゲル層を in situ 形成</strong>することが確認された。この層は炎の直接接触と輻射熱の両方を遮断し、水が完全に蒸発した後も断熱保護を継続する。市販品（AquaGel-K）にはこのようなエアロゲル形成能がなく、水蒸発後は保護効果がゼロになる点が明確な差別化要因である。</p>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 7/9 ｜ Figure 3c–d 燃焼写真</span><span>15 / 25</span></div>
+  </div>
+</div>
+<div class="sn">15</div>
+</div>
+
+<!-- ⑯ 実験⑧ 発泡指数 Figure 4a -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 8/9</span><div class="tb-div"></div><h2 class="tb">Figure 4a：発泡指数（Foaming Index）の定量評価</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="col">
+          <div class="card g">
+            <div class="cl">発泡指数の定義</div>
+            <h3>📐 Foaming Index とは</h3>
+            <ul>
+              <li>定義：<strong>d_エアロゲル / d_初期ゲル</strong></li>
+              <li>燃焼後エアロゲル厚 ÷ 燃焼前ゲル厚</li>
+              <li>1.0 = 体積変化なし、&gt;1.0 = 膨張・多孔化</li>
+              <li>高い値 ＝ より多孔質なエアロゲル ＝ より低熱伝導率</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="cl">Figure 4a – 発泡指数の比較</div>
+            <h3>組成別の発泡指数（Figure 4a）</h3>
+            <div class="bar-chart" style="margin-top:8px;">
+              <div class="bar-row"><span class="bar-label" style="min-width:130px;">AquaGel-K</span><div class="bar-track"><div class="bar-fill" style="width:15%;background:#aaa;"><span class="bar-val">~1.0</span></div></div></div>
+              <div class="bar-row"><span class="bar-label" style="min-width:130px;">MHEC/CSP 1–5</span><div class="bar-track"><div class="bar-fill" style="width:45%;background:#3a7bd5;"><span class="bar-val">~2.5</span></div></div></div>
+              <div class="bar-row"><span class="bar-label" style="min-width:130px;font-weight:700;">HEC+MC/CSP 1–5</span><div class="bar-track"><div class="bar-fill" style="width:68%;background:#c0392b;"><span class="bar-val" style="font-weight:900;">~3.8</span></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card n">
+            <div class="cl">発泡指数と炭化防止時間の相関</div>
+            <h3>発泡指数 ↑ ＝ 保護時間 ↑</h3>
+            <ul>
+              <li>発泡指数が高いほど炭化防止時間が長い</li>
+              <li>正の相関関係を確認（Figure 4a）</li>
+              <li>エアロゲル層の厚みが断熱性能を直接決定</li>
+            </ul>
+          </div>
+          <div class="card s">
+            <div class="cl">わかること</div>
+            <h3>HEC+MC 組み合わせの優位性</h3>
+            <ul>
+              <li>HEC と MC の相乗効果で最高発泡指数を達成</li>
+              <li>単一ポリマー系より高い多孔質エアロゲル形成</li>
+              <li>SDS 添加（0.1 wt%）でさらに発泡指数が向上</li>
+              <li>過剰な SDS（0.5 wt%）では逆に低下（粒子安定性低下）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>実験結果 8/9 ｜ Figure 4a 発泡指数</span><span>16 / 25</span></div>
+  </div>
+</div>
+<div class="sn">16</div>
+</div>
+
+<!-- ⑰ 実験⑨ SEM（焼結過程）Figure 5 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">実験結果 9/9</span><div class="tb-div"></div><h2 class="tb">Figure 5：SEM によるシリカ粒子焼結プロセスの直接観察</h2></div>
+    <div class="ct">
       <!-- タイムライン -->
-      <div class="timeline">
-        <div class="tl-item active">
-          <span class="tl-num">0</span>min<br>未焼結粒子<br>（点接触のみ）
+      <div class="tl">
+        <div class="tl-i on"><span class="tn">0</span>min<br>未焼結粒子<br>（点接触のみ）</div>
+        <div class="tl-i on"><span class="tn">1</span>min<br>粒界形成<br>（Si-OH縮合開始）</div>
+        <div class="tl-i on"><span class="tn">2</span>min<br>ネッキング進行<br>（空隙率↓）</div>
+        <div class="tl-i on"><span class="tn">4</span>min<br>多孔質エアロゲル<br>完成</div>
+      </div>
+      <div class="row" style="margin-top:4px;">
+        <div class="card col">
+          <div class="cl">Figure 5a – 焼結スキームと SEM（上段）</div>
+          <h3>🔬 ナノスケール構造変化の解析</h3>
+          <ul>
+            <li><strong>0 min</strong>：22 nm CSP が散在（点接触のみ）</li>
+            <li><strong>1 min</strong>：粒界（Grain Boundary）が形成・結合強化</li>
+            <li><strong>2 min</strong>：ネッキング（Necking）が進行・空隙率が減少</li>
+            <li><strong>4 min</strong>：連続多孔質シリカ網目（エアロゲル）が完成</li>
+          </ul>
         </div>
-        <div class="tl-item active">
-          <span class="tl-num">1</span>min<br>粒界形成<br>（Si-OH縮合開始）
+        <div class="card s col">
+          <div class="cl">Figure 5b – SEM 下段（より高倍率）</div>
+          <h3>焼結機構の詳細</h3>
+          <ul>
+            <li>SEM の粒子間距離測定で焼結進行を定量化</li>
+            <li>4 min 後には粒子間の明確な融合を確認</li>
+            <li>空隙が残存 → 多孔質性を維持 → 低熱伝導率</li>
+          </ul>
         </div>
-        <div class="tl-item active">
-          <span class="tl-num">2</span>min<br>ネッキング進行<br>（空隙率↓）
-        </div>
-        <div class="tl-item active">
-          <span class="tl-num">4</span>min<br>多孔質エアロゲル<br>完成（断熱層）
+        <div class="card n col">
+          <div class="cl">わかること（Figure 5 総合）</div>
+          <h3>焼結によるエアロゲル形成の実証</h3>
+          <ul>
+            <li>加熱 4 min 以内に焼結エアロゲル化が完了</li>
+            <li>野火の炎（数百°C）で十分に駆動される反応</li>
+            <li>焼結後も多孔質性を維持 → 熱伝導率を低く保つ</li>
+            <li>セルロースは消失・シリカ殻のみが残存</li>
+          </ul>
         </div>
       </div>
+    </div>
+    <div class="bb"><span>実験結果 9/9 ｜ Figure 5 SEM 焼結プロセス</span><span>17 / 25</span></div>
+  </div>
+</div>
+<div class="sn">17</div>
+</div>
+
+<!-- ⑱ 追加解析① SEM エアロゲル形態 Figure 4b -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">追加解析 1/3</span><div class="tb-div"></div><h2 class="tb">Figure 4b：SDS 添加量とエアロゲル微細構造の変化</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">Figure 4b – SDS 濃度別 SEM 比較</div>
+          <h3>界面活性剤添加効果（SEM 観察）</h3>
+          <ul>
+            <li><strong>0% SDS</strong>：密で比較的均一なエアロゲル網目</li>
+            <li><strong>0.1% SDS</strong>：より大きな気孔・高い多孔質性 → 低熱伝導率</li>
+            <li><strong>0.5% SDS</strong>：気孔が乱れ・不均一構造 → 性能低下</li>
+          </ul>
+          <div style="background:#e8f4fd;border-radius:5px;padding:10px;margin-top:8px;font-size:11.5px;color:#1a6bcc;font-weight:600;">
+            最適 SDS 濃度：0.1 wt%（発泡指数・難燃性ともに最高）
+          </div>
+        </div>
+        <div class="col">
+          <div class="card g">
+            <div class="cl">SDS の役割</div>
+            <h3>なぜ SDS が効くのか？</h3>
+            <ul>
+              <li>気泡形成促進 → エアロゲル内の気孔径が拡大</li>
+              <li>気孔率増加 → 空気断熱層がより厚くなる</li>
+              <li>ただし過剰添加（0.5%）で CSP の安定性が低下</li>
+              <li>界面活性剤の臨界ミセル濃度（CMC）付近が最適</li>
+            </ul>
+          </div>
+          <div class="card n">
+            <div class="cl">わかること</div>
+            <h3>エアロゲル構造の制御因子</h3>
+            <ul>
+              <li>SDS 濃度で気孔径・多孔率を精密に制御可能</li>
+              <li>発泡指数 ∝ エアロゲル気孔率 ∝ 断熱性能</li>
+              <li>0.1% SDS が最良のトレードオフ点</li>
+              <li>組成パラメータが断熱性能設計に使える</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb"><span>追加解析 1/3 ｜ Figure 4b SDS 添加効果</span><span>18 / 25</span></div>
+  </div>
+</div>
+<div class="sn">18</div>
+</div>
+
+<!-- ⑲ 追加解析② FT-IR / XPS -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">追加解析 2/3</span><div class="tb-div"></div><h2 class="tb">FT-IR・XPS：燃焼前後の化学組成変化</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">FT-IR 分析（Figure S13）</div>
+          <h3>官能基の変化</h3>
+          <ul>
+            <li><strong>燃焼前（ゲル状態）</strong></li>
+            <li style="list-style:none;padding-left:8px;font-size:11.5px;color:#667;">C-H 伸縮（2900 cm⁻¹）：セルロース骨格を確認</li>
+            <li style="list-style:none;padding-left:8px;font-size:11.5px;color:#667;">O-H（3300 cm⁻¹）：水・シラノール基</li>
+            <li style="list-style:none;padding-left:8px;font-size:11.5px;color:#667;">Si-O-Si（1050 cm⁻¹）：シリカ粒子</li>
+            <li style="margin-top:6px;"><strong>燃焼後（エアロゲル状態）</strong></li>
+            <li style="list-style:none;padding-left:8px;font-size:11.5px;color:#667;">C-H ピーク <span style="color:#c0392b;font-weight:700;">消失</span> → セルロース完全分解</li>
+            <li style="list-style:none;padding-left:8px;font-size:11.5px;color:#667;">Si-O-Si ピーク <span style="color:#1a6bcc;font-weight:700;">残存</span> → 純粋なシリカ殻を確認</li>
+          </ul>
+        </div>
+        <div class="card s col">
+          <div class="cl">XPS 分析（Figure S14）</div>
+          <h3>元素組成の定量変化</h3>
+          <ul>
+            <li>燃焼前：C（炭素）38.3% → 燃焼後：<strong>4.8%</strong></li>
+            <li>燃焼前：Si（ケイ素）12% → 燃焼後：<strong>47%</strong>（相対増加）</li>
+            <li>O（酸素）比率が上昇 → Si-O-Si 網目の形成を示す</li>
+            <li>燃焼後は事実上の <strong>純粋シリカ（SiO₂）エアロゲル</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card g" style="padding:12px 16px;">
+        <div class="cl">わかること（FT-IR + XPS 総合）</div>
+        <p style="font-size:12px;color:#445;line-height:1.6;">FT-IR と XPS の両手法が一致して示すのは、燃焼過程でセルロース成分が完全に熱分解・消失し、<strong>シリカ成分のみが残存してエアロゲル網目を形成する</strong>という二成分分離機構である。市販品（AquaGel-K）の燃焼後残留物にはシリカが含まれず、この保護層形成能が本研究系の本質的な差別化ポイントであることが化学的に実証された。</p>
+      </div>
+    </div>
+    <div class="bb"><span>追加解析 2/3 ｜ FT-IR・XPS 分析</span><span>19 / 25</span></div>
+  </div>
+</div>
+<div class="sn">19</div>
+</div>
+
+<!-- ⑳ 追加解析③ BOD・生分解性 -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item on">実験結果</div>
+    <div class="sb-item">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">追加解析 3/3</span><div class="tb-div"></div><h2 class="tb">BOD 試験・生分解性・市販品との総合比較</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">BOD28 試験（生分解性）</div>
+          <h3>🌿 28日間生物化学的酸素要求量</h3>
+          <ul>
+            <li>HEC+MC/CSP 系は高い生分解性を示した</li>
+            <li>セルロース誘導体は微生物による分解が容易</li>
+            <li>市販ポリアクリルアミド系（PP型）と同等以上</li>
+            <li>リン酸塩系（Phos-Chek）の水生毒性懸念なし</li>
+          </ul>
+        </div>
+        <div class="card g col">
+          <div class="cl">環境安全性</div>
+          <h3>🐟 生態系への低負荷</h3>
+          <ul>
+            <li>コロイダルシリカ：FDA 承認済食品添加物として使用例あり</li>
+            <li>セルロース誘導体：植物由来・土壌中で自然分解</li>
+            <li>残留シリカは土壌中のケイ酸塩として不活性化</li>
+            <li>過去の散布後植生調査でも問題なし</li>
+          </ul>
+        </div>
+      </div>
+      <table class="tbl" style="font-size:11px;">
+        <tr><th>評価項目</th><th>水</th><th>AquaGel-K</th><th>Phos-Chek FORTIFY</th><th>HEC+MC/CSP 1–5</th><th>MHEC/CSP 1–5</th></tr>
+        <tr><td>炭化防止時間</td><td class="ng">~40 s</td><td>~120 s</td><td>~87 s</td><td class="h">&gt;220 s ◎</td><td class="h">&gt;200 s ◎</td></tr>
+        <tr><td>エアロゲル形成</td><td class="ng">✗</td><td class="ng">✗</td><td class="ng">✗</td><td class="ok">✓</td><td class="ok">✓</td></tr>
+        <tr><td>基材密着性</td><td class="ng">△</td><td>○</td><td>○</td><td class="h">◎</td><td class="h">◎</td></tr>
+        <tr><td>生分解性</td><td class="ok">◎</td><td>○</td><td class="ng">△（毒性）</td><td class="ok">◎</td><td class="ok">◎</td></tr>
+      </table>
+    </div>
+    <div class="bb"><span>追加解析 3/3 ｜ 生分解性・総合比較</span><span>20 / 25</span></div>
+  </div>
+</div>
+<div class="sn">20</div>
+</div>
+
+<!-- ㉑ 期待効果① 実装シナリオ -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item on">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">期待効果 1/3</span><div class="tb-div"></div><h2 class="tb">社会実装シナリオ：消防・インフラ保護への展開</h2></div>
+    <div class="ct">
+      <div class="row">
+        <div class="card col">
+          <div class="cl">🏠 住宅・建築物保護</div>
+          <h3>WUI（都市-野域境界）への適用</h3>
+          <ul>
+            <li>山火事シーズン前の予防的事前散布</li>
+            <li>木造建築・フェンス・デッキへの塗布</li>
+            <li>少量塗布（20 g/m²）で数時間以上保護</li>
+            <li>住民が自分でスプレー塗布も可能</li>
+          </ul>
+        </div>
+        <div class="card s col">
+          <div class="cl">✈️ 航空消火</div>
+          <h3>既存タンカー機・ヘリへの統合</h3>
+          <ul>
+            <li>現行の消火タンカー機材をそのまま使用</li>
+            <li>より少ない散布量で広範囲を長時間保護</li>
+            <li>水だけの散布より飛行回数・燃料を削減</li>
+            <li>山岳地形でのアクセス困難域にも対応</li>
+          </ul>
+        </div>
+        <div class="card g col">
+          <div class="cl">⚡ 重要インフラ保護</div>
+          <h3>電力・通信・交通インフラ</h3>
+          <ul>
+            <li>電柱・変電所・送電線鉄塔への塗布</li>
+            <li>道路橋梁・トンネル坑口の保護</li>
+            <li>通信基地局・データセンター外壁</li>
+            <li>停電・通信途絶による二次被害を予防</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card n" style="padding:12px 16px;">
+        <div class="cl">製造・流通の現実性</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.6;">HEC・MC・CSPはいずれも食品・医療・化粧品で実績のある汎用原料であり、<strong>単純混合で製造可能</strong>なため設備投資は最小限。既存の消防用ゲル製造ラインへの転用も容易で、スケールアップの障壁は低い。</p>
+      </div>
+    </div>
+    <div class="bb"><span>期待効果 1/3 ｜ 社会実装シナリオ</span><span>21 / 25</span></div>
+  </div>
+</div>
+<div class="sn">21</div>
+</div>
+
+<!-- ㉒ 期待効果② 環境・社会インパクト -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item on">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">期待効果 2/3</span><div class="tb-div"></div><h2 class="tb">環境・社会的インパクト</h2></div>
+    <div class="ct">
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div class="card-label">SEM 解析（原位置観察）</div>
-            <h3>🔬 微構造変化の直接観察</h3>
+          <div class="card g">
+            <div class="cl">環境インパクト</div>
+            <h3>🌱 現行難燃剤からの脱却</h3>
             <ul>
-              <li>加熱前：22 nm CSPが独立散在</li>
-              <li>1 min：粒界が出現し粒子間結合が形成</li>
-              <li>2 min：ネッキング構造・空隙率の減少を確認</li>
-              <li>4 min：連続多孔質シリカ網目が完成</li>
+              <li>Phos-Chek 等リン酸塩難燃剤：水生生物への毒性が報告</li>
+              <li>HEC+MC/CSP：植物由来・生分解性・無毒</li>
+              <li>残留シリカは土壌中で不活性なケイ酸塩に</li>
+              <li>年間数万トン規模の難燃剤の代替材料となりうる</li>
             </ul>
           </div>
-          <div class="card gold">
-            <div class="card-label">FT-IR・XPS 解析</div>
-            <h3>🧪 化学組成変化の確認</h3>
+          <div class="card">
+            <div class="cl">経済インパクト</div>
+            <h3>💰 消防コストの削減</h3>
             <ul>
-              <li>燃焼後：C-H結合消失（セルロース完全分解）</li>
-              <li>Si-O-Si 伸縮振動のみ残存 → 純シリカ殻</li>
-              <li>市販品は燃焼後に保護層ゼロ</li>
+              <li>散布回数の削減 → ヘリ運用費・燃料費削減</li>
+              <li>インフラ修復費の削減（保護効果による被害軽減）</li>
+              <li>低コスト原料 → 大規模散布が経済的に現実的</li>
             </ul>
           </div>
         </div>
         <div class="col">
-          <div class="stat" style="margin-bottom:14px;">
-            <div class="num">~0.02</div>
-            <div class="unit">W m⁻¹ K⁻¹</div>
-            <div class="desc">シリカエアロゲルの熱伝導率<br>固体材料として地球最低水準</div>
-          </div>
-          <div class="card navy">
-            <div class="card-label">TGA 解析</div>
-            <h3>水分・熱分解挙動</h3>
+          <div class="card n">
+            <div class="cl">社会インパクト</div>
+            <h3>👥 地域コミュニティの安全</h3>
             <ul>
-              <li>水分含量 ~90 wt%（初期冷却効果大）</li>
-              <li>300–500 °C でセルロース熱分解</li>
-              <li>500 °C 以上でシリカ焼結が進行</li>
-              <li>残留物 = 純粋なシリカエアロゲル</li>
+              <li>WUI 住民の財産・生命保護に直結</li>
+              <li>住民自身が事前に塗布できる使いやすさ</li>
+              <li>避難時間の確保 → 人的被害の軽減</li>
+              <li>山岳・島嶼部等の消防アクセス困難地域で特に有効</li>
             </ul>
+          </div>
+          <div class="stat">
+            <div class="n" style="font-size:22px;">次世代 WEG</div>
+            <div class="d" style="color:#f7d060;font-size:11px;">水蒸発後も機能する<br>世界初の難燃保護材料として<br>山火事対策の常識を変える</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="bottombar">
-      <span>実験結果 ｜ エアロゲル形成メカニズム</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
+    <div class="bb"><span>期待効果 2/3 ｜ 環境・社会インパクト</span><span>22 / 25</span></div>
   </div>
 </div>
-<div class="slide-num" style="color:#0a2342;">5</div>
+<div class="sn">22</div>
 </div>
 
-
-<!-- ══════════════════════════════════════════
-     SLIDE 6 ｜ 実験結果③：燃焼試験
-══════════════════════════════════════════ -->
+<!-- ㉓ 期待効果③ 今後の課題 -->
 <div class="slide">
-<div class="inner with-sidebar">
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section">研究背景</div>
-    <div class="sidebar-section active">実験結果</div>
-    <div class="sidebar-section">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item on">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
   </div>
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">実験結果</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">燃焼試験：米国林野庁規格に準拠した性能評価</h2>
-    </div>
-    <div class="content">
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">期待効果 3/3</span><div class="tb-div"></div><h2 class="tb">今後の研究課題と展望</h2></div>
+    <div class="ct">
       <div class="row">
-        <div class="col" style="flex:1.1;">
-          <div class="card">
-            <div class="card-label">試験プロトコル（USDA 準拠）</div>
-            <h3>🔥 試験条件</h3>
-            <ul>
-              <li>基材：合板 2.5 × 2.5 cm、塗布量 20 g/m²</li>
-              <li>ガスバーナー持続照射（定常炎）</li>
-              <li>炭化開始時間（Time to char）を主指標に評価</li>
-              <li>表面温度・120 s・300 s 後の状態を記録</li>
-            </ul>
-          </div>
-          <div class="card sky">
-            <div class="card-label">燃焼過程の観察（目視）</div>
-            <h3>📸 経時変化</h3>
-            <ul>
-              <li>120 s：市販品は炭化進行 → 本ゲルは白色エアロゲル層を維持</li>
-              <li>300 s：HEC+MC/CSP のみ基材保護を継続</li>
-              <li>消炎後：シリカ殻が残存し <strong>二次点火を防止</strong></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col" style="flex:0.9;">
-          <table class="tbl">
-            <tr><th>材料</th><th>炭化防止時間(s)</th><th>向上率</th></tr>
-            <tr><td>水のみ</td><td>40</td><td>基準</td></tr>
-            <tr><td>AquaGel-K</td><td>120</td><td>3×</td></tr>
-            <tr><td>Phos-Chek FORTIFY</td><td>90</td><td>2.3×</td></tr>
-            <tr><td><strong>HEC+MC/CSP 1–5</strong></td><td class="hl">&gt;220</td><td class="hl">5.5×</td></tr>
-            <tr><td><strong>MHEC/CSP 1–5</strong></td><td class="hl">&gt;200</td><td class="hl">5×</td></tr>
-          </table>
-          <div class="stat" style="margin-top:14px;">
-            <div class="num">&gt;5<span class="unit">×</span></div>
-            <div class="desc">市販最高性能ゲル（AquaGel-K）比の<br>炭化防止時間延長（発泡指数と正相関）</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bottombar">
-      <span>実験結果 ｜ 燃焼試験・難燃性評価</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
-  </div>
-</div>
-<div class="slide-num" style="color:#0a2342;">6</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════
-     SLIDE 7 ｜ 期待効果
-══════════════════════════════════════════ -->
-<div class="slide">
-<div class="inner with-sidebar">
-  <div class="sidebar">
-    <div class="sidebar-title">Contents</div>
-    <div class="sidebar-section">研究背景</div>
-    <div class="sidebar-section">実験結果</div>
-    <div class="sidebar-section active">期待効果</div>
-    <div class="sidebar-fill"></div>
-    <div class="sidebar-logo">Dong et al.<br>Adv. Mater. 2024</div>
-  </div>
-  <div class="main">
-    <div class="topbar">
-      <span class="topbar-section">期待効果</span>
-      <div class="topbar-divider"></div>
-      <h2 class="topbar">社会実装に向けた期待効果と今後の展望</h2>
-    </div>
-    <div class="content">
-      <div class="row">
-        <div class="card" style="flex:1;">
-          <div class="card-label">🏠 インフラ保護</div>
-          <h3>重要施設・住宅の防火</h3>
+        <div class="card r col">
+          <div class="cl" style="color:#c0392b;">短期課題</div>
+          <h3>🔬 材料・性能の最適化</h3>
           <ul>
-            <li>WUI（都市-野域境界）の住宅への事前散布</li>
-            <li>電力インフラ・通信塔への適用</li>
-            <li>水蒸発後も断熱層で継続保護</li>
+            <li>実際の野火温度プロファイルでの燃焼試験</li>
+            <li>風・雨・湿度を考慮した環境条件下での評価</li>
+            <li>CSP 粒径・濃度のさらなる最適化</li>
+            <li>長期保管安定性の定量評価（6ヶ月〜1年）</li>
           </ul>
         </div>
-        <div class="card sky" style="flex:1;">
-          <div class="card-label">🚁 消防オペレーション</div>
-          <h3>現行システムとの親和性</h3>
+        <div class="card g col">
+          <div class="cl">中長期課題</div>
+          <h3>🌿 実環境・スケールアップ</h3>
           <ul>
-            <li>既存の地上・航空散布機材で対応可能</li>
-            <li>高い基材密着性で散布効率が向上</li>
-            <li>少量散布で広範囲保護を実現</li>
+            <li>実スケール野外燃焼試験（100 m² 以上）</li>
+            <li>航空散布機材との適合性試験</li>
+            <li>製造コスト削減（原料の低コスト代替品探索）</li>
+            <li>規制・認証の取得（USDA・EPA・EU 規格）</li>
           </ul>
         </div>
-        <div class="card teal" style="flex:1;">
-          <div class="card-label">🌿 環境持続性</div>
-          <h3>生態系への低負荷</h3>
+        <div class="card s col">
+          <div class="cl">応用展開</div>
+          <h3>🚀 新用途・新領域</h3>
           <ul>
-            <li>高い生分解性（BOD試験で確認）</li>
-            <li>リン酸塩系難燃剤の水生毒性懸念なし</li>
-            <li>植物由来原料 → カーボンフットプリント小</li>
-          </ul>
-        </div>
-      </div>
-      <div class="row">
-        <div class="card gold" style="flex:1;">
-          <div class="card-label">🔭 今後の課題</div>
-          <ul>
-            <li>実スケール野外散布試験による有効性検証</li>
-            <li>多様な気候・基材条件下でのロバスト性確認</li>
-            <li>長期保管安定性・製造コスト低減</li>
-          </ul>
-        </div>
-        <div class="card navy" style="flex:1;">
-          <div class="card-label">🚀 将来展開</div>
-          <ul>
-            <li>建材への事前含浸・コーティング剤として展開</li>
-            <li>エアロゲル厚の設計による保護性能のカスタマイズ</li>
+            <li>建材への事前含浸コーティング製品化</li>
             <li>他の高温災害（火山・工業火災）への転用</li>
+            <li>エアロゲル厚の設計自由度を活用した断熱材開発</li>
+            <li>バイオ由来ポリマーの多様化（キトサン・デンプン等）</li>
           </ul>
         </div>
-        <div class="stat" style="flex:0.7;">
-          <div class="num" style="font-size:28px;">次世代</div>
-          <div class="desc" style="font-size:12px; color:#f7d060;">WEG材料として<br>山火事対策を<br>根本から変える可能性</div>
+      </div>
+      <div style="background:#f0f4fa;border-radius:7px;padding:12px 16px;font-size:12px;color:#445;line-height:1.6;border-left:4px solid #1a6bcc;">
+        📌 <strong>著者コメント（論文 Section 3 より）：</strong>「これらの材料は次世代の野火消火・インフラ保護技術として、山火事対策を根本から改善する潜在性を持つ」
+      </div>
+    </div>
+    <div class="bb"><span>期待効果 3/3 ｜ 今後の課題と展望</span><span>23 / 25</span></div>
+  </div>
+</div>
+<div class="sn">23</div>
+</div>
+
+<!-- ㉔ まとめ -->
+<div class="slide">
+<div class="lay">
+  <div class="sb">
+    <div class="sb-title">Contents</div>
+    <div class="sb-item">研究背景</div>
+    <div class="sb-item">材料・方法</div>
+    <div class="sb-item">実験結果</div>
+    <div class="sb-item on">期待効果</div>
+    <div class="sb-logo">Dong et al.<br>Adv. Mater. 2024</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="tb"><span class="tb-sec">まとめ</span><div class="tb-div"></div><h2 class="tb">本研究のまとめ</h2></div>
+    <div class="ct" style="gap:10px;">
+      <div class="row">
+        <div class="card" style="flex:1;border-top-color:#1a6bcc;">
+          <div class="cl">材料</div>
+          <h3>🧪 HEC/MC + CSP ヒドロゲル</h3>
+          <p>植物由来セルロース誘導体とコロイダルシリカの自己組織化により、噴霧・密着・難燃・生分解性を両立した新型 WEG を実現</p>
+        </div>
+        <div class="card" style="flex:1;border-top-color:#f0a500;">
+          <div class="cl">機構</div>
+          <h3>🔥 二段階保護メカニズム</h3>
+          <p>①水蒸発による初期冷却、②CSP 焼結によるシリカエアロゲル形成。<strong>水が蒸発した後も断熱保護を継続</strong>する世界初の設計</p>
+        </div>
+        <div class="card" style="flex:1;border-top-color:#e74c3c;">
+          <div class="cl">性能</div>
+          <h3>📊 市販品比 5× 以上の難燃性</h3>
+          <p>炭化防止時間 &gt;220 s（AquaGel-K 比 1.8×・水比 5.5×）。発泡指数・FT-IR・XPS・SEM で機構を多角的に実証</p>
         </div>
       </div>
-    </div>
-    <div class="bottombar">
-      <span>期待効果 ｜ 社会実装と展望</span>
-      <span>Dong et al., Adv. Mater. 2024</span>
-    </div>
-  </div>
-</div>
-<div class="slide-num" style="color:#0a2342;">7</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════
-     SLIDE 8 ｜ まとめ（表紙リフレイン）
-══════════════════════════════════════════ -->
-<div class="slide cover" style="background:linear-gradient(135deg,#071d35 0%,#0d3560 50%,#1a5295 100%);">
-  <div class="cover-body">
-    <div class="cover-label">Summary</div>
-    <h1 style="font-size:22px; margin-bottom:28px;">本研究のまとめ</h1>
-    <div style="display:flex; gap:24px; max-width:880px;">
-      <div style="flex:1; background:rgba(255,255,255,0.07); border-radius:8px; padding:18px; border-top:3px solid #f0a500;">
-        <div style="font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#f0a500; margin-bottom:8px;">材料</div>
-        <p style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.7;">HEC/MC + CSP の組み合わせにより、噴霧・密着・難燃・生分解性を両立するヒドロゲルを実現</p>
-      </div>
-      <div style="flex:1; background:rgba(255,255,255,0.07); border-radius:8px; padding:18px; border-top:3px solid #4da6ff;">
-        <div style="font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#4da6ff; margin-bottom:8px;">機構</div>
-        <p style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.7;">熱でシリカ粒子が焼結しエアロゲルを形成。水蒸発後も断熱保護層として機能する二段階メカニズム</p>
-      </div>
-      <div style="flex:1; background:rgba(255,255,255,0.07); border-radius:8px; padding:18px; border-top:3px solid #00b4d8;">
-        <div style="font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#00b4d8; margin-bottom:8px;">性能</div>
-        <p style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.7;">市販最高性能品比 <strong style="color:#f7d060;">5倍以上</strong> の難燃性。既存消防機材での散布が可能で実用性も高い</p>
+      <table class="tbl" style="font-size:11.5px;">
+        <tr><th>評価</th><th>レオロジー（Fig.2）</th><th>燃焼試験（Fig.3）</th><th>発泡指数（Fig.4）</th><th>SEM 焼結（Fig.5）</th><th>FT-IR・XPS</th><th>BOD</th></tr>
+        <tr>
+          <td>結論</td>
+          <td class="h">噴霧・密着に最適</td>
+          <td class="h">&gt;5× 向上</td>
+          <td class="h">最高発泡指数</td>
+          <td class="h">4 min で完了</td>
+          <td class="ok">純シリカ残存を確認</td>
+          <td class="ok">高い生分解性</td>
+        </tr>
+      </table>
+      <div style="background:linear-gradient(90deg,#061529,#0c2d58);border-radius:7px;padding:14px 20px;display:flex;align-items:center;gap:20px;">
+        <div style="font-size:32px;font-weight:900;color:#f7d060;white-space:nowrap;">&gt;5×</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.6;">本研究の HEC+MC/CSP ゲルは、現行最高性能の市販 WEG（AquaGel-K）と比較して難燃保護時間を5倍以上延長しながら、生分解性・環境安全性においても優れた特性を示した。<strong style="color:#f0a500;">水蒸発後も機能するという概念的革新</strong>が次世代 WEG の新標準を確立する。</div>
       </div>
     </div>
+    <div class="bb"><span>まとめ</span><span>24 / 25</span></div>
   </div>
-  <div class="cover-footer">
-    <span>Dong et al., Advanced Materials 2024 ｜ DOI: 10.1002/adma.202407375</span>
-    <span>ご清聴ありがとうございました</span>
-  </div>
-  <div class="slide-num">8</div>
+</div>
+<div class="sn">24</div>
 </div>
 
-</body>
-</html>
+<!-- ㉕ 参考情報 -->
+<div class="slide sum">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 72px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#f0a500;margin-bottom:20px;">Reference</div>
+    <h1 style="font-size:22px;font-weight:900;color:#fff;margin-bottom:24px;">論文情報・謝辞</h1>
+    <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:2.0;">
+      <div><span style="color:#f0a500;font-weight:700;">タイトル：</span>Water-Enhancing Gels Exhibiting Heat-Activated Formation of Silica Aerogels for Protection of Critical Infrastructure During Catastrophic Wildfire</div>
+      <div><span style="color:#f0a500;font-weight:700;">著者：</span>C. Dong, A.I. d'Aquino, S. Sen, I.A. Hall, A.C. Yu, G.B. Crane, J.D. Acosta, E.A. Appel</div>
+      <div><span style="color:#f0a500;font-weight:700;">掲載誌：</span>Advanced Materials, 2024, 36, 2407375</div>
+      <div><span style="color:#f0a500;font-weight:700;">DOI：</span>10.1002/adma.202407375</div>
+      <div><span style="color:#f0a500;font-weight:700;">所属：</span>Stanford University（Materials Science &amp; Engineering, Bioengineering, Department of Natural Resource Management &amp; Environmental Sciences, Cal Poly SLO, Stanford ChEM-H, Woods Institute for the Environment, Sarafan ChEM-H, Department of Pediatric-Endocrinology）</div>
+      <div><span style="color:#f0a500;font-weight:700;">助成：</span>Gordon &amp; Betty Moore Foundation, National Science Foundation (ECCS-1542152)</div>
+    </div>
+  </div>
+  <div style="padding:12px 72px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);">
+    <span style="font-size:10px;color:rgba(255,255,255,.3);">本スライドは論文内容をもとに要約・再構成したものです</span>
+    <span style="font-size:10px;color:rgba(255,255,255,.3);">25 / 25</span>
+  </div>
+  <div class="sn">25</div>
+</div>
+
+</body></html>
+
