@@ -1,428 +1,513 @@
 #!/usr/bin/env python3
-"""slides.html → slides.pptx 変換スクリプト"""
+"""slides.html → slides.pptx 変換スクリプト v2"""
 
 from bs4 import BeautifulSoup
 from pptx import Presentation
-from pptx.util import Inches, Pt, Emu
+from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
-from pptx.util import Inches, Pt
-import re
+import re, os
 
-# ─── 色定義 ──────────────────────────────────────────
-NAVY    = RGBColor(0x06, 0x15, 0x29)   # ダークネイビー（サイドバー）
-BLUE    = RGBColor(0x0c, 0x2d, 0x58)   # サイドバーグラデーション下
-ACCENT  = RGBColor(0xf0, 0xa5, 0x00)   # アクセントオレンジ
-WHITE   = RGBColor(0xff, 0xff, 0xff)
-LTBLUE  = RGBColor(0x1a, 0x6b, 0xcc)   # カードボーダー
-BGCARD  = RGBColor(0xf3, 0xf7, 0xfd)   # カード背景
-GRAY    = RGBColor(0x33, 0x33, 0x44)   # 本文グレー
-PLACEHOLDER_BG = RGBColor(0xf0, 0xf4, 0xfa)
-PLACEHOLDER_BD = RGBColor(0xb0, 0xc4, 0xde)
+# ── 色定義（CSS変数と対応） ──────────────────────────────────
+INK    = RGBColor(0x1e, 0x29, 0x3b)
+INK2   = RGBColor(0x33, 0x41, 0x55)
+INK3   = RGBColor(0x47, 0x55, 0x69)
+MUTED  = RGBColor(0x64, 0x74, 0x8b)
+CARD   = RGBColor(0xf1, 0xf5, 0xf9)
+SOFT   = RGBColor(0xf8, 0xfa, 0xfc)
+LINE   = RGBColor(0xe2, 0xe8, 0xf0)
+HEADER = RGBColor(0x1e, 0x29, 0x3b)
+ACCENT = RGBColor(0x3b, 0x51, 0x74)
+AMBER  = RGBColor(0xb0, 0x84, 0x42)
+WHITE  = RGBColor(0xff, 0xff, 0xff)
+D_BLUE = RGBColor(0x5b, 0x7a, 0x99)
+D_TEAL = RGBColor(0x4a, 0x7c, 0x8c)
+D_RED  = RGBColor(0xa0, 0x56, 0x56)
+D_GRN  = RGBColor(0x5b, 0x8c, 0x5a)
+D_AMBR = RGBColor(0x9f, 0x76, 0x39)
 
-# ─── スライドサイズ 16:9 ─────────────────────────────
-W = Inches(13.333)  # 1280px相当 (96dpi換算)
-H = Inches(7.5)     # 720px相当
+FIGS_DIR = '/home/user/my-first-claude/figs'
+W = Inches(13.333)
+H = Inches(7.5)
+HDR_H = Inches(0.72)
+FTR_H = Inches(0.08)
+PAD   = Inches(0.40)
+BODY_Y = HDR_H + Inches(0.22)
+BODY_H = H - BODY_Y - FTR_H - Inches(0.18)
+BODY_X = PAD
+BODY_W = W - PAD * 2
 
-SIDEBAR_W = Inches(1.97)  # 190px
-TOPBAR_H  = Inches(0.44)  # ~42px
-BOTBAR_H  = Inches(0.27)  # ~26px
 
-def emu(px, dpi=96):
-    """ピクセル→EMU"""
-    return int(px / dpi * 914400)
-
-def add_rect(slide, x, y, w, h, fill_color, line_color=None, line_width=None):
-    shape = slide.shapes.add_shape(1, x, y, w, h)  # MSO_SHAPE_TYPE.RECTANGLE
-    shape.fill.solid()
-    shape.fill.fore_color.rgb = fill_color
-    if line_color:
-        shape.line.color.rgb = line_color
-        if line_width:
-            shape.line.width = line_width
+# ── ユーティリティ ──────────────────────────────────────────
+def add_rect(sl, x, y, w, h, fill, border=None, bpt=0.75):
+    s = sl.shapes.add_shape(1, x, y, w, h)
+    s.fill.solid()
+    s.fill.fore_color.rgb = fill
+    if border:
+        s.line.color.rgb = border
+        s.line.width = Pt(bpt)
     else:
-        shape.line.fill.background()
-    return shape
+        s.line.fill.background()
+    return s
 
-def add_textbox(slide, x, y, w, h, text, font_size=12, bold=False,
-                color=WHITE, align=PP_ALIGN.LEFT, wrap=True):
-    txBox = slide.shapes.add_textbox(x, y, w, h)
-    txBox.word_wrap = wrap
-    tf = txBox.text_frame
-    tf.word_wrap = wrap
-    p = tf.paragraphs[0]
-    p.alignment = align
-    run = p.add_run()
-    run.text = text
-    run.font.size = Pt(font_size)
-    run.font.bold = bold
-    run.font.color.rgb = color
-    return txBox
-
-def clean_text(element):
-    """HTML要素からプレーンテキストを抽出"""
-    if element is None:
-        return ""
-    return element.get_text(separator="\n", strip=True)
-
-def extract_bullets(element):
-    """li要素からテキストリストを抽出"""
-    if element is None:
-        return []
-    items = element.find_all('li')
-    return [li.get_text(strip=True) for li in items]
-
-def extract_cards(element):
-    """card要素からタイトル+テキストを抽出"""
-    cards = []
-    for card in element.find_all(class_='card'):
-        h = card.find(['h3','h4','strong'])
-        title = h.get_text(strip=True) if h else ""
-        texts = []
-        for child in card.children:
-            if hasattr(child, 'name') and child.name in ('p','ul','li'):
-                t = child.get_text(strip=True)
-                if t:
-                    texts.append(t)
-            elif hasattr(child, 'name') and child.name == 'ul':
-                for li in child.find_all('li'):
-                    texts.append("• " + li.get_text(strip=True))
-        if not texts:
-            all_text = card.get_text(separator='\n', strip=True)
-            lines = [l for l in all_text.split('\n') if l.strip()]
-            texts = lines[1:] if len(lines) > 1 else lines
-        cards.append((title, "\n".join(texts[:4])))
-    return cards
-
-def make_cover_slide(prs, slide_html):
-    """表紙スライド"""
-    layout = prs.slide_layouts[6]  # 空白レイアウト
-    slide = prs.slides.add_slide(layout)
-    slide.shapes.title  # noqa
-
-    # 背景全体をネイビーに
-    add_rect(slide, 0, 0, W, H, NAVY)
-
-    # 左アクセントバー
-    add_rect(slide, 0, 0, Inches(0.15), H, ACCENT)
-
-    # 中央コンテンツ取得
-    ct = slide_html.find(class_='ct') or slide_html
-    h1 = slide_html.find('h1')
-    if not h1:
-        h1 = slide_html.find(class_='cover-title')
-
-    # タイトル
-    title_text = ""
-    if h1:
-        title_text = h1.get_text(strip=True)
-    else:
-        tb = slide_html.find(class_='tb')
-        if tb:
-            h2 = tb.find('h2')
-            title_text = h2.get_text(strip=True) if h2 else "WEG Wildfire Protection"
-
-    if not title_text:
-        title_text = "WEG Wildfire Protection Gel"
-
-    # メインタイトル
-    txBox = slide.shapes.add_textbox(Inches(0.5), Inches(1.8), Inches(12.5), Inches(2.5))
-    txBox.word_wrap = True
-    tf = txBox.text_frame
+def add_text(sl, x, y, w, h, text, size=11, bold=False,
+             color=INK2, align=PP_ALIGN.LEFT, italic=False):
+    text = (text or '').strip()
+    if not text:
+        return None
+    tb = sl.shapes.add_textbox(x, y, w, max(h, Inches(0.18)))
+    tb.word_wrap = True
+    tf = tb.text_frame
     tf.word_wrap = True
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    run = p.add_run()
-    run.text = title_text
-    run.font.size = Pt(36)
-    run.font.bold = True
-    run.font.color.rgb = WHITE
+    for i, line in enumerate(text.split('\n')):
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        p.alignment = align
+        run = p.add_run()
+        run.text = line
+        run.font.size = Pt(size)
+        run.font.bold = bold
+        run.font.italic = italic
+        run.font.color.rgb = color
+    return tb
 
-    # サブタイトル・著者情報
-    sub_texts = []
-    for tag in (ct or slide_html).find_all(['p', 'div'], limit=5):
-        t = tag.get_text(strip=True)
-        if t and t != title_text and len(t) < 200:
-            sub_texts.append(t)
-            if len(sub_texts) >= 3:
-                break
+def add_image(sl, src, x, y, w, h):
+    fname = os.path.basename(src or '')
+    fpath = os.path.join(FIGS_DIR, fname)
+    if os.path.exists(fpath):
+        try:
+            return sl.shapes.add_picture(fpath, x, y, w, h)
+        except Exception as e:
+            print(f"  [画像エラー] {fname}: {e}")
+    # プレースホルダー
+    add_rect(sl, x, y, w, h, RGBColor(0xec,0xf1,0xf8), RGBColor(0xb0,0xc4,0xde), 1)
+    add_text(sl, x+Inches(0.1), y+h*0.38, w-Inches(0.2), Inches(0.36),
+             fname or '(図)', size=9, color=MUTED, align=PP_ALIGN.CENTER)
 
-    if sub_texts:
-        txBox2 = slide.shapes.add_textbox(Inches(0.5), Inches(4.5), Inches(12.5), Inches(2.0))
-        tf2 = txBox2.text_frame
-        tf2.word_wrap = True
-        for i, st in enumerate(sub_texts[:3]):
-            p2 = tf2.paragraphs[0] if i == 0 else tf2.add_paragraph()
-            p2.alignment = PP_ALIGN.CENTER
-            run2 = p2.add_run()
-            run2.text = st
-            run2.font.size = Pt(14)
-            run2.font.color.rgb = RGBColor(0xc0, 0xd4, 0xf0)
+def t(el):
+    return el.get_text(separator=' ', strip=True) if el else ''
 
-    # 下部アクセントライン
-    add_rect(slide, 0, H - Inches(0.08), W, Inches(0.08), ACCENT)
+def classes(el):
+    return el.get('class', []) if el else []
 
-    return slide
+def has_cls(el, *names):
+    c = classes(el)
+    return any(n in c for n in names)
 
-def make_content_slide(prs, slide_html):
-    """コンテンツスライド（サイドバー+本文）"""
-    layout = prs.slide_layouts[6]
-    slide = prs.slides.add_slide(layout)
 
-    # ─ 背景白 ─
-    add_rect(slide, 0, 0, W, H, WHITE)
-
-    # ─ トップバー（ネイビー） ─
-    add_rect(slide, 0, 0, W, TOPBAR_H, NAVY)
-
-    # トップバーテキスト
-    tb = slide_html.find(class_='tb')
-    section_text = ""
-    title_text = ""
-    if tb:
-        sec = tb.find(class_='tb-sec')
-        h2 = tb.find('h2')
-        section_text = sec.get_text(strip=True) if sec else ""
-        title_text = h2.get_text(strip=True) if h2 else ""
-
-    if section_text:
-        add_textbox(slide, Inches(0.2), Inches(0.05), Inches(2.0), TOPBAR_H,
-                    section_text, font_size=8, bold=True, color=ACCENT)
-
-    if title_text:
-        add_textbox(slide, Inches(2.3), Inches(0.05), Inches(10.8), TOPBAR_H,
-                    title_text, font_size=14, bold=True, color=WHITE)
-
-    # ─ サイドバー ─
-    sb_y = TOPBAR_H
-    sb_h = H - TOPBAR_H - BOTBAR_H
-    add_rect(slide, 0, sb_y, SIDEBAR_W, sb_h, NAVY)
-
-    sb_el = slide_html.find(class_='sb')
-    if sb_el:
-        sb_title_el = sb_el.find(class_='sb-title')
-        if sb_title_el:
-            add_textbox(slide, Inches(0.15), sb_y + Inches(0.25), SIDEBAR_W - Inches(0.2),
-                        Inches(0.3), sb_title_el.get_text(strip=True),
-                        font_size=7, bold=True, color=ACCENT)
-
-        items = sb_el.find_all(class_='sb-item')
-        for j, item in enumerate(items):
-            is_on = 'on' in item.get('class', [])
-            y_pos = sb_y + Inches(0.65) + j * Inches(0.32)
-            if is_on:
-                add_rect(slide, Inches(0.08), y_pos - Inches(0.03),
-                         SIDEBAR_W - Inches(0.16), Inches(0.3),
-                         RGBColor(0x2a, 0x1e, 0x00))
-            add_textbox(slide, Inches(0.18), y_pos,
-                        SIDEBAR_W - Inches(0.25), Inches(0.28),
-                        item.get_text(strip=True),
-                        font_size=9, bold=is_on,
-                        color=ACCENT if is_on else RGBColor(0xaa, 0xbb, 0xcc))
-
-    # ─ コンテンツエリア ─
-    ct_x = SIDEBAR_W + Inches(0.1)
-    ct_y = TOPBAR_H + Inches(0.2)
-    ct_w = W - SIDEBAR_W - Inches(0.4)
-    ct_h = H - TOPBAR_H - BOTBAR_H - Inches(0.3)
-
-    ct = slide_html.find(class_='ct')
-    if ct:
-        render_content(slide, ct, ct_x, ct_y, ct_w, ct_h)
-
-    # ─ ボトムバー ─
-    bb_y = H - BOTBAR_H
-    add_rect(slide, 0, bb_y, W, BOTBAR_H, NAVY)
-
-    bb = slide_html.find(class_='bb')
-    if bb:
-        spans = bb.find_all('span')
-        if spans:
-            add_textbox(slide, Inches(0.3), bb_y + Inches(0.03), Inches(6), BOTBAR_H,
-                        spans[0].get_text(strip=True), font_size=7,
-                        color=RGBColor(0x88, 0x99, 0xaa))
-            if len(spans) > 1:
-                add_textbox(slide, Inches(7), bb_y + Inches(0.03), Inches(6), BOTBAR_H,
-                            spans[-1].get_text(strip=True), font_size=7,
-                            color=RGBColor(0x88, 0x99, 0xaa), align=PP_ALIGN.RIGHT)
-
-    # スライド番号
-    sn = slide_html.find(class_='sn')
+# ── ヘッダーを描画（全コンテンツスライド共通） ────────────────
+def draw_header(sl, div):
+    add_rect(sl, 0, 0, W, HDR_H, HEADER)
+    add_rect(sl, 0, HDR_H - Inches(0.05), W, Inches(0.05), ACCENT)
+    sh = div.find(class_='sh')
+    if sh:
+        tag_el = sh.find(class_='sh-tag')
+        h2_el  = sh.find('h2')
+        tag = t(tag_el)
+        title = t(h2_el)
+        if tag:
+            add_text(sl, PAD, Inches(0.16), Inches(2.2), Inches(0.42),
+                     tag, size=9, color=RGBColor(0x88,0xa4,0xc4))
+        if title:
+            add_text(sl, Inches(2.8), Inches(0.10), W - Inches(3.1), Inches(0.56),
+                     title, size=22, bold=True, color=WHITE)
+    # フッター
+    add_rect(sl, 0, H - FTR_H, W, FTR_H, ACCENT)
+    sn = div.find(class_='sn')
     if sn:
-        add_textbox(slide, W - Inches(0.8), H - Inches(0.25), Inches(0.7), Inches(0.22),
-                    sn.get_text(strip=True), font_size=7,
-                    color=RGBColor(0x88, 0x88, 0x99), align=PP_ALIGN.RIGHT)
+        add_text(sl, W-Inches(1.3), H-Inches(0.30), Inches(1.2), Inches(0.24),
+                 t(sn), size=9, color=MUTED, align=PP_ALIGN.RIGHT)
 
-    return slide
 
-def render_content(slide, ct, x, y, w, h):
-    """コンテンツエリアを描画"""
+# ── カード群を描画 ────────────────────────────────────────────
+def draw_cards(sl, cards, x, y, w, h, cols=None):
+    n = len(cards)
+    if n == 0:
+        return
+    ncols = cols or min(n, 4)
+    nrows = (n + ncols - 1) // ncols
+    gap = Inches(0.14)
+    cw = (w - gap * (ncols - 1)) / ncols
+    ch = (h - gap * (nrows - 1)) / nrows
+
+    for i, card in enumerate(cards):
+        col = i % ncols
+        row = i // ncols
+        cx = x + col * (cw + gap)
+        cy = y + row * (ch + gap)
+        dark = 'dark' in classes(card)
+        bg = HEADER if dark else CARD
+        add_rect(sl, cx, cy, cw, ch, bg, LINE if not dark else None, 0.5)
+        # アクセントトップバー
+        add_rect(sl, cx, cy, cw, Inches(0.04), ACCENT)
+
+        # タイトル
+        ct_el = card.find(class_='ct')
+        cb_el = card.find(class_='cb')
+        li_els = card.find_all('li')
+
+        iy = cy + Inches(0.10)
+        txt_color = WHITE if dark else INK
+        sub_color = RGBColor(0xcc,0xdd,0xee) if dark else INK3
+
+        if ct_el:
+            ct_text = t(ct_el)
+            add_text(sl, cx+Inches(0.12), iy, cw-Inches(0.2), Inches(0.32),
+                     ct_text, size=12, bold=True, color=txt_color)
+            iy += Inches(0.34)
+
+        if cb_el:
+            add_text(sl, cx+Inches(0.12), iy, cw-Inches(0.2), ch-(iy-cy)-Inches(0.08),
+                     t(cb_el), size=10, color=sub_color)
+        elif li_els:
+            bullets = '\n'.join('• ' + t(li) for li in li_els[:5])
+            add_text(sl, cx+Inches(0.12), iy, cw-Inches(0.2), ch-(iy-cy)-Inches(0.08),
+                     bullets, size=10, color=sub_color)
+        else:
+            body = card.get_text(separator='\n', strip=True)
+            lines = [ln for ln in body.split('\n') if ln.strip()]
+            ct_text2 = t(ct_el) if ct_el else ''
+            body_lines = [ln for ln in lines if ln != ct_text2][:6]
+            if body_lines:
+                add_text(sl, cx+Inches(0.12), iy, cw-Inches(0.2), ch-(iy-cy)-Inches(0.08),
+                         '\n'.join(body_lines), size=10, color=sub_color)
+
+
+# ── stat ボックスを描画 ────────────────────────────────────────
+def draw_stats(sl, stats, x, y, w, h):
+    n = len(stats)
+    if n == 0:
+        return
+    gap = Inches(0.14)
+    sw = (w - gap * (n - 1)) / n
+    for i, stat in enumerate(stats):
+        sx = x + i * (sw + gap)
+        add_rect(sl, sx, y, sw, h, CARD, LINE, 0.5)
+        num_el = stat.find(class_='stat-num')
+        lbl_el = stat.find(class_='stat-lbl')
+        sub_el = stat.find(class_='stat-sub')
+        num = t(num_el) if num_el else stat.get_text(strip=True)[:10]
+        lbl = t(lbl_el)
+        sub = t(sub_el)
+        add_text(sl, sx+Inches(0.08), y+Inches(0.12), sw-Inches(0.16), Inches(0.55),
+                 num, size=28, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        if lbl:
+            add_text(sl, sx+Inches(0.08), y+Inches(0.68), sw-Inches(0.16), Inches(0.28),
+                     lbl, size=11, color=INK2, align=PP_ALIGN.CENTER)
+        if sub:
+            add_text(sl, sx+Inches(0.08), y+Inches(0.96), sw-Inches(0.16), Inches(0.24),
+                     sub, size=9, color=MUTED, align=PP_ALIGN.CENTER)
+
+
+# ── テーブルを描画 ────────────────────────────────────────────
+def draw_table(sl, tbl, x, y, w, h):
+    rows = tbl.find_all('tr')
+    if not rows:
+        return
+    n = min(len(rows), 10)
+    row_h = min(h / n, Inches(0.40))
+    for ri, row in enumerate(rows[:n]):
+        cells = row.find_all(['th', 'td'])
+        if not cells:
+            continue
+        cw = w / len(cells)
+        ry = y + ri * row_h
+        bg = HEADER if ri == 0 else (SOFT if ri % 2 == 0 else WHITE)
+        add_rect(sl, x, ry, w, row_h, bg, LINE, 0.3)
+        for ci, cell in enumerate(cells):
+            cx2 = x + ci * cw
+            fg = WHITE if ri == 0 else INK2
+            add_text(sl, cx2 + Inches(0.1), ry + Inches(0.05),
+                     cw - Inches(0.12), row_h - Inches(0.06),
+                     t(cell), size=10, bold=(ri == 0), color=fg)
+
+
+# ── callout / key を描画 ──────────────────────────────────────
+def draw_callout(sl, el, x, y, w, h, dark=False):
+    bg = HEADER if dark else RGBColor(0xf0,0xf4,0xf8)
+    border = ACCENT
+    add_rect(sl, x, y, Inches(0.05), h, border)
+    add_rect(sl, x + Inches(0.05), y, w - Inches(0.05), h, bg)
+    add_text(sl, x + Inches(0.2), y + Inches(0.07), w - Inches(0.28),
+             h - Inches(0.1), t(el), size=11,
+             color=WHITE if dark else INK)
+
+
+# ── img-box から src を取得 ────────────────────────────────────
+def get_img_src(container):
+    img = container.find('img') if container else None
+    return img.get('src', '') if img else ''
+
+
+# ── .sb 内のコンテンツを解析してレンダリング ──────────────────
+def render_sb(sl, sb, x, y, w, h):
+    if not sb:
+        return
     cur_y = y
+    rem_h = lambda: h - (cur_y - y)
 
-    # 図プレースホルダー
-    figs = ct.find_all(class_='fig')
-    cards = ct.find_all(class_='card')
-    stats = ct.find_all(class_='stat')
-    tables = ct.find_all('table')
-    uls = ct.find_all('ul', recursive=False)
-    paras = ct.find_all('p', recursive=False)
+    # 全 img-box を収集
+    img_boxes = sb.find_all(class_='img-box')
+    imgs = [(ib, get_img_src(ib)) for ib in img_boxes if get_img_src(ib)]
 
-    # figがある場合はプレースホルダーボックス追加
-    if figs:
-        fig_h = min(Inches(2.5), h * 0.45)
-        fig_w_each = (w - Inches(0.15) * (len(figs) - 1)) / len(figs)
-        for fi, fig in enumerate(figs):
-            fx = x + fi * (fig_w_each + Inches(0.15))
-            fig_shape = add_rect(slide, fx, cur_y, fig_w_each, fig_h,
-                                 PLACEHOLDER_BG, PLACEHOLDER_BD, Pt(1.5))
-            label_el = fig.find(class_='fig-label')
-            note_el = fig.find(class_='fig-note')
-            label = label_el.get_text(strip=True) if label_el else fig.get_text(strip=True)[:40]
-            note = note_el.get_text(strip=True) if note_el else ""
+    # グリッドコンテナを特定
+    grid_re = re.compile(r'\bg(?:2|3|4|12|21|32)\b')
+    grids = [c for c in sb.children
+             if hasattr(c, 'get') and any(grid_re.match(cl) for cl in c.get('class', []))]
 
-            add_textbox(slide, fx + Inches(0.1), cur_y + fig_h * 0.3,
-                        fig_w_each - Inches(0.2), fig_h * 0.4,
-                        label, font_size=9, bold=True,
-                        color=RGBColor(0x44, 0x66, 0x88), align=PP_ALIGN.CENTER)
-            if note:
-                add_textbox(slide, fx + Inches(0.1), cur_y + fig_h * 0.55,
-                            fig_w_each - Inches(0.2), fig_h * 0.35,
-                            note, font_size=8,
-                            color=RGBColor(0x77, 0x88, 0x99), align=PP_ALIGN.CENTER)
-        cur_y += fig_h + Inches(0.15)
+    # ── レイアウト判定 ──────────────────────────────────
+    cards_all = sb.find_all(class_='card')
+    stats_all = sb.find_all(class_='stat')
+    tables    = sb.find_all(class_='tbl')
+    callouts  = sb.find_all(class_=re.compile(r'\b(?:co|key)\b'))
+    lists     = sb.find_all(class_='list')
 
-    # カード
-    if cards:
-        card_w = (w - Inches(0.15) * (min(len(cards), 3) - 1)) / min(len(cards), 3)
-        card_h = min(Inches(2.2), (h - (cur_y - y)) * 0.9)
-        for ci, card in enumerate(cards[:3]):
-            cx = x + ci * (card_w + Inches(0.15))
-            add_rect(slide, cx, cur_y, card_w, card_h, BGCARD)
-            # カードトップボーダー
-            add_rect(slide, cx, cur_y, card_w, Inches(0.04), LTBLUE)
+    # 画像がある場合とない場合で分岐
+    if imgs:
+        # 画像1枚 + テキスト（g21など）
+        if len(imgs) == 1:
+            img_box, src = imgs[0]
+            # 画像を左60%か右40%に配置
+            # img-boxが左側にある場合: 画像左、テキスト右
+            img_w = w * 0.55
+            txt_w = w * 0.42
+            gap = w * 0.03
 
-            title_el = card.find(['h3', 'h4', 'strong', 'b'])
-            card_title = title_el.get_text(strip=True) if title_el else ""
-            all_text = card.get_text(separator='\n', strip=True)
-            lines = [l for l in all_text.split('\n') if l.strip()]
+            # テキストエリアのカード・リストを収集
+            text_cards = [c for c in cards_all if img_box not in c.parents and c not in [img_box]]
+            # Actually always put image left, text right
+            img_h = min(rem_h(), Inches(4.2))
+            add_image(sl, src, x, cur_y, img_w, img_h)
 
-            ty = cur_y + Inches(0.08)
-            if card_title:
-                add_textbox(slide, cx + Inches(0.12), ty, card_w - Inches(0.2), Inches(0.35),
-                            card_title, font_size=10, bold=True, color=LTBLUE)
-                ty += Inches(0.35)
-                body_lines = [l for l in lines if l != card_title]
-            else:
-                body_lines = lines
+            # テキスト右側
+            tx = x + img_w + gap
+            ty = cur_y
+            if text_cards:
+                draw_cards(sl, text_cards, tx, ty, txt_w, img_h - Inches(0.1))
+            elif lists:
+                bullets = '\n'.join('• ' + t(li) for li in lists[0].find_all('li')[:8])
+                add_text(sl, tx, ty, txt_w, img_h - Inches(0.1), bullets, size=11, color=INK2)
+            cur_y += img_h + Inches(0.12)
 
-            body = "\n".join(body_lines[:6])
-            if body:
-                add_textbox(slide, cx + Inches(0.12), ty, card_w - Inches(0.2),
-                            card_h - (ty - cur_y) - Inches(0.1),
-                            body, font_size=9, color=GRAY)
-        cur_y += card_h + Inches(0.15)
+        # 画像2枚並列
+        elif len(imgs) == 2:
+            img_h = min(rem_h() * 0.55, Inches(3.0))
+            iw = (w - Inches(0.14)) / 2
+            for i, (ib, src) in enumerate(imgs[:2]):
+                add_image(sl, src, x + i*(iw+Inches(0.14)), cur_y, iw, img_h)
+            cur_y += img_h + Inches(0.12)
 
-    # stat ボックス
-    if stats:
-        stat_w = (w - Inches(0.1) * (len(stats) - 1)) / len(stats)
-        stat_h = Inches(1.2)
-        for si, stat in enumerate(stats[:5]):
-            sx = x + si * (stat_w + Inches(0.1))
-            add_rect(slide, sx, cur_y, stat_w, stat_h, RGBColor(0xe8, 0xf0, 0xfc))
-            val_el = stat.find(class_='stat-val') or stat.find(['strong', 'b'])
-            lbl_el = stat.find(class_='stat-lbl') or stat.find('p')
-            val = val_el.get_text(strip=True) if val_el else stat.get_text(strip=True)[:10]
-            lbl = lbl_el.get_text(strip=True) if lbl_el else ""
-            add_textbox(slide, sx + Inches(0.05), cur_y + Inches(0.1),
-                        stat_w - Inches(0.1), Inches(0.6),
-                        val, font_size=18, bold=True, color=LTBLUE, align=PP_ALIGN.CENTER)
-            if lbl:
-                add_textbox(slide, sx + Inches(0.05), cur_y + Inches(0.7),
-                            stat_w - Inches(0.1), Inches(0.4),
-                            lbl, font_size=8, color=GRAY, align=PP_ALIGN.CENTER)
-        cur_y += stat_h + Inches(0.15)
+        # 残りのテキスト要素
+        remaining_cards = [c for c in cards_all
+                           if not any(ib in c.parents or c in [ib] for ib, _ in imgs)]
+        if remaining_cards and rem_h() > Inches(0.5):
+            ch = rem_h() - Inches(0.05)
+            draw_cards(sl, remaining_cards, x, cur_y, w, ch)
+            cur_y += ch + Inches(0.1)
 
-    # テーブル
-    if tables:
-        for tbl in tables[:1]:
-            rows = tbl.find_all('tr')
-            row_h = Inches(0.32)
-            tbl_h = row_h * min(len(rows), 8)
-            tbl_w = w
-            add_rect(slide, x, cur_y, tbl_w, tbl_h, RGBColor(0xf8, 0xf9, 0xff))
+    else:
+        # 画像なし
+        # stats
+        if stats_all and rem_h() > Inches(0.5):
+            sh2 = min(rem_h() * 0.45, Inches(1.4))
+            draw_stats(sl, stats_all, x, cur_y, w, sh2)
+            cur_y += sh2 + Inches(0.14)
 
-            for ri, row in enumerate(rows[:8]):
-                cells = row.find_all(['th', 'td'])
-                if not cells:
-                    continue
-                cell_w = tbl_w / max(len(cells), 1)
-                ry = cur_y + ri * row_h
-                bg = NAVY if ri == 0 else (RGBColor(0xea, 0xf1, 0xfc) if ri % 2 == 0 else WHITE)
-                add_rect(slide, x, ry, tbl_w, row_h, bg)
-                for ci, cell in enumerate(cells):
-                    cx = x + ci * cell_w
-                    fg = WHITE if ri == 0 else GRAY
-                    add_textbox(slide, cx + Inches(0.05), ry + Inches(0.04),
-                                cell_w - Inches(0.1), row_h - Inches(0.06),
-                                cell.get_text(strip=True), font_size=9,
-                                bold=(ri == 0), color=fg)
-            cur_y += tbl_h + Inches(0.15)
+        # cards
+        if cards_all and rem_h() > Inches(0.4):
+            ch = rem_h() - (Inches(0.5) if callouts else Inches(0.05))
+            n = len(cards_all)
+            cols = min(n, 4)
+            draw_cards(sl, cards_all, x, cur_y, w, ch, cols=cols)
+            cur_y += ch + Inches(0.12)
 
-    # リスト（直下のul/ol）
-    for ul in ct.find_all(['ul', 'ol'], recursive=False):
-        items = ul.find_all('li')
-        rem_h = h - (cur_y - y)
-        if rem_h < Inches(0.3):
+        # table
+        if tables and rem_h() > Inches(0.5):
+            th = min(rem_h() * 0.75, Inches(3.5))
+            draw_table(sl, tables[0], x, cur_y, w, th)
+            cur_y += th + Inches(0.12)
+
+        # lists (no cards)
+        if lists and not cards_all and rem_h() > Inches(0.3):
+            for lst in lists[:1]:
+                bullets = '\n'.join('• ' + t(li) for li in lst.find_all('li')[:8])
+                lh = min(rem_h() - Inches(0.4), Inches(3.0))
+                add_text(sl, x, cur_y, w, lh, bullets, size=12, color=INK2)
+                cur_y += lh + Inches(0.12)
+
+    # callout / key （下部に描画）
+    for el in callouts[:2]:
+        if rem_h() < Inches(0.3):
             break
-        bullet_text = "\n".join(["• " + li.get_text(strip=True) for li in items[:8]])
-        if bullet_text:
-            add_textbox(slide, x, cur_y, w, min(rem_h, Inches(2.5)),
-                        bullet_text, font_size=10, color=GRAY)
-            cur_y += Inches(0.3) + Inches(0.26) * min(len(items), 8)
-
-    # 残りの段落
-    for p in ct.find_all('p', recursive=False):
-        rem_h = h - (cur_y - y)
-        if rem_h < Inches(0.25):
-            break
-        text = p.get_text(strip=True)
-        if text and len(text) > 3:
-            add_textbox(slide, x, cur_y, w, Inches(0.4), text, font_size=10, color=GRAY)
-            cur_y += Inches(0.4)
-
-    # グリッドレイアウト内のコンテンツ（fig以外）
-    for grid in ct.find_all(class_=re.compile(r'grid|row|flex|cols')):
-        rem_h = h - (cur_y - y)
-        if rem_h < Inches(0.3):
-            break
-        text = grid.get_text(separator='\n', strip=True)
-        lines = [l for l in text.split('\n') if l.strip()][:10]
-        if lines:
-            add_textbox(slide, x, cur_y, w, min(rem_h, Inches(2.5)),
-                        "\n".join(lines), font_size=9, color=GRAY)
-            cur_y += Inches(0.25) * min(len(lines), 10) + Inches(0.1)
+        dark = 'key' in classes(el)
+        ch = Inches(0.48)
+        draw_callout(sl, el, x, cur_y, w, ch, dark=dark)
+        cur_y += ch + Inches(0.08)
 
 
-# ─── メイン処理 ─────────────────────────────────────
+# ── 各スライドタイプの生成 ─────────────────────────────────────
+def make_cover(prs, div):
+    sl = prs.slides.add_slide(prs.slide_layouts[6])
+    add_rect(sl, 0, 0, W, H, HEADER)
+    add_rect(sl, 0, 0, Inches(0.12), H, ACCENT)
+    add_rect(sl, 0, H - Inches(0.07), W, Inches(0.07), ACCENT)
+
+    h1 = div.find('h1')
+    title = t(h1) if h1 else 'Water-Enhancing Gels'
+    add_text(sl, Inches(0.5), Inches(1.6), Inches(12.4), Inches(2.2),
+             title, size=34, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+
+    sub = div.find(class_='cov-sub')
+    if sub:
+        add_text(sl, Inches(0.8), Inches(3.9), Inches(11.8), Inches(1.2),
+                 t(sub), size=16, color=RGBColor(0xb8, 0xcc, 0xe2), align=PP_ALIGN.CENTER)
+
+    meta = div.find(class_='cov-meta')
+    if meta:
+        items = [t(m) for m in meta.find_all(class_='cov-mi')]
+        add_text(sl, Inches(0.8), Inches(5.2), Inches(11.8), Inches(0.5),
+                 '  ·  '.join(items), size=12,
+                 color=RGBColor(0x77, 0x8a, 0xa0), align=PP_ALIGN.CENTER)
+
+    sn = div.find(class_='sn')
+    if sn:
+        add_text(sl, W - Inches(1.3), H - Inches(0.35), Inches(1.1), Inches(0.26),
+                 t(sn), size=9, color=MUTED, align=PP_ALIGN.RIGHT)
+    return sl
+
+
+def make_sdiv(prs, div):
+    sl = prs.slides.add_slide(prs.slide_layouts[6])
+    add_rect(sl, 0, 0, W, H, HEADER)
+    add_rect(sl, 0, 0, Inches(0.10), H, AMBER)
+
+    lbl = div.find(class_='sdiv-lbl')
+    ttl = div.find(class_='sdiv-ttl')
+    sub = div.find(class_='sdiv-sub')
+    pills = div.find_all(class_='sdiv-pill')
+
+    if lbl:
+        add_text(sl, Inches(1.0), Inches(1.5), Inches(10), Inches(0.4),
+                 t(lbl), size=12, color=RGBColor(0x88, 0xa4, 0xc0))
+    if ttl:
+        add_text(sl, Inches(1.0), Inches(1.95), Inches(10), Inches(1.3),
+                 t(ttl), size=46, bold=True, color=WHITE)
+    if sub:
+        add_text(sl, Inches(1.0), Inches(3.35), Inches(10), Inches(0.8),
+                 t(sub), size=17, color=RGBColor(0x88, 0xa8, 0xc8))
+    if pills:
+        pill_strs = [t(p) for p in pills]
+        px, py = Inches(1.0), Inches(4.4)
+        for ps in pill_strs:
+            pw = Inches(max(len(ps) * 0.13, 1.4))
+            add_rect(sl, px, py, pw, Inches(0.38), RGBColor(0x2a,0x38,0x50),
+                     RGBColor(0x44,0x58,0x76), 0.75)
+            add_text(sl, px + Inches(0.15), py + Inches(0.06), pw - Inches(0.2),
+                     Inches(0.28), ps, size=11, color=RGBColor(0xbb, 0xcc, 0xde))
+            px += pw + Inches(0.2)
+
+    sn = div.find(class_='sn')
+    if sn:
+        add_text(sl, W - Inches(1.3), H - Inches(0.35), Inches(1.1), Inches(0.26),
+                 t(sn), size=9, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+    return sl
+
+
+def make_hero(prs, div):
+    sl = prs.slides.add_slide(prs.slide_layouts[6])
+    add_rect(sl, 0, 0, W, H, HEADER)
+
+    eyebrow = div.find(class_='hero-eyebrow')
+    num_el  = div.find(class_='hero-num')
+    label   = div.find(class_='hero-label')
+    sub_el  = div.find(class_='hero-sub')
+
+    cy = Inches(0.8)
+    if eyebrow:
+        add_text(sl, Inches(1.5), cy, Inches(10.3), Inches(0.4),
+                 t(eyebrow), size=12, color=RGBColor(0x88, 0xa4, 0xc0), align=PP_ALIGN.CENTER)
+        cy += Inches(0.45)
+    if num_el:
+        add_text(sl, Inches(1.5), cy, Inches(10.3), Inches(1.8),
+                 t(num_el), size=72, bold=True, color=RGBColor(0xd4, 0xa5, 0x74),
+                 align=PP_ALIGN.CENTER)
+        cy += Inches(1.85)
+    if label:
+        add_text(sl, Inches(1.5), cy, Inches(10.3), Inches(0.6),
+                 t(label), size=22, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+        cy += Inches(0.68)
+    if sub_el:
+        add_text(sl, Inches(2.0), cy, Inches(9.3), Inches(0.7),
+                 t(sub_el), size=14, color=RGBColor(0x88, 0xa4, 0xc0), align=PP_ALIGN.CENTER)
+        cy += Inches(0.8)
+
+    # bars
+    bars = div.find_all(class_='hero-bar-row')
+    if bars:
+        bx, bw = Inches(2.0), Inches(9.3)
+        add_rect(sl, bx, cy, bw, Inches(0.04), RGBColor(0x44, 0x55, 0x66))
+        cy += Inches(0.12)
+        for row in bars:
+            lbl_el = row.find(class_='hero-bar-lbl')
+            val_el = row.find(class_='hero-bar-val')
+            lbl_str = t(lbl_el)
+            val_str = t(val_el)
+            add_rect(sl, bx, cy, bw, Inches(0.30), RGBColor(0x28, 0x36, 0x4c))
+            if lbl_str:
+                add_text(sl, bx + Inches(0.1), cy + Inches(0.05), Inches(1.8), Inches(0.22),
+                         lbl_str, size=10, color=RGBColor(0xaa, 0xbc, 0xcc), align=PP_ALIGN.RIGHT)
+            if val_str:
+                add_text(sl, bx + bw - Inches(1.3), cy + Inches(0.05), Inches(1.2), Inches(0.22),
+                         val_str, size=10, color=RGBColor(0xaa, 0xbc, 0xcc))
+            cy += Inches(0.38)
+
+    sn = div.find(class_='sn')
+    if sn:
+        add_text(sl, W - Inches(1.3), H - Inches(0.35), Inches(1.1), Inches(0.26),
+                 t(sn), size=9, color=MUTED, align=PP_ALIGN.RIGHT)
+    return sl
+
+
+def make_content(prs, div):
+    sl = prs.slides.add_slide(prs.slide_layouts[6])
+    add_rect(sl, 0, 0, W, H, WHITE)
+    draw_header(sl, div)
+    sb = div.find(class_='sb')
+    render_sb(sl, sb, BODY_X, BODY_Y, BODY_W, BODY_H)
+    return sl
+
+
+# ── メイン ────────────────────────────────────────────────────
 def main():
-    with open('/home/user/my-first-claude/slides.html', 'r', encoding='utf-8') as f:
+    html_path = '/home/user/my-first-claude/slides.html'
+    out_path  = '/home/user/my-first-claude/slides.pptx'
+
+    with open(html_path, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f.read(), 'lxml')
 
-    slides_html = soup.find_all('div', class_='slide')
-    print(f"変換するスライド数: {len(slides_html)}")
+    slide_divs = soup.find_all('div', class_='slide')
+    print(f"変換対象スライド数: {len(slide_divs)}")
 
     prs = Presentation()
-    prs.slide_width = W
+    prs.slide_width  = W
     prs.slide_height = H
 
-    for i, slide_html in enumerate(slides_html):
-        print(f"  スライド {i+1}/{len(slides_html)} を処理中...")
-        if i == 0:
-            make_cover_slide(prs, slide_html)
+    for i, div in enumerate(slide_divs):
+        cls = div.get('class', [])
+        print(f"  [{i+1:02d}/{len(slide_divs)}] ", end='')
+        if 'cover' in cls:
+            print("cover")
+            make_cover(prs, div)
+        elif 'sdiv' in cls:
+            print("section divider")
+            make_sdiv(prs, div)
+        elif 'hero' in cls:
+            print("hero")
+            make_hero(prs, div)
         else:
-            make_content_slide(prs, slide_html)
+            h2 = div.find('h2')
+            print(h2.get_text(strip=True)[:40] if h2 else '(content)')
+            make_content(prs, div)
 
-    out_path = '/home/user/my-first-claude/slides.pptx'
     prs.save(out_path)
     print(f"\n完了: {out_path}")
 
