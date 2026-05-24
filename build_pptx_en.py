@@ -1687,65 +1687,59 @@ def slide_33_scenarios(prs):
 # ===== SLIDE 34: 課題と展望 =====
 def slide_34_future(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Discussion 2/3", "Current Challenges and Future Research Directions")
+    draw_header(sl, "Summary 1/2", "Key Demonstrated Results")
     draw_footer(sl, "34 / 36")
 
-    cw = (BODY_W - Inches(0.30)) / 2
-
-    # Left: current limitations
-    text(sl, BODY_X, BODY_Y, cw, Inches(0.30),
-         "Current Limitations & Challenges", size=12, bold=True, color=MUTED)
-    fy = BODY_Y + Inches(0.45)
-    pw = (cw - Inches(0.30)) / 3
-    ph = Inches(2.2)
-    issues = [
-        ("Scale", "No field trials", "Lab scale only. Verification in real environments required"),
-        ("Durability", "Long-term storage stability", "Evaluation of phase separation and sedimentation. Seasonal storage compatibility"),
-        ("Cost", "Mass production cost", "Establishing raw material costs and large-scale preparation processes"),
+    cw = (BODY_W - Inches(0.42)) / 4
+    ch = Inches(4.6)
+    cards_data = [
+        ("RHEOLOGY", "Rheology", [
+            "G' > G'' for all systems (gel)",
+            "n = 0.108–0.188",
+            "Yield stress ~3× AquaGel-K",
+            "tan δ << 1 (elastic-dominated)",
+        ]),
+        ("FIRE PROTECTION", "Fire Protection", [
+            "Time to char ≈ 10 min",
+            "~5× longer than water (~2 min)",
+            "~40% longer than AquaGel-K",
+            "Surface nearly intact at 300 s",
+        ]),
+        ("FOAMING / SEM", "Foaming & Structure", [
+            "Foaming Index ≈ 2.2–2.6",
+            "Uniform bubbles at SDS 0.1%",
+            "Sintering tracked by SEM",
+            "Necking → porous skeleton",
+        ]),
+        ("CHEMISTRY", "Chemical Change", [
+            "FT-IR: pure SiO₂ after burn",
+            "XPS: Si ~8× increase",
+            "TGA: silica residue ~5–8 wt%",
+            "Aerogel formation confirmed",
+        ]),
     ]
-    for i, (tag, title, desc) in enumerate(issues):
-        fx = BODY_X + i * (pw + Inches(0.15))
-        flow_step(sl, fx, fy, pw, ph, tag, title, desc)
-        if i < 2:
-            text(sl, fx + pw, fy, Inches(0.15), ph,
-                 "▶", size=12, color=MUTED,
-                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    callout(sl, BODY_X, fy + ph + Inches(0.20), cw, Inches(0.85),
-            "Behavior under real-world wind, dryness, and temperature gradients not yet evaluated",
-            icon='⚠')
+    for i, (tag, title, bullets) in enumerate(cards_data):
+        cx = BODY_X + i * (cw + Inches(0.14))
+        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
+             bullets=bullets, ct_size=14, li_size=11)
 
-    # Right: future directions
-    cx2 = BODY_X + cw + Inches(0.30)
-    text(sl, cx2, BODY_Y, cw, Inches(0.30),
-         "Future Research Directions", size=12, bold=True, color=MUTED)
-    by = BODY_Y + Inches(0.55)
-    items = [
-        "Performance validation in large-scale combustion furnaces and outdoor simulated fire tests",
-        "Adhesion evaluation on different substrates (concrete, metal, vegetation)",
-        "Direct measurement of aerogel thermal conductivity (λ = 0.015–0.040 W/m·K expected)",
-        "Exploration of SDS alternative surfactants (improved biodegradability)",
-        "Systematic study of MC/HEC concentration optimization and CSP particle size effects",
-        "Waterproofing improvement to eliminate need for reapplication after rainfall",
-    ]
-    for it in items:
-        text(sl, cx2 + Inches(0.10), by, Inches(0.4), Inches(0.30),
-             "→", size=15, bold=True, color=ACCENT)
-        text(sl, cx2 + Inches(0.50), by, cw - Inches(0.60), Inches(0.30),
-             it, size=12, color=INK2)
-        by += Inches(0.55)
+    cy_co = BODY_Y + ch + Inches(0.25)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+            "Upon heating, CSP sinters and the gel self-transforms into a porous silica aerogel insulating layer — flame protection continues even after water evaporation",
+            dark=True, icon='◆')
 
 
-# ===== SLIDE 35: まとめ =====
+# ===== SLIDE 35: Conclusions =====
 def slide_35_summary(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Discussion 3/3", "Research Findings Summary and Outlook")
+    draw_header(sl, "Summary 2/2", "Conclusions")
     draw_footer(sl, "35 / 36")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
     summaries = [
         ("RESULT 01", "Time to char ~10 min", "~5× water, ~40% longer than AquaGel-K. Greatly extends wood protection time under flame"),
-        ("RESULT 02", "Self-forming aerogel", "CSP heat-activated sintering → porous silica layer continuously insulates even after water evaporation"),
+        ("RESULT 02", "Self-forming aerogel", "CSP sinters upon heating → porous silica layer continuously insulates even after water evaporation"),
         ("RESULT 03", "Compatible with existing spray infrastructure", "Shear-thinning fluid with n = 0.108–0.188. Sprayable through existing hoses and nozzles"),
         ("RESULT 04", "Sustainable materials", "Cellulose derivatives are food-grade; silica is a harmless inorganic material. Low environmental impact"),
     ]
@@ -1765,23 +1759,23 @@ def slide_35_summary(prs):
     ch2 = Inches(2.0)
     cw2 = (BODY_W - Inches(0.20)) / 2
     card(sl, BODY_X, cy, cw2, ch2,
-         title="Anticipated Implementation Scenarios",
+         title="Core Mechanism",
          bullets=[
-             "Pre-protective application to WUI structures and critical infrastructure",
-             "Fire break formation along potential spread paths",
-             "Coating of metal structures such as power lines and communication towers",
+             "MC gelates on flame contact, fixing the structure",
+             "CSP sinters upon dehydration and heating",
+             "Forms a porous SiO₂ aerogel insulating layer",
          ], ct_size=14, li_size=12)
     card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="Future Challenges",
+         title="Demonstrated Protection",
          bullets=[
-             "Large-scale field spray tests (real-world benchmarking)",
-             "Long-term storage stability and cost evaluation",
-             "Environmental impact assessment (biodegradability testing)",
+             "Time to char ~10 min (~5× water)",
+             "Protection continues after water evaporation",
+             "Flow properties compatible with existing infrastructure",
          ], ct_size=14, li_size=12)
 
     cy_co = cy + ch2 + Inches(0.20)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
-            "From \"water carrier\" to \"self-transforming fire-retardant material\" — A new WEG design paradigm",
+            "From \"water carrier\" to \"heat-self-transforming fire-retardant material\" — a new WEG design concept",
             dark=True, icon='"')
 
 

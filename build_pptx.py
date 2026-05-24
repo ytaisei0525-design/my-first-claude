@@ -1680,68 +1680,62 @@ def slide_33_scenarios(prs):
             icon='🚁')
 
 
-# ===== SLIDE 34: 課題と展望 =====
+# ===== SLIDE 34: 実証結果のまとめ =====
 def slide_34_future(prs):
     sl = new_slide(prs)
-    draw_header(sl, "考察 2/3", "現状の課題と今後の研究展望")
+    draw_header(sl, "まとめ 1/2", "実証された主要結果")
     draw_footer(sl, "34 / 36")
 
-    cw = (BODY_W - Inches(0.30)) / 2
-
-    # 左：現状の限界
-    text(sl, BODY_X, BODY_Y, cw, Inches(0.30),
-         "現状の限界・課題", size=12, bold=True, color=MUTED)
-    fy = BODY_Y + Inches(0.45)
-    pw = (cw - Inches(0.30)) / 3
-    ph = Inches(2.2)
-    issues = [
-        ("スケール", "実地試験未実施", "ラボスケールのみ。実環境での検証が必要"),
-        ("耐久性", "長期保存安定性", "分相・沈降の評価。シーズン保管対応"),
-        ("コスト", "量産コスト", "原料コストと大量調製プロセスの確立"),
+    cw = (BODY_W - Inches(0.42)) / 4
+    ch = Inches(4.6)
+    cards_data = [
+        ("RHEOLOGY", "レオロジー特性", [
+            "全系で G' > G''（ゲル挙動）",
+            "n = 0.108–0.188",
+            "降伏応力 AquaGel-K の約3倍",
+            "tan δ << 1（弾性支配）",
+        ]),
+        ("FIRE PROTECTION", "火炎保護性能", [
+            "Time to char ≈ 10 分",
+            "水のみ（~2分）の約5倍",
+            "AquaGel-K比 約40%延長",
+            "300秒後も表面ほぼ無傷",
+        ]),
+        ("FOAMING / SEM", "発泡・微細構造", [
+            "Foaming Index ≈ 2.2–2.6",
+            "SDS 0.1% で均一微細気泡",
+            "SEMで焼結進行を観察",
+            "ネック形成 → 多孔質骨格",
+        ]),
+        ("CHEMISTRY", "化学的変態", [
+            "FT-IR：燃焼後は純 SiO₂",
+            "XPS：Si濃度 約8倍に増加",
+            "TGA：シリカ残渣 ~5–8 wt%",
+            "エアロゲル化を化学確認",
+        ]),
     ]
-    for i, (tag, title, desc) in enumerate(issues):
-        fx = BODY_X + i * (pw + Inches(0.15))
-        flow_step(sl, fx, fy, pw, ph, tag, title, desc)
-        if i < 2:
-            text(sl, fx + pw, fy, Inches(0.15), ph,
-                 "▶", size=12, color=MUTED,
-                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    callout(sl, BODY_X, fy + ph + Inches(0.20), cw, Inches(0.85),
-            "実地での風・乾燥・温度勾配下での挙動は未評価",
-            icon='⚠')
+    for i, (tag, title, bullets) in enumerate(cards_data):
+        cx = BODY_X + i * (cw + Inches(0.14))
+        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
+             bullets=bullets, ct_size=14, li_size=11)
 
-    # 右：今後の展望
-    cx2 = BODY_X + cw + Inches(0.30)
-    text(sl, cx2, BODY_Y, cw, Inches(0.30),
-         "今後の研究展望", size=12, bold=True, color=MUTED)
-    by = BODY_Y + Inches(0.55)
-    items = [
-        "大規模燃焼炉・野外模擬試験による性能検証",
-        "異なる基材（コンクリート・金属・植生）での付着性評価",
-        "エアロゲル熱伝導率の直接測定（λ = 0.015–0.040 W/m·K 想定）",
-        "SDS代替界面活性剤の探索（生分解性向上）",
-        "MC/HEC 濃度最適化・CSP粒径効果の系統的研究",
-        "降水後の再塗布不要な耐水化改良",
-    ]
-    for it in items:
-        text(sl, cx2 + Inches(0.10), by, Inches(0.4), Inches(0.30),
-             "→", size=15, bold=True, color=ACCENT)
-        text(sl, cx2 + Inches(0.50), by, cw - Inches(0.60), Inches(0.30),
-             it, size=12, color=INK2)
-        by += Inches(0.55)
+    cy_co = BODY_Y + ch + Inches(0.25)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+            "加熱により CSP が焼結し、ゲルが多孔質シリカエアロゲル断熱層へ自己変態 ― 水蒸発後も火炎保護が継続",
+            dark=True, icon='◆')
 
 
-# ===== SLIDE 35: まとめ =====
+# ===== SLIDE 35: 結論 =====
 def slide_35_summary(prs):
     sl = new_slide(prs)
-    draw_header(sl, "考察 3/3", "研究成果のまとめと展望")
+    draw_header(sl, "まとめ 2/2", "研究の結論")
     draw_footer(sl, "35 / 36")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
     summaries = [
         ("RESULT 01", "Time to char ~10分", "水の約5倍、AquaGel-K比で約40%延長。火炎下の木材保護時間を大幅に拡張"),
-        ("RESULT 02", "エアロゲルの自己形成", "CSPがheat-activatedで焼結 → 多孔質シリカ層が水蒸発後も継続的に断熱"),
+        ("RESULT 02", "エアロゲルの自己形成", "CSPが加熱で焼結 → 多孔質シリカ層が水蒸発後も継続的に断熱"),
         ("RESULT 03", "既存散布インフラ互換", "n = 0.108〜0.188 の剪断希薄化流体。既存のホース・ノズルで噴霧可能"),
         ("RESULT 04", "持続可能な原料", "セルロース誘導体は食品グレード、シリカは無害な無機材料。低環境負荷"),
     ]
@@ -1761,23 +1755,23 @@ def slide_35_summary(prs):
     ch2 = Inches(2.0)
     cw2 = (BODY_W - Inches(0.20)) / 2
     card(sl, BODY_X, cy, cw2, ch2,
-         title="想定される実装シナリオ",
+         title="核心メカニズム",
          bullets=[
-             "WUI住宅・重要インフラの事前保護散布",
-             "延焼経路の防火線(fire break)形成",
-             "送電線・通信塔など金属構造物の被覆",
+             "火炎接触でMCがゲル化し構造を固定",
+             "脱水・加熱でCSPが焼結",
+             "多孔質SiO₂エアロゲル断熱層を形成",
          ], ct_size=14, li_size=12)
     card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="今後の課題",
+         title="実証された保護性能",
          bullets=[
-             "大規模散布試験（実地ベンチマーク）",
-             "長期保存安定性・コスト評価",
-             "環境への影響評価（生分解性試験）",
+             "Time to char ~10分（水の約5倍）",
+             "水蒸発後も保護が継続",
+             "既存散布インフラと互換な流動特性",
          ], ct_size=14, li_size=12)
 
     cy_co = cy + ch2 + Inches(0.20)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
-            "「水のキャリア」から「自己変態する難燃材料」へ ― WEGの新しい設計パラダイム",
+            "「水のキャリア」から「加熱で自己変態する難燃材料」へ ― WEGの新しい設計思想",
             dark=True, icon='"')
 
 
