@@ -745,8 +745,8 @@ def slide_11_csp_sds(prs):
     text(sl, cx + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
          "Colloidal Silica Particles", size=18, bold=True, color=INK)
     bullets = [
-        "Stock solution: colloidal dispersion at 12 wt% in water",
-        "Particle size: monodisperse silica of tens of nanometers",
+        "LUDOX TM-50 (stock 50 wt%) → diluted to 15 wt% (pH 9)",
+        "Particle size: 22 nm (monodisperse)",
         "Formulation concentration: 5 wt% in gel",
         "Sinters upon heating → transforms into silica aerogel",
     ]
@@ -770,9 +770,9 @@ def slide_11_csp_sds(prs):
          "Sodium Dodecyl Sulfate", size=18, bold=True, color=INK)
     bullets2 = [
         "Anionic surfactant",
-        "Role: promotes foaming and enhances porous structure",
+        "Adding SDS did not improve Foaming Index",
         "Addition levels: two concentrations of 0.1 wt% and 0.5 wt%",
-        "SEM confirms control of bubble size and distribution",
+        "Higher SDS concentration coarsens bubble size (SEM)",
     ]
     by = BODY_Y + Inches(1.30)
     for b in bullets2:
@@ -847,7 +847,7 @@ def slide_13_methods(prs):
         ("Rheological Measurements", "RHEOLOGY",
          ["Oscillatory frequency sweep (G', G'')", "Steady-flow sweep (viscosity vs. shear rate)", "Herschel-Bulkley model fitting"]),
         ("Combustion Test (Time-to-char)", "BURN TEST",
-         ["Wood heated with butane burner", "Time to charring onset measured", "Photographic comparison at 120 s / 300 s"]),
+         ["Whitewood plywood heated with MAP-Pro torch (~2054°C)", "Time to charring onset measured", "Photographic comparison at 120 s / 300 s"]),
         ("Foaming Index Measurement", "FOAMING",
          ["Foamed layer thickness measured after combustion", "Ratio to initial thickness = Foaming Index"]),
         ("SEM Morphological Observation", "SEM",
@@ -929,7 +929,7 @@ def slide_16_rheology1(prs):
          bullets=[
              "G' > G'' for all formulations → solid-like (gel) behavior",
              "Low frequency dependence → stable network",
-             "This work's WEG shows higher elasticity than AquaGel-K",
+             "AquaGel-K (G'=457 Pa) shows higher G' than WEG (46/26 Pa); all formulations exhibit gel behavior",
          ], ct_size=15, li_size=12)
     callout(sl, right_x, BODY_Y + ch + Inches(0.25), right_w, Inches(0.80),
             "Clearly formed gel network; does not flow off after application",
@@ -954,9 +954,9 @@ def slide_17_rheology2(prs):
     # Right: mini stats + explanation
     mh = Inches(1.20)
     mini(sl, right_x, BODY_Y, right_w, mh,
-         "Power-law index n", "0.108", "HEC+MC/CSP 1-5", value_color=ACCENT)
+         "Flow index n", "n < 1", "HEC+MC/CSP — strong shear thinning", value_color=ACCENT)
     mini(sl, right_x, BODY_Y + mh + Inches(0.15), right_w, mh,
-         "Power-law index n", "0.188", "MHEC/CSP 1-5", value_color=ACCENT)
+         "Flow index n", "n < 1", "MHEC/CSP — shear thinning", value_color=ACCENT)
 
     cy_d = BODY_Y + (mh + Inches(0.15)) * 2 + Inches(0.10)
     rrect(sl, right_x, cy_d, right_w, Inches(1.0), WHITE, LINE, 0.5, radius=0.04)
@@ -973,44 +973,40 @@ def slide_17_rheology2(prs):
 # ===== SLIDE 18: Herschel-Bulkley =====
 def slide_18_hb(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 3/11", "Rheology ③: Herschel-Bulkley Model Parameters")
+    draw_header(sl, "Results 3/11", "Rheology ③: Static Yield Stress and Long-term Stability")
     draw_footer(sl, "18 / 36")
 
     # Top callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
-            "σ = τ₀ + K · γ̇ⁿ  （τ₀：降伏応力, K：稠度係数, n：流動指数）",
+            "Static yield stress: stress at the G'/G'' crossover (σ_s) from amplitude sweep — minimum stress to initiate flow",
             icon='ƒ')
 
     ty = BODY_Y + Inches(0.85)
-    th = Inches(2.85)
-    headers = ["Formulation", "τ₀ (Pa)", "K (Pa·sⁿ)", "n", "R²"]
+    th = Inches(2.2)
+    headers = ["Formulation", "Static yield stress (fresh)", "Static yield stress (455 days)", "Note"]
     rows = [
-        ["AquaGel-K (Commercial control)", "0.31", "0.85", "0.52",
-         {'text': ">0.99", 'color': D_GRN}],
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
-         {'text': "0.59", 'bold': True}, {'text': "2.04", 'bold': True},
-         {'text': "0.108", 'bold': True, 'color': AMBER},
-         {'text': ">0.99", 'color': D_GRN}],
-        ["HEC+MC/CSP/SDS 1-5-0.1", "0.54", "1.87", "0.115",
-         {'text': ">0.99", 'color': D_GRN}],
-        ["HEC+MC/CSP/SDS 1-5-0.5", "0.48", "1.65", "0.122",
-         {'text': ">0.99", 'color': D_GRN}],
+         {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
+         {'text': "68.9 Pa", 'color': D_GRN},
+         "Gel strength increases over time"],
         [{'text': "MHEC/CSP 1-5", 'bold': True},
-         {'text': "0.41", 'bold': True}, {'text': "1.43", 'bold': True},
-         {'text': "0.188", 'bold': True, 'color': AMBER},
-         {'text': ">0.99", 'color': D_GRN}],
+         {'text': "3.31 Pa", 'bold': True, 'color': ACCENT},
+         {'text': "4.56 Pa", 'color': D_GRN},
+         "Long-term stability confirmed (455 days)"],
+        ["AquaGel-K (Commercial control)", "—", "—",
+         {'text': "Reference", 'color': MUTED}],
     ]
     simple_table(sl, BODY_X, ty, BODY_W, th, headers, rows,
-                 col_widths=[2.8, 1.2, 1.2, 1.0, 1.0])
+                 col_widths=[2.8, 2.0, 2.0, 2.0])
 
     # Bottom 3 cards
     cy = ty + th + Inches(0.30)
     ch = Inches(1.85)
     cw = (BODY_W - Inches(0.30)) / 3
     cards_data = [
-        ("Yield Stress τ₀", "Flow start requires minimum stress. WEG is ~2× AquaGel-K → higher resistance to sagging on vertical surfaces"),
-        ("Flow Index n (<< 1)", "n=0.108 for HEC+MC/CSP shows strong shear thinning. Balances low viscosity during spraying and high viscosity at rest"),
-        ("HEC+MC vs MHEC", "HEC+MC system shows lower n and higher K → stronger shear thinning. MHEC system achieves similar function with single polymer"),
+        ("Static Yield Stress", "Measured at G'/G'' crossover from amplitude sweep. HEC+MC/CSP: 33.34 Pa; MHEC/CSP: 3.31 Pa (fresh)"),
+        ("Long-term Stability", "MHEC/CSP shows only minor change after 455 days (3.31→4.56 Pa). Demonstrates shelf stability for practical use"),
+        ("HEC+MC vs MHEC", "HEC+MC system shows ~10× higher yield stress, better for vertical surface adhesion. MHEC simpler to manufacture"),
     ]
     for i, (title, body) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.15))
@@ -1024,7 +1020,7 @@ def slide_18_hb(prs):
 # ===== SLIDE 19: dynamic yield stress / tan δ =====
 def slide_19_yield(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 4/11", "Rheology ④: Dynamic Yield Stress and Viscoelasticity (tan δ)")
+    draw_header(sl, "Results 4/11", "Rheology ④: Storage Modulus G' and Viscoelasticity (tan δ)")
     draw_footer(sl, "19 / 36")
 
     cw = (BODY_W - Inches(0.30)) / 2
@@ -1033,13 +1029,12 @@ def slide_19_yield(prs):
 
     # Left: dynamic yield stress
     text(sl, BODY_X, BODY_Y, cw, Inches(0.30),
-         "Dynamic yield stress (from Amplitude Sweep)", size=12, bold=True, color=MUTED)
+         "G' Storage Modulus (1 rad/s)", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     bar_data = [
-        ("AquaGel-K", 0.28, "~0.4 Pa", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.85, "~1.2 Pa", D_TEAL),
-        ("+SDS 0.1 wt%", 0.78, "~1.1 Pa", D_BLUE),
-        ("MHEC/CSP 1-5", 0.65, "~0.9 Pa", D_AMBR),
+        ("MHEC/CSP 1-5", 0.13, "25.6 Pa", D_AMBR),
+        ("HEC+MC/CSP 1-5", 0.25, "46.4 Pa", D_TEAL),
+        ("AquaGel-K", 0.95, "456.8 Pa", GRAY_L),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
@@ -1047,7 +1042,7 @@ def slide_19_yield(prs):
         by += Inches(0.50)
 
     callout(sl, BODY_X, by + Inches(0.15), cw, Inches(0.80),
-            "Stress at G' = G'' crossover = dynamic yield stress. WEG is ~3× AquaGel-K",
+            "All formulations show G'>G'' (gel behavior). AquaGel-K has the highest G' but also larger tan δ (more fluid-like)",
             icon='ⓘ')
 
     # Right: tan δ
@@ -1055,17 +1050,16 @@ def slide_19_yield(prs):
          "Loss tangent tan δ = G''/G' (elastic-dominated = <1)", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     tan_data = [
-        ("AquaGel-K", 0.50, "~0.25", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.20, "~0.10", D_TEAL),
-        ("+SDS 0.1 wt%", 0.24, "~0.12", D_BLUE),
-        ("MHEC/CSP 1-5", 0.30, "~0.15", D_AMBR),
+        ("AquaGel-K", 0.42, "0.168", GRAY_L),
+        ("HEC+MC/CSP 1-5", 0.55, "0.219", D_TEAL),
+        ("MHEC/CSP 1-5", 1.00, "0.400", D_AMBR),
     ]
     for label, ratio, val, color in tan_data:
         bar_row(sl, cx2, by, cw, label, ratio, val, fill_color=color,
                 lbl_w=Inches(2.0), val_w=Inches(1.0))
         by += Inches(0.50)
     callout(sl, cx2, by + Inches(0.15), cw, Inches(0.80),
-            "tan δ << 1 → all formulations show clear gel behavior. Elastic component overwhelmingly dominant",
+            "All formulations: tan δ < 1 (gel behavior). AquaGel-K most elastic (0.168); MHEC system most fluid-like (0.400)",
             dark=True, icon='✓')
 
 
@@ -1091,8 +1085,8 @@ def slide_20_compare(prs):
     bullets = [
         "HEC provides room-temperature viscosity and adhesion",
         "MC maintains structure during heating",
-        "Lower n=0.108 → stronger shear thinning",
-        "Time to char ≈ 9–10 min",
+        "Strong shear thinning (n < 1)",
+        "Time to char > 7 min",
         "Foaming Index ≈ 2.2–2.6",
     ]
     for b in bullets:
@@ -1120,8 +1114,8 @@ def slide_20_compare(prs):
     bullets2 = [
         "Carries both hydroxyethyl and methyl groups on the same chain",
         "Achieves equivalent viscoelasticity and thermal response with a single polymer",
-        "n=0.188 (slightly higher than HEC+MC)",
-        "Time to char ≈ 10 min",
+        "Shear thinning (n < 1)",
+        "Time to char > 5 min",
         "Advantage of simplified formulation and quality control",
     ]
     for b in bullets2:
@@ -1161,9 +1155,9 @@ def slide_21_setup(prs):
     card(sl, right_x, BODY_Y, right_w, ch,
          title="◆ Test Conditions", tag="EXPERIMENTAL",
          bullets=[
-             "Substrate: pine wood thin board",
+             "Substrate: whitewood plywood",
              "Gel application: uniformly applied",
-             "Flame source: butane direct flame",
+             "Flame source: MAP-Pro torch (~2054°C)",
              "Measurement: time until substrate charring",
              "Photographs taken at 120 s and 300 s",
          ], ct_size=15, li_size=12)
@@ -1187,11 +1181,11 @@ def slide_22_ttc(prs):
          "Time to char (time to charring onset)", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     bar_data = [
-        ("Water", 0.18, "~2 min", GRAY_L),
-        ("AquaGel-K (commercial)", 0.60, "~7 min", D_AMBR),
-        ("HEC+MC/CSP 1-5", 0.80, "~9 min", D_TEAL),
-        ("HEC+MC/CSP/SDS 1-5-0.1", 0.90, "~10 min", D_BLUE),
-        ("MHEC/CSP 1-5", 0.92, "~10 min", D_BLUE),
+        ("Water", 0.04, "~0.3 min", GRAY_L),
+        ("AquaGel-K (commercial)", 0.20, "~1.5 min", D_AMBR),
+        ("MHEC/CSP 1-5", 0.65, ">5 min", D_AMBR),
+        ("HEC+MC/CSP 1-5", 0.90, ">7 min", D_TEAL),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.90, ">7 min", D_BLUE),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, left_w, label, ratio, val, fill_color=color,
@@ -1199,7 +1193,7 @@ def slide_22_ttc(prs):
         by += Inches(0.55)
 
     callout(sl, BODY_X, by + Inches(0.15), left_w, Inches(0.85),
-            "This work's WEG group extends protection ~40% beyond AquaGel-K and ~5× longer than water alone",
+            "This work's WEG achieves 3–6× longer protection than commercial AquaGel-K (n≥3 for all tests)",
             icon='📊')
 
     # Right: figure placeholder
@@ -1227,18 +1221,18 @@ def slide_23_timelapse(prs):
     cards_data = [
         ("Water", D_RED, [
             "Immediately evaporates and runs off under direct flame",
-            "Wood surface chars in ~2 min",
+            "Wood surface chars in ~0.3 min (~18 s)",
             "No protective layer formed",
         ]),
         ("AquaGel-K", D_AMBR, [
             "Retains water but ends when water evaporates",
-            "Chars in ~7 min",
+            "Chars in ~1.5 min",
             "No solid protective layer formed",
         ]),
         ("This Work WEG", ACCENT, [
             "Gel foams and expands simultaneously with water evaporation",
             "Porous aerogel layer provides continued protection",
-            "Charring prevented for ~10 min",
+            "Charring prevented for >7 min (HEC+MC)",
         ]),
     ]
     for i, (title, color, bullets) in enumerate(cards_data):
@@ -1271,15 +1265,15 @@ def slide_24_120300(prs):
     ch = Inches(2.8)
     cw = (BODY_W - Inches(0.28)) / 3
     cards_data = [
-        ("Water", D_RED, "Time to char: ~2 min", [
+        ("Water", D_RED, "Time to char: ~0.3 min", [
             "120 s: charring already beginning over wide area",
             "300 s: entire surface blackened, severe damage",
         ]),
-        ("AquaGel-K (commercial)", D_AMBR, "Time to char: ~7 min", [
+        ("AquaGel-K (commercial)", D_AMBR, "Time to char: ~1.5 min", [
             "120 s: gel drying, partial charring",
             "300 s: no protective layer, partial charring",
         ]),
-        ("This Work WEG", ACCENT, "Time to char: ~10 min", [
+        ("This Work WEG", ACCENT, "Time to char: >7 min", [
             "120 s: aerogel layer forming and expanding",
             "300 s: surface nearly intact, layer remains",
         ]),
@@ -1309,22 +1303,22 @@ def slide_25_hero(prs):
          align=PP_ALIGN.CENTER)
 
     text_runs(sl, Inches(0.5), Inches(1.9), Inches(12.3), Inches(2.3), [
-        {'text': "~10", 'size': 130, 'bold': True, 'color': GOLD},
+        {'text': ">7", 'size': 130, 'bold': True, 'color': GOLD},
         {'text': " min", 'size': 60, 'bold': False, 'color': RGBColor(0xc8, 0x9a, 0x68)},
     ], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     text(sl, Inches(0.5), Inches(4.4), Inches(12.3), Inches(0.6),
-         "Time to Char of This Work's WEG", size=26, bold=True, color=WHITE,
+         "Time to Char of This Work's WEG (HEC+MC/CSP)", size=26, bold=True, color=WHITE,
          align=PP_ALIGN.CENTER)
     text(sl, Inches(1.5), Inches(5.15), Inches(10.3), Inches(0.7),
-         "Achieved ~5× longer protection than water alone (~2 min) and ~1.4× longer than commercial AquaGel-K (~7 min)",
+         "Achieved 3–6× longer protection than commercial AquaGel-K (~1.5 min) — n≥3 for all tests",
          size=14, color=RGBColor(0x9c, 0xb4, 0xcc), align=PP_ALIGN.CENTER)
 
     # Bars
     bars = [
-        ("Water", 0.20, "~2 min", GRAY_L),
-        ("AquaGel-K", 0.60, "~7 min", D_AMBR),
-        ("This Work WEG", 0.95, "~10 min", GOLD),
+        ("Water", 0.04, "~0.3 min", GRAY_L),
+        ("AquaGel-K", 0.20, "~1.5 min", D_AMBR),
+        ("This Work WEG", 0.95, ">7 min", GOLD),
     ]
     by = Inches(6.05)
     for label, ratio, val, color in bars:
@@ -1369,10 +1363,10 @@ def slide_26_foam(prs):
          "Foaming Index (post-combustion thickness / initial thickness)", size=12, bold=True, color=MUTED)
     by = cy + Inches(0.40)
     bar_data = [
-        ("AquaGel-K", 0.02, "~0", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.55, "~2.2×", D_TEAL),
-        ("+SDS 0.1 wt%", 0.65, "~2.6×", D_BLUE),
-        ("MHEC/CSP 1-5", 0.58, "~2.3×", D_AMBR),
+        ("AquaGel-K", 0.02, "≈0", GRAY_L),
+        ("MHEC/CSP 1-5", 0.53, "≈2.1×", D_AMBR),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.60, "≈2.3×", D_BLUE),
+        ("HEC+MC/CSP 1-5", 0.68, "≈2.6×", D_TEAL),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
@@ -1388,7 +1382,7 @@ def slide_26_foam(prs):
         "Expands to >2× initial thickness → heat conduction path extended",
         "Air trapped in pores enhances thermal insulation",
         "AquaGel-K does not foam → collapses flat under flame",
-        "SDS 0.1 wt% is optimal: forms uniform fine bubbles",
+        "HEC+MC/CSP without SDS achieves the highest foaming index (≈2.6)",
     ]
     for b in bullets:
         text(sl, cx2 + Inches(0.05), by, Inches(0.20), Inches(0.30),
@@ -1413,14 +1407,14 @@ def slide_27_sem_sds(prs):
     ch = Inches(2.3)
     cw = (BODY_W - Inches(0.28)) / 3
     cards_data = [
-        ("0% SDS", MUTED, "Dense silica network. Low porosity."),
-        ("0.1% SDS (Optimal)", ACCENT, "Uniform fine bubbles. Highest foaming index."),
-        ("0.5% SDS (Excess)", MUTED, "Non-uniform and coarsened bubble size."),
+        ("0% SDS", ACCENT, "Highest foaming index (≈2.6). No SDS yields maximum expansion."),
+        ("0.1% SDS", MUTED, "Uniform fine-bubble structure. Foaming index ≈2.3 (lower than no-SDS)."),
+        ("0.5% SDS (Excess)", MUTED, "Non-uniform and coarsened bubble size. Foaming index further reduced."),
     ]
     for i, (title, color, desc) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.14))
-        bd = ACCENT if title.endswith("(Optimal)") else LINE
-        rrect(sl, cx, cy, cw, ch, WHITE, bd, 0.8 if title.endswith("(Optimal)") else 0.5, radius=0.04)
+        bd = ACCENT if color == ACCENT else LINE
+        rrect(sl, cx, cy, cw, ch, WHITE, bd, 0.8 if color == ACCENT else 0.5, radius=0.04)
         text(sl, cx + Inches(0.18), cy + Inches(0.22), cw - Inches(0.36), Inches(0.35),
              title, size=13, bold=True, color=color)
         text(sl, cx + Inches(0.18), cy + Inches(0.75), cw - Inches(0.36), Inches(1.40),
@@ -1464,18 +1458,19 @@ def slide_28_ftir_xps(prs):
     text(sl, cx2, BODY_Y, cw, Inches(0.30),
          "XPS Surface Elemental Composition (at%)", size=12, bold=True, color=MUTED)
     th2 = Inches(2.1)
-    headers2 = ["Element", "Before combustion", "After combustion"]
+    headers2 = ["Formulation", "C 1s before (at%)", "C 1s after (at%)"]
     rows2 = [
-        [{'text': "Si 2p", 'bold': True}, "~4",
-         {'text': "~33", 'color': D_GRN, 'bold': True}],
-        [{'text': "C 1s", 'bold': True}, "~55",
-         {'text': "~8", 'color': D_RED, 'bold': True}],
-        [{'text': "O 1s", 'bold': True}, "~41", "~59"],
+        [{'text': "HEC+MC/CSP", 'bold': True},
+         "25.6",
+         {'text': "14.9", 'color': D_RED, 'bold': True}],
+        [{'text': "MHEC/CSP", 'bold': True},
+         "38.3",
+         {'text': "4.8", 'color': D_RED, 'bold': True}],
     ]
     simple_table(sl, cx2, BODY_Y + Inches(0.42), cw, th2, headers2, rows2,
-                 col_widths=[1.5, 1.5, 1.5])
+                 col_widths=[2.0, 1.8, 1.8])
     callout(sl, cx2, BODY_Y + Inches(0.42) + th2 + Inches(0.15), cw, Inches(0.85),
-            "Si concentration increases ~8×, C concentration greatly reduced → organic matrix removed, silica exposed",
+            "Carbon greatly reduced (MHEC: 38.3→4.8 at%) → organic matrix combusted and removed; silica remains",
             dark=True, icon='📊')
 
     info_y = BODY_Y + Inches(0.42) + th2 + Inches(1.20)
@@ -1666,8 +1661,8 @@ def slide_33_scenarios(prs):
     text(sl, BODY_X + Inches(0.20), cy + Inches(0.14), cw2 - Inches(0.4), Inches(0.30),
          "Advantages Over Existing Methods", size=12, bold=True, color=MUTED)
     advs = [
-        ("vs Water", "5× longer protection time"),
-        ("vs AquaGel-K", "Continues protecting after water evaporation"),
+        ("vs Water", "Far greater protection (water chars at ~0.3 min)"),
+        ("vs AquaGel-K", "3–6× longer protection + continues after water evaporation"),
         ("vs Phos-Chek", "No residual contamination in soil or water"),
         ("Spray compatibility", "Usable with existing equipment"),
     ]
@@ -1789,12 +1784,12 @@ def slide_36_impact(prs):
          align=PP_ALIGN.CENTER)
 
     text_runs(sl, Inches(0.5), Inches(1.5), Inches(12.3), Inches(2.0), [
-        {'text': "5", 'size': 130, 'bold': True, 'color': GOLD},
-        {'text': "×", 'size': 75, 'bold': True, 'color': RGBColor(0xc8, 0x9a, 0x68)},
+        {'text': "3–6", 'size': 100, 'bold': True, 'color': GOLD},
+        {'text': "×", 'size': 65, 'bold': True, 'color': RGBColor(0xc8, 0x9a, 0x68)},
     ], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     text(sl, Inches(0.5), Inches(3.6), Inches(12.3), Inches(0.5),
-         "Time to Char Improvement vs. Conventional (Water)", size=22, bold=True, color=WHITE,
+         "Time to Char Improvement vs. Commercial WEG (AquaGel-K)", size=22, bold=True, color=WHITE,
          align=PP_ALIGN.CENTER)
 
     text(sl, Inches(1.5), Inches(4.25), Inches(10.3), Inches(1.4),
@@ -1802,9 +1797,9 @@ def slide_36_impact(prs):
          size=15, color=RGBColor(0xa8, 0xbc, 0xd4), align=PP_ALIGN.CENTER)
 
     bars = [
-        ("Time to char", 0.95, "~10 min", GOLD),
-        ("Foaming Index", 0.65, "~2.6×", ACCENT),
-        ("Power-law n", 0.11, "0.108", GRAY_L),
+        ("Time to char", 0.95, ">7 min", GOLD),
+        ("Foaming Index", 0.68, "≈2.6×", ACCENT),
+        ("Shear-thinning", 0.60, "n < 1", GRAY_L),
     ]
     by = Inches(6.0)
     for label, ratio, val, color in bars:
