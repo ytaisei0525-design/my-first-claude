@@ -32,7 +32,7 @@ D_GRN  = RGBColor(0x5b, 0x8c, 0x5a)
 D_RED  = RGBColor(0xa0, 0x56, 0x56)
 GRAY_L = RGBColor(0xaa, 0xb4, 0xc0)
 
-# ── サイズ ───────────────────────────────────────────────────
+# ── Dimensions ───────────────────────────────────────────────
 W = Inches(13.333)
 H = Inches(7.5)
 PAD = Inches(0.40)
@@ -42,6 +42,10 @@ BODY_Y = HDR_H + Inches(0.22)
 BODY_H = H - BODY_Y - FTR_H - Inches(0.20)
 BODY_X = PAD
 BODY_W = W - PAD * 2
+
+# Global font scale and family
+FONT_SCALE = 1.12
+FONT_NAME = 'Arial'
 
 
 # ── ユーティリティ ───────────────────────────────────────────
@@ -91,11 +95,11 @@ def text(sl, x, y, w, h, content, size=11, bold=False,
         p.alignment = align
         run = p.add_run()
         run.text = line
-        run.font.size = Pt(size)
+        run.font.size = Pt(size * FONT_SCALE)
         run.font.bold = bold
         run.font.italic = italic
         run.font.color.rgb = color
-        run.font.name = 'Noto Sans JP'
+        run.font.name = FONT_NAME
     return tb
 
 def text_runs(sl, x, y, w, h, runs, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP):
@@ -112,11 +116,11 @@ def text_runs(sl, x, y, w, h, runs, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP):
     for r in runs:
         run = p.add_run()
         run.text = r['text']
-        run.font.size = Pt(r.get('size', 11))
+        run.font.size = Pt(r.get('size', 11) * FONT_SCALE)
         run.font.bold = r.get('bold', False)
         run.font.italic = r.get('italic', False)
         run.font.color.rgb = r.get('color', INK2)
-        run.font.name = 'Noto Sans JP'
+        run.font.name = FONT_NAME
     return tb
 
 
