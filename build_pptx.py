@@ -741,8 +741,8 @@ def slide_11_csp_sds(prs):
     text(sl, cx + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
          "Colloidal Silica Particles", size=18, bold=True, color=INK)
     bullets = [
-        "原液：水中で12 wt%濃度のコロイド分散液",
-        "粒子サイズ：数十nmの単分散シリカ",
+        "LUDOX TM-50（原液 50 wt%）→ 15 wt%に希釈（pH 9）",
+        "粒子サイズ：22 nm（単分散）",
         "配合濃度：ゲル中 5 wt%",
         "加熱時に焼結 → silica aerogel に変態",
     ]
@@ -766,9 +766,9 @@ def slide_11_csp_sds(prs):
          "Sodium Dodecyl Sulfate", size=18, bold=True, color=INK)
     bullets2 = [
         "陰イオン性界面活性剤",
-        "役割：発泡を促進し多孔構造を強化",
+        "SDS添加でも Foaming Index は改善しなかった",
         "添加濃度：0.1 wt% ・ 0.5 wt% の2水準",
-        "SEMで気泡サイズ・分布を制御確認",
+        "SDS量増加で気泡が粗大化（SEM確認）",
     ]
     by = BODY_Y + Inches(1.30)
     for b in bullets2:
@@ -843,7 +843,7 @@ def slide_13_methods(prs):
         ("レオロジー測定", "RHEOLOGY",
          ["振動周波数掃引（G', G''）", "定常流動掃引（粘度 vs 剪断速度）", "Herschel-Bulkleyモデル適合"]),
         ("燃焼試験（Time-to-char）", "BURN TEST",
-         ["ブタンバーナーで木材を加熱", "炭化開始までの時間を計測", "120 s / 300 s時点を写真比較"]),
+         ["MAP-Proトーチ（~2054°C）で白木合板を加熱", "炭化開始までの時間を計測", "120 s / 300 s時点を写真比較"]),
         ("発泡指数測定", "FOAMING",
          ["燃焼後の発泡層厚さを計測", "初期厚さに対する比 = Foaming Index"]),
         ("SEM形態観察", "SEM",
@@ -925,7 +925,7 @@ def slide_16_rheology1(prs):
          bullets=[
              "全配合系で G' > G'' → 固体的（ゲル）挙動",
              "周波数依存性が小さい → 安定したネットワーク",
-             "AquaGel-Kよりも本研究WEGの方が高弾性",
+             "AquaGel-K（G'=457 Pa）より低い G'（46/26 Pa）だが全系でゲル挙動",
          ], ct_size=15, li_size=12)
     callout(sl, right_x, BODY_Y + ch + Inches(0.25), right_w, Inches(0.80),
             "ゲル骨格が明確に形成されており、塗布後に流れ落ちない",
@@ -950,9 +950,9 @@ def slide_17_rheology2(prs):
     # 右：mini stats + 解説
     mh = Inches(1.20)
     mini(sl, right_x, BODY_Y, right_w, mh,
-         "Power-law index n", "0.108", "HEC+MC/CSP 1-5", value_color=ACCENT)
+         "流動指数 n", "n < 1", "HEC+MC/CSP — 強い剪断希薄化", value_color=ACCENT)
     mini(sl, right_x, BODY_Y + mh + Inches(0.15), right_w, mh,
-         "Power-law index n", "0.188", "MHEC/CSP 1-5", value_color=ACCENT)
+         "流動指数 n", "n < 1", "MHEC/CSP — 同様に剪断希薄化", value_color=ACCENT)
 
     cy_d = BODY_Y + (mh + Inches(0.15)) * 2 + Inches(0.10)
     rrect(sl, right_x, cy_d, right_w, Inches(1.0), WHITE, LINE, 0.5, radius=0.04)
@@ -969,44 +969,40 @@ def slide_17_rheology2(prs):
 # ===== SLIDE 18: Herschel-Bulkley =====
 def slide_18_hb(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 3/11", "レオロジー③：Herschel-Bulkley モデルパラメータ")
+    draw_header(sl, "結果 3/11", "レオロジー③：静的降伏応力と長期安定性")
     draw_footer(sl, "18 / 36")
 
     # 上部 callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
-            "σ = τ₀ + K · γ̇ⁿ  （τ₀：降伏応力, K：稠度係数, n：流動指数）",
+            "静的降伏応力：振幅掃引のG'/G'' クロスオーバー点（σ_s）。流れ始めに必要な最小応力",
             icon='ƒ')
 
     ty = BODY_Y + Inches(0.85)
-    th = Inches(2.85)
-    headers = ["配合系", "τ₀ (Pa)", "K (Pa·sⁿ)", "n", "R²"]
+    th = Inches(2.2)
+    headers = ["配合系", "静的降伏応力（新鮮）", "静的降伏応力（455日後）", "備考"]
     rows = [
-        ["AquaGel-K（市販対照）", "0.31", "0.85", "0.52",
-         {'text': ">0.99", 'color': D_GRN}],
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
-         {'text': "0.59", 'bold': True}, {'text': "2.04", 'bold': True},
-         {'text': "0.108", 'bold': True, 'color': AMBER},
-         {'text': ">0.99", 'color': D_GRN}],
-        ["HEC+MC/CSP/SDS 1-5-0.1", "0.54", "1.87", "0.115",
-         {'text': ">0.99", 'color': D_GRN}],
-        ["HEC+MC/CSP/SDS 1-5-0.5", "0.48", "1.65", "0.122",
-         {'text': ">0.99", 'color': D_GRN}],
+         {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
+         {'text': "68.9 Pa", 'color': D_GRN},
+         "ゲル強度が経時で増大"],
         [{'text': "MHEC/CSP 1-5", 'bold': True},
-         {'text': "0.41", 'bold': True}, {'text': "1.43", 'bold': True},
-         {'text': "0.188", 'bold': True, 'color': AMBER},
-         {'text': ">0.99", 'color': D_GRN}],
+         {'text': "3.31 Pa", 'bold': True, 'color': ACCENT},
+         {'text': "4.56 Pa", 'color': D_GRN},
+         "長期安定性を確認（455日）"],
+        ["AquaGel-K（市販対照）", "—", "—",
+         {'text': "比較対照", 'color': MUTED}],
     ]
     simple_table(sl, BODY_X, ty, BODY_W, th, headers, rows,
-                 col_widths=[2.8, 1.2, 1.2, 1.0, 1.0])
+                 col_widths=[2.8, 2.0, 2.0, 2.0])
 
     # 下部 3カード
     cy = ty + th + Inches(0.30)
     ch = Inches(1.85)
     cw = (BODY_W - Inches(0.30)) / 3
     cards_data = [
-        ("降伏応力 τ₀", "流れ始めるのに必要な最小応力。WEGはAquaGel-Kの約2倍 → 垂直面での流れ落ち抵抗が高い"),
-        ("流動指数 n （<< 1）", "HEC+MC/CSP の n=0.108 は強い剪断希薄化を示す。スプレー時の低粘度と静止時の高粘度を両立"),
-        ("HEC+MC vs MHEC", "HEC+MC系はより低い n と高い K → より強い剪断希薄化。MHEC系は単一ポリマーで類似機能を実現"),
+        ("静的降伏応力", "振幅掃引のG'/G''クロスオーバー点で測定。HEC+MC/CSPは33.34 Pa、MHEC/CSPは3.31 Pa（新鮮配合）"),
+        ("長期安定性", "MHEC/CSPは455日経時後も3.31→4.56 Paとわずかな変化のみ。実用配合の長期安定性を実証"),
+        ("HEC+MC vs MHEC", "HEC+MC系はより高い降伏応力で垂直面付着に有利。MHEC系は単一ポリマーで製造が簡便"),
     ]
     for i, (title, body) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.15))
@@ -1020,7 +1016,7 @@ def slide_18_hb(prs):
 # ===== SLIDE 19: dynamic yield stress / tan δ =====
 def slide_19_yield(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 4/11", "レオロジー④：動的降伏応力・粘弾性（tan δ）")
+    draw_header(sl, "結果 4/11", "レオロジー④：貯蔵弾性率 G' と粘弾性（tan δ）")
     draw_footer(sl, "19 / 36")
 
     cw = (BODY_W - Inches(0.30)) / 2
@@ -1029,13 +1025,12 @@ def slide_19_yield(prs):
 
     # 左：動的降伏応力
     text(sl, BODY_X, BODY_Y, cw, Inches(0.30),
-         "動的降伏応力（Amplitude Sweep より）", size=12, bold=True, color=MUTED)
+         "G' 貯蔵弾性率（1 rad/s）", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     bar_data = [
-        ("AquaGel-K", 0.28, "~0.4 Pa", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.85, "~1.2 Pa", D_TEAL),
-        ("+SDS 0.1 wt%", 0.78, "~1.1 Pa", D_BLUE),
-        ("MHEC/CSP 1-5", 0.65, "~0.9 Pa", D_AMBR),
+        ("MHEC/CSP 1-5", 0.13, "25.6 Pa", D_AMBR),
+        ("HEC+MC/CSP 1-5", 0.25, "46.4 Pa", D_TEAL),
+        ("AquaGel-K", 0.95, "456.8 Pa", GRAY_L),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
@@ -1043,7 +1038,7 @@ def slide_19_yield(prs):
         by += Inches(0.50)
 
     callout(sl, BODY_X, by + Inches(0.15), cw, Inches(0.80),
-            "G' = G'' クロスオーバー点での応力 = 動的降伏応力。WEGはAquaGel-Kの約3倍",
+            "全系でG'>G''（ゲル挙動）。AquaGel-KのG'が最高だがtan δ も大きく流動的",
             icon='ⓘ')
 
     # 右：tan δ
@@ -1051,17 +1046,16 @@ def slide_19_yield(prs):
          "損失正接 tan δ = G'' / G'（弾性支配 = <1）", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     tan_data = [
-        ("AquaGel-K", 0.50, "~0.25", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.20, "~0.10", D_TEAL),
-        ("+SDS 0.1 wt%", 0.24, "~0.12", D_BLUE),
-        ("MHEC/CSP 1-5", 0.30, "~0.15", D_AMBR),
+        ("AquaGel-K", 0.42, "0.168", GRAY_L),
+        ("HEC+MC/CSP 1-5", 0.55, "0.219", D_TEAL),
+        ("MHEC/CSP 1-5", 1.00, "0.400", D_AMBR),
     ]
     for label, ratio, val, color in tan_data:
         bar_row(sl, cx2, by, cw, label, ratio, val, fill_color=color,
                 lbl_w=Inches(2.0), val_w=Inches(1.0))
         by += Inches(0.50)
     callout(sl, cx2, by + Inches(0.15), cw, Inches(0.80),
-            "tan δ << 1 → 全配合系が明確なゲル挙動。弾性成分が圧倒的に支配的",
+            "全系でtan δ < 1 → ゲル挙動。AquaGel-K が最も弾性的（0.168）。MHEC系は流動性が高め（0.400）",
             dark=True, icon='✓')
 
 
@@ -1087,9 +1081,9 @@ def slide_20_compare(prs):
     bullets = [
         "HECで常温粘度・付着性を確保",
         "MCで加熱時の構造維持を担当",
-        "より低い n=0.108 → 強い剪断希薄化",
-        "Time to char ≈ 9–10 min",
-        "Foaming Index ≈ 2.2–2.6",
+        "強い剪断希薄化（n < 1）",
+        "Time to char ＞ 7 min",
+        "Foaming Index 最大≈2.6（SDS無し）",
     ]
     for b in bullets:
         text(sl, BODY_X + Inches(0.30), by, Inches(0.2), Inches(0.30),
@@ -1116,8 +1110,8 @@ def slide_20_compare(prs):
     bullets2 = [
         "ヒドロキシエチル基とメチル基を同一鎖上に有する",
         "単一ポリマーで同等の粘弾性・熱応答を実現",
-        "n=0.188（HEC+MC より若干高い）",
-        "Time to char ≈ 10 min",
+        "剪断希薄化（n < 1）",
+        "Time to char ＞ 5 min",
         "配合・品質管理が単純化される利点",
     ]
     for b in bullets2:
@@ -1157,9 +1151,9 @@ def slide_21_setup(prs):
     card(sl, right_x, BODY_Y, right_w, ch,
          title="◆ 試験条件", tag="EXPERIMENTAL",
          bullets=[
-             "基板：松材（pine wood）薄板",
+             "基板：白木合板（whitewood plywood）",
              "ゲル散布厚：均一に塗布",
-             "火炎源：ブタン直炎",
+             "火炎源：MAP-Pro トーチ（~2054°C）",
              "計測：基材が炭化するまでの時間",
              "120 s時点・300 s時点で外観撮影",
          ], ct_size=15, li_size=12)
@@ -1183,11 +1177,11 @@ def slide_22_ttc(prs):
          "Time to char（炭化開始までの時間）", size=12, bold=True, color=MUTED)
     by = BODY_Y + Inches(0.45)
     bar_data = [
-        ("Water", 0.18, "~2 min", GRAY_L),
-        ("AquaGel-K（市販品）", 0.60, "~7 min", D_AMBR),
-        ("HEC+MC/CSP 1-5", 0.80, "~9 min", D_TEAL),
-        ("HEC+MC/CSP/SDS 1-5-0.1", 0.90, "~10 min", D_BLUE),
-        ("MHEC/CSP 1-5", 0.92, "~10 min", D_BLUE),
+        ("Water", 0.04, "~0.3 min", GRAY_L),
+        ("AquaGel-K（市販品）", 0.20, "~1.5 min", D_AMBR),
+        ("MHEC/CSP 1-5", 0.65, ">5 min", D_AMBR),
+        ("HEC+MC/CSP 1-5", 0.90, ">7 min", D_TEAL),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.90, ">7 min", D_BLUE),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, left_w, label, ratio, val, fill_color=color,
@@ -1195,7 +1189,7 @@ def slide_22_ttc(prs):
         by += Inches(0.55)
 
     callout(sl, BODY_X, by + Inches(0.15), left_w, Inches(0.85),
-            "本研究WEG群はAquaGel-K比で約40%延長、水のみと比べて約5倍の保護時間",
+            "本研究WEGは市販AquaGel-Kの3〜6倍の保護時間を達成（全試験でn≥3）",
             icon='📊')
 
     # 右：図プレースホルダー
@@ -1223,18 +1217,18 @@ def slide_23_timelapse(prs):
     cards_data = [
         ("Water", D_RED, [
             "直炎で即座に蒸発・流失",
-            "~2分で木材表面が炭化",
+            "~0.3分（約18秒）で炭化",
             "保護層ゼロ",
         ]),
         ("AquaGel-K", D_AMBR, [
             "水を保持するが水蒸発で終了",
-            "~7分で炭化",
+            "~1.5分で炭化",
             "固体保護層を形成しない",
         ]),
         ("本研究 WEG", ACCENT, [
             "水蒸発と同時にゲルが発泡・膨張",
             "多孔質エアロゲル層が継続保護",
-            "~10分間、炭化を阻止",
+            ">7分間（HEC+MC）炭化を阻止",
         ]),
     ]
     for i, (title, color, bullets) in enumerate(cards_data):
@@ -1267,15 +1261,15 @@ def slide_24_120300(prs):
     ch = Inches(2.8)
     cw = (BODY_W - Inches(0.28)) / 3
     cards_data = [
-        ("Water", D_RED, "Time to char：~2 min", [
+        ("Water", D_RED, "Time to char：~0.3 min", [
             "120 s：既に広範囲が炭化開始",
             "300 s：表面全体が黒化・損傷甚大",
         ]),
-        ("AquaGel-K（市販品）", D_AMBR, "Time to char：~7 min", [
+        ("AquaGel-K（市販品）", D_AMBR, "Time to char：~1.5 min", [
             "120 s：ゲルが乾燥し一部炭化",
             "300 s：保護層なし、部分炭化",
         ]),
-        ("本研究 WEG", ACCENT, "Time to char：~10 min", [
+        ("本研究 WEG", ACCENT, "Time to char：>7 min", [
             "120 s：エアロゲル層が形成・膨張中",
             "300 s：表面ほぼ無傷、層が残存",
         ]),
@@ -1305,22 +1299,22 @@ def slide_25_hero(prs):
          align=PP_ALIGN.CENTER)
 
     text_runs(sl, Inches(0.5), Inches(1.9), Inches(12.3), Inches(2.3), [
-        {'text': "~10", 'size': 130, 'bold': True, 'color': GOLD},
+        {'text': ">7", 'size': 130, 'bold': True, 'color': GOLD},
         {'text': " min", 'size': 60, 'bold': False, 'color': RGBColor(0xc8, 0x9a, 0x68)},
     ], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     text(sl, Inches(0.5), Inches(4.4), Inches(12.3), Inches(0.6),
-         "本研究WEGの Time to char", size=26, bold=True, color=WHITE,
+         "本研究WEGの Time to char（HEC+MC/CSP）", size=26, bold=True, color=WHITE,
          align=PP_ALIGN.CENTER)
     text(sl, Inches(1.5), Inches(5.15), Inches(10.3), Inches(0.7),
-         "水のみ（~2分）の約5倍、市販AquaGel-K（~7分）の約1.4倍の保護時間を達成",
+         "市販AquaGel-K（~1.5分）の3〜6倍の保護時間を達成（全試験でn≥3）",
          size=14, color=RGBColor(0x9c, 0xb4, 0xcc), align=PP_ALIGN.CENTER)
 
     # bars
     bars = [
-        ("Water", 0.20, "~2 min", GRAY_L),
-        ("AquaGel-K", 0.60, "~7 min", D_AMBR),
-        ("本研究 WEG", 0.95, "~10 min", GOLD),
+        ("Water", 0.04, "~0.3 min", GRAY_L),
+        ("AquaGel-K", 0.20, "~1.5 min", D_AMBR),
+        ("本研究 WEG", 0.95, ">7 min", GOLD),
     ]
     by = Inches(6.05)
     for label, ratio, val, color in bars:
@@ -1365,10 +1359,10 @@ def slide_26_foam(prs):
          "Foaming Index（発泡後厚 / 初期厚）", size=12, bold=True, color=MUTED)
     by = cy + Inches(0.40)
     bar_data = [
-        ("AquaGel-K", 0.02, "~0", GRAY_L),
-        ("HEC+MC/CSP 1-5", 0.55, "~2.2×", D_TEAL),
-        ("+SDS 0.1 wt%", 0.65, "~2.6×", D_BLUE),
-        ("MHEC/CSP 1-5", 0.58, "~2.3×", D_AMBR),
+        ("AquaGel-K", 0.02, "≈0", GRAY_L),
+        ("MHEC/CSP 1-5", 0.53, "≈2.1×", D_AMBR),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.60, "≈2.3×", D_BLUE),
+        ("HEC+MC/CSP 1-5", 0.68, "≈2.6×", D_TEAL),
     ]
     for label, ratio, val, color in bar_data:
         bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
@@ -1384,7 +1378,7 @@ def slide_26_foam(prs):
         "初期厚の2倍以上に膨張 → 熱伝導経路が延長",
         "気孔内に空気が閉じ込められ断熱性が向上",
         "AquaGel-Kは発泡せず → 火炎で平坦に崩壊",
-        "SDS 0.1 wt%が最適：均一な微細気泡を形成",
+        "SDS無しのHEC+MC/CSPが最高発泡指数（≈2.6）を達成",
     ]
     for b in bullets:
         text(sl, cx2 + Inches(0.05), by, Inches(0.20), Inches(0.30),
@@ -1409,14 +1403,14 @@ def slide_27_sem_sds(prs):
     ch = Inches(2.3)
     cw = (BODY_W - Inches(0.28)) / 3
     cards_data = [
-        ("0% SDS", MUTED, "緻密なシリカネットワーク。気孔少。"),
-        ("0.1% SDS（最適）", ACCENT, "均一な微細気泡。最高の発泡指数。"),
-        ("0.5% SDS（過剰）", MUTED, "気泡サイズ不均一・粗大化。"),
+        ("0% SDS", ACCENT, "最高の発泡指数（≈2.6）。SDSなしが膨張率最大。"),
+        ("0.1% SDS", MUTED, "均一な微細気泡構造。発泡指数≈2.3（SDSなしより低い）。"),
+        ("0.5% SDS（過剰）", MUTED, "気泡サイズ不均一・粗大化。発泡指数がさらに低下。"),
     ]
     for i, (title, color, desc) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.14))
-        bd = ACCENT if title.endswith("（最適）") else LINE
-        rrect(sl, cx, cy, cw, ch, WHITE, bd, 0.8 if title.endswith("（最適）") else 0.5, radius=0.04)
+        bd = ACCENT if color == ACCENT else LINE
+        rrect(sl, cx, cy, cw, ch, WHITE, bd, 0.8 if color == ACCENT else 0.5, radius=0.04)
         text(sl, cx + Inches(0.18), cy + Inches(0.22), cw - Inches(0.36), Inches(0.35),
              title, size=13, bold=True, color=color)
         text(sl, cx + Inches(0.18), cy + Inches(0.75), cw - Inches(0.36), Inches(1.40),
@@ -1460,18 +1454,19 @@ def slide_28_ftir_xps(prs):
     text(sl, cx2, BODY_Y, cw, Inches(0.30),
          "XPS 表面元素組成（at%）", size=12, bold=True, color=MUTED)
     th2 = Inches(2.1)
-    headers2 = ["元素", "燃焼前", "燃焼後"]
+    headers2 = ["配合系", "C 1s 燃焼前 (at%)", "C 1s 燃焼後 (at%)"]
     rows2 = [
-        [{'text': "Si 2p", 'bold': True}, "~4",
-         {'text': "~33", 'color': D_GRN, 'bold': True}],
-        [{'text': "C 1s", 'bold': True}, "~55",
-         {'text': "~8", 'color': D_RED, 'bold': True}],
-        [{'text': "O 1s", 'bold': True}, "~41", "~59"],
+        [{'text': "HEC+MC/CSP", 'bold': True},
+         "25.6",
+         {'text': "14.9", 'color': D_RED, 'bold': True}],
+        [{'text': "MHEC/CSP", 'bold': True},
+         "38.3",
+         {'text': "4.8", 'color': D_RED, 'bold': True}],
     ]
     simple_table(sl, cx2, BODY_Y + Inches(0.42), cw, th2, headers2, rows2,
-                 col_widths=[1.5, 1.5, 1.5])
+                 col_widths=[2.0, 1.8, 1.8])
     callout(sl, cx2, BODY_Y + Inches(0.42) + th2 + Inches(0.15), cw, Inches(0.85),
-            "Si濃度が約8倍に増加、C濃度が激減 → 有機マトリクスが除去されシリカが露出",
+            "炭素濃度が大幅減（MHEC: 38.3→4.8 at%）→ 有機マトリクスが燃焼除去、シリカが残存・露出",
             dark=True, icon='📊')
 
     info_y = BODY_Y + Inches(0.42) + th2 + Inches(1.20)
@@ -1662,8 +1657,8 @@ def slide_33_scenarios(prs):
     text(sl, BODY_X + Inches(0.20), cy + Inches(0.14), cw2 - Inches(0.4), Inches(0.30),
          "既存手法との優位点", size=12, bold=True, color=MUTED)
     advs = [
-        ("vs 水", "保護時間 5× 向上"),
-        ("vs AquaGel-K", "水蒸発後も継続保護"),
+        ("vs 水", "保護時間大幅向上（水は~0.3分で炭化）"),
+        ("vs AquaGel-K", "3〜6倍の保護時間＋水蒸発後も継続"),
         ("vs Phos-Chek", "土壌・水系への残留なし"),
         ("散布互換性", "既存機材そのまま使用可"),
     ]
@@ -1785,12 +1780,12 @@ def slide_36_impact(prs):
          align=PP_ALIGN.CENTER)
 
     text_runs(sl, Inches(0.5), Inches(1.5), Inches(12.3), Inches(2.0), [
-        {'text': "5", 'size': 130, 'bold': True, 'color': GOLD},
-        {'text': "×", 'size': 75, 'bold': True, 'color': RGBColor(0xc8, 0x9a, 0x68)},
+        {'text': "3–6", 'size': 100, 'bold': True, 'color': GOLD},
+        {'text': "×", 'size': 65, 'bold': True, 'color': RGBColor(0xc8, 0x9a, 0x68)},
     ], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     text(sl, Inches(0.5), Inches(3.6), Inches(12.3), Inches(0.5),
-         "従来品（水）比 Time to char 向上率", size=22, bold=True, color=WHITE,
+         "市販WEG（AquaGel-K）比 Time to char 向上率", size=22, bold=True, color=WHITE,
          align=PP_ALIGN.CENTER)
 
     text(sl, Inches(1.5), Inches(4.25), Inches(10.3), Inches(1.4),
@@ -1798,9 +1793,9 @@ def slide_36_impact(prs):
          size=15, color=RGBColor(0xa8, 0xbc, 0xd4), align=PP_ALIGN.CENTER)
 
     bars = [
-        ("Time to char", 0.95, "~10 min", GOLD),
-        ("Foaming Index", 0.65, "~2.6×", ACCENT),
-        ("Power-law n", 0.11, "0.108", GRAY_L),
+        ("Time to char", 0.95, ">7 min", GOLD),
+        ("Foaming Index", 0.68, "≈2.6×", ACCENT),
+        ("Shear-thinning", 0.60, "n < 1", GRAY_L),
     ]
     by = Inches(6.0)
     for label, ratio, val, color in bars:
