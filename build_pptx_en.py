@@ -1694,28 +1694,28 @@ def slide_34_future(prs):
     ch = Inches(4.6)
     cards_data = [
         ("RHEOLOGY", "Rheology", [
-            "G' > G'' for all systems (gel)",
-            "n = 0.108–0.188",
-            "Yield stress ~3× AquaGel-K",
-            "tan δ << 1 (elastic-dominated)",
+            "G' > G'', no crossover (gel)",
+            "G': HEC+MC≈46, MHEC≈26 Pa",
+            "Shear-thinning (HB) → sprayable",
+            "tan δ < 1, solid-like gel",
         ]),
         ("FIRE PROTECTION", "Fire Protection", [
-            "Time to char ≈ 10 min",
-            "~5× longer than water (~2 min)",
-            "~40% longer than AquaGel-K",
-            "Surface nearly intact at 300 s",
+            "HEC+MC/CSP: >7 min to char",
+            "MHEC/CSP: >5 min",
+            "3–6× more effective than commercial",
+            "Water ~0.3, AquaGel-K ~1.5 min",
         ]),
         ("FOAMING / SEM", "Foaming & Structure", [
-            "Foaming Index ≈ 2.2–2.6",
-            "Uniform bubbles at SDS 0.1%",
-            "Sintering tracked by SEM",
-            "Necking → porous skeleton",
+            "Foaming Index up to ≈2.6",
+            "AquaGel-K does not foam (≈0)",
+            "Porous silica film on burning",
+            "Particles sinter after 2 min (SEM)",
         ]),
         ("CHEMISTRY", "Chemical Change", [
-            "FT-IR: pure SiO₂ after burn",
-            "XPS: Si ~8× increase",
-            "TGA: silica residue ~5–8 wt%",
-            "Aerogel formation confirmed",
+            "FT-IR: CH/SiO ratio drops",
+            "XPS: large carbon decrease",
+            "MHEC/CSP C 38.3%→4.8%",
+            "Silica (SiO₂) remains",
         ]),
     ]
     for i, (tag, title, bullets) in enumerate(cards_data):
@@ -1725,7 +1725,7 @@ def slide_34_future(prs):
 
     cy_co = BODY_Y + ch + Inches(0.25)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
-            "Upon heating, CSP sinters and the gel self-transforms into a porous silica aerogel insulating layer — flame protection continues even after water evaporation",
+            "On burning, water evaporates while the gel converts into a porous silica aerogel — insulating the substrate even after desiccation (a mechanism absent in commercial WEGs)",
             dark=True, icon='◆')
 
 
@@ -1738,10 +1738,10 @@ def slide_35_summary(prs):
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
     summaries = [
-        ("RESULT 01", "Time to char ~10 min", "~5× water, ~40% longer than AquaGel-K. Greatly extends wood protection time under flame"),
-        ("RESULT 02", "Self-forming aerogel", "CSP sinters upon heating → porous silica layer continuously insulates even after water evaporation"),
-        ("RESULT 03", "Compatible with existing spray infrastructure", "Shear-thinning fluid with n = 0.108–0.188. Sprayable through existing hoses and nozzles"),
-        ("RESULT 04", "Sustainable materials", "Cellulose derivatives are food-grade; silica is a harmless inorganic material. Low environmental impact"),
+        ("RESULT 01", "3–6× more protective", "HEC+MC/CSP >7 min, MHEC/CSP >5 min to char. Protects substrates far longer under flame"),
+        ("RESULT 02", "Self-forming aerogel", "Heat dehydrates the gel and sinters CSP → forms a porous silica aerogel insulating layer in situ (protection continues after drying)"),
+        ("RESULT 03", "Compatible with spray infrastructure", "Shear-thinning, sprayable fluid combining strong substrate adherence and wetting"),
+        ("RESULT 04", "Sustainable, safe materials", "Cellulose derivatives — Earth's most abundant biopolymer; biodegradability confirmed in prior study; silica is benign"),
     ]
     for i, (num, title, body) in enumerate(summaries):
         cx = BODY_X + i * (cw + Inches(0.14))
@@ -1761,21 +1761,21 @@ def slide_35_summary(prs):
     card(sl, BODY_X, cy, cw2, ch2,
          title="Core Mechanism",
          bullets=[
-             "MC gelates on flame contact, fixing the structure",
-             "CSP sinters upon dehydration and heating",
-             "Forms a porous SiO₂ aerogel insulating layer",
+             "Water rapidly evaporates on flame contact",
+             "CSP sinters, forming inter-particle necks",
+             "Porous silica aerogel insulating layer forms",
          ], ct_size=14, li_size=12)
     card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="Demonstrated Protection",
+         title="Significance Stated in the Paper",
          bullets=[
-             "Time to char ~10 min (~5× water)",
-             "Protection continues after water evaporation",
-             "Flow properties compatible with existing infrastructure",
+             "PP platform as a basis for diverse fire retardants",
+             "Amenable to modular manufacturing & large scale",
+             "Fire retardancy retained after 455-day aging (MHEC/CSP)",
          ], ct_size=14, li_size=12)
 
     cy_co = cy + ch2 + Inches(0.20)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
-            "From \"water carrier\" to \"heat-self-transforming fire-retardant material\" — a new WEG design concept",
+            "From \"water carrier\" to \"heat-self-transforming fire-retardant material\" — a next-gen WEG that stays effective even after drying",
             dark=True, icon='"')
 
 

@@ -1690,28 +1690,28 @@ def slide_34_future(prs):
     ch = Inches(4.6)
     cards_data = [
         ("RHEOLOGY", "レオロジー特性", [
-            "全系で G' > G''（ゲル挙動）",
-            "n = 0.108–0.188",
-            "降伏応力 AquaGel-K の約3倍",
-            "tan δ << 1（弾性支配）",
+            "全系で G' > G''、crossoverなし",
+            "G': HEC+MC≈46, MHEC≈26 Pa",
+            "剪断希薄化（HB適合）→ 噴霧可",
+            "tan δ < 1 の固体的ゲル",
         ]),
         ("FIRE PROTECTION", "火炎保護性能", [
-            "Time to char ≈ 10 分",
-            "水のみ（~2分）の約5倍",
-            "AquaGel-K比 約40%延長",
-            "300秒後も表面ほぼ無傷",
+            "HEC+MC/CSP：7分超 char遅延",
+            "MHEC/CSP：5分超",
+            "市販品の3〜6倍の効果",
+            "水~0.3分, AquaGel-K~1.5分",
         ]),
         ("FOAMING / SEM", "発泡・微細構造", [
-            "Foaming Index ≈ 2.2–2.6",
-            "SDS 0.1% で均一微細気泡",
-            "SEMで焼結進行を観察",
-            "ネック形成 → 多孔質骨格",
+            "Foaming Index 最大≈2.6",
+            "AquaGel-Kは発泡せず≈0",
+            "燃焼で多孔質シリカ層を形成",
+            "2分以降に粒子が焼結（SEM）",
         ]),
         ("CHEMISTRY", "化学的変態", [
-            "FT-IR：燃焼後は純 SiO₂",
-            "XPS：Si濃度 約8倍に増加",
-            "TGA：シリカ残渣 ~5–8 wt%",
-            "エアロゲル化を化学確認",
+            "FT-IR：CH/SiO比が低下",
+            "XPS：燃焼で炭素が大幅減",
+            "MHEC/CSP C 38.3%→4.8%",
+            "残存はシリカ（SiO₂）",
         ]),
     ]
     for i, (tag, title, bullets) in enumerate(cards_data):
@@ -1721,7 +1721,7 @@ def slide_34_future(prs):
 
     cy_co = BODY_Y + ch + Inches(0.25)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
-            "加熱により CSP が焼結し、ゲルが多孔質シリカエアロゲル断熱層へ自己変態 ― 水蒸発後も火炎保護が継続",
+            "火炎で水が蒸発しつつゲルが多孔質シリカエアロゲルへ転換 → 乾燥後も基材を断熱保護（市販WEGにない機構）",
             dark=True, icon='◆')
 
 
@@ -1734,10 +1734,10 @@ def slide_35_summary(prs):
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
     summaries = [
-        ("RESULT 01", "Time to char ~10分", "水の約5倍、AquaGel-K比で約40%延長。火炎下の木材保護時間を大幅に拡張"),
-        ("RESULT 02", "エアロゲルの自己形成", "CSPが加熱で焼結 → 多孔質シリカ層が水蒸発後も継続的に断熱"),
-        ("RESULT 03", "既存散布インフラ互換", "n = 0.108〜0.188 の剪断希薄化流体。既存のホース・ノズルで噴霧可能"),
-        ("RESULT 04", "持続可能な原料", "セルロース誘導体は食品グレード、シリカは無害な無機材料。低環境負荷"),
+        ("RESULT 01", "市販品の3〜6倍の保護", "HEC+MC/CSPは7分超、MHEC/CSPは5分超 char遅延。火炎下で基材を長く保護"),
+        ("RESULT 02", "エアロゲルの自己形成", "加熱で脱水・CSPが焼結 → in situで多孔質シリカエアロゲル断熱層を形成（乾燥後も保護継続）"),
+        ("RESULT 03", "既存散布インフラ互換", "剪断希薄化を示す噴霧可能な流体。基材への高い付着性・濡れ性を両立"),
+        ("RESULT 04", "持続可能・安全な原料", "地球上最も豊富なセルロース誘導体。前研究で生分解性を確認、シリカは無害"),
     ]
     for i, (num, title, body) in enumerate(summaries):
         cx = BODY_X + i * (cw + Inches(0.14))
@@ -1757,21 +1757,21 @@ def slide_35_summary(prs):
     card(sl, BODY_X, cy, cw2, ch2,
          title="核心メカニズム",
          bullets=[
-             "火炎接触でMCがゲル化し構造を固定",
-             "脱水・加熱でCSPが焼結",
-             "多孔質SiO₂エアロゲル断熱層を形成",
+             "火炎接触で水が急速に蒸発・脱水",
+             "CSPが焼結し粒子間ネックを形成",
+             "多孔質シリカエアロゲル断熱層が完成",
          ], ct_size=14, li_size=12)
     card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="実証された保護性能",
+         title="論文が示す意義",
          bullets=[
-             "Time to char ~10分（水の約5倍）",
-             "水蒸発後も保護が継続",
-             "既存散布インフラと互換な流動特性",
+             "PPプラットフォームは多様な難燃材料の基盤",
+             "modular製造・大規模適用に展開可能",
+             "455日経時後も難燃性を維持（MHEC/CSP）",
          ], ct_size=14, li_size=12)
 
     cy_co = cy + ch2 + Inches(0.20)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
-            "「水のキャリア」から「加熱で自己変態する難燃材料」へ ― WEGの新しい設計思想",
+            "「水のキャリア」から「加熱で自己変態する難燃材料」へ ― 乾燥後も効力を保つ次世代WEG",
             dark=True, icon='"')
 
 
