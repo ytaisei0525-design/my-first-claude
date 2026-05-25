@@ -230,22 +230,29 @@ def callout(sl, x, y, w, h, content, dark=False, icon='▶'):
              content, size=13, color=INK, bold=True, anchor=MSO_ANCHOR.MIDDLE)
 
 
-def fig_placeholder(sl, x, y, w, h, fig_num=None, caption=None):
-    """論文の図のプレースホルダー（ユーザーが後で画像を貼り付ける用）"""
+def fig_placeholder(sl, x, y, w, h, fig_num=None, caption=None, cited=False):
+    """論文の図のプレースホルダー（ユーザーが後で画像を貼り付ける用）
+    cited=True で他論文からの引用図（アンバーのバッジ＋出典メモ欄）"""
     # 背景（ダッシュではなく実線、薄い色で）
     s = rrect(sl, x, y, w, h, PH_BG, PH_BD, 1.0, radius=0.02)
+    badge_fill = AMBER if cited else HEADER
+    place_text = "（引用図を貼り付け）" if cited else "（論文の図を貼り付け）"
     # 図番号バッジ（左上）
     if fig_num:
         tag_w = Inches(0.95)
         rect(sl, x + Inches(0.12), y + Inches(0.12), tag_w, Inches(0.32),
-             HEADER)
+             badge_fill)
         text(sl, x + Inches(0.12), y + Inches(0.12), tag_w, Inches(0.32),
              fig_num, size=11, bold=True, color=WHITE,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
     # 中央プレースホルダーテキスト
     text(sl, x, y, w, h,
-         "（論文の図を貼り付け）", size=12, color=GRAY_L,
+         place_text, size=12, color=GRAY_L,
          align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    # 引用図は出典メモ欄をボックス下部内側に
+    if cited:
+        text(sl, x + Inches(0.12), y + h - Inches(0.38), w - Inches(0.24), Inches(0.28),
+             "出典: ________________（後で記入）", size=9, color=D_AMBR, italic=True)
     # キャプション
     if caption:
         text(sl, x, y + h + Inches(0.04), w, Inches(0.30),
@@ -507,10 +514,16 @@ def slide_04_wildfire(prs):
          "乾燥・強風期間の長期化により、\n従来の消火・防火戦略だけでは対応が困難",
          size=12, color=INK3, italic=True)
 
-    # 右：山火事／WUI写真プレースホルダー
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # 右：上=山火事写真／下=引用トレンドグラフ
+    rtop_h = Inches(3.2)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="Image",
                     caption="山火事・WUI境界帯（写真）")
+    rbot_y = BODY_Y + rtop_h + Inches(0.46)
+    rbot_h = Inches(2.0)
+    fig_placeholder(sl, right_x, rbot_y, right_w, rbot_h,
+                    fig_num="引用", cited=True,
+                    caption="山火事の大規模化・年間焼失面積の経年トレンド")
 
 
 # ===== SLIDE 5: 4段階の保護プロセス =====
@@ -664,10 +677,20 @@ def slide_07_core(prs):
              desc, size=11, color=MUTED)
         py += Inches(0.75)
 
-    # 右：概念図プレースホルダー（イントロなので将来図の先出しは避け、概念図に）
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # 右：上=概念図／下=引用2図（エアロゲル微細構造＋断熱デモ）
+    rtop_h = Inches(3.1)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="概念図",
                     caption="加熱トリガーでゲルが多孔質エアロゲル断熱層へ変態")
+    rbot_y = BODY_Y + rtop_h + Inches(0.42)
+    rbot_h = Inches(2.2)
+    sub_w = (right_w - Inches(0.18)) / 2
+    fig_placeholder(sl, right_x, rbot_y, sub_w, rbot_h,
+                    fig_num="引用", cited=True,
+                    caption="シリカエアロゲルのSEM微細構造")
+    fig_placeholder(sl, right_x + sub_w + Inches(0.18), rbot_y, sub_w, rbot_h,
+                    fig_num="引用", cited=True,
+                    caption="エアロゲルの断熱性デモ（炎上の試料等）")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
@@ -703,10 +726,16 @@ def slide_09_polymers(prs):
         if i < 2:
             rect(sl, BODY_X, ry + row_h - Inches(0.02), left_w, Inches(0.015), LINE)
 
-    # 右：構造図プレースホルダー
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # 右：上=本論文の構造図／下=引用セルロース分子構造
+    rtop_h = Inches(3.3)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="Fig. 1b/c",
                     caption="各ポリマーの化学構造とCSP混合スキーム")
+    rbot_y = BODY_Y + rtop_h + Inches(0.46)
+    rbot_h = Inches(2.0)
+    fig_placeholder(sl, right_x, rbot_y, right_w, rbot_h,
+                    fig_num="引用", cited=True,
+                    caption="セルロースの分子構造（参考）")
 
 
 # ===== SLIDE 10: MC熱ゲル化 =====
@@ -868,21 +897,24 @@ def slide_12_formulations(prs):
         text(sl, fx + Inches(0.10), fy + Inches(1.20), fw - Inches(0.2), Inches(0.60),
              comp, size=10, color=MUTED, align=PP_ALIGN.CENTER)
 
-    # 下部2カード
+    # 下部：2カード ＋ 配合ゲル外観写真
     cy = fy + fh + Inches(0.40)
     ch = Inches(2.5)
-    cw2 = (BODY_W - Inches(0.20)) / 2
-    card(sl, BODY_X, cy, cw2, ch,
+    cw3 = (BODY_W - Inches(0.36)) / 3
+    card(sl, BODY_X, cy, cw3, ch,
          title="配合設計の意図",
          bullets=[
-             "ポリマー種を変えて(HEC+MC vs MHEC)機能差を比較",
-             "SDS濃度を2水準で発泡構造への影響を検証",
-             "市販品AquaGel-Kとの直接比較",
-         ], ct_size=15, li_size=12)
-    card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch,
+             "ポリマー種を変えて機能差を比較",
+             "SDS濃度を2水準で発泡構造を検証",
+             "市販品AquaGel-Kと直接比較",
+         ], ct_size=14, li_size=11)
+    card(sl, BODY_X + cw3 + Inches(0.18), cy, cw3, ch,
          title="記法の読み方",
-         body="HEC+MC/CSP/SDS 1-5-0.1\n→ HEC+MC 1 wt% ／ CSP 5 wt% ／ SDS 0.1 wt%",
-         ct_size=15, cb_size=14)
+         body="HEC+MC/CSP/SDS 1-5-0.1\n→ HEC+MC 1 wt%\n／ CSP 5 wt%\n／ SDS 0.1 wt%",
+         ct_size=14, cb_size=13)
+    fig_placeholder(sl, BODY_X + (cw3 + Inches(0.18)) * 2, cy, cw3, ch - Inches(0.34),
+                    fig_num="Photo",
+                    caption="5配合系のゲル外観")
 
 
 # ===== SLIDE 13: 評価手法 =====
@@ -891,29 +923,37 @@ def slide_13_methods(prs):
     draw_header(sl, "材料 5/6", "評価手法の全体像")
     draw_footer(sl, "13 / 36")
 
+    # 左：燃焼試験セットアップ図 ／ 右：6手法カード(2列×3行)
+    left_w = BODY_W * 0.34 - Inches(0.10)
+    right_w = BODY_W * 0.66 - Inches(0.10)
+    right_x = BODY_X + left_w + Inches(0.20)
+    fig_placeholder(sl, BODY_X, BODY_Y, left_w, BODY_H - Inches(0.34),
+                    fig_num="Setup",
+                    caption="燃焼試験セットアップ（MAP-Proトーチ／合板基板）")
+
     methods = [
         ("レオロジー測定", "RHEOLOGY",
-         ["振動周波数掃引（G', G''）", "定常流動掃引（粘度 vs 剪断速度）", "Herschel-Bulkleyモデル適合"]),
-        ("燃焼試験（Time-to-char）", "BURN TEST",
-         ["MAP-Proトーチ（~2054°C）で白木合板を加熱", "炭化開始までの時間を計測", "120 s / 300 s時点を写真比較"]),
+         ["振動周波数掃引（G', G''）", "定常流動掃引（粘度）", "Herschel-Bulkley適合"]),
+        ("燃焼試験", "BURN TEST",
+         ["MAP-Proトーチ(~2054°C)で加熱", "炭化開始までの時間を計測", "120/300 s時点を比較"]),
         ("発泡指数測定", "FOAMING",
-         ["燃焼後の発泡層厚さを計測", "初期厚さに対する比 = Foaming Index"]),
+         ["燃焼後の発泡層厚さを計測", "初期厚さ比 = Foaming Index"]),
         ("SEM形態観察", "SEM",
-         ["SDS濃度別の発泡構造", "燃焼時間別(0/1/2/4分)の焼結進行"]),
+         ["SDS濃度別の発泡構造", "燃焼時間別の焼結進行"]),
         ("分光分析", "SPECTROSCOPY",
          ["FT-IR（化学結合）", "XPS（表面組成）"]),
         ("熱分析", "THERMAL",
-         ["TGA（熱重量分析）", "DSC（示差走査熱量）"]),
+         ["TGA（熱重量）", "DSC（熱量）"]),
     ]
-    cw = (BODY_W - Inches(0.30)) / 3
-    ch = (BODY_H - Inches(0.20)) / 2
+    cw = (right_w - Inches(0.15)) / 2
+    ch = (BODY_H - Inches(0.40)) / 3
     for i, (title, tag, bullets) in enumerate(methods):
-        col = i % 3
-        row = i // 3
-        cx = BODY_X + col * (cw + Inches(0.15))
+        col = i % 2
+        row = i // 2
+        cx = right_x + col * (cw + Inches(0.15))
         cy = BODY_Y + row * (ch + Inches(0.20))
         card(sl, cx, cy, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=14, li_size=11)
+             bullets=bullets, ct_size=13, li_size=10)
 
 
 # ===== SLIDE 14: 付着性・濡れ性 =====
@@ -922,34 +962,41 @@ def slide_14_adhesion(prs):
     draw_header(sl, "材料 6/6", "付着性・表面濡れ性：実装に不可欠な特性")
     draw_footer(sl, "14 / 36")
 
-    # 3カード
-    ch = Inches(3.6)
+    # 3列：各列に写真プレースホルダー（上）＋テキスト（下）
     cw = (BODY_W - Inches(0.28)) / 3
-    cards_data = [
-        ("接触角測定", "WETTING", [
-            "木材・コンクリート・金属板で接触角評価",
+    img_h = Inches(2.4)
+    photos = [
+        ("接触角測定", "WETTING", "木材上での接触角", [
+            "木材・コンクリート・金属で評価",
             "WEGは低接触角 → 高い濡れ性",
-            "HEC+MCはセルロース-木材間で特に親和性が高い",
+            "HEC+MCは木材との親和性が高い",
         ]),
-        ("垂直面付着試験", "ADHESION", [
-            "垂直に立てた基板にゲルを塗布",
-            "G' ≫ G'' → 重力に抵抗して流れ落ちない",
-            "AquaGel-Kと同等以上の垂直面保持性",
+        ("垂直面付着試験", "ADHESION", "垂直基板でのゲル保持", [
+            "垂直基板に塗布し保持性を評価",
+            "G' ≫ G'' → 流れ落ちない",
+            "AquaGel-K同等以上の保持性",
         ]),
-        ("スプレー散布適性", "SPRAY", [
-            "高せん断（ノズル内）で粘度が急低下",
-            "基材到達後すぐに高粘度を回復 → 付着維持",
-            "既存消防ホース・ノズルと完全互換",
+        ("スプレー散布適性", "SPRAY", "ノズル噴霧の様子", [
+            "高せん断で粘度が急低下",
+            "到達後すぐ高粘度を回復",
+            "既存ホース・ノズルと互換",
         ]),
     ]
-    for i, (title, tag, bullets) in enumerate(cards_data):
+    for i, (title, tag, ph_cap, bullets) in enumerate(photos):
         cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=15, li_size=12)
+        fig_placeholder(sl, cx, BODY_Y, cw, img_h, fig_num="Photo", caption=ph_cap)
+        ty = BODY_Y + img_h + Inches(0.38)
+        text(sl, cx, ty, cw, Inches(0.26), tag, size=10, bold=True, color=MUTED)
+        text(sl, cx, ty + Inches(0.26), cw, Inches(0.34), title, size=14, bold=True, color=INK)
+        by = ty + Inches(0.68)
+        for b in bullets:
+            text(sl, cx, by, Inches(0.20), Inches(0.30), "•", size=11, color=ACCENT)
+            text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.30), b, size=11, color=INK2)
+            by += Inches(0.34)
 
     # 下部 callout
-    cy_co = BODY_Y + ch + Inches(0.30)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+    cy_co = H - FTR_H - Inches(0.18) - Inches(0.72)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.72),
             "流動学的設計（低 n、高 G'）により、散布適性と付着保持を同時に達成",
             icon='✓')
 

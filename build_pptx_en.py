@@ -234,22 +234,29 @@ def callout(sl, x, y, w, h, content, dark=False, icon='▶'):
              content, size=13, color=INK, bold=True, anchor=MSO_ANCHOR.MIDDLE)
 
 
-def fig_placeholder(sl, x, y, w, h, fig_num=None, caption=None):
-    """Placeholder for paper figures (user will paste their own images later)"""
+def fig_placeholder(sl, x, y, w, h, fig_num=None, caption=None, cited=False):
+    """Placeholder for paper figures (user will paste their own images later).
+    cited=True marks a figure quoted from another paper (amber badge + source memo)."""
     # Background (solid border, light color)
     s = rrect(sl, x, y, w, h, PH_BG, PH_BD, 1.0, radius=0.02)
+    badge_fill = AMBER if cited else HEADER
+    place_text = "(Paste cited figure here)" if cited else "(Paste paper figure here)"
     # Figure number badge (top-left)
     if fig_num:
         tag_w = Inches(0.95)
         rect(sl, x + Inches(0.12), y + Inches(0.12), tag_w, Inches(0.32),
-             HEADER)
+             badge_fill)
         text(sl, x + Inches(0.12), y + Inches(0.12), tag_w, Inches(0.32),
              fig_num, size=11, bold=True, color=WHITE,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
     # Center placeholder text
     text(sl, x, y, w, h,
-         "(Paste paper figure here)", size=12, color=GRAY_L,
+         place_text, size=12, color=GRAY_L,
          align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    # Source memo for cited figures (inside box bottom)
+    if cited:
+        text(sl, x + Inches(0.12), y + h - Inches(0.38), w - Inches(0.24), Inches(0.28),
+             "Source: ________________ (fill in later)", size=9, color=D_AMBR, italic=True)
     # Caption
     if caption:
         text(sl, x, y + h + Inches(0.04), w, Inches(0.30),
@@ -511,10 +518,16 @@ def slide_04_wildfire(prs):
          "Extended dry and high-wind seasons mean\nconventional firefighting strategies can no longer keep pace",
          size=12, color=INK3, italic=True)
 
-    # Right: wildfire / WUI photo placeholder
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # Right: top = wildfire photo / bottom = cited trend graph
+    rtop_h = Inches(3.2)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="Image",
                     caption="Wildfire / WUI boundary zone (photo)")
+    rbot_y = BODY_Y + rtop_h + Inches(0.46)
+    rbot_h = Inches(2.0)
+    fig_placeholder(sl, right_x, rbot_y, right_w, rbot_h,
+                    fig_num="Cited", cited=True,
+                    caption="Year-over-year trend in wildfire scale / annual burned area")
 
 
 # ===== SLIDE 5: 4-Stage Protection Process =====
@@ -668,10 +681,20 @@ def slide_07_core(prs):
              desc, size=11, color=MUTED)
         py += Inches(0.75)
 
-    # Right: concept schematic (intro slide — avoid forward-referencing a results figure)
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # Right: top = concept schematic / bottom = 2 cited figures (aerogel SEM + insulation demo)
+    rtop_h = Inches(3.1)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="Concept",
                     caption="Heat trigger transforms the gel into a porous aerogel insulating layer")
+    rbot_y = BODY_Y + rtop_h + Inches(0.42)
+    rbot_h = Inches(2.2)
+    sub_w = (right_w - Inches(0.18)) / 2
+    fig_placeholder(sl, right_x, rbot_y, sub_w, rbot_h,
+                    fig_num="Cited", cited=True,
+                    caption="SEM microstructure of silica aerogel")
+    fig_placeholder(sl, right_x + sub_w + Inches(0.18), rbot_y, sub_w, rbot_h,
+                    fig_num="Cited", cited=True,
+                    caption="Aerogel thermal-insulation demo (sample over flame, etc.)")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
@@ -707,10 +730,16 @@ def slide_09_polymers(prs):
         if i < 2:
             rect(sl, BODY_X, ry + row_h - Inches(0.02), left_w, Inches(0.015), LINE)
 
-    # Right: structure figure placeholder
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+    # Right: top = paper structure figure / bottom = cited cellulose molecular structure
+    rtop_h = Inches(3.3)
+    fig_placeholder(sl, right_x, BODY_Y, right_w, rtop_h,
                     fig_num="Fig. 1b/c",
                     caption="Chemical structures and CSP mixing scheme")
+    rbot_y = BODY_Y + rtop_h + Inches(0.46)
+    rbot_h = Inches(2.0)
+    fig_placeholder(sl, right_x, rbot_y, right_w, rbot_h,
+                    fig_num="Cited", cited=True,
+                    caption="Molecular structure of cellulose (reference)")
 
 
 # ===== SLIDE 10: MC熱ゲル化 =====
@@ -872,21 +901,24 @@ def slide_12_formulations(prs):
         text(sl, fx + Inches(0.10), fy + Inches(1.20), fw - Inches(0.2), Inches(0.60),
              comp, size=10, color=MUTED, align=PP_ALIGN.CENTER)
 
-    # Bottom 2 cards
+    # Bottom: 2 cards + formulation appearance photo
     cy = fy + fh + Inches(0.40)
     ch = Inches(2.5)
-    cw2 = (BODY_W - Inches(0.20)) / 2
-    card(sl, BODY_X, cy, cw2, ch,
+    cw3 = (BODY_W - Inches(0.36)) / 3
+    card(sl, BODY_X, cy, cw3, ch,
          title="Formulation Design Intent",
          bullets=[
-             "Comparing functional differences by varying polymer type (HEC+MC vs MHEC)",
-             "Verifying the effect on foam structure with two SDS concentration levels",
-             "Direct comparison with commercial AquaGel-K",
-         ], ct_size=15, li_size=12)
-    card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch,
+             "Compare functional differences by polymer type",
+             "Verify foam structure at two SDS levels",
+             "Direct comparison with AquaGel-K",
+         ], ct_size=14, li_size=11)
+    card(sl, BODY_X + cw3 + Inches(0.18), cy, cw3, ch,
          title="Notation Guide",
-         body="HEC+MC/CSP/SDS 1-5-0.1\n→ HEC+MC 1 wt% ／ CSP 5 wt% ／ SDS 0.1 wt%",
-         ct_size=15, cb_size=14)
+         body="HEC+MC/CSP/SDS 1-5-0.1\n→ HEC+MC 1 wt%\n／ CSP 5 wt%\n／ SDS 0.1 wt%",
+         ct_size=14, cb_size=13)
+    fig_placeholder(sl, BODY_X + (cw3 + Inches(0.18)) * 2, cy, cw3, ch - Inches(0.34),
+                    fig_num="Photo",
+                    caption="Appearance of the five formulations")
 
 
 # ===== SLIDE 13: 評価手法 =====
@@ -895,29 +927,37 @@ def slide_13_methods(prs):
     draw_header(sl, "Materials 5/6", "Overview of Evaluation Methods")
     draw_footer(sl, "13 / 36")
 
+    # Left: burn-test setup figure / Right: 6 method cards (2 cols × 3 rows)
+    left_w = BODY_W * 0.34 - Inches(0.10)
+    right_w = BODY_W * 0.66 - Inches(0.10)
+    right_x = BODY_X + left_w + Inches(0.20)
+    fig_placeholder(sl, BODY_X, BODY_Y, left_w, BODY_H - Inches(0.34),
+                    fig_num="Setup",
+                    caption="Combustion test setup (MAP-Pro torch / plywood substrate)")
+
     methods = [
         ("Rheological Measurements", "RHEOLOGY",
-         ["Oscillatory frequency sweep (G', G'')", "Steady-flow sweep (viscosity vs. shear rate)", "Herschel-Bulkley model fitting"]),
-        ("Combustion Test (Time-to-char)", "BURN TEST",
-         ["Whitewood plywood heated with MAP-Pro torch (~2054°C)", "Time to charring onset measured", "Photographic comparison at 120 s / 300 s"]),
-        ("Foaming Index Measurement", "FOAMING",
-         ["Foamed layer thickness measured after combustion", "Ratio to initial thickness = Foaming Index"]),
-        ("SEM Morphological Observation", "SEM",
-         ["Foam structure by SDS concentration", "Sintering progression by burn time (0/1/2/4 min)"]),
-        ("Spectroscopic Analysis", "SPECTROSCOPY",
+         ["Oscillatory sweep (G', G'')", "Steady-flow sweep (viscosity)", "Herschel-Bulkley fitting"]),
+        ("Combustion Test", "BURN TEST",
+         ["MAP-Pro torch (~2054°C)", "Time to charring onset", "Compare at 120/300 s"]),
+        ("Foaming Index", "FOAMING",
+         ["Foamed layer thickness", "Ratio to initial = Foaming Index"]),
+        ("SEM Observation", "SEM",
+         ["Foam structure by SDS level", "Sintering by burn time"]),
+        ("Spectroscopy", "SPECTROSCOPY",
          ["FT-IR (chemical bonding)", "XPS (surface composition)"]),
         ("Thermal Analysis", "THERMAL",
-         ["TGA (thermogravimetric analysis)", "DSC (differential scanning calorimetry)"]),
+         ["TGA (thermogravimetric)", "DSC (calorimetry)"]),
     ]
-    cw = (BODY_W - Inches(0.30)) / 3
-    ch = (BODY_H - Inches(0.20)) / 2
+    cw = (right_w - Inches(0.15)) / 2
+    ch = (BODY_H - Inches(0.40)) / 3
     for i, (title, tag, bullets) in enumerate(methods):
-        col = i % 3
-        row = i // 3
-        cx = BODY_X + col * (cw + Inches(0.15))
+        col = i % 2
+        row = i // 2
+        cx = right_x + col * (cw + Inches(0.15))
         cy = BODY_Y + row * (ch + Inches(0.20))
         card(sl, cx, cy, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=14, li_size=11)
+             bullets=bullets, ct_size=13, li_size=10)
 
 
 # ===== SLIDE 14: 付着性・濡れ性 =====
@@ -926,34 +966,41 @@ def slide_14_adhesion(prs):
     draw_header(sl, "Materials 6/6", "Adhesion and Surface Wettability: Properties Essential for Implementation")
     draw_footer(sl, "14 / 36")
 
-    # 3 cards
-    ch = Inches(3.6)
+    # 3 columns: photo placeholder (top) + text (bottom)
     cw = (BODY_W - Inches(0.28)) / 3
-    cards_data = [
-        ("Contact Angle Measurement", "WETTING", [
-            "Contact angle evaluation on wood, concrete, and metal",
-            "WEG shows low contact angle → high wettability",
-            "HEC+MC shows particularly high affinity at cellulose-wood interface",
+    img_h = Inches(2.4)
+    photos = [
+        ("Contact Angle", "WETTING", "Contact angle on wood", [
+            "Evaluated on wood, concrete, metal",
+            "WEG: low contact angle → wettability",
+            "HEC+MC: high affinity to wood",
         ]),
-        ("Vertical Surface Adhesion Test", "ADHESION", [
-            "Gel applied to vertically oriented substrate",
-            "G' ≫ G'' → resists gravity without flowing down",
-            "Vertical surface retention equal to or better than AquaGel-K",
+        ("Vertical Adhesion", "ADHESION", "Gel retention on vertical substrate", [
+            "Applied to vertical substrate",
+            "G' ≫ G'' → no run-off",
+            "Retention ≥ AquaGel-K",
         ]),
-        ("Spray Application Suitability", "SPRAY", [
-            "Viscosity drops sharply under high shear (inside nozzle)",
-            "Quickly recovers high viscosity upon reaching substrate → maintains adhesion",
-            "Fully compatible with existing fire hoses and nozzles",
+        ("Spray Suitability", "SPRAY", "Nozzle spraying in action", [
+            "Viscosity drops under high shear",
+            "Recovers high viscosity on landing",
+            "Compatible with existing nozzles",
         ]),
     ]
-    for i, (title, tag, bullets) in enumerate(cards_data):
+    for i, (title, tag, ph_cap, bullets) in enumerate(photos):
         cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=15, li_size=12)
+        fig_placeholder(sl, cx, BODY_Y, cw, img_h, fig_num="Photo", caption=ph_cap)
+        ty = BODY_Y + img_h + Inches(0.38)
+        text(sl, cx, ty, cw, Inches(0.26), tag, size=10, bold=True, color=MUTED)
+        text(sl, cx, ty + Inches(0.26), cw, Inches(0.34), title, size=14, bold=True, color=INK)
+        by = ty + Inches(0.68)
+        for b in bullets:
+            text(sl, cx, by, Inches(0.20), Inches(0.30), "•", size=11, color=ACCENT)
+            text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.30), b, size=11, color=INK2)
+            by += Inches(0.34)
 
     # Bottom callout
-    cy_co = BODY_Y + ch + Inches(0.30)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+    cy_co = H - FTR_H - Inches(0.18) - Inches(0.72)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.72),
             "Rheological design (low n, high G') simultaneously achieves spray suitability and adhesion retention",
             icon='✓')
 
