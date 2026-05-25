@@ -719,24 +719,31 @@ def slide_10_mc(prs):
     draw_header(sl, "Materials 2/6", "Methyl Cellulose (MC) Thermal Gelation: Key Property for Flame Protection")
     draw_footer(sl, "10 / 36")
 
-    # Left: description card, Right: temperature process
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # Left card
-    ch_l = Inches(3.5)
-    card(sl, BODY_X, BODY_Y, left_w, ch_l,
-         title="Inverse Thermal Response (LCST Behavior)", tag="THERMAL RESPONSE",
-         bullets=[
-             "MC dissolves in cold water (<20°C) to form a low-viscosity solution",
-             "Gelation above LCST upon heating",
-             "MC gelation onset: approx. 50–60°C (concentration-dependent)",
-             "Liquid at room temperature → instantaneous gelation upon flame contact",
-         ], ct_size=15, li_size=12)
-    callout(sl, BODY_X, BODY_Y + ch_l + Inches(0.20), left_w, Inches(0.85),
-            "MC gelates in the initial stage of flame contact → maintains foamed structure while CSP is fixed",
-            icon='🔥')
+    # Left top: sol→gel appearance photo placeholder
+    img_h = Inches(2.7)
+    fig_placeholder(sl, BODY_X, BODY_Y, left_w, img_h,
+                    fig_num="Photo",
+                    caption="MC sol (room temp) → gel (after heating) — visual comparison")
+
+    # Left bottom: key properties (divider line, no card box)
+    ty = BODY_Y + img_h + Inches(0.20)
+    rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
+    ty += Inches(0.18)
+    props = [
+        ("LCST", "~55°C gelation onset (1 wt% aqueous solution)"),
+        ("Decomp.", "~300°C thermal decomposition of organic component"),
+        ("Design", "Liquid at room temp → instant gel on flame contact"),
+    ]
+    for label, detail in props:
+        text(sl, BODY_X, ty, Inches(0.88), Inches(0.30),
+             label, size=10, bold=True, color=ACCENT)
+        text(sl, BODY_X + Inches(0.92), ty, left_w - Inches(0.92), Inches(0.30),
+             detail, size=12, color=INK2)
+        ty += Inches(0.40)
 
     # Right: 3 mini stats
     mw = (right_w - Inches(0.20)) / 3
@@ -785,60 +792,52 @@ def slide_11_csp_sds(prs):
     draw_footer(sl, "11 / 36")
 
     cw = (BODY_W - Inches(0.18)) / 2
-    ch = Inches(4.2)
+    callout_h = Inches(0.72)
+    img_h = Inches(2.4)
+    text_top = BODY_Y + img_h + Inches(0.18)
 
-    # Left: CSP
+    # Left: CSP — TEM photo placeholder on top, text below
     cx = BODY_X
-    rrect(sl, cx, BODY_Y, cw, ch, CARD_C, LINE, 0.5, radius=0.04)
-    rect(sl, cx, BODY_Y, cw, Inches(0.04), ACCENT)
-    text(sl, cx + Inches(0.20), BODY_Y + Inches(0.20), Inches(0.6), Inches(0.5),
-         "●", size=28, color=ACCENT)
-    text(sl, cx + Inches(0.95), BODY_Y + Inches(0.22), cw - Inches(1.1), Inches(0.3),
-         "CSP", size=11, bold=True, color=MUTED)
-    text(sl, cx + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
-         "Colloidal Silica Particles", size=18, bold=True, color=INK)
-    bullets = [
+    fig_placeholder(sl, cx, BODY_Y, cw, img_h,
+                    fig_num="TEM",
+                    caption="CSP particles (22 nm, monodisperse)")
+    text(sl, cx, text_top, cw, Inches(0.34),
+         "CSP — Colloidal Silica Particles", size=14, bold=True, color=INK)
+    bullets_csp = [
         "LUDOX TM-50 (stock 50 wt%) → diluted to 15 wt% (pH 9)",
         "Particle size: 22 nm (monodisperse)",
         "Formulation concentration: 5 wt% in gel",
         "Sinters upon heating → transforms into silica aerogel",
     ]
-    by = BODY_Y + Inches(1.30)
-    for b in bullets:
-        text(sl, cx + Inches(0.30), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx + Inches(0.55), by, cw - Inches(0.75), Inches(0.30),
-             b, size=13, color=INK2)
-        by += Inches(0.42)
+    by = text_top + Inches(0.38)
+    for b in bullets_csp:
+        text(sl, cx, by, Inches(0.20), Inches(0.28), "•", size=12, color=ACCENT)
+        text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.28), b, size=12, color=INK2)
+        by += Inches(0.34)
 
-    # Right: SDS
+    # Right: SDS — SEM foam structure photo on top, text below
     cx2 = BODY_X + cw + Inches(0.18)
-    rrect(sl, cx2, BODY_Y, cw, ch, CARD_C, LINE, 0.5, radius=0.04)
-    rect(sl, cx2, BODY_Y, cw, Inches(0.04), ACCENT)
-    text(sl, cx2 + Inches(0.20), BODY_Y + Inches(0.20), Inches(0.6), Inches(0.5),
-         "◆", size=28, color=ACCENT)
-    text(sl, cx2 + Inches(0.95), BODY_Y + Inches(0.22), cw - Inches(1.1), Inches(0.3),
-         "SDS (Additive)", size=11, bold=True, color=MUTED)
-    text(sl, cx2 + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
-         "Sodium Dodecyl Sulfate", size=18, bold=True, color=INK)
-    bullets2 = [
-        "Anionic surfactant",
+    fig_placeholder(sl, cx2, BODY_Y, cw, img_h,
+                    fig_num="SEM",
+                    caption="Foam structure variation by SDS concentration")
+    text(sl, cx2, text_top, cw, Inches(0.34),
+         "SDS — Sodium Dodecyl Sulfate", size=14, bold=True, color=INK)
+    bullets_sds = [
+        "Anionic surfactant (additive)",
         "Adding SDS did not improve Foaming Index",
-        "Addition levels: two concentrations of 0.1 wt% and 0.5 wt%",
+        "Addition levels: 0.1 wt% and 0.5 wt%",
         "Higher SDS concentration coarsens bubble size (SEM)",
     ]
-    by = BODY_Y + Inches(1.30)
-    for b in bullets2:
-        text(sl, cx2 + Inches(0.30), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx2 + Inches(0.55), by, cw - Inches(0.75), Inches(0.30),
-             b, size=13, color=INK2)
-        by += Inches(0.42)
+    by2 = text_top + Inches(0.38)
+    for b in bullets_sds:
+        text(sl, cx2, by2, Inches(0.20), Inches(0.28), "•", size=12, color=ACCENT)
+        text(sl, cx2 + Inches(0.22), by2, cw - Inches(0.22), Inches(0.28), b, size=12, color=INK2)
+        by2 += Inches(0.34)
 
     # Bottom callout
-    cy_co = BODY_Y + ch + Inches(0.30)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
-            "The sintering temperature range of CSP overlaps with the thermal decomposition temperature of cellulose, enabling synchronized thermal response to form the insulating layer",
+    cy_co = H - FTR_H - Inches(0.10) - callout_h
+    callout(sl, BODY_X, cy_co, BODY_W, callout_h,
+            "The sintering temperature range of CSP overlaps with cellulose thermal decomposition — synchronized response forms the insulating layer",
             icon='💡')
 
 

@@ -715,24 +715,31 @@ def slide_10_mc(prs):
     draw_header(sl, "材料 2/6", "メチルセルロース(MC)の熱ゲル化：火炎保護の鍵となる特性")
     draw_footer(sl, "10 / 36")
 
-    # 左：説明カード、右：温度プロセス
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # 左カード
-    ch_l = Inches(3.5)
-    card(sl, BODY_X, BODY_Y, left_w, ch_l,
-         title="逆熱応答（LCST挙動）", tag="THERMAL RESPONSE",
-         bullets=[
-             "MCは冷水（<20°C）に溶解し低粘度溶液を形成",
-             "加熱でLCSTを超えてゲル化",
-             "MCのゲル化開始温度：約 50–60°C（濃度依存）",
-             "常温では液体 → 火炎接触で即座にゲル",
-         ], ct_size=15, li_size=12)
-    callout(sl, BODY_X, BODY_Y + ch_l + Inches(0.20), left_w, Inches(0.85),
-            "火炎接触初期にMCがゲル化 → CSPを固定したまま発泡構造を維持",
-            icon='🔥')
+    # 左上：ゾル→ゲル外観写真プレースホルダー
+    img_h = Inches(2.7)
+    fig_placeholder(sl, BODY_X, BODY_Y, left_w, img_h,
+                    fig_num="Photo",
+                    caption="MCゾル（室温）→ ゲル（加熱後）の外観比較")
+
+    # 左下：主要特性（横線区切り、カードなし）
+    ty = BODY_Y + img_h + Inches(0.20)
+    rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
+    ty += Inches(0.18)
+    props = [
+        ("LCST", "~55°C でゲル化開始（1 wt% 水溶液）"),
+        ("熱分解", "~300°C で有機成分が分解"),
+        ("設計意図", "常温では液体、火炎接触で即ゲル → CSPを固定"),
+    ]
+    for label, detail in props:
+        text(sl, BODY_X, ty, Inches(0.88), Inches(0.30),
+             label, size=10, bold=True, color=ACCENT)
+        text(sl, BODY_X + Inches(0.92), ty, left_w - Inches(0.92), Inches(0.30),
+             detail, size=12, color=INK2)
+        ty += Inches(0.40)
 
     # 右：3つのmini stats
     mw = (right_w - Inches(0.20)) / 3
@@ -781,59 +788,51 @@ def slide_11_csp_sds(prs):
     draw_footer(sl, "11 / 36")
 
     cw = (BODY_W - Inches(0.18)) / 2
-    ch = Inches(4.2)
+    callout_h = Inches(0.72)
+    img_h = Inches(2.4)
+    text_top = BODY_Y + img_h + Inches(0.18)
 
-    # 左：CSP
+    # 左：CSP — 上部TEM写真 + 下部テキスト
     cx = BODY_X
-    rrect(sl, cx, BODY_Y, cw, ch, CARD_C, LINE, 0.5, radius=0.04)
-    rect(sl, cx, BODY_Y, cw, Inches(0.04), ACCENT)
-    text(sl, cx + Inches(0.20), BODY_Y + Inches(0.20), Inches(0.6), Inches(0.5),
-         "●", size=28, color=ACCENT)
-    text(sl, cx + Inches(0.95), BODY_Y + Inches(0.22), cw - Inches(1.1), Inches(0.3),
-         "CSP", size=11, bold=True, color=MUTED)
-    text(sl, cx + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
-         "Colloidal Silica Particles", size=18, bold=True, color=INK)
-    bullets = [
+    fig_placeholder(sl, cx, BODY_Y, cw, img_h,
+                    fig_num="TEM",
+                    caption="CSP粒子（22 nm、単分散）")
+    text(sl, cx, text_top, cw, Inches(0.34),
+         "CSP — Colloidal Silica Particles", size=14, bold=True, color=INK)
+    bullets_csp = [
         "LUDOX TM-50（原液 50 wt%）→ 15 wt%に希釈（pH 9）",
         "粒子サイズ：22 nm（単分散）",
         "配合濃度：ゲル中 5 wt%",
         "加熱時に焼結 → silica aerogel に変態",
     ]
-    by = BODY_Y + Inches(1.30)
-    for b in bullets:
-        text(sl, cx + Inches(0.30), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx + Inches(0.55), by, cw - Inches(0.75), Inches(0.30),
-             b, size=13, color=INK2)
-        by += Inches(0.42)
+    by = text_top + Inches(0.38)
+    for b in bullets_csp:
+        text(sl, cx, by, Inches(0.20), Inches(0.28), "•", size=12, color=ACCENT)
+        text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.28), b, size=12, color=INK2)
+        by += Inches(0.34)
 
-    # 右：SDS
+    # 右：SDS — 上部SEM写真（発泡構造）+ 下部テキスト
     cx2 = BODY_X + cw + Inches(0.18)
-    rrect(sl, cx2, BODY_Y, cw, ch, CARD_C, LINE, 0.5, radius=0.04)
-    rect(sl, cx2, BODY_Y, cw, Inches(0.04), ACCENT)
-    text(sl, cx2 + Inches(0.20), BODY_Y + Inches(0.20), Inches(0.6), Inches(0.5),
-         "◆", size=28, color=ACCENT)
-    text(sl, cx2 + Inches(0.95), BODY_Y + Inches(0.22), cw - Inches(1.1), Inches(0.3),
-         "SDS（添加剤）", size=11, bold=True, color=MUTED)
-    text(sl, cx2 + Inches(0.95), BODY_Y + Inches(0.50), cw - Inches(1.1), Inches(0.5),
-         "Sodium Dodecyl Sulfate", size=18, bold=True, color=INK)
-    bullets2 = [
-        "陰イオン性界面活性剤",
+    fig_placeholder(sl, cx2, BODY_Y, cw, img_h,
+                    fig_num="SEM",
+                    caption="SDS添加量による発泡構造の変化")
+    text(sl, cx2, text_top, cw, Inches(0.34),
+         "SDS — Sodium Dodecyl Sulfate", size=14, bold=True, color=INK)
+    bullets_sds = [
+        "陰イオン性界面活性剤（添加剤）",
         "SDS添加でも Foaming Index は改善しなかった",
         "添加濃度：0.1 wt% ・ 0.5 wt% の2水準",
         "SDS量増加で気泡が粗大化（SEM確認）",
     ]
-    by = BODY_Y + Inches(1.30)
-    for b in bullets2:
-        text(sl, cx2 + Inches(0.30), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx2 + Inches(0.55), by, cw - Inches(0.75), Inches(0.30),
-             b, size=13, color=INK2)
-        by += Inches(0.42)
+    by2 = text_top + Inches(0.38)
+    for b in bullets_sds:
+        text(sl, cx2, by2, Inches(0.20), Inches(0.28), "•", size=12, color=ACCENT)
+        text(sl, cx2 + Inches(0.22), by2, cw - Inches(0.22), Inches(0.28), b, size=12, color=INK2)
+        by2 += Inches(0.34)
 
     # 下部callout
-    cy_co = BODY_Y + ch + Inches(0.30)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+    cy_co = H - FTR_H - Inches(0.10) - callout_h
+    callout(sl, BODY_X, cy_co, BODY_W, callout_h,
             "CSPの焼結温度域とセルロースの熱分解温度が重なるため、熱応答が同期して断熱層を形成",
             icon='💡')
 
