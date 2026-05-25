@@ -668,10 +668,10 @@ def slide_07_core(prs):
              desc, size=11, color=MUTED)
         py += Inches(0.75)
 
-    # Right: large figure placeholder
+    # Right: concept schematic (intro slide — avoid forward-referencing a results figure)
     fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
-                    fig_num="Fig. 5a",
-                    caption="3-stage silica aerogel formation")
+                    fig_num="Concept",
+                    caption="Heat trigger transforms the gel into a porous aerogel insulating layer")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
@@ -680,32 +680,37 @@ def slide_09_polymers(prs):
     draw_header(sl, "Materials 1/6", "Cellulosic Polymers Used")
     draw_footer(sl, "9 / 36")
 
-    # Top: 3 polymer cards
-    pw = (BODY_W - Inches(0.28)) / 3
-    ph = Inches(2.1)
-    polymers = [
-        ("Polymer A", "HEC", "Hydroxyethyl cellulose", "→ Base viscosity agent"),
-        ("Polymer B", "MC", "Methyl cellulose", "→ Gelation upon heating (thermoreversible)"),
-        ("Polymer C", "MHEC", "Methyl 2-hydroxyethyl cellulose", "→ Integrates properties of A and B"),
-    ]
-    for i, (tag, name, full, role) in enumerate(polymers):
-        cx = BODY_X + i * (pw + Inches(0.14))
-        rrect(sl, cx, BODY_Y, pw, ph, SOFT, LINE, 0.5, radius=0.04)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.14), pw - Inches(0.4), Inches(0.25),
-             tag, size=11, bold=True, color=MUTED)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.42), pw - Inches(0.4), Inches(0.50),
-             name, size=26, bold=True, color=INK)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.96), pw - Inches(0.4), Inches(0.65),
-             full, size=11, color=INK3)
-        text(sl, cx + Inches(0.20), BODY_Y + ph - Inches(0.42), pw - Inches(0.4), Inches(0.30),
-             role, size=12, bold=True, color=ACCENT)
+    # Left 55% polymer list (large letter badge + dividers) / Right 45% structure figure
+    left_w = BODY_W * 0.55 - Inches(0.12)
+    right_w = BODY_W * 0.45 - Inches(0.08)
+    right_x = BODY_X + left_w + Inches(0.20)
 
-    # Bottom: figure placeholder
-    fy = BODY_Y + ph + Inches(0.30)
-    fh = BODY_H - ph - Inches(0.30)
-    fig_placeholder(sl, BODY_X, fy, BODY_W, fh - Inches(0.35),
+    polymers = [
+        ("A", "HEC", "Hydroxyethyl cellulose", "Base viscosity-building backbone"),
+        ("B", "MC", "Methyl cellulose", "Gels on heating (thermoreversible) — key to flame protection"),
+        ("C", "MHEC", "Methyl 2-hydroxyethyl cellulose", "Hybrid combining the traits of A and B"),
+    ]
+    row_h = BODY_H / 3
+    for i, (letter, abbr, full, role) in enumerate(polymers):
+        ry = BODY_Y + i * row_h
+        # Large letter badge (faint, typographic accent)
+        text(sl, BODY_X, ry, Inches(0.9), row_h,
+             letter, size=54, bold=True, color=LINE, anchor=MSO_ANCHOR.MIDDLE)
+        tx = BODY_X + Inches(0.95)
+        text(sl, tx, ry + Inches(0.22), left_w - Inches(0.95), Inches(0.45),
+             abbr, size=24, bold=True, color=INK)
+        text(sl, tx, ry + Inches(0.70), left_w - Inches(0.95), Inches(0.28),
+             full, size=11, color=MUTED)
+        text(sl, tx, ry + Inches(1.00), left_w - Inches(0.95), Inches(0.34),
+             role, size=12, bold=True, color=ACCENT)
+        # Divider (not last)
+        if i < 2:
+            rect(sl, BODY_X, ry + row_h - Inches(0.02), left_w, Inches(0.015), LINE)
+
+    # Right: structure figure placeholder
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
                     fig_num="Fig. 1b/c",
-                    caption="Chemical structures of each polymer and mixing scheme with colloidal silica (CSP)")
+                    caption="Chemical structures and CSP mixing scheme")
 
 
 # ===== SLIDE 10: MC熱ゲル化 =====

@@ -664,10 +664,10 @@ def slide_07_core(prs):
              desc, size=11, color=MUTED)
         py += Inches(0.75)
 
-    # 右：図プレースホルダー（大きく）
+    # 右：概念図プレースホルダー（イントロなので将来図の先出しは避け、概念図に）
     fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
-                    fig_num="Fig. 5a",
-                    caption="シリカエアロゲル形成の3段階")
+                    fig_num="概念図",
+                    caption="加熱トリガーでゲルが多孔質エアロゲル断熱層へ変態")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
@@ -676,32 +676,37 @@ def slide_09_polymers(prs):
     draw_header(sl, "材料 1/6", "使用したセルロース系ポリマー")
     draw_footer(sl, "9 / 36")
 
-    # 上部：3つのpolymerカード
-    pw = (BODY_W - Inches(0.28)) / 3
-    ph = Inches(2.1)
-    polymers = [
-        ("Polymer A", "HEC", "Hydroxyethyl cellulose\nヒドロキシエチルセルロース", "→ ベース粘性付与"),
-        ("Polymer B", "MC", "Methyl cellulose\nメチルセルロース", "→ 加熱時にゲル化（熱可逆性）"),
-        ("Polymer C", "MHEC", "Methyl 2-hydroxyethyl cellulose\nメチル2-ヒドロキシエチルセルロース", "→ AとBの特性を統合"),
-    ]
-    for i, (tag, name, full, role) in enumerate(polymers):
-        cx = BODY_X + i * (pw + Inches(0.14))
-        rrect(sl, cx, BODY_Y, pw, ph, SOFT, LINE, 0.5, radius=0.04)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.14), pw - Inches(0.4), Inches(0.25),
-             tag, size=11, bold=True, color=MUTED)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.42), pw - Inches(0.4), Inches(0.50),
-             name, size=26, bold=True, color=INK)
-        text(sl, cx + Inches(0.20), BODY_Y + Inches(0.96), pw - Inches(0.4), Inches(0.65),
-             full, size=11, color=INK3)
-        text(sl, cx + Inches(0.20), BODY_Y + ph - Inches(0.42), pw - Inches(0.4), Inches(0.30),
-             role, size=12, bold=True, color=ACCENT)
+    # 左55% ポリマー縦リスト（大文字バッジ＋区切り線）/ 右45% 構造図
+    left_w = BODY_W * 0.55 - Inches(0.12)
+    right_w = BODY_W * 0.45 - Inches(0.08)
+    right_x = BODY_X + left_w + Inches(0.20)
 
-    # 下部：図プレースホルダー
-    fy = BODY_Y + ph + Inches(0.30)
-    fh = BODY_H - ph - Inches(0.30)
-    fig_placeholder(sl, BODY_X, fy, BODY_W, fh - Inches(0.35),
+    polymers = [
+        ("A", "HEC", "Hydroxyethyl cellulose", "ベース粘性を付与する骨格成分"),
+        ("B", "MC", "Methyl cellulose", "加熱でゲル化（熱可逆性）── 火炎保護の鍵"),
+        ("C", "MHEC", "Methyl 2-hydroxyethyl cellulose", "AとBの特性を併せ持つ複合型"),
+    ]
+    row_h = BODY_H / 3
+    for i, (letter, abbr, full, role) in enumerate(polymers):
+        ry = BODY_Y + i * row_h
+        # 大きな文字バッジ（薄色・タイポグラフィ装飾）
+        text(sl, BODY_X, ry, Inches(0.9), row_h,
+             letter, size=54, bold=True, color=LINE, anchor=MSO_ANCHOR.MIDDLE)
+        tx = BODY_X + Inches(0.95)
+        text(sl, tx, ry + Inches(0.22), left_w - Inches(0.95), Inches(0.45),
+             abbr, size=24, bold=True, color=INK)
+        text(sl, tx, ry + Inches(0.70), left_w - Inches(0.95), Inches(0.28),
+             full, size=11, color=MUTED)
+        text(sl, tx, ry + Inches(1.00), left_w - Inches(0.95), Inches(0.34),
+             role, size=12, bold=True, color=ACCENT)
+        # 区切り線（最後以外）
+        if i < 2:
+            rect(sl, BODY_X, ry + row_h - Inches(0.02), left_w, Inches(0.015), LINE)
+
+    # 右：構造図プレースホルダー
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
                     fig_num="Fig. 1b/c",
-                    caption="各ポリマーの化学構造とコロイダルシリカ(CSP)との混合スキーム")
+                    caption="各ポリマーの化学構造とCSP混合スキーム")
 
 
 # ===== SLIDE 10: MC熱ゲル化 =====
