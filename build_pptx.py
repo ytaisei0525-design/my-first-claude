@@ -471,46 +471,46 @@ def slide_04_wildfire(prs):
     draw_header(sl, "背景 1/4", "山火事被害の深刻化とWUIリスク")
     draw_footer(sl, "4 / 36")
 
-    # 左：stats + cards、右：図プレースホルダー
-    left_w = BODY_W * 0.62 - Inches(0.10)
-    right_w = BODY_W * 0.38 - Inches(0.10)
+    # 左42% テキスト（タイポグラフィ主体） / 右58% 写真プレースホルダー
+    left_w = BODY_W * 0.42 - Inches(0.12)
+    right_w = BODY_W * 0.58 - Inches(0.08)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # stats 3つ
-    sw = (left_w - Inches(0.20)) / 3
-    sy = BODY_Y
-    sh = Inches(1.7)
-    stat(sl, BODY_X, sy, sw, sh, "5", unit="倍",
-         label="大規模山火事の増加", sub="過去30年で焼失面積拡大",
-         num_size=46, lbl_size=12, sub_size=10)
-    stat(sl, BODY_X + sw + Inches(0.10), sy, sw, sh, "400", unit="万km²",
-         label="年間焼失面積（世界）", sub="気候変動・干ばつが要因",
-         num_size=40, lbl_size=12, sub_size=10)
-    stat(sl, BODY_X + (sw + Inches(0.10)) * 2, sy, sw, sh, "4500", unit="万人",
-         label="米国WUI居住者", sub="境界帯のリスク層",
-         num_size=42, lbl_size=12, sub_size=10)
+    # 縦アクセントバー（第1統計）
+    rect(sl, BODY_X, BODY_Y, Inches(0.05), Inches(1.80), ACCENT)
 
-    # WUI用語カード
-    ty = sy + sh + Inches(0.20)
-    th = Inches(1.0)
-    rrect(sl, BODY_X, ty, left_w, th, WHITE, LINE, 0.5, radius=0.04)
-    text(sl, BODY_X + Inches(0.20), ty + Inches(0.14), left_w - Inches(0.4), Inches(0.30),
-         "用語", size=11, bold=True, color=MUTED)
-    text(sl, BODY_X + Inches(0.20), ty + Inches(0.42), left_w - Inches(0.4), Inches(0.55),
-         "WUI（Wildland-Urban Interface）：野生地と都市の境界帯。山火事被害が住宅に直接及ぶ高リスク領域",
-         size=13, color=INK)
+    # 第1統計：大タイポグラフィ（ボックスなし）
+    text(sl, BODY_X + Inches(0.18), BODY_Y, left_w - Inches(0.18), Inches(1.10),
+         "5×", size=68, bold=True, color=INK)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.08), left_w - Inches(0.18), Inches(0.32),
+         "大規模山火事の増加（過去30年）", size=13, bold=True, color=INK2)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.40), left_w - Inches(0.18), Inches(0.28),
+         "気候変動・干ばつが主要因", size=11, color=MUTED)
 
-    # callout
-    cy = ty + th + Inches(0.18)
-    callout(sl, BODY_X, cy, left_w, Inches(0.65),
-            "気候変動により乾燥・強風期間が延長 → 従来の消火戦略では対応が追いつかない",
-            icon='⚠')
+    # 区切り線
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.86), left_w * 0.75, Inches(0.02), LINE)
 
-    # 右：図プレースホルダー
-    fig_h = Inches(4.6)
-    fig_placeholder(sl, right_x, BODY_Y, right_w, fig_h,
-                    fig_num="Fig. 3c",
-                    caption="直炎接触下での燃焼過程")
+    # 縦アクセントバー（第2統計）
+    rect(sl, BODY_X, BODY_Y + Inches(2.08), Inches(0.05), Inches(1.60), D_AMBR)
+
+    # 第2統計
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.08), left_w - Inches(0.18), Inches(0.90),
+         "4500万人", size=40, bold=True, color=INK)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.98), left_w - Inches(0.18), Inches(0.32),
+         "米国WUI居住者", size=13, bold=True, color=INK2)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.30), left_w - Inches(0.18), Inches(0.28),
+         "野生地と都市の境界帯（WUI）の高リスク層", size=11, color=MUTED)
+
+    # 下部メモ（横線区切り・calloutなし）
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.78), left_w * 0.90, Inches(0.02), LINE)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.96), left_w - Inches(0.18), Inches(0.70),
+         "乾燥・強風期間の長期化により、\n従来の消火・防火戦略だけでは対応が困難",
+         size=12, color=INK3, italic=True)
+
+    # 右：山火事／WUI写真プレースホルダー
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+                    fig_num="Image",
+                    caption="山火事・WUI境界帯（写真）")
 
 
 # ===== SLIDE 5: 4段階の保護プロセス =====
@@ -520,25 +520,41 @@ def slide_05_process(prs):
     draw_footer(sl, "5 / 36")
 
     # 上部：大きな図プレースホルダー
-    fig_h = Inches(3.0)
+    fig_h = Inches(3.5)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
                     fig_num="Fig. 1a",
                     caption="難燃ゲル散布 → 火炎接触 → 熱活性化エアロゲル形成 → 構造物の保護")
 
-    # 下部：4ステップカード
-    sy = BODY_Y + fig_h + Inches(0.45)
-    sh = Inches(2.2)
+    # 下部：タイムライン風ステップ（数字円 + テキスト、カードなし）
+    sy = BODY_Y + fig_h + Inches(0.28)
     cw = (BODY_W - Inches(0.42)) / 4
+    circ_d = Inches(0.44)
     steps = [
-        ("STEP 1", "ゲル散布", "セルロース系ゲルを建物・植生にスプレー塗布"),
-        ("STEP 2", "火炎接触", "水分が蒸発し、ゲルが発泡しながら粒子が凝集"),
-        ("STEP 3", "エアロゲル形成", "シリカ粒子が焼結し多孔質エアロゲル層が生成"),
-        ("STEP 4", "継続保護", "超低熱伝導率の断熱層が基材を継続的に守る"),
+        ("1", "ゲル散布", "セルロース系ゲルを\n建物・植生にスプレー塗布"),
+        ("2", "火炎接触", "水分蒸発、ゲルが発泡\nしながら粒子が凝集"),
+        ("3", "エアロゲル形成", "シリカ粒子が焼結し\n多孔質断熱層を形成"),
+        ("4", "継続保護", "超低熱伝導の断熱層が\n基材を継続的に守る"),
     ]
-    for i, (tag, title, body) in enumerate(steps):
+    for i, (num, title, body) in enumerate(steps):
         cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, sy, cw, sh, title=title, body=body, tag=tag,
-             ct_size=16, cb_size=12)
+        circ_x = cx + (cw - circ_d) / 2
+
+        # 数字円
+        rrect(sl, circ_x, sy, circ_d, circ_d, ACCENT, None, radius=0.5)
+        text(sl, circ_x, sy, circ_d, circ_d, num, size=16, bold=True, color=WHITE,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+        # 矢印コネクター（最後以外）
+        if i < 3:
+            arr_x = cx + cw + Inches(0.04)
+            arr_y = sy + circ_d / 2 - Inches(0.01)
+            rect(sl, arr_x, arr_y, Inches(0.06), Inches(0.02), GRAY_L)
+
+        # テキスト
+        text(sl, cx, sy + circ_d + Inches(0.14), cw, Inches(0.30),
+             title, size=13, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        text(sl, cx, sy + circ_d + Inches(0.46), cw, Inches(0.60),
+             body, size=11, color=INK3, align=PP_ALIGN.CENTER)
 
 
 # ===== SLIDE 6: 既存技術と限界 =====
@@ -547,37 +563,64 @@ def slide_06_existing(prs):
     draw_header(sl, "背景 3/4", "既存の山火事対策と、その本質的な限界")
     draw_footer(sl, "6 / 36")
 
-    # 左：テーブル、右：図
-    left_w = BODY_W * 0.66 - Inches(0.10)
-    right_w = BODY_W * 0.34 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # 4製品カード横一列：上部に写真プレースホルダー、下部に製品名＋限界テキスト
+    n = 4
+    gap = Inches(0.18)
+    cw = (BODY_W - gap * (n - 1)) / n
+    card_h = BODY_H - Inches(0.56)
 
-    headers = ["技術", "主成分", "特徴", "限界"]
-    rows = [
-        ["水のみ", "H₂O", "蒸発潜熱による冷却",
-         {'text': "即座に流失・蒸発", 'color': D_RED}],
-        ["Phos-Chek", "リン酸アンモニウム", "樹木・地表に直接散布",
-         {'text': "土壌・水系への残留", 'color': D_RED}],
-        ["AquaGel-K", "架橋ポリアクリレート", "水を高濃度に保持",
-         {'text': "水蒸発後は機能消失", 'color': D_RED}],
-        [{'text': "本研究 WEG", 'bold': True, 'color': ACCENT},
-         "セルロース系＋シリカ", "加熱でエアロゲル層形成",
-         {'text': "水蒸発後も継続保護", 'color': D_GRN, 'bold': True}],
+    products = [
+        ("水のみ", "H₂O", "蒸発・流失で\n即座に効果消失", False),
+        ("Phos-Chek", "リン酸アンモニウム", "土壌・水系への\n化学汚染が残留", False),
+        ("AquaGel-K", "架橋ポリアクリレート", "水蒸発と同時に\n保護機能が消失", False),
+        ("WEG（本研究）", "セルロース＋シリカ", "水蒸発後も\nエアロゲル層が継続保護", True),
     ]
-    table_h = Inches(3.2)
-    simple_table(sl, BODY_X, BODY_Y, left_w, table_h, headers, rows,
-                 col_widths=[1.5, 2, 2, 1.5])
 
-    # callout
-    cy = BODY_Y + table_h + Inches(0.22)
-    callout(sl, BODY_X, cy, left_w, Inches(0.70),
-            "課題：既存WEGは「水のキャリア」止まりで、水分喪失と同時に保護機能が失われる",
-            dark=True, icon='→')
+    for i, (name, ingredient, limit_text, is_hero) in enumerate(products):
+        cx = BODY_X + i * (cw + gap)
+        img_h = card_h * 0.50
 
-    # 右：図プレースホルダー
-    fig_placeholder(sl, right_x, BODY_Y, right_w, Inches(4.2),
-                    fig_num="Fig. 3d",
-                    caption="300秒後の比較：Water vs 本研究WEG")
+        # カード背景
+        if is_hero:
+            rrect(sl, cx, BODY_Y, cw, card_h, HEADER, None, radius=0.04)
+            rect(sl, cx, BODY_Y, cw, Inches(0.04), GOLD)
+        else:
+            rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
+            rect(sl, cx, BODY_Y, cw, Inches(0.04), LINE)
+
+        # 写真プレースホルダー（上部）
+        ph_fill = RGBColor(0x2a, 0x3c, 0x54) if is_hero else PH_BG
+        ph_bord = RGBColor(0x44, 0x5e, 0x7a) if is_hero else PH_BD
+        ph_tc = RGBColor(0x88, 0xa0, 0xb8) if is_hero else GRAY_L
+        rrect(sl, cx + Inches(0.12), BODY_Y + Inches(0.12),
+              cw - Inches(0.24), img_h - Inches(0.12), ph_fill, ph_bord, 0.7, radius=0.03)
+        text(sl, cx + Inches(0.12), BODY_Y + Inches(0.12),
+             cw - Inches(0.24), img_h - Inches(0.12),
+             "（写真）", size=11, color=ph_tc,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+        # 製品名
+        name_c = WHITE if is_hero else INK
+        ingr_c = RGBColor(0xa0, 0xb8, 0xd0) if is_hero else MUTED
+        ty = BODY_Y + img_h + Inches(0.14)
+        text(sl, cx + Inches(0.10), ty, cw - Inches(0.20), Inches(0.34),
+             name, size=14, bold=True, color=name_c, align=PP_ALIGN.CENTER)
+        text(sl, cx + Inches(0.10), ty + Inches(0.34), cw - Inches(0.20), Inches(0.26),
+             ingredient, size=10, color=ingr_c, align=PP_ALIGN.CENTER)
+
+        # 限界テキスト
+        limit_c = D_GRN if is_hero else D_RED
+        text(sl, cx + Inches(0.10), ty + Inches(0.64), cw - Inches(0.20),
+             card_h - (ty - BODY_Y) - Inches(0.72),
+             limit_text, size=12, bold=is_hero,
+             color=limit_c, align=PP_ALIGN.CENTER)
+
+    # 下部メッセージ（横線区切り）
+    msg_y = BODY_Y + card_h + Inches(0.14)
+    rect(sl, BODY_X, msg_y, BODY_W, Inches(0.02), LINE)
+    text(sl, BODY_X, msg_y + Inches(0.12), BODY_W, Inches(0.36),
+         "課題：既存WEGは「水のキャリア」止まり ─ 水分喪失と同時に保護機能が失われる",
+         size=13, bold=True, color=INK, align=PP_ALIGN.CENTER)
 
 
 # ===== SLIDE 7: 研究の核心 =====
@@ -586,40 +629,45 @@ def slide_07_core(prs):
     draw_header(sl, "背景 4/4", "本研究の核心：熱活性化エアロゲル形成")
     draw_footer(sl, "7 / 36")
 
-    left_w = BODY_W * 0.60 - Inches(0.10)
-    right_w = BODY_W * 0.40 - Inches(0.10)
+    # 左38% テキスト / 右62% 図プレースホルダー（図を主役に）
+    left_w = BODY_W * 0.38 - Inches(0.12)
+    right_w = BODY_W * 0.62 - Inches(0.08)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # 左：2カード
-    ch = Inches(3.4)
-    cw_l = (left_w - Inches(0.14)) / 2
-    card(sl, BODY_X, BODY_Y, cw_l, ch,
-         title="設計コンセプト", tag="DESIGN CONCEPT",
-         bullets=[
-             "セルロースポリマー(HEC, MC, MHEC)が水溶性ゲル骨格を形成",
-             "コロイダルシリカ粒子(CSP)を均一分散",
-             "加熱時に水が発泡し多孔構造を形成",
-             "シリカ粒子が焼結しエアロゲル層に転換",
-         ], ct_size=15, li_size=11)
-    card(sl, BODY_X + cw_l + Inches(0.14), BODY_Y, cw_l, ch,
-         title="3つの革新ポイント", tag="INNOVATION",
-         dark=True,
-         bullets=[
-             "水分依存からの脱却：熱で活性化する固体保護層",
-             "持続可能：天然由来・食品添加物グレード",
-             "既存散布インフラと互換：噴霧可能な流体",
-         ], ct_size=15, li_size=11)
+    # 縦アクセントバー
+    rect(sl, BODY_X, BODY_Y, Inches(0.05), Inches(1.52), ACCENT)
 
-    # 下部callout
-    cy_co = BODY_Y + ch + Inches(0.25)
-    callout(sl, BODY_X, cy_co, left_w, Inches(0.80),
-            '"Heat-Activated Formation of Silica Aerogels"\n— 火炎接触をトリガーに、ゲル自身がエアロゲル断熱材へ変態する',
-            icon='💡')
+    # ヒーロー文（引用スタイル、ボックスなし）
+    text(sl, BODY_X + Inches(0.18), BODY_Y, left_w - Inches(0.18), Inches(0.52),
+         "Heat-Activated", size=22, bold=True, color=INK, italic=True)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(0.50), left_w - Inches(0.18), Inches(0.52),
+         "Aerogel Formation", size=22, bold=True, color=ACCENT, italic=True)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.04), left_w - Inches(0.18), Inches(0.34),
+         "火炎接触をトリガーに、ゲル自体が断熱材へ変態", size=11, color=INK3)
 
-    # 右：図プレースホルダー
-    fig_placeholder(sl, right_x, BODY_Y, right_w, Inches(4.8),
+    # 区切り線
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.54), left_w * 0.85, Inches(0.02), LINE)
+
+    # 3つの革新ポイント（番号付きリスト、カードなし）
+    points = [
+        ("01", "水分依存からの脱却", "熱で活性化する固体保護層を形成"),
+        ("02", "持続可能な素材", "天然由来・食品添加物グレード素材"),
+        ("03", "既存インフラと互換", "噴霧可能な流体として散布可能"),
+    ]
+    py = BODY_Y + Inches(1.74)
+    for num, title, desc in points:
+        text(sl, BODY_X, py, Inches(0.44), Inches(0.30),
+             num, size=11, bold=True, color=ACCENT)
+        text(sl, BODY_X + Inches(0.46), py, left_w - Inches(0.46), Inches(0.28),
+             title, size=13, bold=True, color=INK)
+        text(sl, BODY_X + Inches(0.46), py + Inches(0.28), left_w - Inches(0.46), Inches(0.28),
+             desc, size=11, color=MUTED)
+        py += Inches(0.75)
+
+    # 右：図プレースホルダー（大きく）
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
                     fig_num="Fig. 5a",
-                    caption="シリカエアロゲル形成の3段階（プレビュー）")
+                    caption="シリカエアロゲル形成の3段階")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====

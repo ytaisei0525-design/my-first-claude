@@ -469,161 +469,209 @@ def slide_section_divider(prs, num_str, num_label, title, sub, pills, page_num):
          page_num, size=10, color=RGBColor(0x66, 0x77, 0x88), align=PP_ALIGN.RIGHT)
 
 
-# ===== SLIDE 4: 山火事の現状 =====
+# ===== SLIDE 4: Wildfire Background =====
 def slide_04_wildfire(prs):
     sl = new_slide(prs)
     draw_header(sl, "Background 1/4", "Growing Severity of Wildfire Damage and WUI Risk")
     draw_footer(sl, "4 / 36")
 
-    # Left: stats + cards, Right: figure placeholder
-    left_w = BODY_W * 0.62 - Inches(0.10)
-    right_w = BODY_W * 0.38 - Inches(0.10)
+    # Left 42% typography stats / Right 58% photo placeholder (asymmetric)
+    left_w = BODY_W * 0.42 - Inches(0.12)
+    right_w = BODY_W * 0.58 - Inches(0.08)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # 3 stats
-    sw = (left_w - Inches(0.20)) / 3
-    sy = BODY_Y
-    sh = Inches(1.7)
-    stat(sl, BODY_X, sy, sw, sh, "5", unit="×",
-         label="Increase in Large-Scale Wildfires", sub="Burned area expansion over past 30 years",
-         num_size=46, lbl_size=12, sub_size=10)
-    stat(sl, BODY_X + sw + Inches(0.10), sy, sw, sh, "400", unit="M km²",
-         label="Annual Burned Area (Global)", sub="Caused by climate change and drought",
-         num_size=40, lbl_size=12, sub_size=10)
-    stat(sl, BODY_X + (sw + Inches(0.10)) * 2, sy, sw, sh, "45M",
-         label="U.S. WUI Residents", sub="High-risk population in interface zone",
-         num_size=42, lbl_size=12, sub_size=10)
+    # Vertical accent bar (stat 1)
+    rect(sl, BODY_X, BODY_Y, Inches(0.05), Inches(1.80), ACCENT)
 
-    # WUI terminology card
-    ty = sy + sh + Inches(0.20)
-    th = Inches(1.0)
-    rrect(sl, BODY_X, ty, left_w, th, WHITE, LINE, 0.5, radius=0.04)
-    text(sl, BODY_X + Inches(0.20), ty + Inches(0.14), left_w - Inches(0.4), Inches(0.30),
-         "Terminology", size=11, bold=True, color=MUTED)
-    text(sl, BODY_X + Inches(0.20), ty + Inches(0.42), left_w - Inches(0.4), Inches(0.55),
-         "WUI (Wildland-Urban Interface): The boundary zone between wildland and urban areas. A high-risk region where wildfire damage directly threatens residential structures.",
-         size=13, color=INK)
+    # Stat 1: large typography, no box
+    text(sl, BODY_X + Inches(0.18), BODY_Y, left_w - Inches(0.18), Inches(1.10),
+         "5×", size=68, bold=True, color=INK)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.08), left_w - Inches(0.18), Inches(0.32),
+         "Increase in large-scale wildfires (past 30 years)", size=13, bold=True, color=INK2)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.40), left_w - Inches(0.18), Inches(0.28),
+         "Driven by climate change and prolonged drought", size=11, color=MUTED)
 
-    # Callout
-    cy = ty + th + Inches(0.18)
-    callout(sl, BODY_X, cy, left_w, Inches(0.65),
-            "Climate change extends dry and high-wind periods → Conventional firefighting strategies cannot keep pace",
-            icon='⚠')
+    # Divider line
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.86), left_w * 0.75, Inches(0.02), LINE)
 
-    # Right: figure placeholder
-    fig_h = Inches(4.6)
-    fig_placeholder(sl, right_x, BODY_Y, right_w, fig_h,
-                    fig_num="Fig. 3c",
-                    caption="Combustion process under direct flame contact")
+    # Vertical accent bar (stat 2)
+    rect(sl, BODY_X, BODY_Y + Inches(2.08), Inches(0.05), Inches(1.60), D_AMBR)
+
+    # Stat 2
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.08), left_w - Inches(0.18), Inches(0.90),
+         "45 million", size=40, bold=True, color=INK)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.98), left_w - Inches(0.18), Inches(0.32),
+         "U.S. WUI residents", size=13, bold=True, color=INK2)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.30), left_w - Inches(0.18), Inches(0.28),
+         "High-risk population at the wildland–urban interface", size=11, color=MUTED)
+
+    # Bottom note (horizontal rule, no callout box)
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.78), left_w * 0.90, Inches(0.02), LINE)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(3.96), left_w - Inches(0.18), Inches(0.70),
+         "Extended dry and high-wind seasons mean\nconventional firefighting strategies can no longer keep pace",
+         size=12, color=INK3, italic=True)
+
+    # Right: wildfire / WUI photo placeholder
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
+                    fig_num="Image",
+                    caption="Wildfire / WUI boundary zone (photo)")
 
 
-# ===== SLIDE 5: 4段階の保護プロセス =====
+# ===== SLIDE 5: 4-Stage Protection Process =====
 def slide_05_process(prs):
     sl = new_slide(prs)
     draw_header(sl, "Background 2/4", "Research Approach: 4-Stage Protection Process")
     draw_footer(sl, "5 / 36")
 
     # Top: large figure placeholder
-    fig_h = Inches(3.0)
+    fig_h = Inches(3.5)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
                     fig_num="Fig. 1a",
-                    caption="Fire-retardant gel application → flame contact → heat-activated aerogel formation → structural protection")
+                    caption="Gel application → flame contact → heat-activated aerogel formation → structural protection")
 
-    # Bottom: 4-step cards
-    sy = BODY_Y + fig_h + Inches(0.45)
-    sh = Inches(2.2)
+    # Bottom: timeline-style steps (numbered circles + text, no cards)
+    sy = BODY_Y + fig_h + Inches(0.28)
     cw = (BODY_W - Inches(0.42)) / 4
+    circ_d = Inches(0.44)
     steps = [
-        ("STEP 1", "Gel Application", "Spray application of cellulosic gel to buildings and vegetation"),
-        ("STEP 2", "Flame Contact", "Moisture evaporates while gel foams and particles aggregate"),
-        ("STEP 3", "Aerogel Formation", "Silica particles sinter to form a porous aerogel layer"),
-        ("STEP 4", "Sustained Protection", "Ultra-low thermal conductivity insulating layer continuously protects the substrate"),
+        ("1", "Gel Application", "Spray cellulosic gel\nonto buildings and vegetation"),
+        ("2", "Flame Contact", "Moisture evaporates; gel\nfoams and particles aggregate"),
+        ("3", "Aerogel Formation", "Silica particles sinter into\na porous insulating layer"),
+        ("4", "Sustained Protection", "Ultra-low thermal conductivity\nlayer shields the substrate"),
     ]
-    for i, (tag, title, body) in enumerate(steps):
+    for i, (num, title, body) in enumerate(steps):
         cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, sy, cw, sh, title=title, body=body, tag=tag,
-             ct_size=16, cb_size=12)
+        circ_x = cx + (cw - circ_d) / 2
+
+        # Numbered circle
+        rrect(sl, circ_x, sy, circ_d, circ_d, ACCENT, None, radius=0.5)
+        text(sl, circ_x, sy, circ_d, circ_d, num, size=16, bold=True, color=WHITE,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+        # Connector (not last)
+        if i < 3:
+            arr_x = cx + cw + Inches(0.04)
+            arr_y = sy + circ_d / 2 - Inches(0.01)
+            rect(sl, arr_x, arr_y, Inches(0.06), Inches(0.02), GRAY_L)
+
+        # Text
+        text(sl, cx, sy + circ_d + Inches(0.14), cw, Inches(0.30),
+             title, size=13, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        text(sl, cx, sy + circ_d + Inches(0.46), cw, Inches(0.60),
+             body, size=11, color=INK3, align=PP_ALIGN.CENTER)
 
 
-# ===== SLIDE 6: 既存技術と限界 =====
+# ===== SLIDE 6: Existing Technologies =====
 def slide_06_existing(prs):
     sl = new_slide(prs)
     draw_header(sl, "Background 3/4", "Existing Wildfire Protection Methods and Their Fundamental Limitations")
     draw_footer(sl, "6 / 36")
 
-    # Left: table, Right: figure
-    left_w = BODY_W * 0.66 - Inches(0.10)
-    right_w = BODY_W * 0.34 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # 4 product cards in a row: photo placeholder on top, product name + limitation below
+    n = 4
+    gap = Inches(0.18)
+    cw = (BODY_W - gap * (n - 1)) / n
+    card_h = BODY_H - Inches(0.56)
 
-    headers = ["Technology", "Main Component", "Feature", "Limitation"]
-    rows = [
-        ["Water only", "H₂O", "Cooling by latent heat of evaporation",
-         {'text': "Immediately runs off and evaporates", 'color': D_RED}],
-        ["Phos-Chek", "Ammonium phosphate", "Direct application to trees and ground surface",
-         {'text': "Residual contamination in soil and water systems", 'color': D_RED}],
-        ["AquaGel-K", "Cross-linked polyacrylate", "Retains water at high concentration",
-         {'text': "Function lost after water evaporation", 'color': D_RED}],
-        [{'text': "This Work WEG", 'bold': True, 'color': ACCENT},
-         "Cellulosic + Silica", "Forms aerogel layer upon heating",
-         {'text': "Continues protecting after water evaporation", 'color': D_GRN, 'bold': True}],
+    products = [
+        ("Water only", "H₂O", "Runs off and evaporates\ninstantly — no persistence", False),
+        ("Phos-Chek", "Ammonium phosphate", "Chemical residue persists\nin soil and water systems", False),
+        ("AquaGel-K", "Cross-linked polyacrylate", "Protection lost the moment\nwater evaporates", False),
+        ("WEG (This Work)", "Cellulosic + Silica", "Aerogel layer continues\nprotecting after water loss", True),
     ]
-    table_h = Inches(3.2)
-    simple_table(sl, BODY_X, BODY_Y, left_w, table_h, headers, rows,
-                 col_widths=[1.5, 2, 2, 1.5])
 
-    # Callout
-    cy = BODY_Y + table_h + Inches(0.22)
-    callout(sl, BODY_X, cy, left_w, Inches(0.70),
-            "Challenge: Existing WEGs are mere \"water carriers\" — protection is lost simultaneously with moisture loss",
-            dark=True, icon='→')
+    for i, (name, ingredient, limit_text, is_hero) in enumerate(products):
+        cx = BODY_X + i * (cw + gap)
+        img_h = card_h * 0.50
 
-    # Right: figure placeholder
-    fig_placeholder(sl, right_x, BODY_Y, right_w, Inches(4.2),
-                    fig_num="Fig. 3d",
-                    caption="Comparison at 300 s: Water vs. This Work WEG")
+        # Card background
+        if is_hero:
+            rrect(sl, cx, BODY_Y, cw, card_h, HEADER, None, radius=0.04)
+            rect(sl, cx, BODY_Y, cw, Inches(0.04), GOLD)
+        else:
+            rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
+            rect(sl, cx, BODY_Y, cw, Inches(0.04), LINE)
+
+        # Photo placeholder (upper half)
+        ph_fill = RGBColor(0x2a, 0x3c, 0x54) if is_hero else PH_BG
+        ph_bord = RGBColor(0x44, 0x5e, 0x7a) if is_hero else PH_BD
+        ph_tc = RGBColor(0x88, 0xa0, 0xb8) if is_hero else GRAY_L
+        rrect(sl, cx + Inches(0.12), BODY_Y + Inches(0.12),
+              cw - Inches(0.24), img_h - Inches(0.12), ph_fill, ph_bord, 0.7, radius=0.03)
+        text(sl, cx + Inches(0.12), BODY_Y + Inches(0.12),
+             cw - Inches(0.24), img_h - Inches(0.12),
+             "(photo)", size=11, color=ph_tc,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+        # Product name
+        name_c = WHITE if is_hero else INK
+        ingr_c = RGBColor(0xa0, 0xb8, 0xd0) if is_hero else MUTED
+        ty = BODY_Y + img_h + Inches(0.14)
+        text(sl, cx + Inches(0.10), ty, cw - Inches(0.20), Inches(0.34),
+             name, size=14, bold=True, color=name_c, align=PP_ALIGN.CENTER)
+        text(sl, cx + Inches(0.10), ty + Inches(0.34), cw - Inches(0.20), Inches(0.26),
+             ingredient, size=10, color=ingr_c, align=PP_ALIGN.CENTER)
+
+        # Limitation text
+        limit_c = D_GRN if is_hero else D_RED
+        text(sl, cx + Inches(0.10), ty + Inches(0.64), cw - Inches(0.20),
+             card_h - (ty - BODY_Y) - Inches(0.72),
+             limit_text, size=12, bold=is_hero,
+             color=limit_c, align=PP_ALIGN.CENTER)
+
+    # Bottom message (horizontal rule)
+    msg_y = BODY_Y + card_h + Inches(0.14)
+    rect(sl, BODY_X, msg_y, BODY_W, Inches(0.02), LINE)
+    text(sl, BODY_X, msg_y + Inches(0.12), BODY_W, Inches(0.36),
+         "Challenge: Existing WEGs are mere \"water carriers\" — protection vanishes the moment moisture is lost",
+         size=13, bold=True, color=INK, align=PP_ALIGN.CENTER)
 
 
-# ===== SLIDE 7: 研究の核心 =====
+# ===== SLIDE 7: Core Innovation =====
 def slide_07_core(prs):
     sl = new_slide(prs)
     draw_header(sl, "Background 4/4", "Research Core: Heat-Activated Aerogel Formation")
     draw_footer(sl, "7 / 36")
 
-    left_w = BODY_W * 0.60 - Inches(0.10)
-    right_w = BODY_W * 0.40 - Inches(0.10)
+    # Left 38% text / Right 62% figure placeholder (figure as hero)
+    left_w = BODY_W * 0.38 - Inches(0.12)
+    right_w = BODY_W * 0.62 - Inches(0.08)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # Left: 2 cards
-    ch = Inches(3.4)
-    cw_l = (left_w - Inches(0.14)) / 2
-    card(sl, BODY_X, BODY_Y, cw_l, ch,
-         title="Design Concept", tag="DESIGN CONCEPT",
-         bullets=[
-             "Cellulosic polymers (HEC, MC, MHEC) form water-soluble gel network",
-             "Colloidal silica particles (CSP) uniformly dispersed",
-             "Water foams upon heating to form porous structure",
-             "Silica particles sinter and convert to aerogel layer",
-         ], ct_size=15, li_size=11)
-    card(sl, BODY_X + cw_l + Inches(0.14), BODY_Y, cw_l, ch,
-         title="Three Innovation Points", tag="INNOVATION",
-         dark=True,
-         bullets=[
-             "Breaking free from water dependence: heat-activated solid protective layer",
-             "Sustainable: naturally derived, food-grade materials",
-             "Compatible with existing spray infrastructure: sprayable fluid",
-         ], ct_size=15, li_size=11)
+    # Vertical accent bar
+    rect(sl, BODY_X, BODY_Y, Inches(0.05), Inches(1.52), ACCENT)
 
-    # Bottom callout
-    cy_co = BODY_Y + ch + Inches(0.25)
-    callout(sl, BODY_X, cy_co, left_w, Inches(0.80),
-            '"Heat-Activated Formation of Silica Aerogels"\n— Triggered by flame contact, the gel itself transforms into an aerogel insulator',
-            icon='💡')
+    # Hero text (quote style, no box)
+    text(sl, BODY_X + Inches(0.18), BODY_Y, left_w - Inches(0.18), Inches(0.52),
+         "Heat-Activated", size=22, bold=True, color=INK, italic=True)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(0.50), left_w - Inches(0.18), Inches(0.52),
+         "Aerogel Formation", size=22, bold=True, color=ACCENT, italic=True)
+    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.04), left_w - Inches(0.18), Inches(0.34),
+         "Flame contact triggers the gel to transform into an aerogel insulator", size=11, color=INK3)
 
-    # Right: figure placeholder
-    fig_placeholder(sl, right_x, BODY_Y, right_w, Inches(4.8),
+    # Divider line
+    rect(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.54), left_w * 0.85, Inches(0.02), LINE)
+
+    # 3 innovation points (numbered list, no card borders)
+    points = [
+        ("01", "Beyond water dependence", "Heat-activated solid protective layer"),
+        ("02", "Sustainable materials", "Naturally derived, food-grade components"),
+        ("03", "Drop-in compatible", "Sprayable fluid — no new infrastructure needed"),
+    ]
+    py = BODY_Y + Inches(1.74)
+    for num, title, desc in points:
+        text(sl, BODY_X, py, Inches(0.44), Inches(0.30),
+             num, size=11, bold=True, color=ACCENT)
+        text(sl, BODY_X + Inches(0.46), py, left_w - Inches(0.46), Inches(0.28),
+             title, size=13, bold=True, color=INK)
+        text(sl, BODY_X + Inches(0.46), py + Inches(0.28), left_w - Inches(0.46), Inches(0.28),
+             desc, size=11, color=MUTED)
+        py += Inches(0.75)
+
+    # Right: large figure placeholder
+    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H,
                     fig_num="Fig. 5a",
-                    caption="3-stage silica aerogel formation (preview)")
+                    caption="3-stage silica aerogel formation")
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
