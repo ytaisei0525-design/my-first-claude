@@ -398,14 +398,14 @@ def slide_01_cover(prs):
     text(sl, Inches(0.5), Inches(6.6), Inches(8), Inches(0.3),
          "DOI: 10.1002/adma.202407375", size=10, color=RGBColor(0x66, 0x77, 0x88))
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "1 / 37", size=10, color=RGBColor(0x66, 0x77, 0x88), align=PP_ALIGN.RIGHT)
+         "1 / 38", size=10, color=RGBColor(0x66, 0x77, 0x88), align=PP_ALIGN.RIGHT)
 
 
 # ===== SLIDE 2: TOC =====
 def slide_02_toc(prs):
     sl = new_slide(prs)
     draw_header(sl, "Contents", "発表の構成")
-    draw_footer(sl, "2 / 37")
+    draw_footer(sl, "2 / 38")
 
     parts = [
         ("PART 1", "研究背景", "山火事の現状、既存技術（Phos-Chek, AquaGel-K）の限界、本研究の革新点", "Slides 4–7"),
@@ -476,7 +476,7 @@ def slide_section_divider(prs, num_str, num_label, title, sub, pills, page_num):
 def slide_04_wildfire(prs):
     sl = new_slide(prs)
     draw_header(sl, "背景 1/4", "山火事被害の深刻化とWUIリスク")
-    draw_footer(sl, "4 / 37")
+    draw_footer(sl, "4 / 38")
 
     # 左42% テキスト（タイポグラフィ主体） / 右58% 写真プレースホルダー
     left_w = BODY_W * 0.42 - Inches(0.12)
@@ -530,7 +530,7 @@ def slide_04_wildfire(prs):
 def slide_05_process(prs):
     sl = new_slide(prs)
     draw_header(sl, "背景 2/4", "本研究のアプローチ：4段階の保護プロセス")
-    draw_footer(sl, "5 / 37")
+    draw_footer(sl, "5 / 38")
 
     # 上部：大きな図プレースホルダー
     fig_h = Inches(3.5)
@@ -574,7 +574,7 @@ def slide_05_process(prs):
 def slide_06_existing(prs):
     sl = new_slide(prs)
     draw_header(sl, "背景 3/4", "既存の山火事対策と、その本質的な限界")
-    draw_footer(sl, "6 / 37")
+    draw_footer(sl, "6 / 38")
 
     # 4製品カード横一列：上部に写真プレースホルダー、下部に製品名＋限界テキスト
     n = 4
@@ -640,7 +640,7 @@ def slide_06_existing(prs):
 def slide_07_core(prs):
     sl = new_slide(prs)
     draw_header(sl, "背景 4/4", "本研究の核心：熱活性化エアロゲル形成")
-    draw_footer(sl, "7 / 37")
+    draw_footer(sl, "7 / 38")
 
     # 左38% テキスト / 右62% 図プレースホルダー（図を主役に）
     left_w = BODY_W * 0.38 - Inches(0.12)
@@ -697,7 +697,7 @@ def slide_07_core(prs):
 def slide_09_polymers(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 1/6", "使用したセルロース系ポリマー")
-    draw_footer(sl, "9 / 37")
+    draw_footer(sl, "9 / 38")
 
     # 左55% ポリマー縦リスト（大文字バッジ＋区切り線）/ 右45% 構造図
     left_w = BODY_W * 0.55 - Inches(0.12)
@@ -742,7 +742,7 @@ def slide_09_polymers(prs):
 def slide_10_mc(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 2/6", "メチルセルロース(MC)の熱ゲル化：火炎保護の鍵となる特性")
-    draw_footer(sl, "10 / 37")
+    draw_footer(sl, "10 / 38")
 
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
@@ -814,7 +814,7 @@ def slide_10_mc(prs):
 def slide_11_csp_sds(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 3/6", "コロイダルシリカ粒子(CSP)と界面活性剤(SDS)")
-    draw_footer(sl, "11 / 37")
+    draw_footer(sl, "11 / 38")
 
     cw = (BODY_W - Inches(0.18)) / 2
     callout_h = Inches(0.72)
@@ -870,7 +870,7 @@ def slide_11_csp_sds(prs):
 def slide_12_formulations(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 4/6", "評価した5種類の配合系")
-    draw_footer(sl, "12 / 37")
+    draw_footer(sl, "12 / 38")
 
     # 5つのカード横並び
     fw = (BODY_W - Inches(0.4 * 4)) / 5
@@ -921,7 +921,7 @@ def slide_12_formulations(prs):
 def slide_13_methods(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 5/6", "評価手法の全体像")
-    draw_footer(sl, "13 / 37")
+    draw_footer(sl, "13 / 38")
 
     # 左：燃焼試験セットアップ図 ／ 右：6手法カード(2列×3行)
     left_w = BODY_W * 0.34 - Inches(0.10)
@@ -960,7 +960,7 @@ def slide_13_methods(prs):
 def slide_14_adhesion(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 6/6", "付着性・表面濡れ性：実装に不可欠な特性")
-    draw_footer(sl, "14 / 37")
+    draw_footer(sl, "14 / 38")
 
     # 3列：各列に写真プレースホルダー（上）＋テキスト（下）
     cw = (BODY_W - Inches(0.28)) / 3
@@ -1005,7 +1005,7 @@ def slide_14_adhesion(prs):
 def slide_16_rheology1(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 1/11", "レオロジー①：振動弾性率 G' / G''")
-    draw_footer(sl, "16 / 37")
+    draw_footer(sl, "16 / 38")
 
     # 左：図、右：観察
     left_w = BODY_W * 0.58 - Inches(0.10)
@@ -1035,7 +1035,7 @@ def slide_16_rheology1(prs):
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 2/11", "レオロジー②：剪断希薄化と Power-law 指数")
-    draw_footer(sl, "17 / 37")
+    draw_footer(sl, "17 / 38")
 
     left_w = BODY_W * 0.58 - Inches(0.10)
     right_w = BODY_W * 0.42 - Inches(0.10)
@@ -1069,7 +1069,7 @@ def slide_17_rheology2(prs):
 def slide_18_hb(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 3/11", "レオロジー③：静的降伏応力と長期安定性")
-    draw_footer(sl, "18 / 37")
+    draw_footer(sl, "18 / 38")
 
     # 上部 callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
@@ -1116,7 +1116,7 @@ def slide_18_hb(prs):
 def slide_19_yield(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 4/11", "レオロジー④：貯蔵弾性率 G' と粘弾性（tan δ）")
-    draw_footer(sl, "19 / 37")
+    draw_footer(sl, "19 / 38")
 
     cw = (BODY_W - Inches(0.30)) / 2
     ch = Inches(5.6)
@@ -1162,7 +1162,7 @@ def slide_19_yield(prs):
 def slide_20_compare(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 5/11", "HEC+MC vs MHEC：二系統の比較")
-    draw_footer(sl, "20 / 37")
+    draw_footer(sl, "20 / 38")
 
     cw = (BODY_W - Inches(0.20)) / 2
     ch = Inches(4.8)
@@ -1235,7 +1235,7 @@ def slide_20_compare(prs):
 def slide_21_setup(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 6/11", "燃焼試験のセットアップ")
-    draw_footer(sl, "21 / 37")
+    draw_footer(sl, "21 / 38")
 
     left_w = BODY_W * 0.55 - Inches(0.10)
     right_w = BODY_W * 0.45 - Inches(0.10)
@@ -1265,7 +1265,7 @@ def slide_21_setup(prs):
 def slide_22_ttc(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 7/11", "Time to char：5配合系の定量比較")
-    draw_footer(sl, "22 / 37")
+    draw_footer(sl, "22 / 38")
 
     left_w = BODY_W * 0.62 - Inches(0.10)
     right_w = BODY_W * 0.38 - Inches(0.10)
@@ -1301,7 +1301,7 @@ def slide_22_ttc(prs):
 def slide_23_timelapse(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 8/11", "燃焼過程の時系列観察")
-    draw_footer(sl, "23 / 37")
+    draw_footer(sl, "23 / 38")
 
     # 上部：図プレースホルダー
     fig_h = Inches(2.4)
@@ -1349,7 +1349,7 @@ def slide_23_timelapse(prs):
 def slide_24_120300(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 8/11", "120秒 / 300秒時点の表面状態比較")
-    draw_footer(sl, "24 / 37")
+    draw_footer(sl, "24 / 38")
 
     fig_h = Inches(2.3)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1433,14 +1433,14 @@ def slide_25_hero(prs):
         by += Inches(0.35)
 
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "25 / 37", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+         "25 / 38", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
 
 
 # ===== SLIDE 26: 発泡指数 =====
 def slide_26_foam(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 9/11", "発泡指数（Foaming Index）の比較")
-    draw_footer(sl, "26 / 37")
+    draw_footer(sl, "26 / 38")
 
     # 上部：2図プレースホルダー
     fig_h = Inches(2.3)
@@ -1491,7 +1491,7 @@ def slide_26_foam(prs):
 def slide_27_sem_sds(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 9/11", "SDS濃度がエアロゲル微細構造に与える影響")
-    draw_footer(sl, "27 / 37")
+    draw_footer(sl, "27 / 38")
 
     fig_h = Inches(3.0)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1520,7 +1520,7 @@ def slide_27_sem_sds(prs):
 def slide_28_ftir_xps(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 10/11", "FT-IR・XPS：化学組成の変化（燃焼前後）")
-    draw_footer(sl, "28 / 37")
+    draw_footer(sl, "28 / 38")
 
     cw = (BODY_W - Inches(0.20)) / 2
 
@@ -1581,7 +1581,7 @@ def slide_28_ftir_xps(prs):
 def slide_29_tga(prs):
     sl = new_slide(prs)
     draw_header(sl, "結果 11/11", "TGA/DSC：熱分解プロファイルと各成分の役割")
-    draw_footer(sl, "29 / 37")
+    draw_footer(sl, "29 / 38")
 
     cw = (BODY_W - Inches(0.20)) / 2
 
@@ -1634,7 +1634,7 @@ def slide_29_tga(prs):
 def slide_30_mechanism(prs):
     sl = new_slide(prs)
     draw_header(sl, "補足 1/3", "シリカエアロゲル形成のメカニズム")
-    draw_footer(sl, "30 / 37")
+    draw_footer(sl, "30 / 38")
 
     fig_h = Inches(2.4)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1671,7 +1671,7 @@ def slide_30_mechanism(prs):
 def slide_31_burnsem(prs):
     sl = new_slide(prs)
     draw_header(sl, "補足 2/3", "燃焼時間に伴う焼結進行（SEM）")
-    draw_footer(sl, "31 / 37")
+    draw_footer(sl, "31 / 38")
 
     fig_h = Inches(2.3)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1724,7 +1724,7 @@ def slide_31_burnsem(prs):
 def slide_32_aging(prs):
     sl = new_slide(prs)
     draw_header(sl, "補足 3/3", "経時変化と長期安定性：1年以上経過しても性能を維持")
-    draw_footer(sl, "32 / 37")
+    draw_footer(sl, "32 / 38")
 
     left_w = BODY_W * 0.36 - Inches(0.12)
     right_w = BODY_W * 0.64 - Inches(0.08)
@@ -1782,7 +1782,7 @@ def slide_32_aging(prs):
 def slide_33_scenarios(prs):
     sl = new_slide(prs)
     draw_header(sl, "考察 1/3", "実装シナリオ：WEGの展開戦略")
-    draw_footer(sl, "34 / 37")
+    draw_footer(sl, "34 / 38")
 
     ch = Inches(3.6)
     cw = (BODY_W - Inches(0.28)) / 3
@@ -1836,7 +1836,7 @@ def slide_33_scenarios(prs):
 def slide_34_future(prs):
     sl = new_slide(prs)
     draw_header(sl, "まとめ 1/2", "実証された主要結果")
-    draw_footer(sl, "35 / 37")
+    draw_footer(sl, "35 / 38")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(4.6)
@@ -1881,7 +1881,7 @@ def slide_34_future(prs):
 def slide_35_summary(prs):
     sl = new_slide(prs)
     draw_header(sl, "まとめ 2/2", "研究の結論")
-    draw_footer(sl, "36 / 37")
+    draw_footer(sl, "36 / 38")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
@@ -1972,7 +1972,46 @@ def slide_36_impact(prs):
         by += Inches(0.32)
 
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "37 / 37", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+         "37 / 38", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+
+
+# ===== SLIDE 38: 温度依存のゲル変化メカニズム（補足） =====
+def slide_thermal_mechanism(prs):
+    sl = new_slide(prs)
+    draw_header(sl, "補足", "温度に応じたゲルの3段階変化メカニズム")
+    draw_footer(sl, "38 / 38")
+
+    # 上部：概念図プレースホルダー
+    fig_h = Inches(2.2)
+    fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
+                    fig_num="概念図",
+                    caption="温度上昇に伴う ゾル → 熱ゲル → シリカエアロゲル の3段階転移")
+
+    # 下部：3段階カード（温度フロー）
+    cy = BODY_Y + fig_h + Inches(0.44)
+    ch = Inches(2.9)
+    cw = (BODY_W - Inches(0.28)) / 3
+    stages = [
+        ("室温（〜25°C）", "STEP 1 ・ ゾル", [
+            "MC鎖が親水性ランダムコイル",
+            "低粘度でスプレー散布が可能",
+            "CSPと高分子は可逆的な水素結合",
+        ]),
+        ("加熱（〜50–60°C）", "STEP 2 ・ 熱ゲル化", [
+            "MCのLCST挙動で疎水性相互作用が増大",
+            "高分子鎖が集合しゲルネットワーク形成",
+            "熱可逆的にゲル化（火炎保護の起点）",
+        ]),
+        ("火炎（数百°C）", "STEP 3 ・ エアロゲル", [
+            "水分が急速に蒸発・脱水",
+            "CSPが焼結し3次元多孔質骨格へ",
+            "断熱性シリカエアロゲル層が完成",
+        ]),
+    ]
+    for i, (temp, tag, bullets) in enumerate(stages):
+        cx = BODY_X + i * (cw + Inches(0.14))
+        card(sl, cx, cy, cw, ch, title=temp, tag=tag,
+             bullets=bullets, ct_size=15, li_size=12)
 
 
 # ── メイン ─────────────────────────────────────────────
@@ -1987,7 +2026,7 @@ def main():
     slide_section_divider(prs, "01", "Part 1", "研究背景",
                           "気候変動下の山火事被害と、既存難燃技術が抱える本質的な限界",
                           ["山火事の現状", "既存WEG / 難燃剤", "本研究の革新"],
-                          "3 / 37")
+                          "3 / 38")
     slide_04_wildfire(prs)
     slide_05_process(prs)
     slide_06_existing(prs)
@@ -1995,7 +2034,7 @@ def main():
     slide_section_divider(prs, "02", "Part 2", "材料・実験方法",
                           "セルロース系ポリマーとコロイダルシリカの組み合わせによる新規ゲル設計",
                           ["ポリマー成分", "シリカ粒子・界面活性剤", "配合系（5種）", "評価手法"],
-                          "8 / 37")
+                          "8 / 38")
     slide_09_polymers(prs)
     slide_10_mc(prs)
     slide_11_csp_sds(prs)
@@ -2005,7 +2044,7 @@ def main():
     slide_section_divider(prs, "03", "Part 3", "実験結果",
                           "レオロジー特性、燃焼性能、発泡構造、エアロゲル形成メカニズムまで",
                           ["レオロジー", "燃焼試験", "発泡指数", "SEM観察"],
-                          "15 / 37")
+                          "15 / 38")
     slide_16_rheology1(prs)
     slide_17_rheology2(prs)
     slide_18_hb(prs)
@@ -2026,11 +2065,12 @@ def main():
     slide_section_divider(prs, "04", "Part 4", "考察・まとめ",
                           "実装シナリオ、既存品との総合比較、研究の意義と今後の展望",
                           ["実装シナリオ", "性能比較", "まとめ"],
-                          "33 / 37")
+                          "33 / 38")
     slide_33_scenarios(prs)
     slide_34_future(prs)
     slide_35_summary(prs)
     slide_36_impact(prs)
+    slide_thermal_mechanism(prs)
 
     out_path = '/home/user/my-first-claude/slides.pptx'
     prs.save(out_path)
