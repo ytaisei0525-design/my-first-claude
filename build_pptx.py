@@ -694,97 +694,150 @@ def slide_mat_composition(prs):
     draw_header(sl, "材料 概要 1/2", "材料構成：持続可能かつ高性能")
     draw_footer(sl, "9 / 39")
 
+    # リード文
+    lead_h = Inches(0.50)
+    text(sl, BODY_X, BODY_Y, BODY_W, lead_h,
+         "本ゲルは「骨格・機能・結合」を担う3要素で構成され、生分解性と高性能を両立します。",
+         size=14, color=INK2, anchor=MSO_ANCHOR.MIDDLE)
+
     n = 3
     gap = Inches(0.30)
     cw = (BODY_W - gap * (n - 1)) / n
-    card_h = BODY_H - Inches(0.50)
+    cards_y = BODY_Y + lead_h + Inches(0.14)
+    card_h = H - cards_y - FTR_H - Inches(0.24)
 
     items = [
-        ("🌿", "セルロース誘導体",
-         "植物由来のバイオポリマー。生分解性が高く、ネットワークの骨格を形成します。",
+        ("🌿", "セルロース誘導体", "Cellulose derivatives",
+         "植物由来のバイオポリマー。ゲルネットワークの骨格を形成します。",
+         [("3種", "HEC・MC・MHEC を使用"),
+          ("生分解性", "環境負荷が低い"),
+          ("役割", "粘性・構造の土台")],
          ACCENT),
-        ("◎", "コロイダルシリカ（CSP）",
-         "ポリマーと動的な相互作用を行い、熱活性化時にエアロゲルを形成する主要成分です。",
+        ("◎", "コロイダルシリカ（CSP）", "Colloidal Silica Particles",
+         "ポリマーと動的に相互作用し、熱でエアロゲルを形成する主役成分です。",
+         [("直径", "約 22 nm の単分散粒子"),
+          ("焼結", "加熱でシリカ骨格を形成"),
+          ("役割", "断熱エアロゲルの源")],
          D_TEAL),
-        ("⬡", "PP相互作用",
-         "動的な多価相互作用により、優れた付着性と噴霧適性を実現します。",
+        ("⬡", "PP 相互作用", "Polymer–Particle Interaction",
+         "動的な多価水素結合でネットワークを構築。共有結合に依存しません。",
+         [("結合", "動的・多価の水素結合"),
+          ("自己修復", "ひずみ後にゲルが回復"),
+          ("噴霧適性", "スプレー塗布が容易")],
          D_AMBR),
     ]
 
-    for i, (icon, title, body, accent_c) in enumerate(items):
+    for i, (icon, title, en, body, keys, accent_c) in enumerate(items):
         cx = BODY_X + i * (cw + gap)
-        rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
-        rect(sl, cx, BODY_Y, cw, Inches(0.05), accent_c)
+        rrect(sl, cx, cards_y, cw, card_h, CARD_C, LINE, 0.5, radius=0.035)
+        rect(sl, cx, cards_y, cw, Inches(0.06), accent_c)
 
-        icon_y = BODY_Y + Inches(0.40)
-        text(sl, cx, icon_y, cw, Inches(0.60),
-             icon, size=32, color=accent_c,
+        pad_x = Inches(0.24)
+        inner_w = cw - pad_x * 2
+
+        icon_y = cards_y + Inches(0.30)
+        text(sl, cx, icon_y, cw, Inches(0.56),
+             icon, size=30, color=accent_c,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-        title_y = icon_y + Inches(0.70)
-        text(sl, cx + Inches(0.22), title_y, cw - Inches(0.44), Inches(0.56),
+        title_y = icon_y + Inches(0.62)
+        text(sl, cx + pad_x, title_y, inner_w, Inches(0.42),
              title, size=17, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        text(sl, cx + pad_x, title_y + Inches(0.42), inner_w, Inches(0.28),
+             en, size=10, italic=True, color=MUTED, align=PP_ALIGN.CENTER)
 
-        rect(sl, cx + Inches(0.30), title_y + Inches(0.60),
-             cw - Inches(0.60), Inches(0.015), LINE)
+        div_y = title_y + Inches(0.78)
+        rect(sl, cx + Inches(0.32), div_y, cw - Inches(0.64), Inches(0.015), LINE)
 
-        text(sl, cx + Inches(0.22), title_y + Inches(0.76),
-             cw - Inches(0.44), card_h - Inches(2.10),
-             body, size=13, color=INK3, align=PP_ALIGN.CENTER)
+        body_y = div_y + Inches(0.14)
+        text(sl, cx + pad_x, body_y, inner_w, Inches(1.00),
+             body, size=12, color=INK3, align=PP_ALIGN.CENTER)
+
+        ky = body_y + Inches(1.22)
+        row_h = Inches(0.74)
+        for j, (label, detail) in enumerate(keys):
+            ry = ky + j * row_h
+            chip_w = Inches(0.92)
+            rrect(sl, cx + pad_x, ry + Inches(0.04), chip_w, Inches(0.32),
+                  WHITE, accent_c, 0.7, radius=0.5)
+            text(sl, cx + pad_x, ry + Inches(0.04), chip_w, Inches(0.32),
+                 label, size=10, bold=True, color=accent_c,
+                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            text(sl, cx + pad_x + chip_w + Inches(0.10), ry,
+                 inner_w - chip_w - Inches(0.10), Inches(0.40),
+                 detail, size=11, color=INK2, anchor=MSO_ANCHOR.MIDDLE)
 
 
-# ===== SLIDE 10 (new): 熱活性化による自己防護メカニズム =====
+# ===== SLIDE 10: 噴霧・付着・耐火のメカニズム =====
 def slide_self_protection(prs):
     sl = new_slide(prs)
     draw_header(sl, "材料 概要 2/2", "噴霧・付着・耐火のメカニズム")
     draw_footer(sl, "10 / 39")
 
-    left_w = BODY_W * 0.42 - Inches(0.15)
-    right_w = BODY_W * 0.58 - Inches(0.05)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # リード文
+    lead_h = Inches(0.52)
+    text(sl, BODY_X, BODY_Y, BODY_W, lead_h,
+         "温度ではなく「せん断力」と「自己修復性」が、噴霧から付着までを支配します。",
+         size=15, bold=True, color=INK, anchor=MSO_ANCHOR.MIDDLE)
 
-    # 左：タイトル + テキスト
-    text(sl, BODY_X, BODY_Y, left_w, Inches(0.70),
-         "せん断変形と", size=26, bold=True, color=INK)
-    text(sl, BODY_X, BODY_Y + Inches(0.68), left_w, Inches(0.70),
-         "自己修復性が鍵", size=26, bold=True, color=INK)
+    # 4段階の大きなプロセスカード（全幅）
+    n = 4
+    arrow_w = Inches(0.30)
+    cards_y = BODY_Y + lead_h + Inches(0.14)
+    cw = (BODY_W - arrow_w * (n - 1)) / n
+    card_h = Inches(3.50)
 
-    rect(sl, BODY_X, BODY_Y + Inches(1.56), Inches(0.05), Inches(1.80), ACCENT)
-
-    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.62), left_w - Inches(0.18), Inches(0.56),
-         "噴霧時のせん断ひずみでゾル様に変化し、壁に付着すると自己修復性によって即座にゲル構造を回復します。",
-         size=12, color=INK2)
-    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.30), left_w - Inches(0.18), Inches(0.56),
-         "炎にさらされると「シリカエアロゲル」へと変貌し、水分が枯渇した後も断熱層として基材を保護します。",
-         size=12, color=INK2)
-
-    # 4段階フロー（ゲル→ゾル様→自己修復ゲル→エアロゲル）
-    fc_y = BODY_Y + Inches(3.20)
-    fc_h = Inches(0.70)
-    fc_w = (left_w - Inches(0.08) * 3) / 4
-    flows = [
-        ("ゲル\n（静止）", ACCENT),
-        ("ゾル様\n（噴霧）", D_TEAL),
-        ("自己修復ゲル\n（付着）", D_GRN),
-        ("エアロゲル\n（炎）", D_AMBR),
+    stages = [
+        ("01", "静止時", "ゲル", "高粘度の弾性ゲル。G′ > G″ で構造を保持。",
+         "降伏応力 ~33 Pa", ACCENT),
+        ("02", "噴霧時", "ゾル様", "せん断ひずみで粘度が低下し、流動化。",
+         "せん断希薄化 n < 1", D_TEAL),
+        ("03", "付着後", "自己修復ゲル", "ひずみ解放で即座にゲル構造を回復。",
+         "G′ 回復率 ~90%", D_GRN),
+        ("04", "炎接触", "エアロゲル", "CSP が焼結し多孔質シリカ層を形成。",
+         "断熱バリアとして機能", D_AMBR),
     ]
-    for j, (lbl, c) in enumerate(flows):
-        fx = BODY_X + j * (fc_w + Inches(0.08))
-        rrect(sl, fx, fc_y, fc_w, fc_h, CARD_C, c, 0.7, radius=0.03)
-        rect(sl, fx, fc_y, fc_w, Inches(0.04), c)
-        text(sl, fx, fc_y, fc_w, fc_h,
-             lbl, size=9, bold=True, color=INK,
+
+    for i, (no, phase, state, desc, metric, c) in enumerate(stages):
+        cx = BODY_X + i * (cw + arrow_w)
+        rrect(sl, cx, cards_y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
+        rect(sl, cx, cards_y, cw, Inches(0.06), c)
+
+        pad_x = Inches(0.20)
+        inner_w = cw - pad_x * 2
+
+        text(sl, cx + pad_x, cards_y + Inches(0.18), inner_w, Inches(0.34),
+             no, size=13, bold=True, color=c)
+        text(sl, cx + pad_x, cards_y + Inches(0.54), inner_w, Inches(0.30),
+             phase, size=12, bold=True, color=MUTED)
+        text(sl, cx + pad_x, cards_y + Inches(0.92), inner_w, Inches(0.56),
+             state, size=22, bold=True, color=INK)
+        rect(sl, cx + pad_x, cards_y + Inches(1.58), inner_w, Inches(0.015), LINE)
+        text(sl, cx + pad_x, cards_y + Inches(1.72), inner_w, Inches(1.10),
+             desc, size=12, color=INK3)
+
+        badge_h = Inches(0.46)
+        badge_y = cards_y + card_h - badge_h - Inches(0.18)
+        rrect(sl, cx + pad_x, badge_y, inner_w, badge_h, WHITE, c, 0.7, radius=0.06)
+        text(sl, cx + pad_x, badge_y, inner_w, badge_h,
+             metric, size=11, bold=True, color=c,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        if j < 3:
-            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.08 * j) + Inches(0.01),
-                 fc_y, Inches(0.08), fc_h,
-                 "→", size=10, color=MUTED,
+
+        if i < n - 1:
+            text(sl, cx + cw, cards_y, arrow_w, card_h,
+                 "→", size=20, color=GRAY_L,
                  align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-    # 右：図プレースホルダー（セルロース→CSP模式図）
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H - Inches(0.40),
-                    fig_num="Fig. 概念",
-                    caption="セルロース系ポリマー × コロイダルシリカ → シリカエアロゲル形成の概念模式図")
+    # 下部：ポイント帯
+    band_y = cards_y + card_h + Inches(0.20)
+    band_h = H - band_y - FTR_H - Inches(0.22)
+    rrect(sl, BODY_X, band_y, BODY_W, band_h, HEADER, None, radius=0.05)
+    rect(sl, BODY_X, band_y, Inches(0.08), band_h, GOLD)
+    text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
+         "POINT", size=13, bold=True, color=GOLD, anchor=MSO_ANCHOR.MIDDLE)
+    text(sl, BODY_X + Inches(2.0), band_y, BODY_W - Inches(2.3), band_h,
+         "MC の温度応答性（LCST）に頼らず、レオロジー特性だけで「飛ばす→留める→固める」を実現する点が本材料の核心です。",
+         size=13, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====

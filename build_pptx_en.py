@@ -696,97 +696,150 @@ def slide_mat_composition(prs):
     draw_header(sl, "Materials Overview 1/2", "Material Composition: Sustainable & High-Performance")
     draw_footer(sl, "9 / 39")
 
+    # Lead sentence
+    lead_h = Inches(0.50)
+    text(sl, BODY_X, BODY_Y, BODY_W, lead_h,
+         "Three building blocks — skeleton, function, and bonding — combine biodegradability with high performance.",
+         size=14, color=INK2, anchor=MSO_ANCHOR.MIDDLE)
+
     n = 3
     gap = Inches(0.30)
     cw = (BODY_W - gap * (n - 1)) / n
-    card_h = BODY_H - Inches(0.50)
+    cards_y = BODY_Y + lead_h + Inches(0.14)
+    card_h = H - cards_y - FTR_H - Inches(0.24)
 
     items = [
-        ("🌿", "Cellulose Derivatives",
-         "Plant-derived biopolymer. Highly biodegradable and forms the scaffold of the gel network.",
+        ("🌿", "Cellulose Derivatives", "Plant-based biopolymers",
+         "Plant-derived biopolymers that form the backbone of the gel network.",
+         [("3 types", "HEC, MC, MHEC"),
+          ("Bio.", "Highly biodegradable"),
+          ("Role", "Viscosity & structure")],
          ACCENT),
-        ("◎", "Colloidal Silica (CSP)",
-         "Dynamically interacts with the polymer and forms a silica aerogel upon heat activation.",
+        ("◎", "Colloidal Silica (CSP)", "Colloidal Silica Particles",
+         "The key component that interacts dynamically with polymers and forms aerogel under heat.",
+         [("Size", "~22 nm monodisperse"),
+          ("Sinter", "Forms silica skeleton"),
+          ("Role", "Source of aerogel")],
          D_TEAL),
-        ("⬡", "Polymer–Particle (PP) Interaction",
-         "Multivalent dynamic interactions provide excellent adhesion and sprayability.",
+        ("⬡", "PP Interaction", "Polymer–Particle Interaction",
+         "Builds the network via dynamic, multivalent hydrogen bonds — no covalent bonds required.",
+         [("Bonds", "Dynamic H-bonds"),
+          ("Self-heal", "Gel recovers after strain"),
+          ("Sprayable", "Easy spray application")],
          D_AMBR),
     ]
 
-    for i, (icon, title, body, accent_c) in enumerate(items):
+    for i, (icon, title, en, body, keys, accent_c) in enumerate(items):
         cx = BODY_X + i * (cw + gap)
-        rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
-        rect(sl, cx, BODY_Y, cw, Inches(0.05), accent_c)
+        rrect(sl, cx, cards_y, cw, card_h, CARD_C, LINE, 0.5, radius=0.035)
+        rect(sl, cx, cards_y, cw, Inches(0.06), accent_c)
 
-        icon_y = BODY_Y + Inches(0.40)
-        text(sl, cx, icon_y, cw, Inches(0.60),
-             icon, size=32, color=accent_c,
+        pad_x = Inches(0.24)
+        inner_w = cw - pad_x * 2
+
+        icon_y = cards_y + Inches(0.30)
+        text(sl, cx, icon_y, cw, Inches(0.56),
+             icon, size=30, color=accent_c,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-        title_y = icon_y + Inches(0.70)
-        text(sl, cx + Inches(0.22), title_y, cw - Inches(0.44), Inches(0.56),
-             title, size=17, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        title_y = icon_y + Inches(0.62)
+        text(sl, cx + pad_x, title_y, inner_w, Inches(0.42),
+             title, size=16, bold=True, color=INK, align=PP_ALIGN.CENTER)
+        text(sl, cx + pad_x, title_y + Inches(0.42), inner_w, Inches(0.28),
+             en, size=10, italic=True, color=MUTED, align=PP_ALIGN.CENTER)
 
-        rect(sl, cx + Inches(0.30), title_y + Inches(0.60),
-             cw - Inches(0.60), Inches(0.015), LINE)
+        div_y = title_y + Inches(0.78)
+        rect(sl, cx + Inches(0.32), div_y, cw - Inches(0.64), Inches(0.015), LINE)
 
-        text(sl, cx + Inches(0.22), title_y + Inches(0.76),
-             cw - Inches(0.44), card_h - Inches(2.10),
-             body, size=13, color=INK3, align=PP_ALIGN.CENTER)
+        body_y = div_y + Inches(0.14)
+        text(sl, cx + pad_x, body_y, inner_w, Inches(1.10),
+             body, size=12, color=INK3, align=PP_ALIGN.CENTER)
+
+        ky = body_y + Inches(1.22)
+        row_h = Inches(0.74)
+        for j, (label, detail) in enumerate(keys):
+            ry = ky + j * row_h
+            chip_w = Inches(1.05)
+            rrect(sl, cx + pad_x, ry + Inches(0.04), chip_w, Inches(0.32),
+                  WHITE, accent_c, 0.7, radius=0.5)
+            text(sl, cx + pad_x, ry + Inches(0.04), chip_w, Inches(0.32),
+                 label, size=10, bold=True, color=accent_c,
+                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+            text(sl, cx + pad_x + chip_w + Inches(0.10), ry,
+                 inner_w - chip_w - Inches(0.10), Inches(0.40),
+                 detail, size=11, color=INK2, anchor=MSO_ANCHOR.MIDDLE)
 
 
-# ===== SLIDE 10 (new): Self-Protection Mechanism via Heat Activation =====
+# ===== SLIDE 10: Mechanism: Spray, Adhesion, and Flame Protection =====
 def slide_self_protection(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials Overview 2/2", "Mechanism: Spray, Adhesion, and Flame Protection")
     draw_footer(sl, "10 / 39")
 
-    left_w = BODY_W * 0.42 - Inches(0.15)
-    right_w = BODY_W * 0.58 - Inches(0.05)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # Lead sentence
+    lead_h = Inches(0.52)
+    text(sl, BODY_X, BODY_Y, BODY_W, lead_h,
+         "Not temperature, but shear and self-healing govern the spray-to-adhesion behavior.",
+         size=15, bold=True, color=INK, anchor=MSO_ANCHOR.MIDDLE)
 
-    # Left: title + text
-    text(sl, BODY_X, BODY_Y, left_w, Inches(0.70),
-         "Shear-Thinning and", size=26, bold=True, color=INK)
-    text(sl, BODY_X, BODY_Y + Inches(0.68), left_w, Inches(0.70),
-         "Self-Healing Are Key", size=26, bold=True, color=INK)
+    # Four large process cards (full width)
+    n = 4
+    arrow_w = Inches(0.30)
+    cards_y = BODY_Y + lead_h + Inches(0.14)
+    cw = (BODY_W - arrow_w * (n - 1)) / n
+    card_h = Inches(3.50)
 
-    rect(sl, BODY_X, BODY_Y + Inches(1.56), Inches(0.05), Inches(1.80), ACCENT)
-
-    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.62), left_w - Inches(0.18), Inches(0.56),
-         "Shear strain during spraying reduces viscosity (sol-like); upon wall contact, self-healing instantly restores the gel network.",
-         size=12, color=INK2)
-    text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.30), left_w - Inches(0.18), Inches(0.56),
-         "When exposed to flame, the gel transforms into a silica aerogel, protecting the substrate as a thermal barrier even after complete desiccation.",
-         size=12, color=INK2)
-
-    # 4-stage flow cards (gel → sol → self-healing gel → aerogel)
-    fc_y = BODY_Y + Inches(3.20)
-    fc_h = Inches(0.70)
-    fc_w = (left_w - Inches(0.08) * 3) / 4
-    flows = [
-        ("Gel\n(at rest)", ACCENT),
-        ("Sol-like\n(spraying)", D_TEAL),
-        ("Self-heal gel\n(on wall)", D_GRN),
-        ("Aerogel\n(flame)", D_AMBR),
+    stages = [
+        ("01", "At rest", "Gel", "High-viscosity elastic gel. G' > G'' holds structure.",
+         "Yield stress ~33 Pa", ACCENT),
+        ("02", "Spraying", "Sol-like", "Shear strain lowers viscosity; the gel flows.",
+         "Shear-thinning n < 1", D_TEAL),
+        ("03", "On wall", "Self-healing gel", "Strain release instantly restores the gel network.",
+         "G' recovery ~90%", D_GRN),
+        ("04", "Flame", "Aerogel", "CSP sinters into a porous silica layer.",
+         "Acts as thermal barrier", D_AMBR),
     ]
-    for j, (lbl, c) in enumerate(flows):
-        fx = BODY_X + j * (fc_w + Inches(0.08))
-        rrect(sl, fx, fc_y, fc_w, fc_h, CARD_C, c, 0.7, radius=0.03)
-        rect(sl, fx, fc_y, fc_w, Inches(0.04), c)
-        text(sl, fx, fc_y, fc_w, fc_h,
-             lbl, size=9, bold=True, color=INK,
+
+    for i, (no, phase, state, desc, metric, c) in enumerate(stages):
+        cx = BODY_X + i * (cw + arrow_w)
+        rrect(sl, cx, cards_y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
+        rect(sl, cx, cards_y, cw, Inches(0.06), c)
+
+        pad_x = Inches(0.20)
+        inner_w = cw - pad_x * 2
+
+        text(sl, cx + pad_x, cards_y + Inches(0.18), inner_w, Inches(0.34),
+             no, size=13, bold=True, color=c)
+        text(sl, cx + pad_x, cards_y + Inches(0.54), inner_w, Inches(0.30),
+             phase, size=12, bold=True, color=MUTED)
+        text(sl, cx + pad_x, cards_y + Inches(0.92), inner_w, Inches(0.56),
+             state, size=20, bold=True, color=INK)
+        rect(sl, cx + pad_x, cards_y + Inches(1.58), inner_w, Inches(0.015), LINE)
+        text(sl, cx + pad_x, cards_y + Inches(1.72), inner_w, Inches(1.10),
+             desc, size=12, color=INK3)
+
+        badge_h = Inches(0.46)
+        badge_y = cards_y + card_h - badge_h - Inches(0.18)
+        rrect(sl, cx + pad_x, badge_y, inner_w, badge_h, WHITE, c, 0.7, radius=0.06)
+        text(sl, cx + pad_x, badge_y, inner_w, badge_h,
+             metric, size=10, bold=True, color=c,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        if j < 3:
-            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.08 * j) + Inches(0.01),
-                 fc_y, Inches(0.08), fc_h,
-                 "→", size=10, color=MUTED,
+
+        if i < n - 1:
+            text(sl, cx + cw, cards_y, arrow_w, card_h,
+                 "→", size=20, color=GRAY_L,
                  align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-    # Right: figure placeholder
-    fig_placeholder(sl, right_x, BODY_Y, right_w, BODY_H - Inches(0.40),
-                    fig_num="Concept",
-                    caption="Cellulosic polymer × colloidal silica → silica aerogel formation concept schematic")
+    # Bottom POINT band
+    band_y = cards_y + card_h + Inches(0.20)
+    band_h = H - band_y - FTR_H - Inches(0.22)
+    rrect(sl, BODY_X, band_y, BODY_W, band_h, HEADER, None, radius=0.05)
+    rect(sl, BODY_X, band_y, Inches(0.08), band_h, GOLD)
+    text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
+         "POINT", size=13, bold=True, color=GOLD, anchor=MSO_ANCHOR.MIDDLE)
+    text(sl, BODY_X + Inches(2.0), band_y, BODY_W - Inches(2.3), band_h,
+         "Rather than relying on MC's thermal response (LCST), rheology alone achieves \"spray → stick → set\" — the core of this material.",
+         size=13, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
 
 
 # ===== SLIDE 9: セルロース系ポリマー =====
