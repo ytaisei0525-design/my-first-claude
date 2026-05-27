@@ -736,7 +736,7 @@ def slide_mat_composition(prs):
 # ===== SLIDE 10 (new): 熱活性化による自己防護メカニズム =====
 def slide_self_protection(prs):
     sl = new_slide(prs)
-    draw_header(sl, "材料 概要 2/2", "熱活性化による自己防護メカニズム")
+    draw_header(sl, "材料 概要 2/2", "噴霧・付着・耐火のメカニズム")
     draw_footer(sl, "10 / 39")
 
     left_w = BODY_W * 0.42 - Inches(0.15)
@@ -745,35 +745,40 @@ def slide_self_protection(prs):
 
     # 左：タイトル + テキスト
     text(sl, BODY_X, BODY_Y, left_w, Inches(0.70),
-         "熱活性化による", size=26, bold=True, color=INK)
+         "せん断変形と", size=26, bold=True, color=INK)
     text(sl, BODY_X, BODY_Y + Inches(0.68), left_w, Inches(0.70),
-         "自己防護メカニズム", size=26, bold=True, color=INK)
+         "自己修復性が鍵", size=26, bold=True, color=INK)
 
     rect(sl, BODY_X, BODY_Y + Inches(1.56), Inches(0.05), Inches(1.80), ACCENT)
 
     text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.62), left_w - Inches(0.18), Inches(0.56),
-         "本研究が開発したバイオミメティック・ヒドロゲルは、炎にさらされることで「シリカエアロゲル」へと変貌します。",
+         "噴霧時のせん断ひずみでゾル様に変化し、壁に付着すると自己修復性によって即座にゲル構造を回復します。",
          size=12, color=INK2)
     text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.30), left_w - Inches(0.18), Inches(0.56),
-         "水分が枯渇した後も、強固な断熱壁として機能し、基材の発火を長時間防ぎます。",
+         "炎にさらされると「シリカエアロゲル」へと変貌し、水分が枯渇した後も断熱層として基材を保護します。",
          size=12, color=INK2)
 
-    # 3段階フロー（小さいカード）
+    # 4段階フロー（ゲル→ゾル様→自己修復ゲル→エアロゲル）
     fc_y = BODY_Y + Inches(3.20)
     fc_h = Inches(0.70)
-    fc_w = (left_w - Inches(0.20)) / 3
-    flows = [("ゾル\n（散布）", ACCENT), ("熱ゲル\n（接触）", D_TEAL), ("エアロゲル\n（保護）", D_AMBR)]
+    fc_w = (left_w - Inches(0.08) * 3) / 4
+    flows = [
+        ("ゲル\n（静止）", ACCENT),
+        ("ゾル様\n（噴霧）", D_TEAL),
+        ("自己修復ゲル\n（付着）", D_GRN),
+        ("エアロゲル\n（炎）", D_AMBR),
+    ]
     for j, (lbl, c) in enumerate(flows):
-        fx = BODY_X + j * (fc_w + Inches(0.10))
+        fx = BODY_X + j * (fc_w + Inches(0.08))
         rrect(sl, fx, fc_y, fc_w, fc_h, CARD_C, c, 0.7, radius=0.03)
         rect(sl, fx, fc_y, fc_w, Inches(0.04), c)
         text(sl, fx, fc_y, fc_w, fc_h,
-             lbl, size=10, bold=True, color=INK,
+             lbl, size=9, bold=True, color=INK,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        if j < 2:
-            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.10 * j) + Inches(0.01),
-                 fc_y, Inches(0.10), fc_h,
-                 "→", size=11, color=MUTED,
+        if j < 3:
+            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.08 * j) + Inches(0.01),
+                 fc_y, Inches(0.08), fc_h,
+                 "→", size=10, color=MUTED,
                  align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     # 右：図プレースホルダー（セルロース→CSP模式図）
@@ -827,67 +832,66 @@ def slide_09_polymers(prs):
                     caption="セルロースの分子構造（参考）")
 
 
-# ===== SLIDE 10: MC熱ゲル化 =====
+# ===== SLIDE 12: レオロジー設計（せん断希薄化・自己修復性）=====
 def slide_10_mc(prs):
     sl = new_slide(prs)
-    draw_header(sl, "材料 2/6", "メチルセルロース(MC)の熱ゲル化：火炎保護の鍵となる特性")
+    draw_header(sl, "材料 2/6", "レオロジー設計：せん断希薄化と自己修復性")
     draw_footer(sl, "12 / 39")
 
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # 左上：ゾル→ゲル外観写真プレースホルダー
+    # 左上：粘度 vs せん断速度グラフ（シアシニング挙動）
     img_h = Inches(2.7)
     fig_placeholder(sl, BODY_X, BODY_Y, left_w, img_h,
-                    fig_num="Photo",
-                    caption="MCゾル（室温）→ ゲル（加熱後）の外観比較")
+                    fig_num="Fig. 2",
+                    caption="粘度 vs せん断速度（シアシニング挙動）")
 
-    # 左下：主要特性（横線区切り、カードなし）
+    # 左下：主要特性
     ty = BODY_Y + img_h + Inches(0.20)
     rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
     ty += Inches(0.18)
     props = [
-        ("LCST", "~55°C でゲル化開始（1 wt% 水溶液）"),
-        ("熱分解", "~300°C で有機成分が分解"),
-        ("設計意図", "常温では液体、火炎接触で即ゲル → CSPを固定"),
+        ("せん断希薄化", "流動指数 n < 1（噴霧時に低粘度化）"),
+        ("降伏応力", "~33 Pa（静止時のゲル構造を維持）"),
+        ("自己修復性", "ひずみ除去後 G' が ~90% 回復"),
     ]
     for label, detail in props:
-        text(sl, BODY_X, ty, Inches(0.88), Inches(0.30),
+        text(sl, BODY_X, ty, Inches(1.10), Inches(0.30),
              label, size=10, bold=True, color=ACCENT)
-        text(sl, BODY_X + Inches(0.92), ty, left_w - Inches(0.92), Inches(0.30),
+        text(sl, BODY_X + Inches(1.14), ty, left_w - Inches(1.14), Inches(0.30),
              detail, size=12, color=INK2)
         ty += Inches(0.40)
 
     # 右：3つのmini stats
     mw = (right_w - Inches(0.20)) / 3
     mh = Inches(1.4)
-    mini(sl, right_x, BODY_Y, mw, mh, "LCST（ゲル化開始）", "~55°C", "1 wt% MC水溶液", value_color=ACCENT)
-    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "熱分解温度", "~300°C", "TGA測定", value_color=D_RED)
-    mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "CSP焼結開始", "~200°C", "粒子間ネック形成", value_color=D_TEAL)
+    mini(sl, right_x, BODY_Y, mw, mh, "流動指数 n", "< 1", "強いせん断希薄化", value_color=ACCENT)
+    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "静的降伏応力", "~33 Pa", "HEC+MC/CSP", value_color=D_TEAL)
+    mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "G' 回復率", "~90%", "1000秒後", value_color=D_GRN)
 
-    # 温度プロセスフロー (4段)
+    # 噴霧〜耐火プロセスフロー (4段)
     fy = BODY_Y + mh + Inches(0.30)
     fh = Inches(2.7)
-    # 暗いカード背景
     rrect(sl, right_x, fy, right_w, fh, HEADER, None, radius=0.04)
     text(sl, right_x + Inches(0.20), fy + Inches(0.18), right_w - Inches(0.4), Inches(0.30),
-         "温度別プロセス", size=11, bold=True, color=RGBColor(0xa0, 0xb8, 0xd0))
+         "噴霧〜耐火プロセス", size=11, bold=True, color=RGBColor(0xa0, 0xb8, 0xd0))
 
     sub_y = fy + Inches(0.65)
     sub_h = fh - Inches(0.75)
     pw = (right_w - Inches(0.40) - Inches(0.30) * 3) / 4
     steps_t = [
-        ("~55°C", "MCゲル化", "構造を固定"),
-        ("~100°C", "水分蒸発", "発泡・膨張"),
-        ("~200°C", "CSP焼結", "粒界形成"),
-        (">300°C", "有機分解", "純シリカ層"),
+        ("静止時", "ゲル状態", "G' > G''"),
+        ("噴霧時", "せん断希薄化", "低粘度・ゾル様"),
+        ("付着後", "自己修復", "G' 回復"),
+        ("炎接触", "エアロゲル化", "多孔質シリカ層"),
     ]
     px = right_x + Inches(0.20)
-    for i, (temp, ti, dsc) in enumerate(steps_t):
+    for i, (phase, ti, dsc) in enumerate(steps_t):
         rrect(sl, px, sub_y, pw, sub_h, RGBColor(0x2c, 0x3b, 0x52), None, radius=0.04)
         text(sl, px + Inches(0.10), sub_y + Inches(0.14), pw - Inches(0.2), Inches(0.30),
-             temp, size=11, bold=True, color=GOLD)
+             phase, size=11, bold=True, color=GOLD)
         text(sl, px + Inches(0.10), sub_y + Inches(0.50), pw - Inches(0.2), Inches(0.40),
              ti, size=13, bold=True, color=WHITE)
         text(sl, px + Inches(0.10), sub_y + Inches(1.0), pw - Inches(0.2), Inches(0.50),

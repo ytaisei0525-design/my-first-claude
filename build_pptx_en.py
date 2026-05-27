@@ -738,7 +738,7 @@ def slide_mat_composition(prs):
 # ===== SLIDE 10 (new): Self-Protection Mechanism via Heat Activation =====
 def slide_self_protection(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Materials Overview 2/2", "Self-Protection Mechanism via Heat Activation")
+    draw_header(sl, "Materials Overview 2/2", "Mechanism: Spray, Adhesion, and Flame Protection")
     draw_footer(sl, "10 / 39")
 
     left_w = BODY_W * 0.42 - Inches(0.15)
@@ -747,35 +747,40 @@ def slide_self_protection(prs):
 
     # Left: title + text
     text(sl, BODY_X, BODY_Y, left_w, Inches(0.70),
-         "Heat-Activated", size=26, bold=True, color=INK)
+         "Shear-Thinning and", size=26, bold=True, color=INK)
     text(sl, BODY_X, BODY_Y + Inches(0.68), left_w, Inches(0.70),
-         "Self-Protection Mechanism", size=26, bold=True, color=INK)
+         "Self-Healing Are Key", size=26, bold=True, color=INK)
 
     rect(sl, BODY_X, BODY_Y + Inches(1.56), Inches(0.05), Inches(1.80), ACCENT)
 
     text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(1.62), left_w - Inches(0.18), Inches(0.56),
-         "The biomimetic hydrogel developed in this work transforms into a silica aerogel when exposed to flame.",
+         "Shear strain during spraying reduces viscosity (sol-like); upon wall contact, self-healing instantly restores the gel network.",
          size=12, color=INK2)
     text(sl, BODY_X + Inches(0.18), BODY_Y + Inches(2.30), left_w - Inches(0.18), Inches(0.56),
-         "Even after complete desiccation, it functions as a robust thermal barrier, shielding the substrate from ignition over extended periods.",
+         "When exposed to flame, the gel transforms into a silica aerogel, protecting the substrate as a thermal barrier even after complete desiccation.",
          size=12, color=INK2)
 
-    # 3-stage flow cards
+    # 4-stage flow cards (gel → sol → self-healing gel → aerogel)
     fc_y = BODY_Y + Inches(3.20)
     fc_h = Inches(0.70)
-    fc_w = (left_w - Inches(0.20)) / 3
-    flows = [("Sol\n(spray)", ACCENT), ("Thermal gel\n(contact)", D_TEAL), ("Aerogel\n(protect)", D_AMBR)]
+    fc_w = (left_w - Inches(0.08) * 3) / 4
+    flows = [
+        ("Gel\n(at rest)", ACCENT),
+        ("Sol-like\n(spraying)", D_TEAL),
+        ("Self-heal gel\n(on wall)", D_GRN),
+        ("Aerogel\n(flame)", D_AMBR),
+    ]
     for j, (lbl, c) in enumerate(flows):
-        fx = BODY_X + j * (fc_w + Inches(0.10))
+        fx = BODY_X + j * (fc_w + Inches(0.08))
         rrect(sl, fx, fc_y, fc_w, fc_h, CARD_C, c, 0.7, radius=0.03)
         rect(sl, fx, fc_y, fc_w, Inches(0.04), c)
         text(sl, fx, fc_y, fc_w, fc_h,
-             lbl, size=10, bold=True, color=INK,
+             lbl, size=9, bold=True, color=INK,
              align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        if j < 2:
-            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.10 * j) + Inches(0.01),
-                 fc_y, Inches(0.10), fc_h,
-                 "→", size=11, color=MUTED,
+        if j < 3:
+            text(sl, BODY_X + (j + 1) * fc_w + Inches(0.08 * j) + Inches(0.01),
+                 fc_y, Inches(0.08), fc_h,
+                 "→", size=10, color=MUTED,
                  align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
     # Right: figure placeholder
@@ -829,67 +834,66 @@ def slide_09_polymers(prs):
                     caption="Molecular structure of cellulose (reference)")
 
 
-# ===== SLIDE 10: MC熱ゲル化 =====
+# ===== SLIDE 12: Rheological Design (Shear-Thinning & Self-Healing) =====
 def slide_10_mc(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Materials 2/6", "Methyl Cellulose (MC) Thermal Gelation: Key Property for Flame Protection")
+    draw_header(sl, "Materials 2/6", "Rheological Design: Shear-Thinning and Self-Healing")
     draw_footer(sl, "12 / 39")
 
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
     right_x = BODY_X + left_w + Inches(0.20)
 
-    # Left top: sol→gel appearance photo placeholder
+    # Left top: viscosity vs shear rate graph (shear-thinning behavior)
     img_h = Inches(2.7)
     fig_placeholder(sl, BODY_X, BODY_Y, left_w, img_h,
-                    fig_num="Photo",
-                    caption="MC sol (room temp) → gel (after heating) — visual comparison")
+                    fig_num="Fig. 2",
+                    caption="Viscosity vs. shear rate — shear-thinning behavior")
 
-    # Left bottom: key properties (divider line, no card box)
+    # Left bottom: key properties
     ty = BODY_Y + img_h + Inches(0.20)
     rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
     ty += Inches(0.18)
     props = [
-        ("LCST", "~55°C gelation onset (1 wt% aqueous solution)"),
-        ("Decomp.", "~300°C thermal decomposition of organic component"),
-        ("Design", "Liquid at room temp → instant gel on flame contact"),
+        ("Shear-thinning", "Flow index n < 1 — reduced viscosity during spraying"),
+        ("Yield stress", "~33 Pa — gel structure maintained at rest"),
+        ("Self-healing", "G' recovers ~90% after strain removal"),
     ]
     for label, detail in props:
-        text(sl, BODY_X, ty, Inches(0.88), Inches(0.30),
+        text(sl, BODY_X, ty, Inches(1.15), Inches(0.30),
              label, size=10, bold=True, color=ACCENT)
-        text(sl, BODY_X + Inches(0.92), ty, left_w - Inches(0.92), Inches(0.30),
+        text(sl, BODY_X + Inches(1.19), ty, left_w - Inches(1.19), Inches(0.30),
              detail, size=12, color=INK2)
         ty += Inches(0.40)
 
     # Right: 3 mini stats
     mw = (right_w - Inches(0.20)) / 3
     mh = Inches(1.4)
-    mini(sl, right_x, BODY_Y, mw, mh, "LCST (Gelation onset)", "~55°C", "1 wt% MC aqueous solution", value_color=ACCENT)
-    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "Thermal decomposition", "~300°C", "TGA measurement", value_color=D_RED)
-    mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "CSP sintering onset", "~200°C", "Inter-particle neck formation", value_color=D_TEAL)
+    mini(sl, right_x, BODY_Y, mw, mh, "Flow index n", "< 1", "Strong shear-thinning", value_color=ACCENT)
+    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "Static yield stress", "~33 Pa", "HEC+MC/CSP", value_color=D_TEAL)
+    mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "G' recovery", "~90%", "After 1000 s", value_color=D_GRN)
 
-    # Temperature process flow (4 steps)
+    # Spray-to-flame process flow (4 steps)
     fy = BODY_Y + mh + Inches(0.30)
     fh = Inches(2.7)
-    # Dark card background
     rrect(sl, right_x, fy, right_w, fh, HEADER, None, radius=0.04)
     text(sl, right_x + Inches(0.20), fy + Inches(0.18), right_w - Inches(0.4), Inches(0.30),
-         "Temperature-dependent Process", size=11, bold=True, color=RGBColor(0xa0, 0xb8, 0xd0))
+         "Spray-to-Flame Process", size=11, bold=True, color=RGBColor(0xa0, 0xb8, 0xd0))
 
     sub_y = fy + Inches(0.65)
     sub_h = fh - Inches(0.75)
     pw = (right_w - Inches(0.40) - Inches(0.30) * 3) / 4
     steps_t = [
-        ("~55°C", "MC gelation", "Structure fixed"),
-        ("~100°C", "Moisture evaporation", "Foaming & expansion"),
-        ("~200°C", "CSP sintering", "Grain boundary formation"),
-        (">300°C", "Organic decomposition", "Pure silica layer"),
+        ("At rest", "Gel state", "G' > G''"),
+        ("Spraying", "Shear-thinning", "Low viscosity"),
+        ("On wall", "Self-healing", "G' recovery"),
+        ("Flame", "Aerogel", "Porous silica"),
     ]
     px = right_x + Inches(0.20)
-    for i, (temp, ti, dsc) in enumerate(steps_t):
+    for i, (phase, ti, dsc) in enumerate(steps_t):
         rrect(sl, px, sub_y, pw, sub_h, RGBColor(0x2c, 0x3b, 0x52), None, radius=0.04)
         text(sl, px + Inches(0.10), sub_y + Inches(0.14), pw - Inches(0.2), Inches(0.30),
-             temp, size=11, bold=True, color=GOLD)
+             phase, size=11, bold=True, color=GOLD)
         text(sl, px + Inches(0.10), sub_y + Inches(0.50), pw - Inches(0.2), Inches(0.40),
              ti, size=13, bold=True, color=WHITE)
         text(sl, px + Inches(0.10), sub_y + Inches(1.0), pw - Inches(0.2), Inches(0.50),
