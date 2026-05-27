@@ -2070,7 +2070,6 @@ def main():
     slide_34_future(prs)
     slide_35_summary(prs)
     slide_36_impact(prs)
-    slide_thermal_mechanism(prs)
 
     out_path = '/home/user/my-first-claude/slides.pptx'
     prs.save(out_path)
