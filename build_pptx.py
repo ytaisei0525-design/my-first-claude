@@ -579,18 +579,30 @@ def slide_06_existing(prs):
     n = 3
     gap = Inches(0.22)
     cw = (BODY_W - gap * (n - 1)) / n
-    card_h = BODY_H - Inches(0.86)
+    card_h = BODY_H - Inches(0.78)
 
     cats = [
-        ("長期遅延剤", "Long-term retardant", "リン酸アンモニウム等の化学物質",
-         "残留物がある限り効果が持続", "化学物質が対象物に残留する", False),
-        ("泡消火剤", "Foam suppressant", "界面活性剤（旧来はフッ素系）",
-         "水分保持 15〜30分（短期的）", "乾燥で効果消失／フッ素系は生体蓄積・環境毒性", False),
-        ("水強化ゲル（WEG）", "Water-enhancing gel", "高吸水性ポリマー（環境配慮型）",
-         "水分保持 30〜60分・建物保護に有効", "高温・強風で乾燥すると効果を完全に喪失", True),
+        ("長期遅延剤", "Long-term retardant",
+         "Phos-Chek（リン酸塩系スラリー）",
+         "航空機からの赤色スラリー散布",
+         "リン酸アンモニウム等の化学物質",
+         "残留物がある限り効果が持続",
+         "化学物質が対象物に残留する", False),
+        ("泡消火剤", "Foam suppressant",
+         "Class A フォーム／旧 AFFF",
+         "消防ホースからの泡放水",
+         "界面活性剤（旧来はフッ素系）",
+         "水分保持 15〜30分（短期的）",
+         "乾燥で効果消失／フッ素系は生体蓄積・環境毒性", False),
+        ("水強化ゲル（WEG）", "Water-enhancing gel",
+         "Barricade／Thermo-Gel／AquaGel-K",
+         "住宅・植生へのゲル事前塗布",
+         "高吸水性ポリマー（環境配慮型）",
+         "水分保持 30〜60分・建物保護に有効",
+         "高温・強風で乾燥すると効果を完全に喪失", True),
     ]
 
-    for i, (name, en, comp, merit, limit, is_hero) in enumerate(cats):
+    for i, (name, en, example, photo_cap, comp, merit, limit, is_hero) in enumerate(cats):
         cx = BODY_X + i * (cw + gap)
         if is_hero:
             rrect(sl, cx, BODY_Y, cw, card_h, HEADER, None, radius=0.04)
@@ -599,33 +611,55 @@ def slide_06_existing(prs):
             rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
             rect(sl, cx, BODY_Y, cw, Inches(0.05), LINE)
 
-        pad = Inches(0.22)
+        pad = Inches(0.20)
         iw = cw - pad * 2
-        ty = BODY_Y + Inches(0.30)
         name_c = WHITE if is_hero else INK
         en_c = RGBColor(0xa0, 0xb8, 0xd0) if is_hero else MUTED
         body_c = RGBColor(0xd8, 0xe2, 0xee) if is_hero else INK3
         label_c = RGBColor(0x88, 0xa0, 0xb8) if is_hero else MUTED
         div_c = RGBColor(0x44, 0x58, 0x70) if is_hero else LINE
+        accent_c = GOLD if is_hero else ACCENT
 
-        text(sl, cx + pad, ty, iw, Inches(0.40), name, size=18, bold=True, color=name_c)
-        text(sl, cx + pad, ty + Inches(0.44), iw, Inches(0.26), en, size=10, italic=True, color=en_c)
-        rect(sl, cx + pad, ty + Inches(0.80), iw, Inches(0.015), div_c)
+        # 写真ボックス（カード上部・ユーザーが後で画像を貼る）
+        ph_y = BODY_Y + Inches(0.18)
+        ph_h = Inches(1.18)
+        rrect(sl, cx + pad, ph_y, iw, ph_h, PH_BG, PH_BD, 1.0, radius=0.03)
+        badge_w = Inches(0.70)
+        rect(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26), accent_c)
+        text(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26),
+             "写真", size=9, bold=True, color=WHITE,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, cx + pad, ph_y + Inches(0.30), iw, Inches(0.56),
+             photo_cap, size=10, color=GRAY_L,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-        text(sl, cx + pad, ty + Inches(0.96), iw, Inches(0.24), "主成分", size=10, bold=True, color=label_c)
-        text(sl, cx + pad, ty + Inches(1.20), iw, Inches(0.52), comp, size=12, color=body_c)
+        # 名称＋英名
+        ty = ph_y + ph_h + Inches(0.12)
+        text(sl, cx + pad, ty, iw, Inches(0.36), name, size=16, bold=True, color=name_c)
+        text(sl, cx + pad, ty + Inches(0.36), iw, Inches(0.22), en, size=9, italic=True, color=en_c)
+        rect(sl, cx + pad, ty + Inches(0.64), iw, Inches(0.012), div_c)
 
-        text(sl, cx + pad, ty + Inches(1.76), iw, Inches(0.24), "効果・保持", size=10, bold=True, color=label_c)
-        text(sl, cx + pad, ty + Inches(2.00), iw, Inches(0.52), merit, size=12, color=body_c)
+        # 例（製品名）
+        text(sl, cx + pad, ty + Inches(0.74), iw, Inches(0.22), "例", size=9, bold=True, color=accent_c)
+        text(sl, cx + pad, ty + Inches(0.94), iw, Inches(0.40), example, size=11, bold=True, color=body_c)
 
+        # 主成分
+        text(sl, cx + pad, ty + Inches(1.40), iw, Inches(0.22), "主成分", size=9, bold=True, color=label_c)
+        text(sl, cx + pad, ty + Inches(1.60), iw, Inches(0.40), comp, size=11, color=body_c)
+
+        # 効果・保持
+        text(sl, cx + pad, ty + Inches(2.06), iw, Inches(0.22), "効果・保持", size=9, bold=True, color=label_c)
+        text(sl, cx + pad, ty + Inches(2.26), iw, Inches(0.40), merit, size=11, color=body_c)
+
+        # 課題
         limit_label_c = GOLD if is_hero else D_RED
-        text(sl, cx + pad, ty + Inches(2.58), iw, Inches(0.24), "課題", size=10, bold=True, color=limit_label_c)
-        text(sl, cx + pad, ty + Inches(2.82), iw, card_h - Inches(3.30),
-             limit, size=12, bold=True, color=(WHITE if is_hero else D_RED))
+        text(sl, cx + pad, ty + Inches(2.72), iw, Inches(0.22), "課題", size=9, bold=True, color=limit_label_c)
+        text(sl, cx + pad, ty + Inches(2.92), iw, card_h - (ty - BODY_Y) - Inches(3.10),
+             limit, size=11, bold=True, color=(WHITE if is_hero else D_RED))
 
     # 下部メッセージ
-    msg_y = BODY_Y + card_h + Inches(0.18)
-    callout(sl, BODY_X, msg_y, BODY_W, Inches(0.52),
+    msg_y = BODY_Y + card_h + Inches(0.16)
+    callout(sl, BODY_X, msg_y, BODY_W, Inches(0.50),
             "本研究は、環境配慮型WEGが持つ「乾燥すると無効になる」致命的な弱点を克服する",
             icon='→')
 
