@@ -70,6 +70,18 @@ def rrect(sl, x, y, w, h, fill, border=None, bpt=0.5, radius=0.05):
     s.shadow.inherit = False
     return s
 
+def oval(sl, x, y, w, h, fill, border=None, bpt=0.5):
+    s = sl.shapes.add_shape(MSO_SHAPE.OVAL, x, y, w, h)
+    s.fill.solid()
+    s.fill.fore_color.rgb = fill
+    if border:
+        s.line.color.rgb = border
+        s.line.width = Pt(bpt)
+    else:
+        s.line.fill.background()
+    s.shadow.inherit = False
+    return s
+
 def text(sl, x, y, w, h, content, size=11, bold=False,
          color=INK2, align=PP_ALIGN.LEFT, italic=False, anchor=MSO_ANCHOR.TOP):
     if content is None:
@@ -571,6 +583,117 @@ def slide_05_process(prs):
 
 
 # ===== SLIDE 6: 既存技術と限界（米国森林局の3分類） =====
+def _draw_retardant(sl, bx, by, bw, bh):
+    """長期遅延剤：航空機が赤色スラリーを空中散布するイラスト"""
+    SKY  = RGBColor(0xa8, 0xd4, 0xef)
+    GRND = RGBColor(0x6a, 0xa5, 0x5e)
+    PLN  = RGBColor(0x55, 0x6a, 0x7e)
+    DROP = RGBColor(0xc0, 0x3c, 0x3c)
+
+    rrect(sl, bx, by, bw, bh, SKY, None, radius=0.03)
+    rect(sl, bx, by + bh * 0.78, bw, bh * 0.22, GRND)
+    rect(sl, bx, by + bh * 0.78, bw, Inches(0.018), RGBColor(0x4e, 0x88, 0x42))
+
+    # 胴体
+    bdy_w, bdy_h = bw * 0.30, bh * 0.08
+    bdy_x = bx + bw * 0.10
+    bdy_y = by + bh * 0.22
+    rect(sl, bdy_x, bdy_y, bdy_w, bdy_h, PLN)
+    # 主翼
+    rect(sl, bdy_x + bdy_w * 0.28, bdy_y - bh * 0.08, bw * 0.10, bh * 0.22, PLN)
+    # 垂直尾翼
+    rect(sl, bdy_x + bw * 0.01, bdy_y - bh * 0.10, bw * 0.04, bh * 0.12, PLN)
+
+    # 赤色スラリー散布（楕円）
+    for fx, fy, fw, fh in [
+        (0.35, 0.44, 0.040, 0.088), (0.44, 0.53, 0.036, 0.078),
+        (0.52, 0.46, 0.038, 0.082), (0.42, 0.65, 0.032, 0.070),
+        (0.58, 0.58, 0.034, 0.074), (0.50, 0.70, 0.030, 0.066),
+        (0.62, 0.50, 0.028, 0.062),
+    ]:
+        oval(sl, bx + bw * fx, by + bh * fy, bw * fw, bh * fh, DROP)
+
+
+def _draw_foam(sl, bx, by, bw, bh):
+    """泡消火剤：消防ノズルから泡が広がるイラスト"""
+    BG    = RGBColor(0xbe, 0xe0, 0xf5)
+    NOZL  = RGBColor(0x2c, 0x3e, 0x50)
+    FOAM  = RGBColor(0xf2, 0xf8, 0xfe)
+    FOAM2 = RGBColor(0xc8, 0xe4, 0xf5)
+
+    rrect(sl, bx, by, bw, bh, BG, None, radius=0.03)
+
+    # ホース＋ノズル
+    rect(sl, bx + bw * 0.02, by + bh * 0.50, bw * 0.07, bh * 0.40, NOZL)
+    rect(sl, bx + bw * 0.05, by + bh * 0.36, bw * 0.10, bh * 0.28, NOZL)
+    rect(sl, bx + bw * 0.13, by + bh * 0.43, bw * 0.04, bh * 0.14, NOZL)
+
+    # 泡（扇状に広がる重なり合う楕円）
+    for fx, fy, fw, fh, c in [
+        (0.18, 0.22, 0.14, 0.30, FOAM),  (0.28, 0.14, 0.16, 0.32, FOAM),
+        (0.40, 0.19, 0.14, 0.28, FOAM),  (0.51, 0.14, 0.15, 0.30, FOAM),
+        (0.62, 0.20, 0.13, 0.26, FOAM),  (0.72, 0.16, 0.14, 0.28, FOAM),
+        (0.82, 0.24, 0.12, 0.24, FOAM),
+        (0.23, 0.44, 0.15, 0.30, FOAM2), (0.34, 0.38, 0.16, 0.32, FOAM2),
+        (0.46, 0.44, 0.14, 0.28, FOAM),  (0.57, 0.38, 0.14, 0.28, FOAM2),
+        (0.68, 0.44, 0.13, 0.26, FOAM),  (0.79, 0.36, 0.12, 0.24, FOAM2),
+        (0.88, 0.30, 0.10, 0.20, FOAM),
+    ]:
+        oval(sl, bx + bw * fx, by + bh * fy, bw * fw, bh * fh, c)
+
+
+def _draw_gel_house(sl, bx, by, bw, bh):
+    """水強化ゲル（WEG）：ゲルを塗布された家のイラスト"""
+    BG   = RGBColor(0x1e, 0x29, 0x3b)
+    WALL = RGBColor(0xe8, 0xf0, 0xf8)
+    ROOF = RGBColor(0xcc, 0xd8, 0xe8)
+    GEL  = RGBColor(0x4a, 0xaa, 0x92)
+    GEL2 = RGBColor(0x38, 0x90, 0x7a)
+    WIN  = RGBColor(0x70, 0xaa, 0xcc)
+
+    rrect(sl, bx, by, bw, bh, BG, None, radius=0.03)
+
+    # 地面
+    rect(sl, bx, by + bh * 0.88, bw, bh * 0.12, RGBColor(0x2e, 0x4a, 0x38))
+
+    # 家の中心位置
+    h_w  = bw * 0.32
+    h_x  = bx + bw * 0.34
+    w_y  = by + bh * 0.48   # 壁の上端
+    w_h  = bh * 0.40        # 壁の高さ
+
+    # ゲルの輝き（後ろ）
+    oval(sl, h_x - bw * 0.03, w_y - bh * 0.06,
+         h_w + bw * 0.06, w_h + bh * 0.12, GEL)
+
+    # 壁
+    rect(sl, h_x, w_y, h_w, w_h, WALL)
+
+    # 屋根（三角形）
+    s = sl.shapes.add_shape(MSO_SHAPE.ISOSCELES_TRIANGLE,
+        h_x - bw * 0.02, by + bh * 0.18,
+        h_w + bw * 0.04, bh * 0.32)
+    s.fill.solid(); s.fill.fore_color.rgb = ROOF
+    s.line.fill.background(); s.shadow.inherit = False
+
+    # 窓
+    for wi in range(2):
+        rect(sl, h_x + h_w * 0.10 + wi * h_w * 0.50,
+             w_y + w_h * 0.14, h_w * 0.26, w_h * 0.30, WIN)
+
+    # ドア
+    rect(sl, h_x + h_w * 0.36, w_y + w_h * 0.58,
+         h_w * 0.28, w_h * 0.42, WIN)
+
+    # ゲル滴（周囲に散布）
+    for fx, fy, fw, fh in [
+        (0.10, 0.20, 0.028, 0.076), (0.15, 0.42, 0.024, 0.064),
+        (0.20, 0.30, 0.026, 0.070), (0.80, 0.22, 0.026, 0.074),
+        (0.84, 0.42, 0.024, 0.066), (0.76, 0.54, 0.028, 0.070),
+    ]:
+        oval(sl, bx + bw * fx, by + bh * fy, bw * fw, bh * fh, GEL2)
+
+
 def slide_06_existing(prs):
     sl = new_slide(prs)
     draw_header(sl, "背景 3/4", "既存の山火事用消火剤と、その限界（米国森林局の3分類）")
@@ -620,18 +743,15 @@ def slide_06_existing(prs):
         div_c = RGBColor(0x44, 0x58, 0x70) if is_hero else LINE
         accent_c = GOLD if is_hero else ACCENT
 
-        # 写真ボックス（カード上部・ユーザーが後で画像を貼る）
+        # イラスト（AIが図形で生成）
         ph_y = BODY_Y + Inches(0.18)
         ph_h = Inches(1.18)
-        rrect(sl, cx + pad, ph_y, iw, ph_h, PH_BG, PH_BD, 1.0, radius=0.03)
-        badge_w = Inches(0.70)
-        rect(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26), accent_c)
-        text(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26),
-             "写真", size=9, bold=True, color=WHITE,
-             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-        text(sl, cx + pad, ph_y + Inches(0.30), iw, Inches(0.56),
-             photo_cap, size=10, color=GRAY_L,
-             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        if i == 0:
+            _draw_retardant(sl, cx + pad, ph_y, iw, ph_h)
+        elif i == 1:
+            _draw_foam(sl, cx + pad, ph_y, iw, ph_h)
+        else:
+            _draw_gel_house(sl, cx + pad, ph_y, iw, ph_h)
 
         # 名称＋英名
         ty = ph_y + ph_h + Inches(0.12)
