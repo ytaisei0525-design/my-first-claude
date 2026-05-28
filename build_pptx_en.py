@@ -583,18 +583,30 @@ def slide_06_existing(prs):
     n = 3
     gap = Inches(0.22)
     cw = (BODY_W - gap * (n - 1)) / n
-    card_h = BODY_H - Inches(0.86)
+    card_h = BODY_H - Inches(0.78)
 
     cats = [
-        ("Long-term retardant", "Long-term retardant", "Chemicals such as ammonium phosphate",
-         "Effective as long as residue remains", "Chemical residue left on the target", False),
-        ("Foam suppressant", "Foam suppressant", "Surfactants (historically fluorinated)",
-         "Water retention 15–30 min (short-term)", "Loses effect when dry; fluorinated types bioaccumulate and are toxic", False),
-        ("Water-enhancing gel (WEG)", "Water-enhancing gel", "Superabsorbent polymer (eco-friendly)",
-         "Water retention 30–60 min; protects buildings", "Once dried by heat/wind, effectiveness is completely lost", True),
+        ("Long-term retardant", "Long-term retardant",
+         "Phos-Chek (phosphate slurry)",
+         "Aerial drop of red retardant slurry",
+         "Chemicals such as ammonium phosphate",
+         "Effective as long as residue remains",
+         "Chemical residue left on the target", False),
+        ("Foam suppressant", "Foam suppressant",
+         "Class A foam / legacy AFFF",
+         "Foam discharge from a fire hose",
+         "Surfactants (historically fluorinated)",
+         "Water retention 15–30 min (short-term)",
+         "Loses effect when dry; fluorinated types bioaccumulate and are toxic", False),
+        ("Water-enhancing gel (WEG)", "Water-enhancing gel",
+         "Barricade / Thermo-Gel / AquaGel-K",
+         "Pre-applied gel coating on homes",
+         "Superabsorbent polymer (eco-friendly)",
+         "Water retention 30–60 min; protects buildings",
+         "Once dried by heat/wind, effectiveness is completely lost", True),
     ]
 
-    for i, (name, en, comp, merit, limit, is_hero) in enumerate(cats):
+    for i, (name, en, example, photo_cap, comp, merit, limit, is_hero) in enumerate(cats):
         cx = BODY_X + i * (cw + gap)
         if is_hero:
             rrect(sl, cx, BODY_Y, cw, card_h, HEADER, None, radius=0.04)
@@ -603,31 +615,53 @@ def slide_06_existing(prs):
             rrect(sl, cx, BODY_Y, cw, card_h, CARD_C, LINE, 0.5, radius=0.04)
             rect(sl, cx, BODY_Y, cw, Inches(0.05), LINE)
 
-        pad = Inches(0.22)
+        pad = Inches(0.20)
         iw = cw - pad * 2
-        ty = BODY_Y + Inches(0.30)
         name_c = WHITE if is_hero else INK
         body_c = RGBColor(0xd8, 0xe2, 0xee) if is_hero else INK3
         label_c = RGBColor(0x88, 0xa0, 0xb8) if is_hero else MUTED
         div_c = RGBColor(0x44, 0x58, 0x70) if is_hero else LINE
+        accent_c = GOLD if is_hero else ACCENT
 
-        text(sl, cx + pad, ty, iw, Inches(0.46), name, size=16, bold=True, color=name_c)
-        rect(sl, cx + pad, ty + Inches(0.80), iw, Inches(0.015), div_c)
+        # Photo box (top of card; insert image later)
+        ph_y = BODY_Y + Inches(0.18)
+        ph_h = Inches(1.18)
+        rrect(sl, cx + pad, ph_y, iw, ph_h, PH_BG, PH_BD, 1.0, radius=0.03)
+        badge_w = Inches(0.70)
+        rect(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26), accent_c)
+        text(sl, cx + pad + Inches(0.08), ph_y + Inches(0.08), badge_w, Inches(0.26),
+             "Photo", size=9, bold=True, color=WHITE,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, cx + pad, ph_y + Inches(0.30), iw, Inches(0.56),
+             photo_cap, size=10, color=GRAY_L,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-        text(sl, cx + pad, ty + Inches(0.96), iw, Inches(0.24), "Composition", size=10, bold=True, color=label_c)
-        text(sl, cx + pad, ty + Inches(1.20), iw, Inches(0.52), comp, size=12, color=body_c)
+        # Name
+        ty = ph_y + ph_h + Inches(0.12)
+        text(sl, cx + pad, ty, iw, Inches(0.40), name, size=15, bold=True, color=name_c)
+        rect(sl, cx + pad, ty + Inches(0.56), iw, Inches(0.012), div_c)
 
-        text(sl, cx + pad, ty + Inches(1.76), iw, Inches(0.24), "Effect / retention", size=10, bold=True, color=label_c)
-        text(sl, cx + pad, ty + Inches(2.00), iw, Inches(0.52), merit, size=12, color=body_c)
+        # Example (product)
+        text(sl, cx + pad, ty + Inches(0.66), iw, Inches(0.22), "Example", size=9, bold=True, color=accent_c)
+        text(sl, cx + pad, ty + Inches(0.86), iw, Inches(0.40), example, size=11, bold=True, color=body_c)
 
+        # Composition
+        text(sl, cx + pad, ty + Inches(1.32), iw, Inches(0.22), "Composition", size=9, bold=True, color=label_c)
+        text(sl, cx + pad, ty + Inches(1.52), iw, Inches(0.42), comp, size=11, color=body_c)
+
+        # Effect / retention
+        text(sl, cx + pad, ty + Inches(2.00), iw, Inches(0.22), "Effect / retention", size=9, bold=True, color=label_c)
+        text(sl, cx + pad, ty + Inches(2.20), iw, Inches(0.42), merit, size=11, color=body_c)
+
+        # Limitation
         limit_label_c = GOLD if is_hero else D_RED
-        text(sl, cx + pad, ty + Inches(2.58), iw, Inches(0.24), "Limitation", size=10, bold=True, color=limit_label_c)
-        text(sl, cx + pad, ty + Inches(2.82), iw, card_h - Inches(3.30),
-             limit, size=12, bold=True, color=(WHITE if is_hero else D_RED))
+        text(sl, cx + pad, ty + Inches(2.68), iw, Inches(0.22), "Limitation", size=9, bold=True, color=limit_label_c)
+        text(sl, cx + pad, ty + Inches(2.88), iw, card_h - (ty - BODY_Y) - Inches(3.06),
+             limit, size=11, bold=True, color=(WHITE if is_hero else D_RED))
 
     # Bottom message
-    msg_y = BODY_Y + card_h + Inches(0.18)
-    callout(sl, BODY_X, msg_y, BODY_W, Inches(0.52),
+    msg_y = BODY_Y + card_h + Inches(0.16)
+    callout(sl, BODY_X, msg_y, BODY_W, Inches(0.50),
             "This work overcomes the fatal flaw of eco-friendly WEGs: losing all effectiveness once dried",
             icon='→')
 
