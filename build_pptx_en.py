@@ -1521,56 +1521,35 @@ def slide_sds_rheology(prs):
     draw_header(sl, "Results 6/12", "SDS Addition: Effect on Rheology (Fig. 2e–h)")
     draw_footer(sl, "23 / 40")
 
-    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.56),
-            "Adding SDS surfactant to HEC+MC/CSP gels changes viscoelastic properties "
-            "in a concentration-dependent manner — optimized at 0.1 wt%, softened at 0.5 wt% (Fig. 2e,f,h)",
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.52),
+            "Adding SDS to HEC+MC/CSP gels changes properties concentration-dependently "
+            "— optimized at 0.1 wt% (G'=58.2 Pa), softened at 0.5 wt% (G'=33.8 Pa)",
             icon='ⓘ')
 
-    cw = (BODY_W - Inches(0.30)) / 2
-    cx2 = BODY_X + cw + Inches(0.30)
-    top_y = BODY_Y + Inches(0.74)
+    # 2×2 grid (Fig. 2e / 2f / 2g / 2h)
+    gap = Inches(0.18)
+    cw = (BODY_W - gap) / 2
+    row1_y = BODY_Y + Inches(0.68)
+    row_h  = Inches(2.42)
+    row2_y = row1_y + row_h + gap
 
-    # Left: G' Storage modulus
-    text(sl, BODY_X, top_y, cw, Inches(0.30),
-         "Storage Modulus G' (at 1 rad/s)", size=12, bold=True, color=MUTED)
-    by = top_y + Inches(0.45)
-    for label, ratio, val, color in [
-        ("HEC+MC/CSP 1-5 (no SDS)", 43.9 / 58.2, "43.9 Pa", ACCENT),
-        ("+ SDS 0.1 wt%",           1.00,          "58.2 Pa", D_TEAL),
-        ("+ SDS 0.5 wt%",           33.8 / 58.2,  "33.8 Pa", D_AMBR),
-    ]:
-        bar_row(sl, BODY_X, by, cw, label, ratio, val,
-                fill_color=color, lbl_w=Inches(2.4), val_w=Inches(1.0))
-        by += Inches(0.50)
-
-    callout(sl, BODY_X, by + Inches(0.15), cw, Inches(1.10),
-            "SDS 0.1%: increased crosslink density → G' +33% (58.2 Pa)\n"
-            "SDS 0.5%: above CMC, crosslinks disrupted → G' −23% (33.8 Pa)\n"
-            "Shear thinning (n < 1) maintained at all concentrations (Fig. 2g)",
-            icon='△')
-
-    # Right: tan δ
-    text(sl, cx2, top_y, cw, Inches(0.30),
-         "Loss Tangent tan δ (lower = more elastic)", size=12, bold=True, color=MUTED)
-    by2 = top_y + Inches(0.45)
-    for label, ratio, val, color in [
-        ("HEC+MC/CSP 1-5 (no SDS)", 0.207 / 0.242, "0.207", ACCENT),
-        ("+ SDS 0.1 wt%",           0.193 / 0.242, "0.193", D_TEAL),
-        ("+ SDS 0.5 wt%",           1.00,           "0.242", D_AMBR),
-    ]:
-        bar_row(sl, cx2, by2, cw, label, ratio, val,
-                fill_color=color, lbl_w=Inches(2.4), val_w=Inches(1.0))
-        by2 += Inches(0.50)
-
-    callout(sl, cx2, by2 + Inches(0.15), cw, Inches(1.10),
-            "All systems: tan δ < 1 → gel behavior maintained\n"
-            "SDS 0.1% most elastic (tan δ = 0.193)\n"
-            "Yield stress decreases with SDS → improved sprayability (Fig. 2h)",
-            dark=True, icon='✓')
+    panels = [
+        (BODY_X,            row1_y, "Fig. 2e",
+         "G' / G'' vs angular frequency (SAOS, 3 SDS levels)"),
+        (BODY_X + cw + gap, row1_y, "Fig. 2f",
+         "G' and tan δ bar chart (at 1 rad/s)"),
+        (BODY_X,            row2_y, "Fig. 2g",
+         "Viscosity vs shear rate (Herschel–Bulkley fit)"),
+        (BODY_X + cw + gap, row2_y, "Fig. 2h",
+         "Dynamic yield stress by SDS concentration (0.05 Pa reference line)"),
+    ]
+    for px, py, fig_num, cap in panels:
+        fig_placeholder(sl, px, py, cw, row_h,
+                        fig_num=fig_num, caption=cap)
 
     # POINT band
-    band_y = H - FTR_H - Inches(0.82)
-    band_h = Inches(0.66)
+    band_y = row2_y + row_h + Inches(0.18)
+    band_h = H - band_y - FTR_H - Inches(0.18)
     rrect(sl, BODY_X, band_y, BODY_W, band_h, HEADER, None, radius=0.05)
     rect(sl, BODY_X, band_y, Inches(0.08), band_h, GOLD)
     text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
