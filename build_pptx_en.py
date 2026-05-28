@@ -414,14 +414,14 @@ def slide_01_cover(prs):
     text(sl, Inches(0.5), Inches(6.6), Inches(8), Inches(0.3),
          "DOI: 10.1002/adma.202407375", size=10, color=RGBColor(0x66, 0x77, 0x88))
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "1 / 40", size=10, color=RGBColor(0x66, 0x77, 0x88), align=PP_ALIGN.RIGHT)
+         "1 / 41", size=10, color=RGBColor(0x66, 0x77, 0x88), align=PP_ALIGN.RIGHT)
 
 
 # ===== SLIDE 2: TOC =====
 def slide_02_toc(prs):
     sl = new_slide(prs)
     draw_header(sl, "Contents", "Presentation Outline")
-    draw_footer(sl, "2 / 40")
+    draw_footer(sl, "2 / 41")
 
     parts = [
         ("PART 1", "Background", "Current state of wildfires, limitations of existing technologies (Phos-Chek, AquaGel-K), and innovation of this research", "Slides 4–7"),
@@ -491,8 +491,8 @@ def slide_section_divider(prs, num_str, num_label, title, sub, pills, page_num):
 # ===== SLIDE 4: Wildfire Background =====
 def slide_04_wildfire(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Background 1/4", "Growing Severity of Wildfire Damage and WUI Risk")
-    draw_footer(sl, "4 / 40")
+    draw_header(sl, "Background 1/5", "Growing Severity of Wildfire Damage and WUI Risk")
+    draw_footer(sl, "4 / 41")
 
     # Left 42% typography stats / Right 58% photo placeholder (asymmetric)
     left_w = BODY_W * 0.42 - Inches(0.12)
@@ -545,8 +545,8 @@ def slide_04_wildfire(prs):
 # ===== SLIDE 5: 4-Stage Protection Process =====
 def slide_05_process(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Background 2/4", "Research Approach: 4-Stage Protection Process")
-    draw_footer(sl, "5 / 40")
+    draw_header(sl, "Background 2/5", "Research Approach: 4-Stage Protection Process")
+    draw_footer(sl, "5 / 41")
 
     # Top: large figure placeholder
     fig_h = Inches(3.5)
@@ -682,8 +682,8 @@ def _draw_gel_house(sl, bx, by, bw, bh):
 
 def slide_06_existing(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Background 3/4", "Existing Wildfire Suppressants and Their Limits (USFS 3 Categories)")
-    draw_footer(sl, "6 / 40")
+    draw_header(sl, "Background 3/5", "Existing Wildfire Suppressants and Their Limits (USFS 3 Categories)")
+    draw_footer(sl, "6 / 41")
 
     n = 3
     gap = Inches(0.22)
@@ -768,11 +768,98 @@ def slide_06_existing(prs):
             icon='→')
 
 
-# ===== SLIDE 7: Core Innovation =====
+# ===== SLIDE 7: Predecessor work (PNP gel as APP carrier; adsorption & self-healing already known) =====
+def slide_07_predecessor(prs):
+    sl = new_slide(prs)
+    draw_header(sl, "Background 4/5", "Predecessor Work: PNP Gel Platform (Yu et al., PNAS 2016)")
+    draw_footer(sl, "7 / 41")
+
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.62),
+            "The same HEC+MC/CSP platform was already established in 2016 as a "
+            "carrier for ammonium polyphosphate fire retardants (Phos-Chek LC95A) — "
+            "this work builds on that foundation",
+            icon='📚')
+
+    cw = (BODY_W - Inches(0.30)) / 2
+    cx2 = BODY_X + cw + Inches(0.30)
+    ctop = BODY_Y + Inches(0.78)
+    ch = Inches(4.20)
+
+    # Left: already established
+    rrect(sl, BODY_X, ctop, cw, ch, CARD_C, LINE, 0.5, radius=0.04)
+    rect(sl, BODY_X, ctop, cw, Inches(0.05), ACCENT)
+    text(sl, BODY_X + Inches(0.24), ctop + Inches(0.18), cw - Inches(0.48), Inches(0.30),
+         "Established in Yu et al., PNAS 2016", size=11, bold=True, color=MUTED)
+    text(sl, BODY_X + Inches(0.24), ctop + Inches(0.50), cw - Inches(0.48), Inches(0.40),
+         "Foundational properties of PNP gel (HEC+MC + CSP)", size=14, bold=True, color=INK)
+
+    items_old = [
+        ("PP interactions", "Cellulose chains selectively adsorb onto CSP (noncovalent, multivalent)"),
+        ("Shear thinning",  "Power-law n < 1 (suitable for spraying and pipeline pumping)"),
+        ("Self-healing",    "Gel structure rapidly recovers after stress release"),
+        ("Scalability",     "Linearly scalable from 0.5 mL to 15 L"),
+        ("APP carrier use", "Carries Phos-Chek LC95A; improves adhesion & rain resistance"),
+    ]
+    by = ctop + Inches(1.05)
+    for label, body in items_old:
+        rrect(sl, BODY_X + Inches(0.24), by + Inches(0.05),
+              Inches(1.55), Inches(0.32),
+              WHITE, ACCENT, 0.7, radius=0.5)
+        text(sl, BODY_X + Inches(0.24), by + Inches(0.05),
+             Inches(1.55), Inches(0.32),
+             label, size=9, bold=True, color=ACCENT,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, BODY_X + Inches(1.88), by, cw - Inches(2.08), Inches(0.42),
+             body, size=10, color=INK3, anchor=MSO_ANCHOR.MIDDLE)
+        by += Inches(0.56)
+
+    # Right: this work's novelty
+    rrect(sl, cx2, ctop, cw, ch, HEADER, None, radius=0.04)
+    rect(sl, cx2, ctop, cw, Inches(0.05), GOLD)
+    text(sl, cx2 + Inches(0.24), ctop + Inches(0.18), cw - Inches(0.48), Inches(0.30),
+         "New capabilities gained in this work", size=11, bold=True, color=GOLD)
+    text(sl, cx2 + Inches(0.24), ctop + Inches(0.50), cw - Inches(0.48), Inches(0.40),
+         "The gel itself transforms into an insulating layer", size=14, bold=True, color=WHITE)
+
+    items_new = [
+        ("Stand-alone",     "Suppresses fire without depending on APP"),
+        ("Heat activation", "Flame contact → water evaporation → CSP sintering → porous silica"),
+        ("Aerogel formation","Forms a highly insulating porous silica layer in situ"),
+        ("Dry resistance",  "Overcomes the fatal flaw of conventional WEGs (\"dry = useless\")"),
+        ("Long-term stability", "Yield stress retained after 455 days (see Supplement 3/3)"),
+    ]
+    by = ctop + Inches(1.05)
+    for label, body in items_new:
+        rrect(sl, cx2 + Inches(0.24), by + Inches(0.05),
+              Inches(1.55), Inches(0.32),
+              HEADER, GOLD, 0.7, radius=0.5)
+        text(sl, cx2 + Inches(0.24), by + Inches(0.05),
+             Inches(1.55), Inches(0.32),
+             label, size=9, bold=True, color=GOLD,
+             align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, cx2 + Inches(1.88), by, cw - Inches(2.08), Inches(0.42),
+             body, size=10, color=RGBColor(0xd8, 0xe2, 0xee),
+             anchor=MSO_ANCHOR.MIDDLE)
+        by += Inches(0.56)
+
+    # POINT band
+    band_y = ctop + ch + Inches(0.18)
+    band_h = H - band_y - FTR_H - Inches(0.18)
+    rrect(sl, BODY_X, band_y, BODY_W, band_h, SOFT, LINE, 0.5, radius=0.05)
+    rect(sl, BODY_X, band_y, Inches(0.08), band_h, ACCENT)
+    text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
+         "POINT", size=13, bold=True, color=ACCENT, anchor=MSO_ANCHOR.MIDDLE)
+    text(sl, BODY_X + Inches(2.0), band_y, BODY_W - Inches(2.3), band_h,
+         "The innovation: from \"carrier of chemicals\" to \"material that itself "
+         "becomes a thermal barrier\" — redefining the PP gel platform",
+         size=13, color=INK2, anchor=MSO_ANCHOR.MIDDLE)
+
+
+# ===== SLIDE 8: Core Innovation =====
 def slide_07_core(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Background 4/4", "Research Core: Heat-Activated Aerogel Formation")
-    draw_footer(sl, "7 / 40")
+    draw_header(sl, "Background 5/5", "Research Core: Heat-Activated Aerogel Formation")
+    draw_footer(sl, "8 / 41")
 
     # Left 38% text / Right 62% figure placeholder (figure as hero)
     left_w = BODY_W * 0.38 - Inches(0.12)
@@ -830,7 +917,7 @@ def slide_07_core(prs):
 def slide_mat_composition(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials Overview 1/2", "Material Composition: Sustainable & High-Performance")
-    draw_footer(sl, "9 / 40")
+    draw_footer(sl, "10 / 41")
 
     # Lead sentence
     lead_h = Inches(0.50)
@@ -910,7 +997,7 @@ def slide_mat_composition(prs):
 def slide_self_protection(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials Overview 2/2", "Mechanism: Spray, Adhesion, and Flame Protection")
-    draw_footer(sl, "10 / 40")
+    draw_footer(sl, "11 / 41")
 
     # Lead sentence
     lead_h = Inches(0.52)
@@ -982,7 +1069,7 @@ def slide_self_protection(prs):
 def slide_09_polymers(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 1/6", "Cellulosic Polymers Used")
-    draw_footer(sl, "11 / 40")
+    draw_footer(sl, "12 / 41")
 
     # Left 55% polymer list (large letter badge + dividers) / Right 45% structure figure
     left_w = BODY_W * 0.55 - Inches(0.12)
@@ -1027,7 +1114,7 @@ def slide_09_polymers(prs):
 def slide_10_mc(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 2/6", "Rheological Design: Shear-Thinning and Self-Healing")
-    draw_footer(sl, "12 / 40")
+    draw_footer(sl, "13 / 41")
 
     left_w = BODY_W * 0.48 - Inches(0.10)
     right_w = BODY_W * 0.52 - Inches(0.10)
@@ -1098,7 +1185,7 @@ def slide_10_mc(prs):
 def slide_11_csp_sds(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 3/6", "Colloidal Silica Particles (CSP) and Surfactant (SDS)")
-    draw_footer(sl, "13 / 40")
+    draw_footer(sl, "14 / 41")
 
     cw = (BODY_W - Inches(0.18)) / 2
     callout_h = Inches(0.72)
@@ -1154,7 +1241,7 @@ def slide_11_csp_sds(prs):
 def slide_12_formulations(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 4/6", "Five Formulations Evaluated")
-    draw_footer(sl, "14 / 40")
+    draw_footer(sl, "15 / 41")
 
     # 5 cards side by side
     fw = (BODY_W - Inches(0.4 * 4)) / 5
@@ -1205,7 +1292,7 @@ def slide_12_formulations(prs):
 def slide_13_methods(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 5/6", "Overview of Evaluation Methods")
-    draw_footer(sl, "15 / 40")
+    draw_footer(sl, "16 / 41")
 
     # Left: burn-test setup figure / Right: 6 method cards (2 cols × 3 rows)
     left_w = BODY_W * 0.34 - Inches(0.10)
@@ -1244,7 +1331,7 @@ def slide_13_methods(prs):
 def slide_14_adhesion(prs):
     sl = new_slide(prs)
     draw_header(sl, "Materials 6/6", "Adhesion and Surface Wettability: Properties Essential for Implementation")
-    draw_footer(sl, "16 / 40")
+    draw_footer(sl, "17 / 41")
 
     # 3 columns: photo placeholder (top) + text (bottom)
     cw = (BODY_W - Inches(0.28)) / 3
@@ -1289,7 +1376,7 @@ def slide_14_adhesion(prs):
 def slide_16_rheology1(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 1/12", "Rheology ①: Oscillatory Moduli G' / G''")
-    draw_footer(sl, "18 / 40")
+    draw_footer(sl, "19 / 41")
 
     # Left: figure, Right: observations
     left_w = BODY_W * 0.58 - Inches(0.10)
@@ -1319,7 +1406,7 @@ def slide_16_rheology1(prs):
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 2/12", "Rheology ②: Shear Thinning and Power-law Index")
-    draw_footer(sl, "19 / 40")
+    draw_footer(sl, "20 / 41")
 
     left_w = BODY_W * 0.58 - Inches(0.10)
     right_w = BODY_W * 0.42 - Inches(0.10)
@@ -1353,7 +1440,7 @@ def slide_17_rheology2(prs):
 def slide_18_hb(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 3/12", "Rheology ③: Static Yield Stress and Long-term Stability")
-    draw_footer(sl, "20 / 40")
+    draw_footer(sl, "21 / 41")
 
     # Top callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
@@ -1400,7 +1487,7 @@ def slide_18_hb(prs):
 def slide_19_yield(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 4/12", "Rheology ④: Storage Modulus G' and Viscoelasticity (tan δ)")
-    draw_footer(sl, "21 / 40")
+    draw_footer(sl, "22 / 41")
 
     cw = (BODY_W - Inches(0.30)) / 2
     ch = Inches(5.6)
@@ -1446,7 +1533,7 @@ def slide_19_yield(prs):
 def slide_20_compare(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 5/12", "HEC+MC vs MHEC: Comparison of Two Systems")
-    draw_footer(sl, "22 / 40")
+    draw_footer(sl, "23 / 41")
 
     cw = (BODY_W - Inches(0.20)) / 2
     ch = Inches(4.8)
@@ -1519,7 +1606,7 @@ def slide_20_compare(prs):
 def slide_sds_rheology(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 6/12", "SDS Addition: Effect on Rheology (Fig. 2e–h)")
-    draw_footer(sl, "23 / 40")
+    draw_footer(sl, "24 / 41")
 
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.52),
             "Adding SDS to HEC+MC/CSP gels changes properties concentration-dependently "
@@ -1564,7 +1651,7 @@ def slide_sds_rheology(prs):
 def slide_21_setup(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 7/12", "Combustion Test Setup")
-    draw_footer(sl, "24 / 40")
+    draw_footer(sl, "25 / 41")
 
     left_w = BODY_W * 0.55 - Inches(0.10)
     right_w = BODY_W * 0.45 - Inches(0.10)
@@ -1594,7 +1681,7 @@ def slide_21_setup(prs):
 def slide_22_ttc(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 8/12", "Time to Char: Quantitative Comparison of 5 Formulations")
-    draw_footer(sl, "25 / 40")
+    draw_footer(sl, "26 / 41")
 
     left_w = BODY_W * 0.62 - Inches(0.10)
     right_w = BODY_W * 0.38 - Inches(0.10)
@@ -1630,7 +1717,7 @@ def slide_22_ttc(prs):
 def slide_23_timelapse(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 9/12", "Time-lapse Observation of Combustion Process")
-    draw_footer(sl, "26 / 40")
+    draw_footer(sl, "27 / 41")
 
     # Top: figure placeholder
     fig_h = Inches(2.4)
@@ -1678,7 +1765,7 @@ def slide_23_timelapse(prs):
 def slide_24_120300(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 9/12", "Surface Condition Comparison at 120 s / 300 s")
-    draw_footer(sl, "27 / 40")
+    draw_footer(sl, "28 / 41")
 
     fig_h = Inches(2.3)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1762,14 +1849,14 @@ def slide_25_hero(prs):
         by += Inches(0.35)
 
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "28 / 40", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+         "29 / 41", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
 
 
 # ===== SLIDE 26: 発泡指数 =====
 def slide_26_foam(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 10/12", "Foaming Index Comparison")
-    draw_footer(sl, "29 / 40")
+    draw_footer(sl, "30 / 41")
 
     # Top: 2 figure placeholders
     fig_h = Inches(2.3)
@@ -1820,7 +1907,7 @@ def slide_26_foam(prs):
 def slide_27_sem_sds(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 10/12", "Effect of SDS Concentration on Aerogel Microstructure")
-    draw_footer(sl, "30 / 40")
+    draw_footer(sl, "31 / 41")
 
     fig_h = Inches(3.0)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -1849,7 +1936,7 @@ def slide_27_sem_sds(prs):
 def slide_28_ftir_xps(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 11/12", "FT-IR & XPS: Chemical Composition Changes (Before/After Combustion)")
-    draw_footer(sl, "31 / 40")
+    draw_footer(sl, "32 / 41")
 
     cw = (BODY_W - Inches(0.20)) / 2
 
@@ -1910,7 +1997,7 @@ def slide_28_ftir_xps(prs):
 def slide_29_tga(prs):
     sl = new_slide(prs)
     draw_header(sl, "Results 12/12", "TGA/DSC: Thermal Decomposition Profile and Role of Each Component")
-    draw_footer(sl, "32 / 40")
+    draw_footer(sl, "33 / 41")
 
     cw = (BODY_W - Inches(0.20)) / 2
 
@@ -1963,7 +2050,7 @@ def slide_29_tga(prs):
 def slide_30_mechanism(prs):
     sl = new_slide(prs)
     draw_header(sl, "Supplementary 1/3", "Mechanism of Silica Aerogel Formation")
-    draw_footer(sl, "33 / 40")
+    draw_footer(sl, "34 / 41")
 
     fig_h = Inches(2.4)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -2000,7 +2087,7 @@ def slide_30_mechanism(prs):
 def slide_31_burnsem(prs):
     sl = new_slide(prs)
     draw_header(sl, "Supplementary 2/3", "Sintering Progression with Burn Time (SEM)")
-    draw_footer(sl, "34 / 40")
+    draw_footer(sl, "35 / 41")
 
     fig_h = Inches(2.3)
     fig_placeholder(sl, BODY_X, BODY_Y, BODY_W, fig_h,
@@ -2053,7 +2140,7 @@ def slide_31_burnsem(prs):
 def slide_32_aging(prs):
     sl = new_slide(prs)
     draw_header(sl, "Supplementary 3/3", "Aging & Long-Term Stability: Performance Retained Beyond One Year")
-    draw_footer(sl, "35 / 40")
+    draw_footer(sl, "36 / 41")
 
     left_w = BODY_W * 0.36 - Inches(0.12)
     right_w = BODY_W * 0.64 - Inches(0.08)
@@ -2111,7 +2198,7 @@ def slide_32_aging(prs):
 def slide_33_scenarios(prs):
     sl = new_slide(prs)
     draw_header(sl, "Discussion 1/3", "Implementation Scenarios: WEG Deployment Strategy")
-    draw_footer(sl, "37 / 40")
+    draw_footer(sl, "38 / 41")
 
     ch = Inches(3.6)
     cw = (BODY_W - Inches(0.28)) / 3
@@ -2165,7 +2252,7 @@ def slide_33_scenarios(prs):
 def slide_34_future(prs):
     sl = new_slide(prs)
     draw_header(sl, "Summary 1/2", "Key Demonstrated Results")
-    draw_footer(sl, "38 / 40")
+    draw_footer(sl, "39 / 41")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(4.6)
@@ -2210,7 +2297,7 @@ def slide_34_future(prs):
 def slide_35_summary(prs):
     sl = new_slide(prs)
     draw_header(sl, "Summary 2/2", "Conclusions")
-    draw_footer(sl, "39 / 40")
+    draw_footer(sl, "40 / 41")
 
     cw = (BODY_W - Inches(0.42)) / 4
     ch = Inches(2.5)
@@ -2301,7 +2388,7 @@ def slide_36_impact(prs):
         by += Inches(0.32)
 
     text(sl, W - Inches(1.4), H - Inches(0.36), Inches(1.2), Inches(0.26),
-         "39 / 40", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
+         "40 / 41", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
 
 
 # ── メイン ─────────────────────────────────────────────
@@ -2316,15 +2403,16 @@ def main():
     slide_section_divider(prs, "01", "Part 1", "Background",
                           "Wildfire damage under climate change and the fundamental limitations of existing fire retardant technologies",
                           ["Wildfire Status", "Existing WEG / Retardants", "Research Innovation"],
-                          "3 / 40")
+                          "3 / 41")
     slide_04_wildfire(prs)
     slide_05_process(prs)
     slide_06_existing(prs)
+    slide_07_predecessor(prs)
     slide_07_core(prs)
     slide_section_divider(prs, "02", "Part 2", "Materials & Methods",
                           "Novel gel design combining cellulosic polymers and colloidal silica",
                           ["Polymer Components", "Silica Particles & Surfactant", "Formulations (5 types)", "Evaluation Methods"],
-                          "8 / 40")
+                          "9 / 41")
     slide_mat_composition(prs)
     slide_self_protection(prs)
     slide_09_polymers(prs)
@@ -2336,7 +2424,7 @@ def main():
     slide_section_divider(prs, "03", "Part 3", "Results",
                           "Rheological properties, combustion performance, foam structure, and aerogel formation mechanism",
                           ["Rheology", "Combustion Test", "Foaming Index", "SEM Observation"],
-                          "17 / 40")
+                          "18 / 41")
     slide_16_rheology1(prs)
     slide_17_rheology2(prs)
     slide_18_hb(prs)
@@ -2358,7 +2446,7 @@ def main():
     slide_section_divider(prs, "04", "Part 4", "Discussion & Conclusion",
                           "Implementation scenarios, comprehensive comparison with existing products, research significance and future prospects",
                           ["Implementation Scenarios", "Performance Comparison", "Summary"],
-                          "36 / 40")
+                          "37 / 41")
     slide_33_scenarios(prs)
     slide_34_future(prs)
     slide_35_summary(prs)
