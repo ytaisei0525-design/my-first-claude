@@ -1347,46 +1347,66 @@ def slide_13_methods(prs):
 # ===== SLIDE 14: 付着性・濡れ性 =====
 def slide_14_adhesion(prs):
     sl = new_slide(prs)
-    draw_header(sl, "材料 6/6", "付着性・表面濡れ性：実装に不可欠な特性")
+    draw_header(sl, "材料 6/6", "レオロジー設計が実装性能に直結する")
     draw_footer(sl, "17 / 42")
 
-    # 3列：各列に写真プレースホルダー（上）＋テキスト（下）
-    cw = (BODY_W - Inches(0.28)) / 3
-    img_h = Inches(2.4)
-    photos = [
-        ("接触角測定", "WETTING", "木材上での接触角", [
-            "木材・コンクリート・金属で評価",
-            "WEGは低接触角 → 高い濡れ性",
-            "HEC+MCは木材との親和性が高い",
-        ]),
-        ("垂直面付着試験", "ADHESION", "垂直基板でのゲル保持", [
-            "垂直基板に塗布し保持性を評価",
-            "G' ≫ G'' → 流れ落ちない",
-            "AquaGel-K同等以上の保持性",
-        ]),
-        ("スプレー散布適性", "SPRAY", "ノズル噴霧の様子", [
-            "高せん断で粘度が急低下",
-            "到達後すぐ高粘度を回復",
-            "既存ホース・ノズルと互換",
-        ]),
-    ]
-    for i, (title, tag, ph_cap, bullets) in enumerate(photos):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        fig_placeholder(sl, cx, BODY_Y, cw, img_h, fig_num="Photo", caption=ph_cap)
-        ty = BODY_Y + img_h + Inches(0.38)
-        text(sl, cx, ty, cw, Inches(0.26), tag, size=10, bold=True, color=MUTED)
-        text(sl, cx, ty + Inches(0.26), cw, Inches(0.34), title, size=14, bold=True, color=INK)
-        by = ty + Inches(0.68)
-        for b in bullets:
-            text(sl, cx, by, Inches(0.20), Inches(0.30), "•", size=11, color=ACCENT)
-            text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.30), b, size=11, color=INK2)
-            by += Inches(0.34)
+    # レイアウト：左（測定されたレオロジー特性）→ 矢印 →（期待される実装性能）の3行
+    left_w = Inches(4.5)
+    arrow_w = Inches(0.7)
+    gap = Inches(0.18)
+    right_x = BODY_X + left_w + gap + arrow_w + gap
+    right_w = BODY_W - left_w - arrow_w - gap * 2
 
-    # 下部 callout
-    cy_co = H - FTR_H - Inches(0.18) - Inches(0.72)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.72),
-            "流動学的設計（低 n、高 G'）により、散布適性と付着保持を同時に達成",
-            icon='✓')
+    # 列見出し
+    lbl_y = BODY_Y
+    text(sl, BODY_X, lbl_y, left_w, Inches(0.30),
+         "レオロジー設計（実測された物性）", size=12, bold=True, color=MUTED)
+    text(sl, right_x, lbl_y, right_w, Inches(0.30),
+         "期待される実装性能（現場での挙動）", size=12, bold=True, color=MUTED)
+
+    # 3行の因果マッピング：(左タイトル, 左説明, 右タイトル, 右説明, アクセント色)
+    rows = [
+        ("低い Power-law 指数 n", "強いせん断希薄化（n ≪ 1）",
+         "噴霧できる", "ノズル通過時の高せん断で粘度が急低下\n→ 既存ホース・ノズルで散布可能", D_TEAL),
+        ("高い貯蔵弾性率 G'（G' ≫ G''）", "静止時はゲル状態を保持",
+         "垂直面で流れ落ちない", "塗布後は形状を保持して付着\n→ 木材・壁面など垂直基材にも保持", ACCENT),
+        ("自己修復性", "step-strain で G' が即時回復",
+         "到達後すぐ保護膜を形成", "散布直後に再ゲル化\n→ 風雨・自重で流出せず防火層を維持", GOLD),
+    ]
+
+    row_y = BODY_Y + Inches(0.42)
+    row_h = Inches(1.32)
+    row_gap = Inches(0.20)
+    for ltitle, ldesc, rtitle, rdesc, c in rows:
+        # 左：実測物性カード
+        rrect(sl, BODY_X, row_y, left_w, row_h, CARD_C, LINE, 0.5, radius=0.05)
+        rect(sl, BODY_X, row_y, Inches(0.06), row_h, c)
+        text(sl, BODY_X + Inches(0.22), row_y + Inches(0.18), left_w - Inches(0.34), Inches(0.40),
+             ltitle, size=15, bold=True, color=INK)
+        text(sl, BODY_X + Inches(0.22), row_y + Inches(0.70), left_w - Inches(0.34), Inches(0.50),
+             ldesc, size=12, color=INK2)
+
+        # 中央：矢印
+        ar = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW,
+                                 BODY_X + left_w + gap, row_y + row_h/2 - Inches(0.22),
+                                 arrow_w, Inches(0.44))
+        ar.fill.solid(); ar.fill.fore_color.rgb = c
+        ar.line.fill.background(); ar.shadow.inherit = False
+
+        # 右：実装性能カード
+        rrect(sl, right_x, row_y, right_w, row_h, WHITE, c, 1.0, radius=0.05)
+        text(sl, right_x + Inches(0.22), row_y + Inches(0.16), right_w - Inches(0.34), Inches(0.40),
+             rtitle, size=15, bold=True, color=c)
+        text(sl, right_x + Inches(0.22), row_y + Inches(0.62), right_w - Inches(0.34), Inches(0.62),
+             rdesc, size=12, color=INK2)
+
+        row_y += row_h + row_gap
+
+    # 下部：正直な注記（独立した付着・接触角試験は本論文では未実施）
+    cy_co = H - FTR_H - Inches(0.16) - Inches(0.62)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
+            "これらの実装性能はレオロジー実測値からの帰結。接触角・付着力の独立した測定試験は本論文では行われていない",
+            icon='ⓘ')
 
 
 # ===== SLIDE 16: G'/G'' =====

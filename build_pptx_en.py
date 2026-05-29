@@ -1330,46 +1330,66 @@ def slide_13_methods(prs):
 # ===== SLIDE 14: 付着性・濡れ性 =====
 def slide_14_adhesion(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Materials 6/6", "Adhesion and Surface Wettability: Properties Essential for Implementation")
+    draw_header(sl, "Materials 6/6", "Rheological Design Translates Directly into Field Performance")
     draw_footer(sl, "17 / 42")
 
-    # 3 columns: photo placeholder (top) + text (bottom)
-    cw = (BODY_W - Inches(0.28)) / 3
-    img_h = Inches(2.4)
-    photos = [
-        ("Contact Angle", "WETTING", "Contact angle on wood", [
-            "Evaluated on wood, concrete, metal",
-            "WEG: low contact angle → wettability",
-            "HEC+MC: high affinity to wood",
-        ]),
-        ("Vertical Adhesion", "ADHESION", "Gel retention on vertical substrate", [
-            "Applied to vertical substrate",
-            "G' ≫ G'' → no run-off",
-            "Retention ≥ AquaGel-K",
-        ]),
-        ("Spray Suitability", "SPRAY", "Nozzle spraying in action", [
-            "Viscosity drops under high shear",
-            "Recovers high viscosity on landing",
-            "Compatible with existing nozzles",
-        ]),
-    ]
-    for i, (title, tag, ph_cap, bullets) in enumerate(photos):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        fig_placeholder(sl, cx, BODY_Y, cw, img_h, fig_num="Photo", caption=ph_cap)
-        ty = BODY_Y + img_h + Inches(0.38)
-        text(sl, cx, ty, cw, Inches(0.26), tag, size=10, bold=True, color=MUTED)
-        text(sl, cx, ty + Inches(0.26), cw, Inches(0.34), title, size=14, bold=True, color=INK)
-        by = ty + Inches(0.68)
-        for b in bullets:
-            text(sl, cx, by, Inches(0.20), Inches(0.30), "•", size=11, color=ACCENT)
-            text(sl, cx + Inches(0.22), by, cw - Inches(0.22), Inches(0.30), b, size=11, color=INK2)
-            by += Inches(0.34)
+    # Layout: left (measured rheology) → arrow → (expected field performance), 3 rows
+    left_w = Inches(4.5)
+    arrow_w = Inches(0.7)
+    gap = Inches(0.18)
+    right_x = BODY_X + left_w + gap + arrow_w + gap
+    right_w = BODY_W - left_w - arrow_w - gap * 2
 
-    # Bottom callout
-    cy_co = H - FTR_H - Inches(0.18) - Inches(0.72)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.72),
-            "Rheological design (low n, high G') simultaneously achieves spray suitability and adhesion retention",
-            icon='✓')
+    # Column headers
+    lbl_y = BODY_Y
+    text(sl, BODY_X, lbl_y, left_w, Inches(0.30),
+         "Rheological Design (measured properties)", size=12, bold=True, color=MUTED)
+    text(sl, right_x, lbl_y, right_w, Inches(0.30),
+         "Expected Field Performance (behavior in use)", size=12, bold=True, color=MUTED)
+
+    # 3-row causal mapping: (left title, left desc, right title, right desc, accent color)
+    rows = [
+        ("Low Power-law Index n", "Strong shear thinning (n ≪ 1)",
+         "Sprayable", "Viscosity drops under nozzle's high shear\n→ Deployable with existing hoses/nozzles", D_TEAL),
+        ("High Storage Modulus G' (G' ≫ G'')", "Holds gel state at rest",
+         "No run-off on vertical surfaces", "Retains shape and adheres after application\n→ Holds on vertical substrates (wood, walls)", ACCENT),
+        ("Self-healing", "G' recovers instantly after step-strain",
+         "Forms protective layer on landing", "Re-gels immediately after spraying\n→ Fire layer maintained against wind/rain/gravity", GOLD),
+    ]
+
+    row_y = BODY_Y + Inches(0.42)
+    row_h = Inches(1.32)
+    row_gap = Inches(0.20)
+    for ltitle, ldesc, rtitle, rdesc, c in rows:
+        # Left: measured property card
+        rrect(sl, BODY_X, row_y, left_w, row_h, CARD_C, LINE, 0.5, radius=0.05)
+        rect(sl, BODY_X, row_y, Inches(0.06), row_h, c)
+        text(sl, BODY_X + Inches(0.22), row_y + Inches(0.18), left_w - Inches(0.34), Inches(0.40),
+             ltitle, size=14, bold=True, color=INK)
+        text(sl, BODY_X + Inches(0.22), row_y + Inches(0.70), left_w - Inches(0.34), Inches(0.50),
+             ldesc, size=12, color=INK2)
+
+        # Center: arrow
+        ar = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW,
+                                 BODY_X + left_w + gap, row_y + row_h/2 - Inches(0.22),
+                                 arrow_w, Inches(0.44))
+        ar.fill.solid(); ar.fill.fore_color.rgb = c
+        ar.line.fill.background(); ar.shadow.inherit = False
+
+        # Right: field performance card
+        rrect(sl, right_x, row_y, right_w, row_h, WHITE, c, 1.0, radius=0.05)
+        text(sl, right_x + Inches(0.22), row_y + Inches(0.16), right_w - Inches(0.34), Inches(0.40),
+             rtitle, size=14, bold=True, color=c)
+        text(sl, right_x + Inches(0.22), row_y + Inches(0.62), right_w - Inches(0.34), Inches(0.62),
+             rdesc, size=12, color=INK2)
+
+        row_y += row_h + row_gap
+
+    # Bottom: honest note (no independent adhesion/contact-angle test in this paper)
+    cy_co = H - FTR_H - Inches(0.16) - Inches(0.62)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
+            "These field performances are inferred from measured rheology. No independent contact-angle or adhesion-force tests were performed in this paper",
+            icon='ⓘ')
 
 
 # ===== SLIDE 16: G'/G'' =====
