@@ -2489,6 +2489,103 @@ def slide_36_impact(prs):
          "41 / 42", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
 
 
+# ===== STANDALONE: MHEC の優位性（経時安定性＋コスト） =====
+def slide_mhec_advantage(prs):
+    """
+    独立スライド：MHEC が HEC+MC に対して優れる2点
+    ① 経時変化が穏やか（SI Fig. S7 データ）
+    ② 単一ポリマーによるコスト・製造簡便性
+    main() から任意の位置で呼び出して挿入する。
+    """
+    sl = new_slide(prs)
+    draw_header(sl, "補足", "MHEC 系の優位性：経時安定性とコスト")
+    draw_footer(sl, "— / 42")   # 挿入位置に応じてページ番号を変更する
+
+    cw = (BODY_W - Inches(0.28)) / 2
+    cx2 = BODY_X + cw + Inches(0.28)
+
+    # ===== 左列：経時安定性（SI Section 2-3 / Fig. S7） =====
+    rect(sl, BODY_X, BODY_Y, Inches(0.06), Inches(2.80), D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y, cw - Inches(0.20), Inches(0.36),
+         "① 経時変化が穏やか（SI Fig. S7）", size=14, bold=True, color=INK)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(0.42), cw - Inches(0.20), Inches(0.30),
+         "Day 1 → Day 455 の降伏応力変化", size=11, bold=True, color=MUTED)
+
+    # Bar chart: MHEC vs HEC+MC の変化率
+    bar_data = [
+        ("MHEC / CSP", 0.35, "+38 %\n(3.31 → 4.56 Pa)", D_TEAL),
+        ("HEC+MC / CSP", 1.00, "+107 %\n(33.3 → 68.9 Pa)", D_AMBR),
+    ]
+    by = BODY_Y + Inches(0.88)
+    for label, ratio, val, c in bar_data:
+        text(sl, BODY_X + Inches(0.20), by, cw - Inches(0.20), Inches(0.28),
+             label, size=11, bold=True, color=INK2)
+        bx = BODY_X + Inches(0.20)
+        bw = cw - Inches(0.50)
+        rrect(sl, bx, by + Inches(0.30), bw, Inches(0.22),
+              LINE, None, radius=0.4)
+        rrect(sl, bx, by + Inches(0.30), bw * ratio, Inches(0.22),
+              c, None, radius=0.4)
+        text(sl, bx + bw * ratio + Inches(0.12), by + Inches(0.22),
+             Inches(1.4), Inches(0.40), val, size=10, bold=True, color=c)
+        by += Inches(0.90)
+
+    # 解釈テキスト
+    rrect(sl, BODY_X + Inches(0.10), by + Inches(0.10), cw - Inches(0.20), Inches(0.90),
+          SOFT, D_TEAL, 0.8, radius=0.04)
+    text(sl, BODY_X + Inches(0.24), by + Inches(0.22), cw - Inches(0.46), Inches(0.72),
+         "MHEC系は非共有結合が主体のまま経時変化\n→ 製品特性が1年以上にわたって安定\n（HEC+MC系は共有結合化が進み剛性が変動）",
+         size=11, color=INK2)
+
+    # SI Fig. S7 参照
+    text(sl, BODY_X + Inches(0.20), by + Inches(1.18), cw - Inches(0.40), Inches(0.22),
+         "出典：SI Fig. S7（フロースイープ・HB モデル fit）", size=9, italic=True, color=MUTED)
+
+    # 区切り線
+    rect(sl, BODY_X, BODY_Y + Inches(2.94), cw, Inches(0.015), LINE)
+
+    # 小見出し（Si-O 縮合の不在）
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(3.06), cw - Inches(0.20), Inches(0.26),
+         "なぜ安定か：Si–O 共有結合縮合が起こりにくい", size=11, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(3.38), cw - Inches(0.20), Inches(0.60),
+         "HEC+MC/CSP では熟成とともに CSP と高分子の間で\n"
+         "Si–O 縮合が進行し剛性が上昇する。MHEC/CSP では\n"
+         "この縮合が抑制され、特性が緩やかに変化する。",
+         size=10.5, color=INK2)
+
+    # ===== 右列：コスト・製造簡便性 =====
+    rect(sl, cx2, BODY_Y, Inches(0.06), Inches(4.20), D_AMBR)
+    text(sl, cx2 + Inches(0.20), BODY_Y, cw - Inches(0.20), Inches(0.36),
+         "② 製造コスト・品質管理で有利", size=14, bold=True, color=INK)
+
+    cost_items = [
+        ("単一ポリマー",
+         "HEC と MC を別途調達・混合する必要がない\n→ 原料種数を削減"),
+        ("配合工程の簡略化",
+         "2成分の混合比調整・均一分散の管理が不要\n→ 製造バッチ間のばらつきを低減"),
+        ("品質管理の負担軽減",
+         "1種類の原料規格を管理するだけで良い\n→ スケールアップ時のコスト優位性が顕在化"),
+        ("廃棄・物流コスト",
+         "保管・輸送する原料が1種類に統合\n→ サプライチェーンを簡素化"),
+    ]
+    iy = BODY_Y + Inches(0.52)
+    for title, desc in cost_items:
+        rrect(sl, cx2 + Inches(0.10), iy, cw - Inches(0.20), Inches(0.96),
+              CARD_C, LINE, 0.5, radius=0.04)
+        text(sl, cx2 + Inches(0.26), iy + Inches(0.12), cw - Inches(0.50), Inches(0.28),
+             title, size=12, bold=True, color=D_AMBR)
+        text(sl, cx2 + Inches(0.26), iy + Inches(0.44), cw - Inches(0.50), Inches(0.46),
+             desc, size=10.5, color=INK2)
+        iy += Inches(1.06)
+
+    # 下部：限界の注記
+    cy_co = H - FTR_H - Inches(0.16) - Inches(0.80)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
+            "注：コスト比較の定量データは本論文には掲載されていない。MHEC の優位性は「単一ポリマー」であることと"
+            "「経時安定性」の実測（SI Fig. S7）に基づく定性的評価である。",
+            icon='ⓘ')
+
+
 # ── メイン ─────────────────────────────────────────────
 def main():
     prs = Presentation()
