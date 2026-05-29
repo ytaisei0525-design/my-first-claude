@@ -1926,55 +1926,91 @@ def slide_25_hero(prs):
          "30 / 43", size=10, color=RGBColor(0x55, 0x66, 0x77), align=PP_ALIGN.RIGHT)
 
 
-# ===== SLIDE 26: 発泡指数 =====
+# ===== SLIDE 26: Foaming Index =====
 def slide_26_foam(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 12/15", "Foaming Index Comparison")
+    draw_header(sl, "Results 12/15", "SDS Addition: Expected to Improve Foaming — But the Opposite Occurred (Fig. 4)")
     draw_footer(sl, "31 / 43")
 
-    # Top: 2 figure placeholders
-    fig_h = Inches(2.3)
+    # ── Top: Hypothesis → Experiment → Unexpected Result (3 boxes) ──
+    bw = Inches(3.6)
+    bh = Inches(1.10)
+    arrow_w = Inches(0.70)
+    gap = (BODY_W - bw * 3 - arrow_w * 2) / 2
+    box_y = BODY_Y
+
+    # Hypothesis box
+    rrect(sl, BODY_X, box_y, bw, bh, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, box_y, Inches(0.06), bh, D_TEAL)
+    text(sl, BODY_X + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "Hypothesis (purpose of SDS)", size=10, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "Surfactant SDS promotes bubble formation\n→ Foaming Index increases\n→ Thicker aerogel insulation layer",
+         size=11, color=INK2)
+
+    # → Arrow 1
+    ax1 = BODY_X + bw + gap * 0.5
+    ar1 = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, ax1, box_y + bh/2 - Inches(0.22),
+                              arrow_w, Inches(0.44))
+    ar1.fill.solid(); ar1.fill.fore_color.rgb = MUTED
+    ar1.line.fill.background(); ar1.shadow.inherit = False
+
+    # Experiment box
+    bx2 = BODY_X + bw + gap * 0.5 + arrow_w + gap * 0.5
+    rrect(sl, bx2, box_y, bw, bh, CARD_C, LINE, 0.8, radius=0.05)
+    text(sl, bx2 + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "Experiment", size=10, bold=True, color=MUTED)
+    text(sl, bx2 + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "SDS 0 / 0.1 / 0.5 wt% added to\nHEC+MC/CSP; combustion tested\n→ Foaming Index quantified (Fig. 4a/4b)",
+         size=11, color=INK2)
+
+    # → Arrow 2 (amber: signals unexpected)
+    ax2 = bx2 + bw + gap * 0.5
+    ar2 = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, ax2, box_y + bh/2 - Inches(0.22),
+                              arrow_w, Inches(0.44))
+    ar2.fill.solid(); ar2.fill.fore_color.rgb = D_AMBR
+    ar2.line.fill.background(); ar2.shadow.inherit = False
+
+    # Result box (unexpected)
+    bx3 = ax2 + arrow_w + gap * 0.5
+    rrect(sl, bx3, box_y, bw, bh, RGBColor(0xff, 0xf7, 0xed), D_AMBR, 1.4, radius=0.05)
+    rect(sl, bx3, box_y, Inches(0.06), bh, D_AMBR)
+    text(sl, bx3 + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "Result (opposite of expected)", size=10, bold=True, color=D_AMBR)
+    text(sl, bx3 + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "SDS addition reduced Foaming Index\n2.6 (0%) → 2.3 (0.1%) → even lower (0.5%)\nSDS did not improve foaming",
+         size=11, color=INK2)
+
+    # ── Middle: Fig. 4a / 4b placeholders ──
+    fig_y = box_y + bh + Inches(0.28)
+    fig_h = Inches(2.10)
     fw = (BODY_W - Inches(0.20)) / 2
-    fig_placeholder(sl, BODY_X, BODY_Y, fw, fig_h, fig_num="Fig. 4a",
-                    caption="Appearance of foamed layer after combustion")
-    fig_placeholder(sl, BODY_X + fw + Inches(0.20), BODY_Y, fw, fig_h,
-                    fig_num="Fig. 4b", caption="Foaming Index for each formulation")
+    fig_placeholder(sl, BODY_X, fig_y, fw, fig_h,
+                    fig_num="Fig. 4a", caption="Foamed layer appearance after combustion (by SDS level)")
+    fig_placeholder(sl, BODY_X + fw + Inches(0.20), fig_y, fw, fig_h,
+                    fig_num="Fig. 4b", caption="Foaming Index per formulation (quantified)")
 
-    # Bottom: left bar chart, right explanation
-    cy = BODY_Y + fig_h + Inches(0.45)
-    cw = (BODY_W - Inches(0.20)) / 2
-
-    text(sl, BODY_X, cy, cw, Inches(0.30),
-         "Foaming Index (post-combustion thickness / initial thickness)", size=12, bold=True, color=MUTED)
-    by = cy + Inches(0.40)
+    # ── Bottom: Foaming Index bar chart ──
+    bar_y = fig_y + fig_h + Inches(0.28)
     bar_data = [
-        ("AquaGel-K", 0.02, "≈0", GRAY_L),
-        ("MHEC/CSP 1-5", 0.53, "≈2.1×", D_AMBR),
-        ("HEC+MC/CSP/SDS 1-5-0.1", 0.60, "≈2.3×", D_BLUE),
-        ("HEC+MC/CSP 1-5", 0.68, "≈2.6×", D_TEAL),
+        ("HEC+MC/CSP 1-5 (SDS 0%)", 1.00, "≈2.6×", D_TEAL),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.88, "≈2.3×", MUTED),
+        ("HEC+MC/CSP/SDS 1-5-0.5", 0.72, "even lower", D_AMBR),
+        ("AquaGel-K (reference)", 0.02, "≈0", GRAY_L),
     ]
+    text(sl, BODY_X, bar_y, BODY_W * 0.5, Inches(0.26),
+         "Foaming Index (post-combustion thickness / initial thickness)", size=11, bold=True, color=MUTED)
+    by = bar_y + Inches(0.32)
     for label, ratio, val, color in bar_data:
-        bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
-                lbl_w=Inches(1.6), val_w=Inches(0.95))
-        by += Inches(0.45)
+        bar_row(sl, BODY_X, by, BODY_W * 0.62, label, ratio, val,
+                fill_color=color, lbl_w=Inches(3.2), val_w=Inches(1.0))
+        by += Inches(0.40)
 
-    # Right: explanation
-    cx2 = BODY_X + cw + Inches(0.20)
-    text(sl, cx2, cy, cw, Inches(0.30),
-         "Insulating Effect from Foaming", size=12, bold=True, color=MUTED)
-    by = cy + Inches(0.40)
-    bullets = [
-        "Expands to >2× initial thickness → heat conduction path extended",
-        "Air trapped in pores enhances thermal insulation",
-        "AquaGel-K does not foam → collapses flat under flame",
-        "HEC+MC/CSP without SDS achieves the highest foaming index (≈2.6)",
-    ]
-    for b in bullets:
-        text(sl, cx2 + Inches(0.05), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx2 + Inches(0.30), by, cw - Inches(0.35), Inches(0.30),
-             b, size=12, color=INK2)
-        by += Inches(0.42)
+    # ── Bottom callout ──
+    cy_co = H - FTR_H - Inches(0.14) - Inches(0.58)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.58),
+            "SDS did not improve foaming — instead coarsened bubble structure (Fig. 4c SEM) → explains the Foaming Index decrease",
+            icon='!', dark=True)
 
 
 # ===== SLIDE 27: SDS濃度別SEM =====

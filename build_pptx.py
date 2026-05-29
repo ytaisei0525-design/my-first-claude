@@ -1949,52 +1949,88 @@ def slide_25_hero(prs):
 # ===== SLIDE 26: 発泡指数 =====
 def slide_26_foam(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 12/15", "発泡指数（Foaming Index）の比較")
+    draw_header(sl, "結果 12/15", "SDS 添加：発泡性向上を期待したが、逆の結果に（Fig. 4）")
     draw_footer(sl, "31 / 43")
 
-    # 上部：2図プレースホルダー
-    fig_h = Inches(2.3)
+    # ── 上部：仮説 → ？ → 結果 の3ボックス ──
+    bw = Inches(3.6)
+    bh = Inches(1.10)
+    arrow_w = Inches(0.70)
+    gap = (BODY_W - bw * 3 - arrow_w * 2) / 2
+    box_y = BODY_Y
+
+    # 仮説ボックス
+    rrect(sl, BODY_X, box_y, bw, bh, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, box_y, Inches(0.06), bh, D_TEAL)
+    text(sl, BODY_X + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "仮説（SDS 添加の目的）", size=10, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "界面活性剤 SDS が発泡を促進\n→ Foaming Index が上昇\n→ エアロゲル断熱層が厚くなる",
+         size=11, color=INK2)
+
+    # → 矢印1
+    ax1 = BODY_X + bw + gap * 0.5
+    ar1 = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, ax1, box_y + bh/2 - Inches(0.22),
+                              arrow_w, Inches(0.44))
+    ar1.fill.solid(); ar1.fill.fore_color.rgb = MUTED
+    ar1.line.fill.background(); ar1.shadow.inherit = False
+
+    # 実験ボックス
+    bx2 = BODY_X + bw + gap * 0.5 + arrow_w + gap * 0.5
+    rrect(sl, bx2, box_y, bw, bh, CARD_C, LINE, 0.8, radius=0.05)
+    text(sl, bx2 + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "実験", size=10, bold=True, color=MUTED)
+    text(sl, bx2 + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "SDS 0 / 0.1 / 0.5 wt% を添加した\nHEC+MC/CSP の燃焼試験\n→ Foaming Index を定量（Fig. 4a/4b）",
+         size=11, color=INK2)
+
+    # → 矢印2（赤系：予想外を示す）
+    ax2 = bx2 + bw + gap * 0.5
+    ar2 = sl.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, ax2, box_y + bh/2 - Inches(0.22),
+                              arrow_w, Inches(0.44))
+    ar2.fill.solid(); ar2.fill.fore_color.rgb = D_AMBR
+    ar2.line.fill.background(); ar2.shadow.inherit = False
+
+    # 結果ボックス（予想外）
+    bx3 = ax2 + arrow_w + gap * 0.5
+    rrect(sl, bx3, box_y, bw, bh, RGBColor(0xff, 0xf7, 0xed), D_AMBR, 1.4, radius=0.05)
+    rect(sl, bx3, box_y, Inches(0.06), bh, D_AMBR)
+    text(sl, bx3 + Inches(0.22), box_y + Inches(0.08), bw - Inches(0.30), Inches(0.24),
+         "結果（予想と逆）", size=10, bold=True, color=D_AMBR)
+    text(sl, bx3 + Inches(0.22), box_y + Inches(0.38), bw - Inches(0.30), Inches(0.64),
+         "SDS 添加で Foaming Index が低下\n2.6（SDS 0%） → 2.3（0.1%）→ さらに低下（0.5%）\n発泡性向上には寄与せず",
+         size=11, color=INK2)
+
+    # ── 中央：Fig. 4a / 4b プレースホルダー ──
+    fig_y = box_y + bh + Inches(0.28)
+    fig_h = Inches(2.10)
     fw = (BODY_W - Inches(0.20)) / 2
-    fig_placeholder(sl, BODY_X, BODY_Y, fw, fig_h, fig_num="Fig. 4a",
-                    caption="燃焼後の発泡層外観")
-    fig_placeholder(sl, BODY_X + fw + Inches(0.20), BODY_Y, fw, fig_h,
-                    fig_num="Fig. 4b", caption="各配合系の Foaming Index")
+    fig_placeholder(sl, BODY_X, fig_y, fw, fig_h,
+                    fig_num="Fig. 4a", caption="燃焼後の発泡層外観（SDS 濃度別）")
+    fig_placeholder(sl, BODY_X + fw + Inches(0.20), fig_y, fw, fig_h,
+                    fig_num="Fig. 4b", caption="各配合系の Foaming Index（定量）")
 
-    # 下部：左バーチャート、右解説
-    cy = BODY_Y + fig_h + Inches(0.45)
-    cw = (BODY_W - Inches(0.20)) / 2
-
-    text(sl, BODY_X, cy, cw, Inches(0.30),
-         "Foaming Index（発泡後厚 / 初期厚）", size=12, bold=True, color=MUTED)
-    by = cy + Inches(0.40)
+    # ── 下部：Foaming Index 棒グラフ ──
+    bar_y = fig_y + fig_h + Inches(0.28)
     bar_data = [
-        ("AquaGel-K", 0.02, "≈0", GRAY_L),
-        ("MHEC/CSP 1-5", 0.53, "≈2.1×", D_AMBR),
-        ("HEC+MC/CSP/SDS 1-5-0.1", 0.60, "≈2.3×", D_BLUE),
-        ("HEC+MC/CSP 1-5", 0.68, "≈2.6×", D_TEAL),
+        ("HEC+MC/CSP 1-5（SDS 0%）", 1.00, "≈2.6×", D_TEAL),
+        ("HEC+MC/CSP/SDS 1-5-0.1", 0.88, "≈2.3×", MUTED),
+        ("HEC+MC/CSP/SDS 1-5-0.5", 0.72, "さらに低下", D_AMBR),
+        ("AquaGel-K（参考）", 0.02, "≈0", GRAY_L),
     ]
+    text(sl, BODY_X, bar_y, BODY_W * 0.5, Inches(0.26),
+         "Foaming Index（発泡後厚 / 初期厚）", size=11, bold=True, color=MUTED)
+    by = bar_y + Inches(0.32)
     for label, ratio, val, color in bar_data:
-        bar_row(sl, BODY_X, by, cw, label, ratio, val, fill_color=color,
-                lbl_w=Inches(1.6), val_w=Inches(0.95))
-        by += Inches(0.45)
+        bar_row(sl, BODY_X, by, BODY_W * 0.62, label, ratio, val,
+                fill_color=color, lbl_w=Inches(3.2), val_w=Inches(1.0))
+        by += Inches(0.40)
 
-    # 右側：解説
-    cx2 = BODY_X + cw + Inches(0.20)
-    text(sl, cx2, cy, cw, Inches(0.30),
-         "発泡がもたらす断熱効果", size=12, bold=True, color=MUTED)
-    by = cy + Inches(0.40)
-    bullets = [
-        "初期厚の2倍以上に膨張 → 熱伝導経路が延長",
-        "気孔内に空気が閉じ込められ断熱性が向上",
-        "AquaGel-Kは発泡せず → 火炎で平坦に崩壊",
-        "SDS無しのHEC+MC/CSPが最高発泡指数（≈2.6）を達成",
-    ]
-    for b in bullets:
-        text(sl, cx2 + Inches(0.05), by, Inches(0.20), Inches(0.30),
-             "•", size=14, color=ACCENT)
-        text(sl, cx2 + Inches(0.30), by, cw - Inches(0.35), Inches(0.30),
-             b, size=12, color=INK2)
-        by += Inches(0.42)
+    # ── 下部 callout ──
+    cy_co = H - FTR_H - Inches(0.14) - Inches(0.58)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.58),
+            "SDS は発泡に寄与せず、むしろ気泡を粗大化・不均一化（Fig. 4c SEM）→ 発泡指数低下の原因",
+            icon='!', dark=True)
 
 
 # ===== SLIDE 27: SDS濃度別SEM =====
