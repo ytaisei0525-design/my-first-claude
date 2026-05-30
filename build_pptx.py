@@ -1442,51 +1442,73 @@ def slide_16_rheology1(prs):
 # ===== SLIDE 17: shear thinning =====
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 2/15", "レオロジー②：剪断希薄化と Power-law 指数")
+    draw_header(sl, "結果 2/15", "レオロジー②：2つの降伏応力 — 静的（付着）と動的（噴霧）")
     draw_footer(sl, "20 / 43")
 
-    left_w = BODY_W * 0.58 - Inches(0.10)
-    right_w = BODY_W * 0.42 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # 上部 callout：降伏応力とは
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.62),
+            "降伏応力＝ゲルが流れ出す／流れ続けるのに必要な応力。本研究は2つの定義で評価（Fig. 2c–d・S3）",
+            icon='ƒ')
 
-    fig_h = Inches(4.8)
-    fig_placeholder(sl, BODY_X, BODY_Y, left_w, fig_h,
+    top = BODY_Y + Inches(0.82)
+    left_w = BODY_W * 0.40 - Inches(0.10)
+    right_x = BODY_X + left_w + Inches(0.24)
+    right_w = BODY_W - left_w - Inches(0.24)
+
+    # 左：フロースイープ図
+    fig_h = Inches(3.55)
+    fig_placeholder(sl, BODY_X, top, left_w, fig_h,
                     fig_num="Fig. 2c–d",
-                    caption="粘度 vs 剪断速度（shear-thinning挙動）")
+                    caption="定常せん断フロースイープ → HB fit で動的降伏応力を算出")
 
-    # 右：mini stats + 解説
-    mh = Inches(1.20)
-    mini(sl, right_x, BODY_Y, right_w, mh,
-         "流動指数 n", "n < 1", "HEC+MC/CSP — 強い剪断希薄化", value_color=ACCENT)
-    mini(sl, right_x, BODY_Y + mh + Inches(0.15), right_w, mh,
-         "流動指数 n", "n < 1", "MHEC/CSP — 同様に剪断希薄化", value_color=ACCENT)
+    # 右：2つの降伏応力カード
+    card_h = Inches(1.70)
+    # 静的降伏応力
+    rrect(sl, right_x, top, right_w, card_h, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, right_x, top, Inches(0.06), card_h, D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
+         "静的降伏応力 σ_static（＝絶対降伏応力）", size=13, bold=True, color=D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.50),
+         "測定：大振幅振動（LAOS）の G' / G'' クロスオーバー応力", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top + Inches(0.98), right_w - Inches(0.34), Inches(0.64),
+         "意味：流れ始める（変形開始）のに必要な応力\n→ 高いほど垂直・高所の燃料面に強く付着し、流れ出しにくい",
+         size=11.5, color=INK3)
 
-    cy_d = BODY_Y + (mh + Inches(0.15)) * 2 + Inches(0.10)
-    rrect(sl, right_x, cy_d, right_w, Inches(1.0), WHITE, LINE, 0.5, radius=0.04)
-    text(sl, right_x + Inches(0.15), cy_d + Inches(0.15), right_w - Inches(0.3), Inches(0.7),
-         "n < 1 = 剪断希薄化（shear-thinning）\n低いほど高せん断でよく流れる → スプレー性◎",
-         size=12, color=INK3)
+    # 動的降伏応力
+    top2 = top + card_h + Inches(0.15)
+    rrect(sl, right_x, top2, right_w, card_h, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, right_x, top2, Inches(0.06), card_h, ACCENT)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
+         "動的降伏応力 σ_dynamic", size=13, bold=True, color=ACCENT)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
+         "測定：フロースイープ（100→0.01 s⁻¹）を HB モデルにフィット", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
+         "意味：流れ続ける（流動維持）のに必要な応力 → 適度ならポンプ圧の制約内で噴霧可能\n"
+         "実測（新鮮）：HEC+MC/CSP 33.34 Pa ／ MHEC/CSP 3.31 Pa",
+         size=11.5, color=INK3)
 
-    cy_co = BODY_Y + fig_h + Inches(0.20)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.65),
-            "静止時は高粘度で付着、噴霧時は低粘度で散布 — 既存の消火機材でそのまま使える流動特性",
-            icon='💨')
+    # 下部 callout
+    cy_co = top + fig_h + Inches(0.22)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
+            "高い静的降伏応力（付着）と適度な動的降伏応力（噴霧）の両立が実用化の鍵。"
+            "界面活性剤（SDS）添加は両降伏応力を下げ、付着・安定性に影響",
+            dark=True, icon='✓')
 
 
 # ===== SLIDE 18: Herschel-Bulkley =====
 def slide_18_hb(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 3/15", "レオロジー③：静的降伏応力と長期安定性")
+    draw_header(sl, "結果 3/15", "レオロジー③：動的降伏応力の経時変化と長期安定性")
     draw_footer(sl, "21 / 43")
 
     # 上部 callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
-            "静的降伏応力：振幅掃引のG'/G'' クロスオーバー点（σ_s）。流れ始めに必要な最小応力",
+            "動的降伏応力：定常フロースイープを HB モデルにフィットして算出（σ_d）。流動状態を維持するのに必要な応力（Fig. S7）",
             icon='ƒ')
 
     ty = BODY_Y + Inches(0.85)
     th = Inches(2.2)
-    headers = ["配合系", "静的降伏応力（新鮮）", "静的降伏応力（455日後）", "備考"]
+    headers = ["配合系", "動的降伏応力（Day 1）", "動的降伏応力（Day 455）", "備考"]
     rows = [
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
          {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
@@ -1507,9 +1529,9 @@ def slide_18_hb(prs):
     ch = Inches(1.85)
     cw = (BODY_W - Inches(0.30)) / 3
     cards_data = [
-        ("静的降伏応力", "振幅掃引のG'/G''クロスオーバー点で測定。HEC+MC/CSPは33.34 Pa、MHEC/CSPは3.31 Pa（新鮮配合）"),
+        ("動的降伏応力（HB fit）", "定常フロースイープを HB モデルにフィットして測定。HEC+MC/CSPは33.34 Pa、MHEC/CSPは3.31 Pa（Day 1）"),
         ("長期安定性", "MHEC/CSPは455日経時後も3.31→4.56 Paとわずかな変化のみ。実用配合の長期安定性を実証"),
-        ("HEC+MC vs MHEC", "HEC+MC系はより高い降伏応力で垂直面付着に有利。MHEC系は単一ポリマーで製造が簡便"),
+        ("HEC+MC vs MHEC", "HEC+MC系は経時で剛性化（33.34→68.9 Pa）。MHEC系は変化が穏やかで単一ポリマーにより製造も簡便"),
     ]
     for i, (title, body) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.15))

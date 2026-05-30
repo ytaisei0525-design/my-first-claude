@@ -1425,51 +1425,73 @@ def slide_16_rheology1(prs):
 # ===== SLIDE 17: shear thinning =====
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 2/15", "Rheology ②: Shear Thinning and Power-law Index")
+    draw_header(sl, "Results 2/15", "Rheology ②: Two Yield Stresses — Static (Adhesion) & Dynamic (Spraying)")
     draw_footer(sl, "20 / 43")
 
-    left_w = BODY_W * 0.58 - Inches(0.10)
-    right_w = BODY_W * 0.42 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # Top callout: what is yield stress
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.62),
+            "Yield stress = stress needed to initiate / maintain flow of the gel. Evaluated with two definitions (Fig. 2c–d, S3)",
+            icon='ƒ')
 
-    fig_h = Inches(4.8)
-    fig_placeholder(sl, BODY_X, BODY_Y, left_w, fig_h,
+    top = BODY_Y + Inches(0.82)
+    left_w = BODY_W * 0.40 - Inches(0.10)
+    right_x = BODY_X + left_w + Inches(0.24)
+    right_w = BODY_W - left_w - Inches(0.24)
+
+    # Left: flow sweep figure
+    fig_h = Inches(3.55)
+    fig_placeholder(sl, BODY_X, top, left_w, fig_h,
                     fig_num="Fig. 2c–d",
-                    caption="Viscosity vs. shear rate (shear-thinning behavior)")
+                    caption="Steady-shear flow sweep → dynamic yield stress via HB fit")
 
-    # Right: mini stats + explanation
-    mh = Inches(1.20)
-    mini(sl, right_x, BODY_Y, right_w, mh,
-         "Flow index n", "n < 1", "HEC+MC/CSP — strong shear thinning", value_color=ACCENT)
-    mini(sl, right_x, BODY_Y + mh + Inches(0.15), right_w, mh,
-         "Flow index n", "n < 1", "MHEC/CSP — shear thinning", value_color=ACCENT)
+    # Right: two yield-stress cards
+    card_h = Inches(1.70)
+    # Static yield stress
+    rrect(sl, right_x, top, right_w, card_h, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, right_x, top, Inches(0.06), card_h, D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
+         "Static yield stress σ_static (\"absolute\" yield stress)", size=13, bold=True, color=D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.40),
+         "Measured: stress at G' / G'' crossover in a large-amplitude oscillatory shear (LAOS) sweep", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top + Inches(0.98), right_w - Inches(0.34), Inches(0.64),
+         "Meaning: stress to initiate flow (start deforming)\n→ Higher = stronger adhesion to vertical/elevated fuel surfaces, reluctant to flow",
+         size=11.5, color=INK3)
 
-    cy_d = BODY_Y + (mh + Inches(0.15)) * 2 + Inches(0.10)
-    rrect(sl, right_x, cy_d, right_w, Inches(1.0), WHITE, LINE, 0.5, radius=0.04)
-    text(sl, right_x + Inches(0.15), cy_d + Inches(0.15), right_w - Inches(0.3), Inches(0.7),
-         "n < 1 = shear-thinning\nLower values → better flow at high shear → excellent sprayability",
-         size=12, color=INK3)
+    # Dynamic yield stress
+    top2 = top + card_h + Inches(0.15)
+    rrect(sl, right_x, top2, right_w, card_h, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, right_x, top2, Inches(0.06), card_h, ACCENT)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
+         "Dynamic yield stress σ_dynamic", size=13, bold=True, color=ACCENT)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
+         "Measured: fit flow sweep (100→0.01 s⁻¹) to the Herschel–Bulkley model", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top2 + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
+         "Meaning: stress to maintain flow → moderate value enables spraying within pump-pressure limits\n"
+         "Measured (fresh): HEC+MC/CSP 33.34 Pa / MHEC/CSP 3.31 Pa",
+         size=11.5, color=INK3)
 
-    cy_co = BODY_Y + fig_h + Inches(0.20)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.65),
-            "High viscosity at rest for adhesion, low viscosity during spraying — flow properties compatible with existing firefighting equipment",
-            icon='💨')
+    # Bottom callout
+    cy_co = top + fig_h + Inches(0.22)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
+            "The key to deployability: high static yield stress (adhesion) + moderate dynamic yield stress (spraying). "
+            "Adding surfactant (SDS) lowers both, affecting adhesion and stability",
+            dark=True, icon='✓')
 
 
 # ===== SLIDE 18: Herschel-Bulkley =====
 def slide_18_hb(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 3/15", "Rheology ③: Static Yield Stress and Long-term Stability")
+    draw_header(sl, "Results 3/15", "Rheology ③: Aging of Dynamic Yield Stress and Long-term Stability")
     draw_footer(sl, "21 / 43")
 
     # Top callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.65),
-            "Static yield stress: stress at the G'/G'' crossover (σ_s) from amplitude sweep — minimum stress to initiate flow",
+            "Dynamic yield stress: obtained by fitting the steady-shear flow sweep to the Herschel–Bulkley model (σ_d) — stress to maintain flow (Fig. S7)",
             icon='ƒ')
 
     ty = BODY_Y + Inches(0.85)
     th = Inches(2.2)
-    headers = ["Formulation", "Static yield stress (fresh)", "Static yield stress (455 days)", "Note"]
+    headers = ["Formulation", "Dynamic yield stress (Day 1)", "Dynamic yield stress (Day 455)", "Note"]
     rows = [
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
          {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
@@ -1490,9 +1512,9 @@ def slide_18_hb(prs):
     ch = Inches(1.85)
     cw = (BODY_W - Inches(0.30)) / 3
     cards_data = [
-        ("Static Yield Stress", "Measured at G'/G'' crossover from amplitude sweep. HEC+MC/CSP: 33.34 Pa; MHEC/CSP: 3.31 Pa (fresh)"),
+        ("Dynamic Yield Stress (HB fit)", "Obtained by fitting the steady-shear flow sweep to the HB model. HEC+MC/CSP: 33.34 Pa; MHEC/CSP: 3.31 Pa (Day 1)"),
         ("Long-term Stability", "MHEC/CSP shows only minor change after 455 days (3.31→4.56 Pa). Demonstrates shelf stability for practical use"),
-        ("HEC+MC vs MHEC", "HEC+MC system shows ~10× higher yield stress, better for vertical surface adhesion. MHEC simpler to manufacture"),
+        ("HEC+MC vs MHEC", "HEC+MC stiffens with aging (33.34→68.9 Pa). MHEC changes gently and is simpler to manufacture (single polymer)"),
     ]
     for i, (title, body) in enumerate(cards_data):
         cx = BODY_X + i * (cw + Inches(0.15))
