@@ -795,7 +795,7 @@ def slide_07_predecessor(prs):
 
     items_old = [
         ("PP interactions", "Cellulose chains selectively adsorb onto CSP (noncovalent, multivalent)"),
-        ("Shear thinning",  "Power-law n < 1 (suitable for spraying and pipeline pumping)"),
+        ("Shear thinning",  "Viscosity drops at high shear (suitable for spraying and pipeline pumping)"),
         ("Self-healing",    "Gel structure rapidly recovers after stress release"),
         ("Scalability",     "Linearly scalable from 0.5 mL to 15 L"),
         ("APP carrier use", "Carries Phos-Chek LC95A; improves adhesion & rain resistance"),
@@ -1016,7 +1016,7 @@ def slide_self_protection(prs):
         ("01", "At rest", "Gel", "High-viscosity elastic gel. G' > G'' holds structure.",
          "Yield stress ~33 Pa", ACCENT),
         ("02", "Spraying", "Sol-like", "Shear strain lowers viscosity; the gel flows.",
-         "Shear-thinning n < 1", D_TEAL),
+         "Shear-thinning (viscosity drops)", D_TEAL),
         ("03", "On wall", "Self-healing gel", "Strain release instantly restores the gel network.",
          "G' recovery ~90%", D_GRN),
         ("04", "Flame", "Aerogel", "CSP sinters into a porous silica layer.",
@@ -1131,8 +1131,8 @@ def slide_10_mc(prs):
     rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
     ty += Inches(0.18)
     props = [
-        ("Shear-thinning", "Flow index n < 1 — reduced viscosity during spraying"),
-        ("Yield stress", "~33 Pa — gel structure maintained at rest"),
+        ("Shear-thinning", "Viscosity drops sharply at high shear — fluidizes during spraying"),
+        ("Yield stress", "~33 Pa (dynamic, HB fit) — gel structure maintained at rest"),
         ("Self-healing", "G' recovers ~90% after strain removal"),
     ]
     for label, detail in props:
@@ -1145,8 +1145,8 @@ def slide_10_mc(prs):
     # Right: 3 mini stats
     mw = (right_w - Inches(0.20)) / 3
     mh = Inches(1.4)
-    mini(sl, right_x, BODY_Y, mw, mh, "Flow index n", "< 1", "Strong shear-thinning", value_color=ACCENT)
-    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "Static yield stress", "~33 Pa", "HEC+MC/CSP", value_color=D_TEAL)
+    mini(sl, right_x, BODY_Y, mw, mh, "Viscosity response", "reversible", "Low at high shear → recovers at rest", value_color=ACCENT)
+    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "Dynamic yield stress", "~33 Pa", "HEC+MC/CSP (HB fit)", value_color=D_TEAL)
     mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "G' recovery", "~90%", "After 1000 s", value_color=D_GRN)
 
     # Spray-to-flame process flow (4 steps)
@@ -1349,7 +1349,7 @@ def slide_14_adhesion(prs):
 
     # 3-row causal mapping: (left title, left desc, right title, right desc, accent color)
     rows = [
-        ("Low Power-law Index n", "Strong shear thinning (n ≪ 1)",
+        ("Shear-thinning behavior", "Viscosity drops sharply at high shear",
          "Sprayable", "Viscosity drops under nozzle's high shear\n→ Deployable with existing hoses/nozzles", D_TEAL),
         ("High Storage Modulus G' (G' ≫ G'')", "Holds gel state at rest",
          "No run-off on vertical surfaces", "Retains shape and adheres after application\n→ Holds on vertical substrates (wood, walls)", ACCENT),
@@ -1647,7 +1647,7 @@ def slide_20_compare(prs):
     bullets = [
         "HEC provides room-temperature viscosity and adhesion",
         "MC maintains structure during heating",
-        "Strong shear thinning (n < 1)",
+        "Shear-thinning (low viscosity at high shear)",
         "Time to char > 7 min",
         "Foaming Index ≈ 2.2–2.6",
     ]
@@ -1676,7 +1676,7 @@ def slide_20_compare(prs):
     bullets2 = [
         "Carries both hydroxyethyl and methyl groups on the same chain",
         "Achieves equivalent viscoelasticity and thermal response with a single polymer",
-        "Shear thinning (n < 1)",
+        "Shear-thinning behavior",
         "Time to char > 5 min",
         "Advantage of simplified formulation and quality control",
     ]
@@ -2504,7 +2504,7 @@ def slide_36_impact(prs):
     bars = [
         ("Time to char", 0.95, ">7 min", GOLD),
         ("Foaming Index", 0.68, "≈2.6×", ACCENT),
-        ("Shear-thinning", 0.60, "n < 1", GRAY_L),
+        ("Shear-thinning", 0.60, "demonstrated", GRAY_L),
     ]
     by = Inches(6.0)
     for label, ratio, val, color in bars:

@@ -812,7 +812,7 @@ def slide_07_predecessor(prs):
 
     items_old = [
         ("PP 相互作用", "セルロース鎖が CSP 表面に選択吸着（非共有・多価）"),
-        ("剪断希薄化", "n < 1 の Power-law 挙動（噴霧・パイプ送液に適合）"),
+        ("剪断希薄化", "高せん断で粘度が低下（噴霧・パイプ送液に適合）"),
         ("自己修復性", "応力解放で即座にゲル構造を回復"),
         ("スケーラビリティ", "0.5 mL → 15 L まで線形にスケール"),
         ("APP キャリア用途", "Phos-Chek LC95A を担持し、付着・耐降雨性を向上"),
@@ -1033,7 +1033,7 @@ def slide_self_protection(prs):
         ("01", "静止時", "ゲル", "高粘度の弾性ゲル。G′ > G″ で構造を保持。",
          "降伏応力 ~33 Pa", ACCENT),
         ("02", "噴霧時", "ゾル様", "せん断ひずみで粘度が低下し、流動化。",
-         "せん断希薄化 n < 1", D_TEAL),
+         "せん断希薄化（粘度低下）", D_TEAL),
         ("03", "付着後", "自己修復ゲル", "ひずみ解放で即座にゲル構造を回復。",
          "G′ 回復率 ~90%", D_GRN),
         ("04", "炎接触", "エアロゲル", "CSP が焼結し多孔質シリカ層を形成。",
@@ -1148,7 +1148,7 @@ def slide_10_mc(prs):
     rect(sl, BODY_X, ty, left_w * 0.9, Inches(0.015), LINE)
     ty += Inches(0.18)
     props = [
-        ("せん断希薄化", "流動指数 n < 1（噴霧時に低粘度化）"),
+        ("せん断希薄化", "高せん断で粘度が急低下（噴霧時に低粘度化）"),
         ("降伏応力", "~33 Pa（静止時のゲル構造を維持）"),
         ("自己修復性", "ひずみ除去後 G' が ~90% 回復"),
     ]
@@ -1162,8 +1162,8 @@ def slide_10_mc(prs):
     # 右：3つのmini stats
     mw = (right_w - Inches(0.20)) / 3
     mh = Inches(1.4)
-    mini(sl, right_x, BODY_Y, mw, mh, "流動指数 n", "< 1", "強いせん断希薄化", value_color=ACCENT)
-    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "静的降伏応力", "~33 Pa", "HEC+MC/CSP", value_color=D_TEAL)
+    mini(sl, right_x, BODY_Y, mw, mh, "粘度挙動", "可逆", "高せん断で低粘度→静止で回復", value_color=ACCENT)
+    mini(sl, right_x + mw + Inches(0.10), BODY_Y, mw, mh, "動的降伏応力", "~33 Pa", "HEC+MC/CSP（HB fit）", value_color=D_TEAL)
     mini(sl, right_x + (mw + Inches(0.10)) * 2, BODY_Y, mw, mh, "G' 回復率", "~90%", "1000秒後", value_color=D_GRN)
 
     # 噴霧〜耐火プロセスフロー (4段)
@@ -1366,7 +1366,7 @@ def slide_14_adhesion(prs):
 
     # 3行の因果マッピング：(左タイトル, 左説明, 右タイトル, 右説明, アクセント色)
     rows = [
-        ("低い Power-law 指数 n", "強いせん断希薄化（n ≪ 1）",
+        ("せん断希薄化挙動", "高せん断で粘度が急低下",
          "噴霧できる", "ノズル通過時の高せん断で粘度が急低下\n→ 既存ホース・ノズルで散布可能", D_TEAL),
         ("高い貯蔵弾性率 G'（G' ≫ G''）", "静止時はゲル状態を保持",
          "垂直面で流れ落ちない", "塗布後は形状を保持して付着\n→ 木材・壁面など垂直基材にも保持", ACCENT),
@@ -1666,7 +1666,7 @@ def slide_20_compare(prs):
     bullets = [
         "HECで常温粘度・付着性を確保",
         "MCで加熱時の構造維持を担当",
-        "強い剪断希薄化（n < 1）",
+        "せん断希薄化（高せん断で低粘度）",
         "Time to char ＞ 7 min",
         "Foaming Index 最大≈2.6（SDS無し）",
     ]
@@ -1695,7 +1695,7 @@ def slide_20_compare(prs):
     bullets2 = [
         "ヒドロキシエチル基とメチル基を同一鎖上に有する",
         "単一ポリマーで同等の粘弾性・熱応答を実現",
-        "剪断希薄化（n < 1）",
+        "せん断希薄化挙動",
         "Time to char ＞ 5 min",
         "配合・品質管理が単純化される利点",
     ]
@@ -2524,7 +2524,7 @@ def slide_36_impact(prs):
     bars = [
         ("Time to char", 0.95, ">7 min", GOLD),
         ("Foaming Index", 0.68, "≈2.6×", ACCENT),
-        ("Shear-thinning", 0.60, "n < 1", GRAY_L),
+        ("Shear-thinning", 0.60, "実証", GRAY_L),
     ]
     by = Inches(6.0)
     for label, ratio, val, color in bars:
