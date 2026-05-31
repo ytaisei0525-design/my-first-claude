@@ -2447,98 +2447,139 @@ def slide_33_scenarios(prs):
             icon='🚁')
 
 
-# ===== SLIDE 34: 実証結果のまとめ =====
+# ===== SLIDE 34: 実証結果のまとめ（既存品との○×比較）=====
 def slide_34_future(prs):
     sl = new_slide(prs)
-    draw_header(sl, "まとめ 1/2", "実証された主要結果")
+    draw_header(sl, "まとめ 1/2", "既存品との比較：WEG だけが満たす要件")
     draw_footer(sl, "41 / 43")
 
-    cw = (BODY_W - Inches(0.42)) / 4
-    ch = Inches(4.6)
-    cards_data = [
-        ("RHEOLOGY", "レオロジー特性", [
-            "全系で G' > G''、crossoverなし",
-            "G': HEC+MC≈46, MHEC≈26 Pa",
-            "剪断希薄化（HB適合）→ 噴霧可",
-            "tan δ < 1 の固体的ゲル",
-        ]),
-        ("FIRE PROTECTION", "火炎保護性能", [
-            "HEC+MC/CSP：7分超 char遅延",
-            "MHEC/CSP：5分超",
-            "市販品の3〜6倍の効果",
-            "水~0.3分, AquaGel-K~1.5分",
-        ]),
-        ("FOAMING / SEM", "発泡・微細構造", [
-            "Foaming Index 最大≈2.6",
-            "AquaGel-Kは発泡せず≈0",
-            "燃焼で多孔質シリカ層を形成",
-            "2分以降に粒子が焼結（SEM）",
-        ]),
-        ("CHEMISTRY", "化学的変態", [
-            "FT-IR：CH/SiO比が低下",
-            "XPS：燃焼で炭素が大幅減",
-            "MHEC/CSP C 38.3%→4.8%",
-            "残存はシリカ（SiO₂）",
-        ]),
-    ]
-    for i, (tag, title, bullets) in enumerate(cards_data):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=14, li_size=11)
+    # 上部 callout
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.56),
+            "本研究の WEG（PPハイドロゲル）は、水・市販WEG・Phos-Chek が個別にしか満たせない要件をすべて両立する",
+            icon='◆')
 
-    cy_co = BODY_Y + ch + Inches(0.25)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
-            "火炎で水が蒸発しつつゲルが多孔質シリカエアロゲルへ転換 → 乾燥後も基材を断熱保護（市販WEGにない機構）",
-            dark=True, icon='◆')
+    # ── ○×比較マトリクス ──
+    ty = BODY_Y + Inches(0.78)
+    # 列：製品、横：5つの評価軸
+    crit = ["長時間の火炎保護", "乾燥後も保護継続", "噴霧散布が可能", "環境残留が低い", "発泡・断熱層を形成"]
+    # 各行：(製品名, 強調か, [評価記号...])  記号: '◎'/'○'/'△'/'×'
+    G = D_GRN      # ◎/○ 緑
+    A = D_AMBR     # △ 琥珀
+    R = D_RED      # × 赤
+    rows = [
+        ("WEG（本研究）", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G)]),
+        ("市販 AquaGel-K", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R)]),
+        ("Phos-Chek", False,     [("○", G), ("○", G), ("○", G), ("×", R), ("×", R)]),
+        ("水のみ", False,         [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R)]),
+    ]
+
+    name_w = Inches(2.6)
+    grid_w = BODY_W - name_w
+    col_w = grid_w / len(crit)
+    hdr_h = Inches(0.95)
+    row_h = Inches(0.66)
+    table_h = hdr_h + row_h * len(rows)
+
+    # ヘッダー行（評価軸）
+    rect(sl, BODY_X, ty, name_w, hdr_h, HEADER)
+    text(sl, BODY_X + Inches(0.12), ty, name_w - Inches(0.24), hdr_h,
+         "製品 ＼ 要件", size=11, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+    for ci, c in enumerate(crit):
+        cx = BODY_X + name_w + col_w * ci
+        rect(sl, cx, ty, col_w, hdr_h, HEADER, WHITE, 0.5)
+        text(sl, cx + Inches(0.06), ty + Inches(0.05), col_w - Inches(0.12), hdr_h - Inches(0.10),
+             c, size=10.5, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+
+    # データ行
+    for ri, (name, emph, marks) in enumerate(rows):
+        ry = ty + hdr_h + row_h * ri
+        name_bg = RGBColor(0xec, 0xf2, 0xf8) if emph else (SOFT if ri % 2 == 0 else WHITE)
+        rect(sl, BODY_X, ry, name_w, row_h, name_bg, LINE, 0.3)
+        if emph:
+            rect(sl, BODY_X, ry, Inches(0.06), row_h, D_GRN)
+        text(sl, BODY_X + Inches(0.20), ry, name_w - Inches(0.30), row_h,
+             name, size=12, bold=emph, color=(INK if emph else INK2),
+             anchor=MSO_ANCHOR.MIDDLE)
+        for ci, (sym, col) in enumerate(marks):
+            cx = BODY_X + name_w + col_w * ci
+            cell_bg = name_bg
+            rect(sl, cx, ry, col_w, row_h, cell_bg, LINE, 0.3)
+            text(sl, cx, ry, col_w, row_h, sym, size=18, bold=True,
+                 color=col, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+
+    # 凡例
+    leg_y = ty + table_h + Inches(0.16)
+    legend = [("◎", "優れる", D_GRN), ("○", "可能", D_GRN), ("△", "限定的", D_AMBR), ("×", "不可・課題", D_RED)]
+    lx = BODY_X
+    for sym, lbl, col in legend:
+        text(sl, lx, leg_y, Inches(0.4), Inches(0.30), sym, size=14, bold=True,
+             color=col, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, lx + Inches(0.38), leg_y, Inches(1.5), Inches(0.30), lbl, size=11,
+             color=INK3, anchor=MSO_ANCHOR.MIDDLE)
+        lx += Inches(2.0)
 
 
 # ===== SLIDE 35: 結論 =====
 def slide_35_summary(prs):
     sl = new_slide(prs)
-    draw_header(sl, "まとめ 2/2", "研究の結論")
+    draw_header(sl, "まとめ 2/2", "研究の結論：核心メカニズムと4つの成果")
     draw_footer(sl, "42 / 43")
 
-    cw = (BODY_W - Inches(0.42)) / 4
-    ch = Inches(2.5)
-    summaries = [
-        ("RESULT 01", "市販品の3〜6倍の保護", "HEC+MC/CSPは7分超、MHEC/CSPは5分超 char遅延。火炎下で基材を長く保護"),
-        ("RESULT 02", "エアロゲルの自己形成", "加熱で脱水・CSPが焼結 → in situで多孔質シリカエアロゲル断熱層を形成（乾燥後も保護継続）"),
-        ("RESULT 03", "既存散布インフラ互換", "剪断希薄化を示す噴霧可能な流体。基材への高い付着性・濡れ性を両立"),
-        ("RESULT 04", "持続可能・安全な原料", "地球上最も豊富なセルロース誘導体。前研究で生分解性を確認、シリカは無害"),
+    # ── 上段：核心メカニズムを3ステップの横並びフロー図で視覚化 ──
+    text(sl, BODY_X, BODY_Y, BODY_W, Inches(0.30),
+         "核心メカニズム：火炎接触でゲルが「自己変態」する", size=13, bold=True, color=INK)
+    fy = BODY_Y + Inches(0.42)
+    fh = Inches(1.65)
+    steps = [
+        ("STEP 1", "水が急速に蒸発", "火炎接触でゲル中の水が気化・吸熱\n→ 基材表面の温度上昇を抑制", D_TEAL),
+        ("STEP 2", "CSP が焼結", "シリカ粒子が加熱で焼結し\n粒子間にネック（架橋）を形成", D_AMBR),
+        ("STEP 3", "エアロゲル断熱層", "多孔質シリカエアロゲルが in situ で完成\n→ 乾燥後も基材を断熱保護", ACCENT),
     ]
-    for i, (num, title, body) in enumerate(summaries):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        rrect(sl, cx, BODY_Y, cw, ch, SOFT, LINE, 0.5, radius=0.04)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(0.16), cw - Inches(0.36), Inches(0.28),
-             num, size=10, bold=True, color=MUTED)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(0.50), Inches(0.6), Inches(0.5),
-             "●", size=22, color=ACCENT)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(1.10), cw - Inches(0.36), Inches(0.45),
+    n = len(steps)
+    arrow_w = Inches(0.45)
+    sw = (BODY_W - arrow_w * (n - 1)) / n
+    for i, (tag, title, desc, c) in enumerate(steps):
+        sx = BODY_X + i * (sw + arrow_w)
+        rrect(sl, sx, fy, sw, fh, CARD_C, LINE, 0.5, radius=0.04)
+        rect(sl, sx, fy, sw, Inches(0.05), c)
+        text(sl, sx + Inches(0.18), fy + Inches(0.14), sw - Inches(0.36), Inches(0.26),
+             tag, size=10, bold=True, color=c)
+        text(sl, sx + Inches(0.18), fy + Inches(0.44), sw - Inches(0.36), Inches(0.36),
              title, size=15, bold=True, color=INK)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(1.65), cw - Inches(0.36), ch - Inches(1.8),
-             body, size=12, color=INK3)
+        text(sl, sx + Inches(0.18), fy + Inches(0.86), sw - Inches(0.36), fh - Inches(0.95),
+             desc, size=11, color=INK3)
+        # 矢印
+        if i < n - 1:
+            ax = sx + sw
+            text(sl, ax, fy, arrow_w, fh, "▶", size=18, bold=True,
+                 color=GRAY_L, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
-    cy = BODY_Y + ch + Inches(0.25)
-    ch2 = Inches(2.0)
-    cw2 = (BODY_W - Inches(0.20)) / 2
-    card(sl, BODY_X, cy, cw2, ch2,
-         title="核心メカニズム",
-         bullets=[
-             "火炎接触で水が急速に蒸発・脱水",
-             "CSPが焼結し粒子間ネックを形成",
-             "多孔質シリカエアロゲル断熱層が完成",
-         ], ct_size=14, li_size=12)
-    card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="論文が示す意義",
-         bullets=[
-             "PPプラットフォームは多様な難燃材料の基盤",
-             "modular製造・大規模適用に展開可能",
-             "455日経時後も難燃性を維持（MHEC/CSP）",
-         ], ct_size=14, li_size=12)
+    # ── 中段：4つの成果（1行＝アイコン＋見出し＋一言）──
+    ry = fy + fh + Inches(0.28)
+    text(sl, BODY_X, ry, BODY_W, Inches(0.30),
+         "4つの主要成果", size=13, bold=True, color=INK)
+    ry += Inches(0.40)
+    results = [
+        ("3–6×", "市販品比の保護時間", D_GRN),
+        ("自己形成", "エアロゲル断熱層を in situ 生成", ACCENT),
+        ("噴霧可能", "既存散布インフラと互換", D_TEAL),
+        ("持続可能", "セルロース系・安全な原料", D_AMBR),
+    ]
+    rcw = (BODY_W - Inches(0.42)) / 4
+    rch = Inches(1.30)
+    for i, (big, lbl, c) in enumerate(results):
+        cx = BODY_X + i * (rcw + Inches(0.14))
+        rrect(sl, cx, ry, rcw, rch, SOFT, LINE, 0.5, radius=0.04)
+        rect(sl, cx, ry, Inches(0.06), rch, c)
+        text(sl, cx + Inches(0.20), ry + Inches(0.16), rcw - Inches(0.34), Inches(0.50),
+             big, size=22, bold=True, color=c)
+        text(sl, cx + Inches(0.20), ry + Inches(0.74), rcw - Inches(0.34), rch - Inches(0.84),
+             lbl, size=11.5, color=INK3)
 
-    cy_co = cy + ch2 + Inches(0.20)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
-            "「水のキャリア」から「加熱で自己変態する難燃材料」へ ― 乾燥後も効力を保つ次世代WEG",
+    # ── 下段：キーメッセージ ──
+    cy_co = ry + rch + Inches(0.22)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
+            "「水のキャリア」から「加熱で自己変態する難燃材料」へ ― 乾燥後も効力を保つ次世代 WEG",
             dark=True, icon='"')
 
 

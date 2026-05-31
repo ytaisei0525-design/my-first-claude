@@ -2432,94 +2432,131 @@ def slide_33_scenarios(prs):
 # ===== SLIDE 34: 課題と展望 =====
 def slide_34_future(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Summary 1/2", "Key Demonstrated Results")
+    draw_header(sl, "Summary 1/2", "Comparison with Existing Products: Only WEG Meets Every Requirement")
     draw_footer(sl, "41 / 43")
 
-    cw = (BODY_W - Inches(0.42)) / 4
-    ch = Inches(4.6)
-    cards_data = [
-        ("RHEOLOGY", "Rheology", [
-            "G' > G'', no crossover (gel)",
-            "G': HEC+MC≈46, MHEC≈26 Pa",
-            "Shear-thinning (HB) → sprayable",
-            "tan δ < 1, solid-like gel",
-        ]),
-        ("FIRE PROTECTION", "Fire Protection", [
-            "HEC+MC/CSP: >7 min to char",
-            "MHEC/CSP: >5 min",
-            "3–6× more effective than commercial",
-            "Water ~0.3, AquaGel-K ~1.5 min",
-        ]),
-        ("FOAMING / SEM", "Foaming & Structure", [
-            "Foaming Index up to ≈2.6",
-            "AquaGel-K does not foam (≈0)",
-            "Porous silica film on burning",
-            "Particles sinter after 2 min (SEM)",
-        ]),
-        ("CHEMISTRY", "Chemical Change", [
-            "FT-IR: CH/SiO ratio drops",
-            "XPS: large carbon decrease",
-            "MHEC/CSP C 38.3%→4.8%",
-            "Silica (SiO₂) remains",
-        ]),
-    ]
-    for i, (tag, title, bullets) in enumerate(cards_data):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        card(sl, cx, BODY_Y, cw, ch, title=title, tag=tag,
-             bullets=bullets, ct_size=14, li_size=11)
+    # Top callout
+    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.56),
+            "This WEG (PP hydrogel) simultaneously satisfies requirements that water, commercial WEG, and Phos-Chek each meet only partially",
+            icon='◆')
 
-    cy_co = BODY_Y + ch + Inches(0.25)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.80),
-            "On burning, water evaporates while the gel converts into a porous silica aerogel — insulating the substrate even after desiccation (a mechanism absent in commercial WEGs)",
-            dark=True, icon='◆')
+    # ── ○× comparison matrix ──
+    ty = BODY_Y + Inches(0.78)
+    crit = ["Long flame\nprotection", "Protects after\ndrying", "Sprayable", "Low environ.\npersistence", "Forms foam /\ninsulating layer"]
+    G = D_GRN
+    A = D_AMBR
+    R = D_RED
+    rows = [
+        ("WEG (this work)", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G)]),
+        ("AquaGel-K (commercial)", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R)]),
+        ("Phos-Chek", False,     [("○", G), ("○", G), ("○", G), ("×", R), ("×", R)]),
+        ("Water only", False,    [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R)]),
+    ]
+
+    name_w = Inches(2.9)
+    grid_w = BODY_W - name_w
+    col_w = grid_w / len(crit)
+    hdr_h = Inches(0.95)
+    row_h = Inches(0.66)
+    table_h = hdr_h + row_h * len(rows)
+
+    # Header row (criteria)
+    rect(sl, BODY_X, ty, name_w, hdr_h, HEADER)
+    text(sl, BODY_X + Inches(0.12), ty, name_w - Inches(0.24), hdr_h,
+         "Product ＼ Requirement", size=11, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+    for ci, c in enumerate(crit):
+        cx = BODY_X + name_w + col_w * ci
+        rect(sl, cx, ty, col_w, hdr_h, HEADER, WHITE, 0.5)
+        text(sl, cx + Inches(0.06), ty + Inches(0.05), col_w - Inches(0.12), hdr_h - Inches(0.10),
+             c, size=10, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+
+    # Data rows
+    for ri, (name, emph, marks) in enumerate(rows):
+        ry = ty + hdr_h + row_h * ri
+        name_bg = RGBColor(0xec, 0xf2, 0xf8) if emph else (SOFT if ri % 2 == 0 else WHITE)
+        rect(sl, BODY_X, ry, name_w, row_h, name_bg, LINE, 0.3)
+        if emph:
+            rect(sl, BODY_X, ry, Inches(0.06), row_h, D_GRN)
+        text(sl, BODY_X + Inches(0.20), ry, name_w - Inches(0.30), row_h,
+             name, size=11.5, bold=emph, color=(INK if emph else INK2),
+             anchor=MSO_ANCHOR.MIDDLE)
+        for ci, (sym, col) in enumerate(marks):
+            cx = BODY_X + name_w + col_w * ci
+            rect(sl, cx, ry, col_w, row_h, name_bg, LINE, 0.3)
+            text(sl, cx, ry, col_w, row_h, sym, size=18, bold=True,
+                 color=col, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+
+    # Legend
+    leg_y = ty + table_h + Inches(0.16)
+    legend = [("◎", "excellent", D_GRN), ("○", "capable", D_GRN), ("△", "limited", D_AMBR), ("×", "not feasible", D_RED)]
+    lx = BODY_X
+    for sym, lbl, col in legend:
+        text(sl, lx, leg_y, Inches(0.4), Inches(0.30), sym, size=14, bold=True,
+             color=col, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, lx + Inches(0.38), leg_y, Inches(1.7), Inches(0.30), lbl, size=11,
+             color=INK3, anchor=MSO_ANCHOR.MIDDLE)
+        lx += Inches(2.1)
 
 
 # ===== SLIDE 35: Conclusions =====
 def slide_35_summary(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Summary 2/2", "Conclusions")
+    draw_header(sl, "Summary 2/2", "Conclusions: Core Mechanism and Four Outcomes")
     draw_footer(sl, "42 / 43")
 
-    cw = (BODY_W - Inches(0.42)) / 4
-    ch = Inches(2.5)
-    summaries = [
-        ("RESULT 01", "3–6× more protective", "HEC+MC/CSP >7 min, MHEC/CSP >5 min to char. Protects substrates far longer under flame"),
-        ("RESULT 02", "Self-forming aerogel", "Heat dehydrates the gel and sinters CSP → forms a porous silica aerogel insulating layer in situ (protection continues after drying)"),
-        ("RESULT 03", "Compatible with spray infrastructure", "Shear-thinning, sprayable fluid combining strong substrate adherence and wetting"),
-        ("RESULT 04", "Sustainable, safe materials", "Cellulose derivatives — Earth's most abundant biopolymer; biodegradability confirmed in prior study; silica is benign"),
+    # ── Top: core mechanism as a 3-step horizontal flow ──
+    text(sl, BODY_X, BODY_Y, BODY_W, Inches(0.30),
+         "Core mechanism: the gel \"self-transforms\" upon flame contact", size=13, bold=True, color=INK)
+    fy = BODY_Y + Inches(0.42)
+    fh = Inches(1.65)
+    steps = [
+        ("STEP 1", "Water evaporates", "Flame contact vaporises water in the gel (endothermic)\n→ suppresses substrate heating", D_TEAL),
+        ("STEP 2", "CSP sinters", "Silica particles sinter under heat,\nforming inter-particle necks (bridges)", D_AMBR),
+        ("STEP 3", "Aerogel insulation", "A porous silica aerogel forms in situ\n→ insulates the substrate even after drying", ACCENT),
     ]
-    for i, (num, title, body) in enumerate(summaries):
-        cx = BODY_X + i * (cw + Inches(0.14))
-        rrect(sl, cx, BODY_Y, cw, ch, SOFT, LINE, 0.5, radius=0.04)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(0.16), cw - Inches(0.36), Inches(0.28),
-             num, size=10, bold=True, color=MUTED)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(0.50), Inches(0.6), Inches(0.5),
-             "●", size=22, color=ACCENT)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(1.10), cw - Inches(0.36), Inches(0.45),
+    n = len(steps)
+    arrow_w = Inches(0.45)
+    sw = (BODY_W - arrow_w * (n - 1)) / n
+    for i, (tag, title, desc, c) in enumerate(steps):
+        sx = BODY_X + i * (sw + arrow_w)
+        rrect(sl, sx, fy, sw, fh, CARD_C, LINE, 0.5, radius=0.04)
+        rect(sl, sx, fy, sw, Inches(0.05), c)
+        text(sl, sx + Inches(0.18), fy + Inches(0.14), sw - Inches(0.36), Inches(0.26),
+             tag, size=10, bold=True, color=c)
+        text(sl, sx + Inches(0.18), fy + Inches(0.44), sw - Inches(0.36), Inches(0.36),
              title, size=15, bold=True, color=INK)
-        text(sl, cx + Inches(0.18), BODY_Y + Inches(1.65), cw - Inches(0.36), ch - Inches(1.8),
-             body, size=12, color=INK3)
+        text(sl, sx + Inches(0.18), fy + Inches(0.86), sw - Inches(0.36), fh - Inches(0.95),
+             desc, size=11, color=INK3)
+        if i < n - 1:
+            ax = sx + sw
+            text(sl, ax, fy, arrow_w, fh, "▶", size=18, bold=True,
+                 color=GRAY_L, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
-    cy = BODY_Y + ch + Inches(0.25)
-    ch2 = Inches(2.0)
-    cw2 = (BODY_W - Inches(0.20)) / 2
-    card(sl, BODY_X, cy, cw2, ch2,
-         title="Core Mechanism",
-         bullets=[
-             "Water rapidly evaporates on flame contact",
-             "CSP sinters, forming inter-particle necks",
-             "Porous silica aerogel insulating layer forms",
-         ], ct_size=14, li_size=12)
-    card(sl, BODY_X + cw2 + Inches(0.20), cy, cw2, ch2,
-         title="Significance Stated in the Paper",
-         bullets=[
-             "PP platform as a basis for diverse fire retardants",
-             "Amenable to modular manufacturing & large scale",
-             "Fire retardancy retained after 455-day aging (MHEC/CSP)",
-         ], ct_size=14, li_size=12)
+    # ── Middle: four key outcomes ──
+    ry = fy + fh + Inches(0.28)
+    text(sl, BODY_X, ry, BODY_W, Inches(0.30),
+         "Four key outcomes", size=13, bold=True, color=INK)
+    ry += Inches(0.40)
+    results = [
+        ("3–6×", "protection time vs commercial", D_GRN),
+        ("Self-forming", "aerogel insulation in situ", ACCENT),
+        ("Sprayable", "compatible with existing infra", D_TEAL),
+        ("Sustainable", "cellulose-based, safe materials", D_AMBR),
+    ]
+    rcw = (BODY_W - Inches(0.42)) / 4
+    rch = Inches(1.30)
+    for i, (big, lbl, c) in enumerate(results):
+        cx = BODY_X + i * (rcw + Inches(0.14))
+        rrect(sl, cx, ry, rcw, rch, SOFT, LINE, 0.5, radius=0.04)
+        rect(sl, cx, ry, Inches(0.06), rch, c)
+        text(sl, cx + Inches(0.20), ry + Inches(0.16), rcw - Inches(0.34), Inches(0.50),
+             big, size=20, bold=True, color=c)
+        text(sl, cx + Inches(0.20), ry + Inches(0.74), rcw - Inches(0.34), rch - Inches(0.84),
+             lbl, size=11.5, color=INK3)
 
-    cy_co = cy + ch2 + Inches(0.20)
-    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.55),
+    # ── Bottom: key message ──
+    cy_co = ry + rch + Inches(0.22)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
             "From \"water carrier\" to \"heat-self-transforming fire-retardant material\" — a next-gen WEG that stays effective even after drying",
             dark=True, icon='"')
 
