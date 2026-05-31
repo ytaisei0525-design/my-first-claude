@@ -2425,26 +2425,36 @@ def slide_33_scenarios(prs):
 
     cy = BODY_Y + ch + Inches(0.30)
     cw2 = (BODY_W - Inches(0.20)) / 2
-    rrect(sl, BODY_X, cy, cw2, Inches(1.7), WHITE, LINE, 0.5, radius=0.04)
-    text(sl, BODY_X + Inches(0.20), cy + Inches(0.14), cw2 - Inches(0.4), Inches(0.30),
+    box_h = Inches(1.95)
+    rrect(sl, BODY_X, cy, cw2, box_h, WHITE, LINE, 0.5, radius=0.04)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.12), cw2 - Inches(0.4), Inches(0.28),
          "既存手法との優位点", size=12, bold=True, color=MUTED)
     advs = [
-        ("vs 水", "保護時間大幅向上（水は~0.3分で炭化）"),
+        ("vs 水", "保護時間が大幅向上（水は~0.3分で炭化）"),
         ("vs AquaGel-K", "3〜6倍の保護時間＋水蒸発後も継続"),
-        ("vs Phos-Chek", "土壌・水系への残留なし"),
-        ("散布互換性", "既存機材そのまま使用可"),
+        ("vs Phos-Chek", "土壌・水系への残留性が低い"),
+        ("散布互換性", "既存機材をそのまま使用可"),
     ]
-    av = cy + Inches(0.45)
+    av = cy + Inches(0.50)
+    lbl_x = BODY_X + Inches(0.22)
+    val_x = BODY_X + Inches(1.70)
     for k, v in advs:
-        text(sl, BODY_X + Inches(0.25), av, Inches(1.6), Inches(0.25),
-             k, size=11, color=MUTED)
-        text(sl, BODY_X + Inches(1.95), av, cw2 - Inches(2.2), Inches(0.25),
-             v, size=11, bold=True, color=D_GRN)
-        av += Inches(0.28)
+        text(sl, lbl_x, av, Inches(1.45), Inches(0.32),
+             k, size=10.5, color=MUTED, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, val_x, av, cw2 - Inches(1.90), Inches(0.32),
+             v, size=10.5, bold=True, color=D_GRN, anchor=MSO_ANCHOR.MIDDLE)
+        av += Inches(0.33)
 
-    callout(sl, BODY_X + cw2 + Inches(0.20), cy + Inches(0.3), cw2, Inches(1.0),
+    callout(sl, BODY_X + cw2 + Inches(0.20), cy + Inches(0.20), cw2, Inches(1.0),
             "航空散布・地上散布ともに対応可能な流動特性（剪断希薄化）が実用化の鍵",
             icon='🚁')
+
+    # 出典注記
+    note_y = cy + Inches(1.30)
+    text(sl, BODY_X + cw2 + Inches(0.20), note_y, cw2, Inches(0.55),
+         "※ 水・AquaGel-K との保護時間比較は実測（Fig. 3）。Phos-Chek は論文の燃焼直接比較ではなく、"
+         "環境残留性に関する定性的な位置づけ",
+         size=9.5, italic=True, color=MUTED)
 
 
 # ===== SLIDE 34: 実証結果のまとめ（既存品との○×比較）=====
@@ -2517,6 +2527,12 @@ def slide_34_future(prs):
         text(sl, lx + Inches(0.38), leg_y, Inches(1.5), Inches(0.30), lbl, size=11,
              color=INK3, anchor=MSO_ANCHOR.MIDDLE)
         lx += Inches(2.0)
+
+    # 出典注記
+    text(sl, BODY_X, leg_y + Inches(0.40), BODY_W, Inches(0.50),
+         "※ 水・AquaGel-K との火炎保護・発泡の比較は本論文の実測（Fig. 3・4）に基づく。"
+         "Phos-Chek 列は燃焼の直接測定ではなく、文献に基づく環境残留性・適用性の定性的評価",
+         size=9.5, italic=True, color=MUTED)
 
 
 # ===== SLIDE 35: 結論 =====

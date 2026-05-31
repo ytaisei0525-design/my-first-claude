@@ -2407,26 +2407,36 @@ def slide_33_scenarios(prs):
 
     cy = BODY_Y + ch + Inches(0.30)
     cw2 = (BODY_W - Inches(0.20)) / 2
-    rrect(sl, BODY_X, cy, cw2, Inches(1.7), WHITE, LINE, 0.5, radius=0.04)
-    text(sl, BODY_X + Inches(0.20), cy + Inches(0.14), cw2 - Inches(0.4), Inches(0.30),
+    box_h = Inches(1.95)
+    rrect(sl, BODY_X, cy, cw2, box_h, WHITE, LINE, 0.5, radius=0.04)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.12), cw2 - Inches(0.4), Inches(0.28),
          "Advantages Over Existing Methods", size=12, bold=True, color=MUTED)
     advs = [
-        ("vs Water", "Far greater protection (water chars at ~0.3 min)"),
-        ("vs AquaGel-K", "3–6× longer protection + continues after water evaporation"),
-        ("vs Phos-Chek", "No residual contamination in soil or water"),
-        ("Spray compatibility", "Usable with existing equipment"),
+        ("vs Water", "Far longer protection (water chars at ~0.3 min)"),
+        ("vs AquaGel-K", "3–6× longer + continues after water evaporates"),
+        ("vs Phos-Chek", "No residual soil / water contamination"),
+        ("Spray compat.", "Usable with existing equipment"),
     ]
-    av = cy + Inches(0.45)
+    av = cy + Inches(0.50)
+    lbl_x = BODY_X + Inches(0.22)
+    val_x = BODY_X + Inches(1.85)
     for k, v in advs:
-        text(sl, BODY_X + Inches(0.25), av, Inches(1.6), Inches(0.25),
-             k, size=11, color=MUTED)
-        text(sl, BODY_X + Inches(1.95), av, cw2 - Inches(2.2), Inches(0.25),
-             v, size=11, bold=True, color=D_GRN)
-        av += Inches(0.28)
+        text(sl, lbl_x, av, Inches(1.60), Inches(0.32),
+             k, size=10.5, color=MUTED, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, val_x, av, cw2 - Inches(2.05), Inches(0.32),
+             v, size=10, bold=True, color=D_GRN, anchor=MSO_ANCHOR.MIDDLE)
+        av += Inches(0.33)
 
-    callout(sl, BODY_X + cw2 + Inches(0.20), cy + Inches(0.3), cw2, Inches(1.0),
+    callout(sl, BODY_X + cw2 + Inches(0.20), cy + Inches(0.20), cw2, Inches(1.0),
             "Flow properties (shear thinning) compatible with both aerial and ground application are key to practical deployment",
             icon='🚁')
+
+    # Source note
+    note_y = cy + Inches(1.30)
+    text(sl, BODY_X + cw2 + Inches(0.20), note_y, cw2, Inches(0.55),
+         "* Protection-time comparisons vs water / AquaGel-K are measured (Fig. 3). "
+         "Phos-Chek is positioned qualitatively (environmental persistence), not by direct burn testing.",
+         size=9.5, italic=True, color=MUTED)
 
 
 # ===== SLIDE 34: 課題と展望 =====
@@ -2496,6 +2506,12 @@ def slide_34_future(prs):
         text(sl, lx + Inches(0.38), leg_y, Inches(1.7), Inches(0.30), lbl, size=11,
              color=INK3, anchor=MSO_ANCHOR.MIDDLE)
         lx += Inches(2.1)
+
+    # Source note
+    text(sl, BODY_X, leg_y + Inches(0.40), BODY_W, Inches(0.50),
+         "* Flame-protection and foaming comparisons vs water / AquaGel-K are measured in this paper (Fig. 3, 4). "
+         "The Phos-Chek row is a qualitative assessment (environmental persistence / applicability) from the literature, not a direct burn test.",
+         size=9.5, italic=True, color=MUTED)
 
 
 # ===== SLIDE 35: Conclusions =====
