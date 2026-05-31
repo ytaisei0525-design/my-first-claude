@@ -1530,12 +1530,12 @@ def slide_18_hb(prs):
     rows = [
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
          {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
-         {'text': "68.9 Pa", 'color': D_GRN},
-         "ゲル強度が経時で増大"],
+         {'text': "68.9 Pa (+107%)", 'color': D_AMBR},
+         "経時で大きく剛性化"],
         [{'text': "MHEC/CSP 1-5", 'bold': True},
          {'text': "3.31 Pa", 'bold': True, 'color': ACCENT},
-         {'text': "4.56 Pa", 'color': D_GRN},
-         "長期安定性を確認（455日）"],
+         {'text': "4.56 Pa (+38%)", 'color': D_GRN},
+         "変化はわずか → 安定（455日）"],
         ["AquaGel-K（市販対照）", "—", "—",
          {'text': "比較対照", 'color': MUTED}],
     ]

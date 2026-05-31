@@ -1513,12 +1513,12 @@ def slide_18_hb(prs):
     rows = [
         [{'text': "HEC+MC/CSP 1-5", 'bold': True},
          {'text': "33.34 Pa", 'bold': True, 'color': ACCENT},
-         {'text': "68.9 Pa", 'color': D_GRN},
-         "Gel strength increases over time"],
+         {'text': "68.9 Pa (+107%)", 'color': D_AMBR},
+         "Stiffens markedly with aging"],
         [{'text': "MHEC/CSP 1-5", 'bold': True},
          {'text': "3.31 Pa", 'bold': True, 'color': ACCENT},
-         {'text': "4.56 Pa", 'color': D_GRN},
-         "Long-term stability confirmed (455 days)"],
+         {'text': "4.56 Pa (+38%)", 'color': D_GRN},
+         "Only minor change → stable (455 days)"],
         ["AquaGel-K (Commercial control)", "—", "—",
          {'text': "Reference", 'color': MUTED}],
     ]
@@ -2173,7 +2173,7 @@ def slide_28_ftir_xps(prs):
 # ===== SLIDE 29: TGA/DSC =====
 def slide_29_tga(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 15/15", "TGA/DSC: Thermal Decomposition Profile and Role of Each Component")
+    draw_header(sl, "Results 15/15", "TGA/DSC: Thermal Decomposition and Component Roles")
     draw_footer(sl, "34 / 43")
 
     cw = (BODY_W - Inches(0.20)) / 2
@@ -2184,7 +2184,7 @@ def slide_29_tga(prs):
     by = BODY_Y + Inches(0.45)
     tga_data = [
         ("50–150°C", "Evaporation of free and adsorbed water", 0.30, D_BLUE),
-        ("200–350°C", "Thermal decomposition of HEC/MC organic chains (main weight loss)", 0.85, D_RED),
+        ("200–350°C", "HEC/MC organic-chain decomposition (main loss)", 0.85, D_RED),
         ("350–600°C", "Oxidation and loss of residual carbon (in air)", 0.50, D_AMBR),
         (">600°C", "Silica residue (~5–8 wt%, no change)", 0.08, D_TEAL),
     ]
