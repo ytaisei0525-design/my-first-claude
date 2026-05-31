@@ -2465,29 +2465,26 @@ def slide_34_future(prs):
 
     # 上部 callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.56),
-            "本研究の WEG（PPハイドロゲル）は、水・市販WEG・Phos-Chek が個別にしか満たせない要件をすべて両立する",
+            "本研究の WEG（PPハイドロゲル）は、水・市販 AquaGel-K が個別にしか満たせない要件をすべて両立する",
             icon='◆')
 
     # ── ○×比較マトリクス ──
     ty = BODY_Y + Inches(0.78)
-    # 列：製品、横：5つの評価軸
-    crit = ["長時間の火炎保護", "乾燥後も保護継続", "噴霧散布が可能", "環境残留が低い", "発泡・断熱層を形成"]
-    # 各行：(製品名, 強調か, [評価記号...])  記号: '◎'/'○'/'△'/'×'
-    G = D_GRN      # ◎/○ 緑
-    A = D_AMBR     # △ 琥珀
-    R = D_RED      # × 赤
+    crit = ["長時間の\n火炎保護", "乾燥後も\n保護継続", "噴霧散布\nが可能", "環境残留\nが低い", "発泡・断熱\n層を形成", "劣化しにくい\n（長期安定性）"]
+    G = D_GRN
+    A = D_AMBR
+    R = D_RED
     rows = [
-        ("WEG（本研究）", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G)]),
-        ("市販 AquaGel-K", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R)]),
-        ("Phos-Chek", False,     [("○", G), ("○", G), ("○", G), ("×", R), ("×", R)]),
-        ("水のみ", False,         [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R)]),
+        ("WEG（本研究）", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G), ("◎", G)]),
+        ("市販 AquaGel-K", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R), ("△", A)]),
+        ("水のみ", False,         [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R), ("×", R)]),
     ]
 
-    name_w = Inches(2.6)
+    name_w = Inches(2.4)
     grid_w = BODY_W - name_w
     col_w = grid_w / len(crit)
     hdr_h = Inches(0.95)
-    row_h = Inches(0.66)
+    row_h = Inches(0.72)
     table_h = hdr_h + row_h * len(rows)
 
     # ヘッダー行（評価軸）
@@ -2497,8 +2494,8 @@ def slide_34_future(prs):
     for ci, c in enumerate(crit):
         cx = BODY_X + name_w + col_w * ci
         rect(sl, cx, ty, col_w, hdr_h, HEADER, WHITE, 0.5)
-        text(sl, cx + Inches(0.06), ty + Inches(0.05), col_w - Inches(0.12), hdr_h - Inches(0.10),
-             c, size=10.5, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+        text(sl, cx + Inches(0.04), ty + Inches(0.05), col_w - Inches(0.08), hdr_h - Inches(0.10),
+             c, size=9.5, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
     # データ行
     for ri, (name, emph, marks) in enumerate(rows):
@@ -2530,8 +2527,8 @@ def slide_34_future(prs):
 
     # 出典注記
     text(sl, BODY_X, leg_y + Inches(0.40), BODY_W, Inches(0.50),
-         "※ 水・AquaGel-K との火炎保護・発泡の比較は本論文の実測（Fig. 3・4）に基づく。"
-         "Phos-Chek 列は燃焼の直接測定ではなく、文献に基づく環境残留性・適用性の定性的評価",
+         "※ 火炎保護・発泡の比較は本論文の実測（Fig. 3・4）に基づく。"
+         "「劣化しにくい」：WEG は SI Fig. S7（455日実測）、AquaGel-K は本論文で経時試験未実施（△）",
          size=9.5, italic=True, color=MUTED)
 
 

@@ -2447,27 +2447,26 @@ def slide_34_future(prs):
 
     # Top callout
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.56),
-            "This WEG (PP hydrogel) simultaneously satisfies requirements that water, commercial WEG, and Phos-Chek each meet only partially",
+            "This WEG (PP hydrogel) simultaneously satisfies requirements that water and commercial AquaGel-K each meet only partially",
             icon='◆')
 
     # ── ○× comparison matrix ──
     ty = BODY_Y + Inches(0.78)
-    crit = ["Long flame\nprotection", "Protects after\ndrying", "Sprayable", "Low environ.\npersistence", "Forms foam /\ninsulating layer"]
+    crit = ["Long flame\nprotection", "Protects after\ndrying", "Sprayable", "Low environ.\npersistence", "Forms foam /\ninsulating layer", "Long-term\nstability"]
     G = D_GRN
     A = D_AMBR
     R = D_RED
     rows = [
-        ("WEG (this work)", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G)]),
-        ("AquaGel-K (commercial)", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R)]),
-        ("Phos-Chek", False,     [("○", G), ("○", G), ("○", G), ("×", R), ("×", R)]),
-        ("Water only", False,    [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R)]),
+        ("WEG (this work)", True,  [("◎", G), ("◎", G), ("○", G), ("○", G), ("◎", G), ("◎", G)]),
+        ("AquaGel-K (commercial)", False, [("△", A), ("×", R), ("○", G), ("○", G), ("×", R), ("△", A)]),
+        ("Water only", False,    [("×", R), ("×", R), ("◎", G), ("◎", G), ("×", R), ("×", R)]),
     ]
 
-    name_w = Inches(2.9)
+    name_w = Inches(2.6)
     grid_w = BODY_W - name_w
     col_w = grid_w / len(crit)
     hdr_h = Inches(0.95)
-    row_h = Inches(0.66)
+    row_h = Inches(0.72)
     table_h = hdr_h + row_h * len(rows)
 
     # Header row (criteria)
@@ -2477,8 +2476,8 @@ def slide_34_future(prs):
     for ci, c in enumerate(crit):
         cx = BODY_X + name_w + col_w * ci
         rect(sl, cx, ty, col_w, hdr_h, HEADER, WHITE, 0.5)
-        text(sl, cx + Inches(0.06), ty + Inches(0.05), col_w - Inches(0.12), hdr_h - Inches(0.10),
-             c, size=10, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+        text(sl, cx + Inches(0.04), ty + Inches(0.05), col_w - Inches(0.08), hdr_h - Inches(0.10),
+             c, size=9.5, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
     # Data rows
     for ri, (name, emph, marks) in enumerate(rows):
@@ -2509,8 +2508,8 @@ def slide_34_future(prs):
 
     # Source note
     text(sl, BODY_X, leg_y + Inches(0.40), BODY_W, Inches(0.50),
-         "* Flame-protection and foaming comparisons vs water / AquaGel-K are measured in this paper (Fig. 3, 4). "
-         "The Phos-Chek row is a qualitative assessment (environmental persistence / applicability) from the literature, not a direct burn test.",
+         "* Flame-protection and foaming comparisons are measured in this paper (Fig. 3, 4). "
+         "Long-term stability: WEG measured at 455 days (SI Fig. S7); AquaGel-K not tested for aging in this study (△).",
          size=9.5, italic=True, color=MUTED)
 
 
