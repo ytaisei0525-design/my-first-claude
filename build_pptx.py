@@ -1412,42 +1412,58 @@ def slide_14_adhesion(prs):
 # ===== SLIDE 16: G'/G'' =====
 def slide_16_rheology1(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 1/15", "レオロジー①：振動弾性率 G' / G''")
+    draw_header(sl, "結果 1/15", "レオロジー①：粘弾性とせん断希薄化（Fig. 2a–c）")
     draw_footer(sl, "19 / 43")
 
-    # 左：図、右：観察
-    left_w = BODY_W * 0.58 - Inches(0.10)
-    right_w = BODY_W * 0.42 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # 2図を横並び（左=粘弾性 2a–b、右=せん断希薄化 2c）
+    gap = Inches(0.24)
+    fw = (BODY_W - gap) / 2
+    fig_h = Inches(3.5)
 
-    fig_h = Inches(4.8)
-    fig_placeholder(sl, BODY_X, BODY_Y, left_w, fig_h,
+    fig_placeholder(sl, BODY_X, BODY_Y, fw, fig_h,
                     fig_num="Fig. 2a–b",
-                    caption="角周波数 vs Storage modulus G' ・ Loss modulus G''")
+                    caption="角周波数 vs G' / G''（静止時の粘弾性）")
+    cx2 = BODY_X + fw + gap
+    fig_placeholder(sl, cx2, BODY_Y, fw, fig_h,
+                    fig_num="Fig. 2c",
+                    caption="せん断速度 vs 粘度（せん断希薄化）")
 
-    # 右：観察カード
-    ch = Inches(2.8)
-    card(sl, right_x, BODY_Y, right_w, ch,
-         title="主な観察", tag="KEY OBSERVATION",
-         bullets=[
-             "全配合系で G' > G'' → 固体的（ゲル）挙動",
-             "周波数依存性が小さい → 安定したネットワーク",
-             "AquaGel-K（G'=457 Pa）より低い G'（46/26 Pa）だが全系でゲル挙動",
-         ], ct_size=15, li_size=12)
-    callout(sl, right_x, BODY_Y + ch + Inches(0.25), right_w, Inches(0.80),
-            "ゲル骨格が明確に形成されており、塗布後に流れ落ちない",
-            icon='"')
+    # 観察カード 2枚
+    cy = BODY_Y + fig_h + Inches(0.22)
+    ch = Inches(1.0)
+    # 左カード：ゲル挙動
+    rrect(sl, BODY_X, cy, fw, ch, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, cy, Inches(0.06), ch, D_TEAL)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.12), fw - Inches(0.34), Inches(0.30),
+         "静止時：G' > G'' → 固体的（ゲル）挙動", size=12.5, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.48), fw - Inches(0.34), Inches(0.45),
+         "周波数依存性が小さく安定なネットワーク → 塗布後に流れ落ちない",
+         size=11.5, color=INK2)
+    # 右カード：シアシニング
+    rrect(sl, cx2, cy, fw, ch, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, cx2, cy, Inches(0.06), ch, ACCENT)
+    text(sl, cx2 + Inches(0.20), cy + Inches(0.12), fw - Inches(0.34), Inches(0.30),
+         "高せん断時：粘度が急低下（せん断希薄化）", size=12.5, bold=True, color=ACCENT)
+    text(sl, cx2 + Inches(0.20), cy + Inches(0.48), fw - Inches(0.34), Inches(0.45),
+         "ノズル通過時の高せん断で粘度低下 → スプレー噴霧が可能",
+         size=11.5, color=INK2)
+
+    # 下部 callout
+    cy_co = cy + ch + Inches(0.18)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.56),
+            "静止時はゲル（垂れない）／噴霧時は低粘度（飛ばせる）の両立がスプレー散布の基盤",
+            dark=True, icon='✓')
 
 
 # ===== SLIDE 17: shear thinning =====
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 2/15", "レオロジー②：2つの降伏応力 — 静的（付着）と動的（噴霧）")
+    draw_header(sl, "結果 2/15", "レオロジー②：静的・動的降伏応力と AquaGel-K 比較（Fig. 2d・S3）")
     draw_footer(sl, "20 / 43")
 
     # 上部 callout：降伏応力とは
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.62),
-            "降伏応力＝ゲルが流れ出す／流れ続けるのに必要な応力。本研究は2つの定義で評価（Fig. 2c–d・S3）",
+            "降伏応力＝ゲルが流れ出す／流れ続けるのに必要な応力。静的（流れ始め＝付着）と動的（流動維持＝噴霧）の2定義で評価",
             icon='ƒ')
 
     top = BODY_Y + Inches(0.82)
@@ -1455,11 +1471,14 @@ def slide_17_rheology2(prs):
     right_x = BODY_X + left_w + Inches(0.24)
     right_w = BODY_W - left_w - Inches(0.24)
 
-    # 左：フロースイープ図
-    fig_h = Inches(3.55)
+    # 左：2図（静的=S3、動的=2d）を縦に
+    fig_h = Inches(1.70)
     fig_placeholder(sl, BODY_X, top, left_w, fig_h,
-                    fig_num="Fig. 2c–d",
-                    caption="定常せん断フロースイープ → HB fit で動的降伏応力を算出")
+                    fig_num="SI Fig. S3",
+                    caption="振幅掃引：G'/G'' クロスオーバー（静的降伏応力）")
+    fig_placeholder(sl, BODY_X, top + fig_h + Inches(0.15), left_w, fig_h,
+                    fig_num="Fig. 2d",
+                    caption="HB fit による動的降伏応力（棒グラフ）")
 
     # 右：2つの降伏応力カード
     card_h = Inches(1.70)
@@ -1467,11 +1486,11 @@ def slide_17_rheology2(prs):
     rrect(sl, right_x, top, right_w, card_h, CARD_C, D_TEAL, 1.2, radius=0.05)
     rect(sl, right_x, top, Inches(0.06), card_h, D_TEAL)
     text(sl, right_x + Inches(0.22), top + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
-         "静的降伏応力 σ_static（＝絶対降伏応力）", size=13, bold=True, color=D_TEAL)
-    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.50),
-         "測定：大振幅振動（LAOS）の G' / G'' クロスオーバー応力", size=11.5, color=INK2)
-    text(sl, right_x + Inches(0.22), top + Inches(0.98), right_w - Inches(0.34), Inches(0.64),
-         "意味：流れ始める（変形開始）のに必要な応力\n→ 高いほど垂直・高所の燃料面に強く付着し、流れ出しにくい",
+         "静的降伏応力 σ_static（流れ始め＝付着）", size=13, bold=True, color=D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
+         "測定：振幅掃引（LAOS）の G' / G'' クロスオーバー応力（S3）", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
+         "PPハイドロゲルは AquaGel-K より高い静的降伏応力\n→ 垂直・高所の燃料面でも流れ落ちにくく、強く付着する",
          size=11.5, color=INK3)
 
     # 動的降伏応力
@@ -1479,19 +1498,18 @@ def slide_17_rheology2(prs):
     rrect(sl, right_x, top2, right_w, card_h, CARD_C, ACCENT, 1.2, radius=0.05)
     rect(sl, right_x, top2, Inches(0.06), card_h, ACCENT)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
-         "動的降伏応力 σ_dynamic", size=13, bold=True, color=ACCENT)
+         "動的降伏応力 σ_dynamic（流動維持＝噴霧）", size=13, bold=True, color=ACCENT)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
-         "測定：フロースイープ（100→0.01 s⁻¹）を HB モデルにフィット", size=11.5, color=INK2)
+         "測定：フロースイープ（100→0.01 s⁻¹）の HB モデル fit（2d）", size=11.5, color=INK2)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
-         "意味：流れ続ける（流動維持）のに必要な応力 → 適度ならポンプ圧の制約内で噴霧可能\n"
-         "実測（新鮮）：HEC+MC/CSP 33.34 Pa ／ MHEC/CSP 3.31 Pa",
+         "AquaGel-K（基準線 0.05 Pa）に対し PPハイドロゲルは桁違いに高い\n→ ポンプ圧内で噴霧でき、かつ流れにくい設計を両立",
          size=11.5, color=INK3)
 
     # 下部 callout
-    cy_co = top + fig_h + Inches(0.22)
+    cy_co = top + fig_h * 2 + Inches(0.15) + Inches(0.22)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
-            "高い静的降伏応力（付着）と適度な動的降伏応力（噴霧）の両立が実用化の鍵。"
-            "界面活性剤（SDS）添加は両降伏応力を下げ、付着・安定性に影響",
+            "静的・動的いずれの降伏応力でも PPハイドロゲルは市販 AquaGel-K を大きく上回る。"
+            "両者の差が小さい（弱いチキソトロピー）ため構造が即再形成され、自己修復的に付着を保つ",
             dark=True, icon='✓')
 
 

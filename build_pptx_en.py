@@ -1395,42 +1395,58 @@ def slide_14_adhesion(prs):
 # ===== SLIDE 16: G'/G'' =====
 def slide_16_rheology1(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 1/15", "Rheology ①: Oscillatory Moduli G' / G''")
+    draw_header(sl, "Results 1/15", "Rheology ①: Viscoelasticity & Shear-Thinning (Fig. 2a–c)")
     draw_footer(sl, "19 / 43")
 
-    # Left: figure, Right: observations
-    left_w = BODY_W * 0.58 - Inches(0.10)
-    right_w = BODY_W * 0.42 - Inches(0.10)
-    right_x = BODY_X + left_w + Inches(0.20)
+    # Two figures side by side (left = viscoelasticity 2a–b, right = shear-thinning 2c)
+    gap = Inches(0.24)
+    fw = (BODY_W - gap) / 2
+    fig_h = Inches(3.5)
 
-    fig_h = Inches(4.8)
-    fig_placeholder(sl, BODY_X, BODY_Y, left_w, fig_h,
+    fig_placeholder(sl, BODY_X, BODY_Y, fw, fig_h,
                     fig_num="Fig. 2a–b",
-                    caption="Angular frequency vs Storage modulus G' · Loss modulus G''")
+                    caption="Angular frequency vs G' / G'' (viscoelasticity at rest)")
+    cx2 = BODY_X + fw + gap
+    fig_placeholder(sl, cx2, BODY_Y, fw, fig_h,
+                    fig_num="Fig. 2c",
+                    caption="Shear rate vs viscosity (shear-thinning)")
 
-    # Right: observation card
-    ch = Inches(2.8)
-    card(sl, right_x, BODY_Y, right_w, ch,
-         title="Key Observation", tag="KEY OBSERVATION",
-         bullets=[
-             "G' > G'' for all formulations → solid-like (gel) behavior",
-             "Low frequency dependence → stable network",
-             "AquaGel-K (G'=457 Pa) shows higher G' than WEG (46/26 Pa); all formulations exhibit gel behavior",
-         ], ct_size=15, li_size=12)
-    callout(sl, right_x, BODY_Y + ch + Inches(0.25), right_w, Inches(0.80),
-            "Clearly formed gel network; does not flow off after application",
-            icon='"')
+    # Two observation cards
+    cy = BODY_Y + fig_h + Inches(0.22)
+    ch = Inches(1.0)
+    # Left card: gel behavior
+    rrect(sl, BODY_X, cy, fw, ch, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, cy, Inches(0.06), ch, D_TEAL)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.12), fw - Inches(0.34), Inches(0.30),
+         "At rest: G' > G'' → solid-like (gel) behavior", size=12.5, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.20), cy + Inches(0.48), fw - Inches(0.34), Inches(0.45),
+         "Low frequency dependence, stable network → does not flow off after application",
+         size=11.5, color=INK2)
+    # Right card: shear-thinning
+    rrect(sl, cx2, cy, fw, ch, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, cx2, cy, Inches(0.06), ch, ACCENT)
+    text(sl, cx2 + Inches(0.20), cy + Inches(0.12), fw - Inches(0.34), Inches(0.30),
+         "Under high shear: viscosity drops sharply (shear-thinning)", size=12.5, bold=True, color=ACCENT)
+    text(sl, cx2 + Inches(0.20), cy + Inches(0.48), fw - Inches(0.34), Inches(0.45),
+         "High shear through the nozzle lowers viscosity → enables spray application",
+         size=11.5, color=INK2)
+
+    # Bottom callout
+    cy_co = cy + ch + Inches(0.18)
+    callout(sl, BODY_X, cy_co, BODY_W, Inches(0.56),
+            "Gel at rest (no dripping) + low viscosity when sprayed (deliverable) — the basis of spray application",
+            dark=True, icon='✓')
 
 
 # ===== SLIDE 17: shear thinning =====
 def slide_17_rheology2(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 2/15", "Rheology ②: Two Yield Stresses — Static (Adhesion) & Dynamic (Spraying)")
+    draw_header(sl, "Results 2/15", "Rheology ②: Static & Dynamic Yield Stress vs AquaGel-K (Fig. 2d, S3)")
     draw_footer(sl, "20 / 43")
 
     # Top callout: what is yield stress
     callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.62),
-            "Yield stress = stress needed to initiate / maintain flow of the gel. Evaluated with two definitions (Fig. 2c–d, S3)",
+            "Yield stress = stress needed to initiate / maintain flow. Evaluated as static (onset = adhesion) and dynamic (maintain = spraying)",
             icon='ƒ')
 
     top = BODY_Y + Inches(0.82)
@@ -1438,11 +1454,14 @@ def slide_17_rheology2(prs):
     right_x = BODY_X + left_w + Inches(0.24)
     right_w = BODY_W - left_w - Inches(0.24)
 
-    # Left: flow sweep figure
-    fig_h = Inches(3.55)
+    # Left: two figures stacked (static = S3, dynamic = 2d)
+    fig_h = Inches(1.70)
     fig_placeholder(sl, BODY_X, top, left_w, fig_h,
-                    fig_num="Fig. 2c–d",
-                    caption="Steady-shear flow sweep → dynamic yield stress via HB fit")
+                    fig_num="SI Fig. S3",
+                    caption="Amplitude sweep: G'/G'' crossover (static yield stress)")
+    fig_placeholder(sl, BODY_X, top + fig_h + Inches(0.15), left_w, fig_h,
+                    fig_num="Fig. 2d",
+                    caption="Dynamic yield stress via HB fit (bar chart)")
 
     # Right: two yield-stress cards
     card_h = Inches(1.70)
@@ -1450,11 +1469,11 @@ def slide_17_rheology2(prs):
     rrect(sl, right_x, top, right_w, card_h, CARD_C, D_TEAL, 1.2, radius=0.05)
     rect(sl, right_x, top, Inches(0.06), card_h, D_TEAL)
     text(sl, right_x + Inches(0.22), top + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
-         "Static yield stress σ_static (\"absolute\" yield stress)", size=13, bold=True, color=D_TEAL)
-    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.40),
-         "Measured: stress at G' / G'' crossover in a large-amplitude oscillatory shear (LAOS) sweep", size=11.5, color=INK2)
-    text(sl, right_x + Inches(0.22), top + Inches(0.98), right_w - Inches(0.34), Inches(0.64),
-         "Meaning: stress to initiate flow (start deforming)\n→ Higher = stronger adhesion to vertical/elevated fuel surfaces, reluctant to flow",
+         "Static yield stress σ_static (onset = adhesion)", size=13, bold=True, color=D_TEAL)
+    text(sl, right_x + Inches(0.22), top + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
+         "Measured: stress at G' / G'' crossover in an amplitude (LAOS) sweep (S3)", size=11.5, color=INK2)
+    text(sl, right_x + Inches(0.22), top + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
+         "WEG shows higher static yield stress than AquaGel-K\n→ reluctant to flow off vertical/elevated fuel surfaces, adheres strongly",
          size=11.5, color=INK3)
 
     # Dynamic yield stress
@@ -1462,19 +1481,18 @@ def slide_17_rheology2(prs):
     rrect(sl, right_x, top2, right_w, card_h, CARD_C, ACCENT, 1.2, radius=0.05)
     rect(sl, right_x, top2, Inches(0.06), card_h, ACCENT)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.12), right_w - Inches(0.34), Inches(0.30),
-         "Dynamic yield stress σ_dynamic", size=13, bold=True, color=ACCENT)
+         "Dynamic yield stress σ_dynamic (maintain = spraying)", size=13, bold=True, color=ACCENT)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.50), right_w - Inches(0.34), Inches(0.30),
-         "Measured: fit flow sweep (100→0.01 s⁻¹) to the Herschel–Bulkley model", size=11.5, color=INK2)
+         "Measured: HB-model fit of the flow sweep (100→0.01 s⁻¹) (2d)", size=11.5, color=INK2)
     text(sl, right_x + Inches(0.22), top2 + Inches(0.84), right_w - Inches(0.34), Inches(0.80),
-         "Meaning: stress to maintain flow → moderate value enables spraying within pump-pressure limits\n"
-         "Measured (fresh): HEC+MC/CSP 33.34 Pa / MHEC/CSP 3.31 Pa",
+         "Orders of magnitude above AquaGel-K (0.05 Pa reference line)\n→ sprayable within pump pressure yet resistant to flowing off",
          size=11.5, color=INK3)
 
     # Bottom callout
-    cy_co = top + fig_h + Inches(0.22)
+    cy_co = top + fig_h * 2 + Inches(0.15) + Inches(0.22)
     callout(sl, BODY_X, cy_co, BODY_W, Inches(0.62),
-            "The key to deployability: high static yield stress (adhesion) + moderate dynamic yield stress (spraying). "
-            "Adding surfactant (SDS) lowers both, affecting adhesion and stability",
+            "For both static and dynamic yield stress, WEG greatly exceeds commercial AquaGel-K. "
+            "Their small difference (weak thixotropy) lets the network re-form instantly, maintaining adhesion self-healingly",
             dark=True, icon='✓')
 
 
