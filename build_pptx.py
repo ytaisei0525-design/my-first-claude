@@ -1738,47 +1738,72 @@ def slide_20_compare(prs):
 # ===== SLIDE SDS RHEOLOGY: Fig. 2e–h（SDS 添加によるレオロジー調整）=====
 def slide_sds_rheology(prs):
     sl = new_slide(prs)
-    draw_header(sl, "結果 7/15", "SDS 添加によるレオロジー調整（Fig. 2e–h）")
+    draw_header(sl, "結果 7/15", "SDS 添加：目的は発泡促進・濡れ性改善だったが…（Fig. 2e–h）")
     draw_footer(sl, "25 / 43")
 
-    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.52),
-            "HEC+MC/CSP 系に SDS を添加すると濃度依存的にゲル特性が変化 "
-            "— 0.1 wt% で剛性最大化（G'=58.2 Pa）、0.5 wt% で軟化（G'=33.8 Pa）",
-            icon='ⓘ')
+    # ── 上部：目的 2カード（左＝目的、右＝期待した効果）──
+    hdr_h = Inches(0.90)
+    cw2 = (BODY_W - Inches(0.18)) / 2
+    # 左：目的
+    rrect(sl, BODY_X, BODY_Y, cw2, hdr_h, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, BODY_Y, Inches(0.06), hdr_h, D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(0.08), cw2 - Inches(0.30), Inches(0.28),
+         "SDS 添加の目的", size=12, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(0.40), cw2 - Inches(0.30), Inches(0.45),
+         "界面活性剤 SDS（0 / 0.1 / 0.5 wt%）を HEC+MC/CSP に添加し、"
+         "燃料表面への濡れ性改善と発泡層形成の促進を狙った",
+         size=11, color=INK2)
+    # 右：期待
+    cx2_hdr = BODY_X + cw2 + Inches(0.18)
+    rrect(sl, cx2_hdr, BODY_Y, cw2, hdr_h, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, cx2_hdr, BODY_Y, Inches(0.06), hdr_h, ACCENT)
+    text(sl, cx2_hdr + Inches(0.20), BODY_Y + Inches(0.08), cw2 - Inches(0.30), Inches(0.28),
+         "期待した効果", size=12, bold=True, color=ACCENT)
+    text(sl, cx2_hdr + Inches(0.20), BODY_Y + Inches(0.40), cw2 - Inches(0.30), Inches(0.45),
+         "①ゲル粘度を下げてスプレー性を向上　②気泡を安定化して Foaming Index を増大",
+         size=11, color=INK2)
 
-    # 2×2 グリッド（Fig. 2e / 2f / 2g / 2h）
+    # ── 中央：2×2 グリッド（Fig. 2e–h）──
     gap = Inches(0.18)
     cw = (BODY_W - gap) / 2
-    row1_y = BODY_Y + Inches(0.68)
-    row_h  = Inches(2.42)
+    row1_y = BODY_Y + hdr_h + Inches(0.16)
+    row_h  = Inches(2.05)
     row2_y = row1_y + row_h + gap
 
     panels = [
-        # (x, y, fig_num, caption)
-        (BODY_X,          row1_y, "Fig. 2e",
-         "G' / G'' vs 角周波数（SDS 3濃度の SAOS）"),
-        (BODY_X + cw + gap, row1_y, "Fig. 2f",
-         "G' と tan δ（棒グラフ、1 rad/s）"),
-        (BODY_X,          row2_y, "Fig. 2g",
-         "粘度 vs せん断速度（HB モデル fit）"),
-        (BODY_X + cw + gap, row2_y, "Fig. 2h",
-         "動的降伏応力（SDS 濃度別、0.05 Pa 基準線）"),
+        (BODY_X,            row1_y, "Fig. 2e", "G' / G'' vs 角周波数（SDS 3濃度）"),
+        (BODY_X + cw + gap, row1_y, "Fig. 2f", "G' と tan δ（1 rad/s、濃度別棒グラフ）"),
+        (BODY_X,            row2_y, "Fig. 2g", "粘度 vs せん断速度（HB fit）"),
+        (BODY_X + cw + gap, row2_y, "Fig. 2h", "動的降伏応力（SDS 濃度別・0.05 Pa 基準線）"),
     ]
     for px, py, fig_num, cap in panels:
-        fig_placeholder(sl, px, py, cw, row_h,
-                        fig_num=fig_num, caption=cap)
+        fig_placeholder(sl, px, py, cw, row_h, fig_num=fig_num, caption=cap)
 
-    # POINT band
-    band_y = row2_y + row_h + Inches(0.18)
-    band_h = H - band_y - FTR_H - Inches(0.18)
-    rrect(sl, BODY_X, band_y, BODY_W, band_h, HEADER, None, radius=0.05)
-    rect(sl, BODY_X, band_y, Inches(0.08), band_h, GOLD)
-    text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
-         "POINT", size=13, bold=True, color=GOLD, anchor=MSO_ANCHOR.MIDDLE)
-    text(sl, BODY_X + Inches(2.0), band_y, BODY_W - Inches(2.3), band_h,
-         "SDS 0.1 wt% が最適点：G' 最大（58.2 Pa）・tan δ 最小（0.193）・"
-         "せん断希薄化を維持 — 発泡構造の制御と付着性の最適化に直結",
-         size=13, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+    # ── 下部：結果評価（2列）──
+    band_y = row2_y + row_h + Inches(0.16)
+    band_h = H - band_y - FTR_H - Inches(0.16)
+    res_w = (BODY_W - Inches(0.18)) / 2
+
+    # 左：レオロジーへの影響（限定的改善）
+    rrect(sl, BODY_X, band_y, res_w, band_h, CARD_C, D_AMBR, 1.2, radius=0.04)
+    rect(sl, BODY_X, band_y, Inches(0.06), band_h, D_AMBR)
+    text(sl, BODY_X + Inches(0.20), band_y + Inches(0.06), res_w - Inches(0.30), Inches(0.26),
+         "レオロジー：濃度依存的だが限定的改善", size=11.5, bold=True, color=D_AMBR)
+    text(sl, BODY_X + Inches(0.20), band_y + Inches(0.34), res_w - Inches(0.30), band_h - Inches(0.38),
+         "0.1 wt% で G' がわずかに上昇するが、0.5 wt% ではむしろ軟化し降伏応力も低下。"
+         "付着性・ゲル強度の観点では SDS 添加は全体的にマイナスに働く",
+         size=11, color=INK3)
+
+    # 右：発泡への影響（逆効果）
+    cx2_res = BODY_X + res_w + Inches(0.18)
+    rrect(sl, cx2_res, band_y, res_w, band_h, CARD_C, D_RED, 1.2, radius=0.04)
+    rect(sl, cx2_res, band_y, Inches(0.06), band_h, D_RED)
+    text(sl, cx2_res + Inches(0.20), band_y + Inches(0.06), res_w - Inches(0.30), Inches(0.26),
+         "発泡：期待に反して Foaming Index が低下", size=11.5, bold=True, color=D_RED)
+    text(sl, cx2_res + Inches(0.20), band_y + Inches(0.34), res_w - Inches(0.30), band_h - Inches(0.38),
+         "SDS 添加により気泡が粗大化・不均一化し、Foaming Index は低下（Fig. 4 参照）。"
+         "発泡促進という当初の目的は達成されなかった",
+         size=11, color=INK3)
 
 
 # ===== SLIDE 21: 燃焼試験 setup =====

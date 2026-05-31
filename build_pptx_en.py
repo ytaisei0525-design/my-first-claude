@@ -1719,46 +1719,73 @@ def slide_20_compare(prs):
 # ===== SLIDE SDS RHEOLOGY: Fig. 2e–h (SDS Addition Effect on Rheology) =====
 def slide_sds_rheology(prs):
     sl = new_slide(prs)
-    draw_header(sl, "Results 7/15", "SDS Addition: Effect on Rheology (Fig. 2e–h)")
+    draw_header(sl, "Results 7/15", "SDS Addition: Goal Was Better Foaming & Wetting — But Results Were Mixed (Fig. 2e–h)")
     draw_footer(sl, "25 / 43")
 
-    callout(sl, BODY_X, BODY_Y, BODY_W, Inches(0.52),
-            "Adding SDS to HEC+MC/CSP gels changes properties concentration-dependently "
-            "— optimized at 0.1 wt% (G'=58.2 Pa), softened at 0.5 wt% (G'=33.8 Pa)",
-            icon='ⓘ')
+    # ── Top: purpose 2 cards (left = purpose, right = expectation) ──
+    hdr_h = Inches(0.90)
+    cw2 = (BODY_W - Inches(0.18)) / 2
+    # Left: purpose
+    rrect(sl, BODY_X, BODY_Y, cw2, hdr_h, CARD_C, D_TEAL, 1.2, radius=0.05)
+    rect(sl, BODY_X, BODY_Y, Inches(0.06), hdr_h, D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(0.08), cw2 - Inches(0.30), Inches(0.28),
+         "Why SDS was added", size=12, bold=True, color=D_TEAL)
+    text(sl, BODY_X + Inches(0.20), BODY_Y + Inches(0.40), cw2 - Inches(0.30), Inches(0.45),
+         "Surfactant SDS (0 / 0.1 / 0.5 wt%) was added to HEC+MC/CSP to improve wetting "
+         "on fuel surfaces and promote stable foam-layer formation during combustion",
+         size=11, color=INK2)
+    # Right: expectation
+    cx2_hdr = BODY_X + cw2 + Inches(0.18)
+    rrect(sl, cx2_hdr, BODY_Y, cw2, hdr_h, CARD_C, ACCENT, 1.2, radius=0.05)
+    rect(sl, cx2_hdr, BODY_Y, Inches(0.06), hdr_h, ACCENT)
+    text(sl, cx2_hdr + Inches(0.20), BODY_Y + Inches(0.08), cw2 - Inches(0.30), Inches(0.28),
+         "Expected outcome", size=12, bold=True, color=ACCENT)
+    text(sl, cx2_hdr + Inches(0.20), BODY_Y + Inches(0.40), cw2 - Inches(0.30), Inches(0.45),
+         "① Lower gel viscosity to improve sprayability  "
+         "② Stabilise bubbles to increase Foaming Index",
+         size=11, color=INK2)
 
-    # 2×2 grid (Fig. 2e / 2f / 2g / 2h)
+    # ── Center: 2×2 grid (Fig. 2e–h) ──
     gap = Inches(0.18)
     cw = (BODY_W - gap) / 2
-    row1_y = BODY_Y + Inches(0.68)
-    row_h  = Inches(2.42)
+    row1_y = BODY_Y + hdr_h + Inches(0.16)
+    row_h  = Inches(2.05)
     row2_y = row1_y + row_h + gap
 
     panels = [
-        (BODY_X,            row1_y, "Fig. 2e",
-         "G' / G'' vs angular frequency (SAOS, 3 SDS levels)"),
-        (BODY_X + cw + gap, row1_y, "Fig. 2f",
-         "G' and tan δ bar chart (at 1 rad/s)"),
-        (BODY_X,            row2_y, "Fig. 2g",
-         "Viscosity vs shear rate (Herschel–Bulkley fit)"),
-        (BODY_X + cw + gap, row2_y, "Fig. 2h",
-         "Dynamic yield stress by SDS concentration (0.05 Pa reference line)"),
+        (BODY_X,            row1_y, "Fig. 2e", "G' / G'' vs angular frequency (SAOS, 3 SDS levels)"),
+        (BODY_X + cw + gap, row1_y, "Fig. 2f", "G' and tan δ bar chart (at 1 rad/s)"),
+        (BODY_X,            row2_y, "Fig. 2g", "Viscosity vs shear rate (Herschel–Bulkley fit)"),
+        (BODY_X + cw + gap, row2_y, "Fig. 2h", "Dynamic yield stress by SDS level (0.05 Pa reference)"),
     ]
     for px, py, fig_num, cap in panels:
-        fig_placeholder(sl, px, py, cw, row_h,
-                        fig_num=fig_num, caption=cap)
+        fig_placeholder(sl, px, py, cw, row_h, fig_num=fig_num, caption=cap)
 
-    # POINT band
-    band_y = row2_y + row_h + Inches(0.18)
-    band_h = H - band_y - FTR_H - Inches(0.18)
-    rrect(sl, BODY_X, band_y, BODY_W, band_h, HEADER, None, radius=0.05)
-    rect(sl, BODY_X, band_y, Inches(0.08), band_h, GOLD)
-    text(sl, BODY_X + Inches(0.30), band_y, Inches(2.4), band_h,
-         "POINT", size=13, bold=True, color=GOLD, anchor=MSO_ANCHOR.MIDDLE)
-    text(sl, BODY_X + Inches(2.0), band_y, BODY_W - Inches(2.3), band_h,
-         "SDS 0.1 wt% is optimal: maximum G' (58.2 Pa), minimum tan δ (0.193), "
-         "shear thinning maintained — directly governs foam structure control in subsequent slides",
-         size=13, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+    # ── Bottom: result assessment (2 columns) ──
+    band_y = row2_y + row_h + Inches(0.16)
+    band_h = H - band_y - FTR_H - Inches(0.16)
+    res_w = (BODY_W - Inches(0.18)) / 2
+
+    # Left: rheology (limited improvement)
+    rrect(sl, BODY_X, band_y, res_w, band_h, CARD_C, D_AMBR, 1.2, radius=0.04)
+    rect(sl, BODY_X, band_y, Inches(0.06), band_h, D_AMBR)
+    text(sl, BODY_X + Inches(0.20), band_y + Inches(0.06), res_w - Inches(0.30), Inches(0.26),
+         "Rheology: concentration-dependent but limited benefit", size=11.5, bold=True, color=D_AMBR)
+    text(sl, BODY_X + Inches(0.20), band_y + Inches(0.34), res_w - Inches(0.30), band_h - Inches(0.38),
+         "G' rises slightly at 0.1 wt% but drops again at 0.5 wt%; yield stress also decreases. "
+         "Overall, SDS addition negatively affects gel stiffness and adhesion",
+         size=11, color=INK3)
+
+    # Right: foaming (counterproductive)
+    cx2_res = BODY_X + res_w + Inches(0.18)
+    rrect(sl, cx2_res, band_y, res_w, band_h, CARD_C, D_RED, 1.2, radius=0.04)
+    rect(sl, cx2_res, band_y, Inches(0.06), band_h, D_RED)
+    text(sl, cx2_res + Inches(0.20), band_y + Inches(0.06), res_w - Inches(0.30), Inches(0.26),
+         "Foaming: Foaming Index actually decreased (Fig. 4)", size=11.5, bold=True, color=D_RED)
+    text(sl, cx2_res + Inches(0.20), band_y + Inches(0.34), res_w - Inches(0.30), band_h - Inches(0.38),
+         "SDS caused bubble coarsening and non-uniform foam structure, lowering the Foaming Index. "
+         "The original goal of enhancing foam formation was not achieved",
+         size=11, color=INK3)
 
 
 # ===== SLIDE 21: 燃焼試験 setup =====
