@@ -107,67 +107,78 @@ panel(sx2, sub_y, sub_w, sub_h, "目的・戦略",
 
 # ===== Results & Discussion(データ)=====
 ry = iy + ih + gap
-sectionbar(cx, ry, cw, "Results & Discussion ｜ データ", "#33506b")
+sectionbar(cx, ry, cw, "Results & Discussion ｜ データ（左→右で研究の流れ）", "#33506b")
 
 # 下部バンドの位置を先に確保
-band_conc_h = 96
-band_vivo_h = 120
+band_conc_h = 60      # 結論は薄い帯に縮小
+band_vivo_h = 118
 conc_y = H - M - band_conc_h
 vivo_y = conc_y - gap - band_vivo_h
 
 # データ用カラム領域
-data_y = ry + 32
-data_bottom = vivo_y - gap
-data_h = data_bottom - data_y
 colw = (cw - 2*gap) / 3
 dx0 = cx
 dx1 = cx + colw + gap
 dx2 = cx + 2*(colw + gap)
 
-# --- Col1: 材料合成 + In vitro ---
+# 各列にテーマ小見出し(流れを明示)
+theme_y = ry + 32
+theme_h = 20
+def themebar(x, label, color):
+    add(f'<rect x="{x}" y="{theme_y}" width="{colw}" height="{theme_h}" rx="4" fill="{color}"/>')
+    text(x+colw/2, theme_y+14, label, size=10.5, color="#ffffff", weight="bold", anchor="middle")
+themebar(dx0, "① 合成・架橋メカニズム", "#a9772a")
+themebar(dx1, "② ゲル化・力学特性", "#1d4ed8")
+themebar(dx2, "③ 生体適合性・注入実証", "#1d4ed8")
+
+data_y = theme_y + theme_h + 8
+data_bottom = vivo_y - gap
+data_h = data_bottom - data_y
+
+# --- Col1: 合成・架橋メカニズム(合成チック系)---
 p1 = (data_h - gap) / 2
-panel(dx0, data_y, colw, p1, "A. 材料合成: 高純度 PGD G4 〔新〕",
+panel(dx0, data_y, colw, p1, "A. 高純度 PGD G4 の精密合成〔新〕",
       ["・Divergent法(全8段階)で合成",
        "・撹拌強化+反応時間2倍で最適化",
        "・G3.5→G4 収率90%, 13.0 g 取得",
        "・MALDI単一ピーク [M+Na]+=3488",
        "  → 単分散の高品質体を確認"],
       C_MAT, bar="#c9962a", fig="図: MALDI(1回目vs2回目) / 収率表", fig_h=p1-92)
-panel(dx0, data_y+p1+gap, colw, p1, "B-1. ゲル化時間の制御 (In vitro)",
+panel(dx0, data_y+p1+gap, colw, p1, "B. 架橋点の同定: GCアセチル化〔新〕",
+      ["・GCアミノ基を部分N-アセチル化",
+       "・DA↑でゲル化遅延",
+       "  (DA16.7%:1.5h → 90%:80h)",
+       "→ アミノ基が主架橋点と化学的に証明",
+       "  アセチル化度で物性調整も可"],
+      C_MAT, bar="#c9962a", fig="図: DA vs ゲル化時間 / NMR", fig_h=p1-92)
+
+# --- Col2: ゲル化・力学特性(レオロジー系)---
+panel(dx1, data_y, colw, p1, "C. ゲル化時間の制御 (In vitro)",
       ["・世代↑(G3→G4)で短縮",
        "・PGD/GC比↑で短縮",
        "・PG4-025: 2分 / PG3-1: 67分",
        "  (架橋点密度に依存)"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: ゲル化時間 vs アミノ基比", fig_h=p1-80)
-
-# --- Col2: In vitro ---
-panel(dx1, data_y, colw, p1, "B-2. 架橋点の同定: GCアセチル化 (In vitro)〔新〕",
-      ["・GCアミノ基を部分N-アセチル化",
-       "・DA↑でゲル化遅延",
-       "  (DA16.7%:1.5h → 90%:80h)",
-       "→ アミノ基が主架橋点と証明",
-       "  アセチル化度で物性調整も可"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: DA vs ゲル化時間 / NMR", fig_h=p1-92)
-panel(dx1, data_y+p1+gap, colw, p1, "B-3. レオロジー (In vitro・目玉)",
+panel(dx1, data_y+p1+gap, colw, p1, "D. レオロジー: 自己修復性 (In vitro・目玉)",
       ["・G'>G'' 安定なゲルネットワーク",
        "・大歪500%でゾル化",
        "・低歪に戻すと即G'回復(自己修復)",
        "・複数サイクルで再現"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: Time sweep / ステップ歪み", fig_h=p1-80)
 
-# --- Col3: In vitro(分解性・Live/Dead・注入)---
+# --- Col3: 生体適合性・実用(分解性→安全性→注入)---
 p3 = (data_h - 2*gap) / 3
-panel(dx2, data_y, colw, p3, "B-4. in vitro 分解性〔新〕",
+panel(dx2, data_y, colw, p3, "E. in vitro 分解性〔新〕",
       ["・37℃ PBS中の重量変化で評価",
        "・PG3-1:3日/PG4-0125:4日/PG4-025:25日",
        "→ 滞留期間を数日〜数週間で制御"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線", fig_h=p3-58)
-panel(dx2, data_y+p3+gap, colw, p3, "B-5. 生体適合性 Live/Dead〔新〕",
+panel(dx2, data_y+p3+gap, colw, p3, "F. 生体適合性 Live/Dead〔新〕",
       ["・D1細胞を3次元包埋し培養",
        "・1/5/9日とも死細胞ほぼ無し",
        "→ 化学架橋剤なしで高生存率"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: 蛍光像(PG3-1/4-025/4-0125)", fig_h=p3-58)
-panel(dx2, data_y+2*(p3+gap), colw, p3, "B-6. in vitro 注入試験〔新〕",
+panel(dx2, data_y+2*(p3+gap), colw, p3, "G. in vitro 注入試験〔新〕",
       ["・赤色化PG4-0125をシリンジ吐出",
        "・針内でゾル化→吐出後に即ゲル化",
        "→ 液だれせず形状を保持"],
@@ -197,27 +208,18 @@ add(f'<line x1="{fvx}" y1="{fvy}" x2="{fvx+fvw}" y2="{fvy+fvh}" stroke="{C_FIGB}
 add(f'<line x1="{fvx}" y1="{fvy+fvh}" x2="{fvx+fvw}" y2="{fvy}" stroke="{C_FIGB}" stroke-width="0.8"/>')
 text(fvx+fvw/2, fvy+fvh/2+4, "図: in vivo マウス皮下デポ写真(大きく)", size=9.5, color="#6b7884", anchor="middle")
 
-# ===== Conclusion / Future / References(最下段・全幅)=====
-rect(cx, conc_y, cw, band_conc_h, C_CONC, stroke="#2d6a4f", rx=8, sw=1.5)
-add(f'<rect x="{cx}" y="{conc_y}" width="{cw}" height="20" rx="8" fill="#2d6a4f"/>')
-add(f'<rect x="{cx}" y="{conc_y+10}" width="{cw}" height="10" fill="#2d6a4f"/>')
-text(cx+12, conc_y+15, "Conclusion / Future Plans / References", size=12, color="#ffffff", weight="bold")
-ty = conc_y + 34
-for ln in ["① 材料: 最適化で単分散PGD G4(13.0g,収率90%,MALDI単一ピーク)を達成   "
-           "② In vitro: ゲル化時間・分解性を制御、アミノ基=主架橋点を証明、自己修復実証、9日間高生存率",
-           "③ In vivo: マウス皮下で即自己修復し局所ドーム状デポ形成 → 実用性実証",
-           "Future: PTX徐放定量(HPLC) / 長期生分解性 / 担がんマウスで抗腫瘍効果 / PGD G5合成 / DSCで中間水評価",
-           "Ref: Wilhelm 2016 ; Ooya Gels 2022 ; Cho&Ooya 2018 ; Yamazaki Langmuir 2021 ; Tanaka BCSJ 2019 ほか"]:
-    text(cx+12, ty, ln, size=8.8, color="#1d3a2a"); ty += 13
-
-# ===== 凡例(右下小)=====
-def legend(x, y, c, label):
-    add(f'<rect x="{x}" y="{y}" width="13" height="10" rx="2" fill="{c}" stroke="{C_BORDER}"/>')
-    text(x+17, y+9, label, size=8.5, color="#333")
-lgy = ry + 6
-legend(cx+cw-330, lgy, C_MAT, "材料合成")
-legend(cx+cw-250, lgy, C_VITRO, "In vitro")
-legend(cx+cw-165, lgy, C_VIVO, "In vivo")
+# ===== Conclusion(最下段・全幅・薄い帯)=====
+rect(cx, conc_y, cw, band_conc_h, C_CONC, stroke="#2d6a4f", rx=6, sw=1.2)
+text(cx+10, conc_y+18, "Conclusion:", size=11, color="#1d3a2a", weight="bold")
+text(cx+95, conc_y+18,
+     "単分散PGD G4を確立 → 水素結合で超分子ゲル形成（自己修復・分解性を制御, 高生体適合性）"
+     " → in vivoで局所デポを形成し実用性を実証",
+     size=9.3, color="#1d3a2a")
+text(cx+10, conc_y+38, "Future:", size=10, color="#33506b", weight="bold")
+text(cx+62, conc_y+38,
+     "PTX徐放定量(HPLC) / 担がんマウスで抗腫瘍効果 / PGD G5合成 / DSCで中間水評価　　"
+     "Ref: Ooya Gels 2022 ; Cho&Ooya 2018 ; Yamazaki Langmuir 2021 ほか",
+     size=8.5, color="#3a4a55")
 
 add('</svg>')
 with open("poster/poster_mockup.svg","w",encoding="utf-8") as f:
