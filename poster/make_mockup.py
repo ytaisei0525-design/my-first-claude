@@ -110,10 +110,10 @@ ry = iy + ih + gap
 sectionbar(cx, ry, cw, "Results & Discussion ｜ データ（左→右で研究の流れ）", "#33506b")
 
 # 下部バンドの位置を先に確保
-band_conc_h = 60      # 結論は薄い帯に縮小
-band_vivo_h = 118
+band_conc_h = 56      # 結論は薄い帯に縮小
+band_inject_h = 158   # 実用性評価(注入試験 In vitro→In vivo)を全幅で
 conc_y = H - M - band_conc_h
-vivo_y = conc_y - gap - band_vivo_h
+inj_y = conc_y - gap - band_inject_h
 
 # データ用カラム領域
 colw = (cw - 2*gap) / 3
@@ -129,10 +129,10 @@ def themebar(x, label, color):
     text(x+colw/2, theme_y+14, label, size=10.5, color="#ffffff", weight="bold", anchor="middle")
 themebar(dx0, "① 合成・架橋メカニズム", "#a9772a")
 themebar(dx1, "② ゲル化・力学特性", "#1d4ed8")
-themebar(dx2, "③ 生体適合性・注入実証", "#1d4ed8")
+themebar(dx2, "③ 生体適合性(安全性)", "#1d4ed8")
 
 data_y = theme_y + theme_h + 8
-data_bottom = vivo_y - gap
+data_bottom = inj_y - gap
 data_h = data_bottom - data_y
 
 # --- Col1: 合成・架橋メカニズム(合成チック系)---
@@ -166,47 +166,48 @@ panel(dx1, data_y+p1+gap, colw, p1, "D. レオロジー: 自己修復性 (In vit
        "・複数サイクルで再現"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: Time sweep / ステップ歪み", fig_h=p1-80)
 
-# --- Col3: 生体適合性・実用(分解性→安全性→注入)---
-p3 = (data_h - 2*gap) / 3
-panel(dx2, data_y, colw, p3, "E. in vitro 分解性〔新〕",
+# --- Col3: 生体適合性(分解性→安全性)---
+p1 = (data_h - gap) / 2
+panel(dx2, data_y, colw, p1, "E. in vitro 分解性〔新〕",
       ["・37℃ PBS中の重量変化で評価",
-       "・PG3-1:3日/PG4-0125:4日/PG4-025:25日",
+       "・PG3-1:3日 / PG4-0125:4日",
+       "・PG4-025:25日で完全溶解",
        "→ 滞留期間を数日〜数週間で制御"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線", fig_h=p3-58)
-panel(dx2, data_y+p3+gap, colw, p3, "F. 生体適合性 Live/Dead〔新〕",
+      C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線", fig_h=p1-72)
+panel(dx2, data_y+p1+gap, colw, p1, "F. 生体適合性 Live/Dead〔新〕",
       ["・D1細胞を3次元包埋し培養",
        "・1/5/9日とも死細胞ほぼ無し",
+       "・溶解後も毒性なし",
        "→ 化学架橋剤なしで高生存率"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: 蛍光像(PG3-1/4-025/4-0125)", fig_h=p3-58)
-panel(dx2, data_y+2*(p3+gap), colw, p3, "G. in vitro 注入試験〔新〕",
-      ["・赤色化PG4-0125をシリンジ吐出",
-       "・針内でゾル化→吐出後に即ゲル化",
-       "→ 液だれせず形状を保持"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: 注入の連続写真", fig_h=p3-58)
+      C_VITRO, bar=C_VITRO_BAR, fig="図: 蛍光像(PG3-1/4-025/4-0125)", fig_h=p1-72)
 
-# ===== In vivo(全幅・独立帯・色で区別)=====
-rect(cx, vivo_y, cw, band_vivo_h, C_VIVO, stroke=C_VIVO_BAR, rx=8, sw=2)
-add(f'<rect x="{cx}" y="{vivo_y}" width="{cw}" height="22" rx="8" fill="{C_VIVO_BAR}"/>')
-add(f'<rect x="{cx}" y="{vivo_y+12}" width="{cw}" height="10" fill="{C_VIVO_BAR}"/>')
-text(cx+12, vivo_y+16, "C. In vivo 評価 ｜ マウス皮下注入試験（最重要・目玉）〔新データ〕",
-     size=13, color="#ffffff", weight="bold")
-# 左テキスト
-vtx = cx + 12
-ty = vivo_y + 40
-for ln in ["・香港大 Sang-Jin Lee先生との共同研究",
-           "・PG4-0125(0.25mL)をマウス背部皮下へ注入",
-           "・抵抗なくスムーズに注入 → 生体内で即座に自己修復",
-           "→ 局所に明瞭なドーム状デポを形成。低侵襲な局所投与キャリアの実用性を実証"]:
-    text(vtx, ty, ln, size=10, color="#222"); ty += 16
-# 右に大きめ図枠
-fvw = cw*0.34
-fvx = cx + cw - fvw - 12
-fvy = vivo_y + 30
-fvh = band_vivo_h - 40
-rect(fvx, fvy, fvw, fvh, C_FIG, stroke=C_FIGB, rx=3, sw=1)
-add(f'<line x1="{fvx}" y1="{fvy}" x2="{fvx+fvw}" y2="{fvy+fvh}" stroke="{C_FIGB}" stroke-width="0.8"/>')
-add(f'<line x1="{fvx}" y1="{fvy+fvh}" x2="{fvx+fvw}" y2="{fvy}" stroke="{C_FIGB}" stroke-width="0.8"/>')
-text(fvx+fvw/2, fvy+fvh/2+4, "図: in vivo マウス皮下デポ写真(大きく)", size=9.5, color="#6b7884", anchor="middle")
+# ===== C. 実用性評価: 注入試験(全幅・独立帯)=====
+# 外枠 + 全幅ヘッダー
+rect(cx, inj_y, cw, band_inject_h, "#fbf3ee", stroke=C_VIVO_BAR, rx=8, sw=2)
+add(f'<rect x="{cx}" y="{inj_y}" width="{cw}" height="22" rx="8" fill="#33506b"/>')
+add(f'<rect x="{cx}" y="{inj_y+12}" width="{cw}" height="10" fill="#33506b"/>')
+text(cx+12, inj_y+16, "C. 実用性評価 ｜ 注入試験（In vitro → In vivo）〔新データ・目玉〕",
+     size=14, color="#ffffff", weight="bold")
+# 2分割サブパネル
+inj_inner_y = inj_y + 28
+inj_inner_h = band_inject_h - 36
+half_w = (cw - 12 - 16) / 2
+ix0 = cx + 8
+ix1 = cx + 8 + half_w + 12
+# 左: In vitro 注入(青)
+panel(ix0, inj_inner_y, half_w, inj_inner_h, "C-1. in vitro 注入試験",
+      ["・赤色化PG4-0125をシリンジから吐出",
+       "・針内で高せん断→ゾル化(シアシニング)",
+       "・吐出直後に即ゲル化、液だれせず形状保持",
+       "→ レオロジーの挙動を実機操作で可視化"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: in vitro 注入の連続写真", fig_h=inj_inner_h-78)
+# 右: In vivo 注入(オレンジ・目玉)
+panel(ix1, inj_inner_y, half_w, inj_inner_h, "C-2. in vivo マウス皮下注入試験（最重要）",
+      ["・香港大 Sang-Jin Lee先生との共同研究",
+       "・PG4-0125(0.25mL)をマウス背部皮下へ注入",
+       "・抵抗なく注入→生体内で即座に自己修復",
+       "→ 局所に明瞭なドーム状デポを形成し実用性実証"],
+      C_VIVO, bar=C_VIVO_BAR, fig="図: in vivo マウス皮下デポ写真(大きく)", fig_h=inj_inner_h-78)
 
 # ===== Conclusion(最下段・全幅・薄い帯)=====
 rect(cx, conc_y, cw, band_conc_h, C_CONC, stroke="#2d6a4f", rx=6, sw=1.2)
