@@ -171,64 +171,38 @@ inj_y = conc_y - gap - band_inject_h
 colw = (cw - 2*gap) / 3
 dx0 = M; dx1 = M + colw + gap; dx2 = M + 2*(colw+gap)
 
-# テーマ小見出し
-theme_y = ry + 14
-theme_h = 11
-def themebar(x, label, color):
-    box(x, theme_y, colw, theme_h, color, line=None, rounded=False)
-    textbox(x, theme_y, colw, theme_h, [(label, 15, C_WHITE, True)],
-            align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-themebar(dx0, "① 合成・架橋メカニズム", C_MAT_BAR)
-themebar(dx1, "② ゲル化・力学特性", C_VITRO_BAR)
-themebar(dx2, "③ 生体適合性(安全性)", C_VITRO_BAR)
-
-data_y = theme_y + theme_h + 4
+data_y = ry + 14
 data_h = inj_y - gap - data_y
 
-# Col1: 合成・架橋メカニズム
-p1 = (data_h - gap) / 2
-panel(dx0, data_y, colw, p1, "A. 高純度 PGD G4 の精密合成〔新〕",
-      ["・Divergent法(全8段階)で合成",
-       "・撹拌強化＋反応時間2倍で最適化",
-       "・G3.5→G4 収率90%, 13.0 g 取得",
-       "・MALDI 単一ピーク [M+Na]⁺=3488",
-       "  → 単分散の高品質体を確認"],
-      C_MAT, C_MAT_BAR, fig_caption="図: MALDI(1回目 vs 2回目) / 収率表", fig_h=p1-58)
-panel(dx0, data_y+p1+gap, colw, p1, "B. 架橋点の同定: GCアセチル化〔新〕",
-      ["・GCアミノ基を部分N-アセチル化",
-       "・DA↑でゲル化遅延",
+# 各列1枚に統合(計3枚)。本文を要点に絞り、図を大きく
+fig_h = data_h - 52
+
+# Col1: ① 合成・架橋メカニズム
+panel(dx0, data_y, colw, data_h, "① 合成・架橋｜PGD G4合成と架橋点の同定〔新〕",
+      ["・Divergent法で単分散PGD G4を合成",
+       "  (収率90%, MALDI単一ピーク [M+Na]⁺=3488)",
+       "・GCアミノ基をアセチル化 → DA↑でゲル化遅延",
        "  (DA 16.7%:1.5h → 90%:80h)",
-       "→ アミノ基が主架橋点と化学的に証明",
-       "  アセチル化度で物性調整も可"],
-      C_MAT, C_MAT_BAR, fig_caption="図: DA vs ゲル化時間 / NMR", fig_h=p1-58)
+       "→ アミノ基が主架橋点と化学的に証明"],
+      C_MAT, C_MAT_BAR, fig_caption="図: MALDI(最適化前後) / DA vs ゲル化時間", fig_h=fig_h)
 
-# Col2: ゲル化・力学特性
-panel(dx1, data_y, colw, p1, "C. ゲル化時間の制御 (In vitro)",
-      ["・世代↑(G3→G4)で短縮",
-       "・PGD/GC比↑で短縮",
-       "・PG4-025: 2分 / PG3-1: 67分",
-       "  (架橋点密度に依存)"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: ゲル化時間 vs アミノ基比", fig_h=p1-50)
-panel(dx1, data_y+p1+gap, colw, p1, "D. レオロジー: 自己修復性 (目玉)",
-      ["・G′>G″ 安定なゲルネットワーク",
-       "・大歪500%でゾル化",
-       "・低歪に戻すと即 G′回復(自己修復)",
-       "・複数サイクルで再現"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: Time sweep / ステップ歪み", fig_h=p1-50)
+# Col2: ② ゲル化・力学特性
+panel(dx1, data_y, colw, data_h, "② ゲル化・力学｜ゲル化挙動と自己修復性〔新〕",
+      ["・世代↑・PGD比↑でゲル化時間を短縮",
+       "  (PG4-025: 2分 / PG3-1: 67分)",
+       "・レオロジー: G′>G″ の安定ネットワーク",
+       "・大歪500%でゾル化 → 低歪で即 G′回復",
+       "→ シアシニング & 自己修復を実証"],
+      C_VITRO, C_VITRO_BAR, fig_caption="図: ゲル化時間 / Time sweep・ステップ歪み", fig_h=fig_h)
 
-# Col3: 生体適合性(分解性→安全性)
-panel(dx2, data_y, colw, p1, "E. in vitro 分解性〔新〕",
-      ["・37℃ PBS中の重量変化で評価",
-       "・PG3-1:3日 / PG4-0125:4日",
-       "・PG4-025:25日で完全溶解",
-       "→ 滞留期間を数日〜数週間で制御"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: 分解曲線", fig_h=p1-50)
-panel(dx2, data_y+p1+gap, colw, p1, "F. 生体適合性 Live/Dead〔新〕",
-      ["・D1細胞を3次元包埋し培養",
-       "・1/5/9日とも死細胞ほぼ無し",
-       "・溶解後も毒性なし",
-       "→ 化学架橋剤なしで高生存率"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: 蛍光像(PG3-1/4-025/4-0125)", fig_h=p1-50)
+# Col3: ③ 生体適合性
+panel(dx2, data_y, colw, data_h, "③ 生体適合性｜分解性と細胞適合性 (In vitro)〔新〕",
+      ["・37℃ PBS中で分解、滞留期間を制御",
+       "  (PG3-1:3日 / PG4-025:25日)",
+       "・D1細胞包埋 Live/Dead: 1/5/9日とも",
+       "  死細胞ほぼ無し(溶解後も毒性なし)",
+       "→ 化学架橋剤なしで高い生体適合性"],
+      C_VITRO, C_VITRO_BAR, fig_caption="図: 分解曲線 / Live-Dead 蛍光像", fig_h=fig_h)
 
 # --- C. 実用性評価: 注入試験(全幅・独立帯, In vitro→In vivo)---
 box(M, inj_y, cw, band_inject_h, RGBColor(0xfb,0xf3,0xee), line=C_VIVO_BAR, line_w=2.0)

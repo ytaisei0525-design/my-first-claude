@@ -47,86 +47,45 @@
 <text x="692.1666666666667" y="323.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PGD+GC 超分子ゲル形成(中心図)</text>
 <rect x="18" y="376" width="805" height="26" rx="5" fill="#33506b"/>
 <text x="30" y="394" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Results &amp; Discussion ｜ データ（左→右で研究の流れ）</text>
-<rect x="18" y="408" width="261.6666666666667" height="20" rx="4" fill="#a9772a"/>
-<text x="148.83333333333334" y="422" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="middle">① 合成・架橋メカニズム</text>
-<rect x="289.6666666666667" y="408" width="261.6666666666667" height="20" rx="4" fill="#1d4ed8"/>
-<text x="420.5" y="422" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="middle">② ゲル化・力学特性</text>
-<rect x="561.3333333333334" y="408" width="261.6666666666667" height="20" rx="4" fill="#1d4ed8"/>
-<text x="692.1666666666667" y="422" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="middle">③ 生体適合性(安全性)</text>
-<rect x="18" y="436" width="261.6666666666667" height="245.5" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="18" y="436" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
-<rect x="18" y="446" width="261.6666666666667" height="10" fill="#c9962a"/>
-<text x="25" y="451" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">A. 高純度 PGD G4 の精密合成〔新〕</text>
-<text x="25" y="470" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法(全8段階)で合成</text>
-<text x="25" y="482.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・撹拌強化+反応時間2倍で最適化</text>
-<text x="25" y="495.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・G3.5→G4 収率90%, 13.0 g 取得</text>
-<text x="25" y="507.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・MALDI単一ピーク [M+Na]+=3488</text>
-<text x="25" y="520.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  → 単分散の高品質体を確認</text>
-<rect x="25" y="521.0" width="247.66666666666669" height="153.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="521.0" x2="272.6666666666667" y2="674.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="674.5" x2="272.6666666666667" y2="521.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="601.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(1回目vs2回目) / 収率表</text>
-<rect x="18" y="691.5" width="261.6666666666667" height="245.5" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="18" y="691.5" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
-<rect x="18" y="701.5" width="261.6666666666667" height="10" fill="#c9962a"/>
-<text x="25" y="706.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">B. 架橋点の同定: GCアセチル化〔新〕</text>
-<text x="25" y="725.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・GCアミノ基を部分N-アセチル化</text>
-<text x="25" y="738.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・DA↑でゲル化遅延</text>
-<text x="25" y="750.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (DA16.7%:1.5h → 90%:80h)</text>
-<text x="25" y="763.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ アミノ基が主架橋点と化学的に証明</text>
-<text x="25" y="775.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  アセチル化度で物性調整も可</text>
-<rect x="25" y="776.5" width="247.66666666666669" height="153.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="776.5" x2="272.6666666666667" y2="930.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="930.0" x2="272.6666666666667" y2="776.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="857.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: DA vs ゲル化時間 / NMR</text>
-<rect x="289.6666666666667" y="436" width="261.6666666666667" height="245.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="289.6666666666667" y="436" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="289.6666666666667" y="446" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="451" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">C. ゲル化時間の制御 (In vitro)</text>
-<text x="296.6666666666667" y="470" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・世代↑(G3→G4)で短縮</text>
-<text x="296.6666666666667" y="482.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PGD/GC比↑で短縮</text>
-<text x="296.6666666666667" y="495.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG4-025: 2分 / PG3-1: 67分</text>
-<text x="296.6666666666667" y="507.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (架橋点密度に依存)</text>
-<rect x="296.6666666666667" y="509.0" width="247.66666666666669" height="165.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="509.0" x2="544.3333333333334" y2="674.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="674.5" x2="544.3333333333334" y2="509.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="595.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ゲル化時間 vs アミノ基比</text>
-<rect x="289.6666666666667" y="691.5" width="261.6666666666667" height="245.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="289.6666666666667" y="691.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="289.6666666666667" y="701.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="706.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">D. レオロジー: 自己修復性 (In vitro・目玉)</text>
-<text x="296.6666666666667" y="725.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・G'&gt;G'' 安定なゲルネットワーク</text>
-<text x="296.6666666666667" y="738.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・大歪500%でゾル化</text>
-<text x="296.6666666666667" y="750.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・低歪に戻すと即G'回復(自己修復)</text>
-<text x="296.6666666666667" y="763.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・複数サイクルで再現</text>
-<rect x="296.6666666666667" y="764.5" width="247.66666666666669" height="165.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="764.5" x2="544.3333333333334" y2="930.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="930.0" x2="544.3333333333334" y2="764.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="851.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: Time sweep / ステップ歪み</text>
-<rect x="561.3333333333334" y="436" width="261.6666666666667" height="245.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="436" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="561.3333333333334" y="446" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="451" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">E. in vitro 分解性〔新〕</text>
-<text x="568.3333333333334" y="470" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中の重量変化で評価</text>
-<text x="568.3333333333334" y="482.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG3-1:3日 / PG4-0125:4日</text>
-<text x="568.3333333333334" y="495.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG4-025:25日で完全溶解</text>
-<text x="568.3333333333334" y="507.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 滞留期間を数日〜数週間で制御</text>
-<rect x="568.3333333333334" y="501.0" width="247.66666666666669" height="173.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="501.0" x2="816.0" y2="674.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="674.5" x2="816.0" y2="501.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="591.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線</text>
-<rect x="561.3333333333334" y="691.5" width="261.6666666666667" height="245.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="691.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="561.3333333333334" y="701.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="706.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">F. 生体適合性 Live/Dead〔新〕</text>
-<text x="568.3333333333334" y="725.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞を3次元包埋し培養</text>
-<text x="568.3333333333334" y="738.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・1/5/9日とも死細胞ほぼ無し</text>
-<text x="568.3333333333334" y="750.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・溶解後も毒性なし</text>
-<text x="568.3333333333334" y="763.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 化学架橋剤なしで高生存率</text>
-<rect x="568.3333333333334" y="756.5" width="247.66666666666669" height="173.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="756.5" x2="816.0" y2="930.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="930.0" x2="816.0" y2="756.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="847.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 蛍光像(PG3-1/4-025/4-0125)</text>
+<rect x="18" y="408" width="261.6666666666667" height="529" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="18" y="408" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
+<rect x="18" y="418" width="261.6666666666667" height="10" fill="#c9962a"/>
+<text x="25" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">① 合成・架橋｜PGD G4合成と架橋点の同定〔新〕</text>
+<text x="25" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法で単分散PGD G4を合成</text>
+<text x="25" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (収率90%, MALDI単一ピーク[M+Na]+=3488)</text>
+<text x="25" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・GCアミノ基をアセチル化 → DA↑でゲル化遅延</text>
+<text x="25" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (DA16.7%:1.5h → 90%:80h)</text>
+<text x="25" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ アミノ基が主架橋点と化学的に証明</text>
+<rect x="25" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="497" x2="272.6666666666667" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="930" x2="272.6666666666667" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(最適化前後) / DA vs ゲル化時間</text>
+<rect x="289.6666666666667" y="408" width="261.6666666666667" height="529" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="289.6666666666667" y="408" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="289.6666666666667" y="418" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="296.6666666666667" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">② ゲル化・力学｜ゲル化挙動と自己修復性〔新〕</text>
+<text x="296.6666666666667" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・世代↑・PGD比↑でゲル化時間を短縮</text>
+<text x="296.6666666666667" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (PG4-025: 2分 / PG3-1: 67分)</text>
+<text x="296.6666666666667" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・レオロジー: G'&gt;G''の安定ネットワーク</text>
+<text x="296.6666666666667" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・大歪500%でゾル化→低歪で即G'回復</text>
+<text x="296.6666666666667" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ シアシニング &amp; 自己修復を実証</text>
+<rect x="296.6666666666667" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="296.6666666666667" y1="497" x2="544.3333333333334" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="296.6666666666667" y1="930" x2="544.3333333333334" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="420.5" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ゲル化時間 / Time sweep・ステップ歪み</text>
+<rect x="561.3333333333334" y="408" width="261.6666666666667" height="529" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="561.3333333333334" y="408" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="561.3333333333334" y="418" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="568.3333333333334" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">③ 生体適合性｜分解性と細胞適合性 (In vitro)〔新〕</text>
+<text x="568.3333333333334" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中で分解、滞留期間を制御</text>
+<text x="568.3333333333334" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (PG3-1:3日 / PG4-025:25日)</text>
+<text x="568.3333333333334" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞包埋 Live/Dead: 1/5/9日とも</text>
+<text x="568.3333333333334" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  死細胞ほぼ無し(溶解後も毒性なし)</text>
+<text x="568.3333333333334" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 化学架橋剤なしで高生体適合性</text>
+<rect x="568.3333333333334" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="497" x2="816.0" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="930" x2="816.0" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線 / Live-Dead 蛍光像</text>
 <rect x="18" y="947" width="805" height="158" rx="8" fill="#fbf3ee" stroke="#ea580c" stroke-width="2"/>
 <rect x="18" y="947" width="805" height="22" rx="8" fill="#33506b"/>
 <rect x="18" y="959" width="805" height="10" fill="#33506b"/>
