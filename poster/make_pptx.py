@@ -175,25 +175,26 @@ data_y = ry + 14
 data_h = inj_y - gap - data_y
 
 # 各列1枚に統合(計3枚)。本文を要点に絞り、図を大きく
-fig_h = data_h - 52
+fig_h = data_h - 66
 
-# Col1: ① 合成・架橋メカニズム
-panel(dx0, data_y, colw, data_h, "① 合成・架橋｜PGD G4合成と架橋点の同定〔新〕",
-      ["・Divergent法で単分散PGD G4を合成",
-       "  (収率90%, MALDI単一ピーク [M+Na]⁺=3488)",
-       "・GCアミノ基をアセチル化 → DA↑でゲル化遅延",
-       "  (DA 16.7%:1.5h → 90%:80h)",
-       "→ アミノ基が主架橋点と化学的に証明"],
-      C_MAT, C_MAT_BAR, fig_caption="図: MALDI(最適化前後) / DA vs ゲル化時間", fig_h=fig_h)
+# Col1: ① 合成(PGD G4のみ)
+panel(dx0, data_y, colw, data_h, "① 合成｜PGD G4 の精密合成〔新〕",
+      ["・Divergent法(全8段階)で単分散PGD G4を合成",
+       "・撹拌強化＋反応時間2倍で高世代を最適化",
+       "・G3.5→G4 収率90%, 13.0 g を取得",
+       "・MALDI 単一ピーク [M+Na]⁺=3488",
+       "  → 単分散の高品質体を確認"],
+      C_MAT, C_MAT_BAR, fig_caption="図: MALDI(最適化前後) / 収率表・NMR", fig_h=fig_h)
 
-# Col2: ② ゲル化・力学特性
-panel(dx1, data_y, colw, data_h, "② ゲル化・力学｜ゲル化挙動と自己修復性〔新〕",
+# Col2: ② ゲル化・架橋・力学(ゲル化時間+アセチル化+レオロジー)
+panel(dx1, data_y, colw, data_h, "② ゲル化・架橋・力学｜ゲル化と自己修復性〔新〕",
       ["・世代↑・PGD比↑でゲル化時間を短縮",
        "  (PG4-025: 2分 / PG3-1: 67分)",
-       "・レオロジー: G′>G″ の安定ネットワーク",
-       "・大歪500%でゾル化 → 低歪で即 G′回復",
-       "→ シアシニング & 自己修復を実証"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: ゲル化時間 / Time sweep・ステップ歪み", fig_h=fig_h)
+       "・GCアセチル化: DA↑でゲル化遅延",
+       "  (16.7%:1.5h→90%:80h) → アミノ基が主架橋点",
+       "・レオロジー: 大歪500%でゾル化→低歪で即回復",
+       "  → シアシニング & 自己修復を実証"],
+      C_VITRO, C_VITRO_BAR, fig_caption="図: ゲル化時間 / DA vs ゲル化 / レオロジー", fig_h=fig_h)
 
 # Col3: ③ 生体適合性
 panel(dx2, data_y, colw, data_h, "③ 生体適合性｜分解性と細胞適合性 (In vitro)〔新〕",

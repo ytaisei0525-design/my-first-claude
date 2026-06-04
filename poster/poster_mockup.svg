@@ -50,29 +50,30 @@
 <rect x="18" y="408" width="261.6666666666667" height="529" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="18" y="408" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
 <rect x="18" y="418" width="261.6666666666667" height="10" fill="#c9962a"/>
-<text x="25" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">① 合成・架橋｜PGD G4合成と架橋点の同定〔新〕</text>
-<text x="25" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法で単分散PGD G4を合成</text>
-<text x="25" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (収率90%, MALDI単一ピーク[M+Na]+=3488)</text>
-<text x="25" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・GCアミノ基をアセチル化 → DA↑でゲル化遅延</text>
-<text x="25" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (DA16.7%:1.5h → 90%:80h)</text>
-<text x="25" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ アミノ基が主架橋点と化学的に証明</text>
-<rect x="25" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="497" x2="272.6666666666667" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="930" x2="272.6666666666667" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(最適化前後) / DA vs ゲル化時間</text>
+<text x="25" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">① 合成｜PGD G4 の精密合成〔新〕</text>
+<text x="25" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法(全8段階)で単分散PGD G4を合成</text>
+<text x="25" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・撹拌強化+反応時間2倍で高世代を最適化</text>
+<text x="25" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・G3.5→G4 収率90%, 13.0 g を取得</text>
+<text x="25" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・MALDI単一ピーク [M+Na]+=3488</text>
+<text x="25" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  → 単分散の高品質体を確認</text>
+<rect x="25" y="517" width="247.66666666666669" height="413" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="517" x2="272.6666666666667" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="930" x2="272.6666666666667" y2="517" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="727.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(最適化前後) / 収率表・NMR</text>
 <rect x="289.6666666666667" y="408" width="261.6666666666667" height="529" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="289.6666666666667" y="408" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
 <rect x="289.6666666666667" y="418" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">② ゲル化・力学｜ゲル化挙動と自己修復性〔新〕</text>
+<text x="296.6666666666667" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">② ゲル化・架橋・力学｜ゲル化と自己修復性〔新〕</text>
 <text x="296.6666666666667" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・世代↑・PGD比↑でゲル化時間を短縮</text>
 <text x="296.6666666666667" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (PG4-025: 2分 / PG3-1: 67分)</text>
-<text x="296.6666666666667" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・レオロジー: G'&gt;G''の安定ネットワーク</text>
-<text x="296.6666666666667" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・大歪500%でゾル化→低歪で即G'回復</text>
-<text x="296.6666666666667" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ シアシニング &amp; 自己修復を実証</text>
-<rect x="296.6666666666667" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="497" x2="544.3333333333334" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="930" x2="544.3333333333334" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ゲル化時間 / Time sweep・ステップ歪み</text>
+<text x="296.6666666666667" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・GCアセチル化: DA↑でゲル化遅延</text>
+<text x="296.6666666666667" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  (16.7%:1.5h→90%:80h) →アミノ基が主架橋点</text>
+<text x="296.6666666666667" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・レオロジー: 大歪500%でゾル化→低歪で即回復</text>
+<text x="296.6666666666667" y="504.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  → シアシニング &amp; 自己修復を実証</text>
+<rect x="296.6666666666667" y="517" width="247.66666666666669" height="413" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="296.6666666666667" y1="517" x2="544.3333333333334" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="296.6666666666667" y1="930" x2="544.3333333333334" y2="517" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="420.5" y="727.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ゲル化時間 / DA vs ゲル化 / レオロジー</text>
 <rect x="561.3333333333334" y="408" width="261.6666666666667" height="529" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="561.3333333333334" y="408" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
 <rect x="561.3333333333334" y="418" width="261.6666666666667" height="10" fill="#2563eb"/>
@@ -82,10 +83,10 @@
 <text x="568.3333333333334" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞包埋 Live/Dead: 1/5/9日とも</text>
 <text x="568.3333333333334" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  死細胞ほぼ無し(溶解後も毒性なし)</text>
 <text x="568.3333333333334" y="492.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 化学架橋剤なしで高生体適合性</text>
-<rect x="568.3333333333334" y="497" width="247.66666666666669" height="433" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="497" x2="816.0" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="930" x2="816.0" y2="497" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="717.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線 / Live-Dead 蛍光像</text>
+<rect x="568.3333333333334" y="517" width="247.66666666666669" height="413" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="517" x2="816.0" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="930" x2="816.0" y2="517" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="727.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線 / Live-Dead 蛍光像</text>
 <rect x="18" y="947" width="805" height="158" rx="8" fill="#fbf3ee" stroke="#ea580c" stroke-width="2"/>
 <rect x="18" y="947" width="805" height="22" rx="8" fill="#33506b"/>
 <rect x="18" y="959" width="805" height="10" fill="#33506b"/>
