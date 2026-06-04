@@ -143,29 +143,25 @@ panel(dx0, yb, colw, ph, "レオロジー｜自己修復性 (In vitro・目玉)"
        "・複数サイクルで再現 → 自己修復を実証"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: Time sweep / ステップ歪み", fig_h=fh)
 
-# Col2: ゲル化時間 + 架橋点(アセチル化)
+# Col2: ゲル化時間 + 分解性
 panel(dx1, yt, colw, ph, "② ゲル化時間の制御 (In vitro)",
       ["・世代↑・PGD比↑でゲル化時間を短縮",
        "・PG4-025: 2分 / PG3-1: 67分",
        "・架橋点密度に依存"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: ゲル化時間 vs アミノ基比", fig_h=fh)
-panel(dx1, yb, colw, ph, "架橋点の同定｜GCアセチル化〔新〕",
-      ["・GCアミノ基を部分N-アセチル化",
-       "・DA↑でゲル化遅延(16.7%:1.5h→90%:80h)",
-       "・→ アミノ基が主架橋点と化学的に証明"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: DA vs ゲル化時間 / NMR", fig_h=fh)
-
-# Col3: 分解性 + 生体適合性
-panel(dx2, yt, colw, ph, "③ in vitro 分解性〔新〕",
+panel(dx1, yb, colw, ph, "③ in vitro 分解性〔新〕",
       ["・37℃ PBS中で分解、滞留期間を制御",
        "・PG3-1:3日 / PG4-025:25日",
        "・→ 数日〜数週間で任意に制御"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線", fig_h=fh)
-panel(dx2, yb, colw, ph, "生体適合性｜Live/Dead〔新〕",
-      ["・D1細胞を3次元包埋し培養",
-       "・1/5/9日とも死細胞ほぼ無し",
-       "・→ 化学架橋剤なしで高生存率"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: 蛍光像(PG3-1/4-025/4-0125)", fig_h=fh)
+
+# Col3: 生体適合性 Live/Dead(縦長1枚・蛍光像グリッドを大きく)
+panel(dx2, yt, colw, data_h, "④ 生体適合性｜Live/Dead〔新〕",
+      ["・D1細胞を3次元ゲル内に包埋し培養",
+       "・1/5/9日とも死細胞はほぼ観察されず",
+       "・溶解後も毒性なし",
+       "・→ 化学架橋剤なしで高い細胞生存率"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: Live/Dead 蛍光像 (PG3-1 / PG4-025 / PG4-0125 × 1・5・9日)", fig_h=data_h-116)
 
 # ===== C. 実用性評価: 注入試験(全幅・独立帯)=====
 # 外枠 + 全幅ヘッダー
@@ -174,21 +170,23 @@ add(f'<rect x="{cx}" y="{inj_y}" width="{cw}" height="22" rx="8" fill="#33506b"/
 add(f'<rect x="{cx}" y="{inj_y+12}" width="{cw}" height="10" fill="#33506b"/>')
 text(cx+12, inj_y+16, "C. 実用性評価 ｜ 注入試験（In vitro → In vivo）〔新データ・目玉〕",
      size=14, color="#ffffff", weight="bold")
-# 2分割サブパネル
+# 2分割サブパネル(In vivoを広めに: 左42% / 右58%)
 inj_inner_y = inj_y + 28
 inj_inner_h = band_inject_h - 36
-half_w = (cw - 12 - 16) / 2
+usable = cw - 16 - 12
+w_l = usable * 0.42
+w_r = usable * 0.58
 ix0 = cx + 8
-ix1 = cx + 8 + half_w + 12
+ix1 = cx + 8 + w_l + 12
 # 左: In vitro 注入(青)
-panel(ix0, inj_inner_y, half_w, inj_inner_h, "C-1. in vitro 注入試験",
+panel(ix0, inj_inner_y, w_l, inj_inner_h, "C-1. in vitro 注入試験",
       ["・赤色化PG4-0125をシリンジから吐出",
        "・針内で高せん断→ゾル化(シアシニング)",
        "・吐出直後に即ゲル化、液だれせず形状保持",
        "→ レオロジーの挙動を実機操作で可視化"],
       C_VITRO, bar=C_VITRO_BAR, fig="図: in vitro 注入の連続写真", fig_h=inj_inner_h-78)
-# 右: In vivo 注入(オレンジ・目玉)
-panel(ix1, inj_inner_y, half_w, inj_inner_h, "C-2. in vivo マウス皮下注入試験（最重要）",
+# 右: In vivo 注入(オレンジ・目玉・広め)
+panel(ix1, inj_inner_y, w_r, inj_inner_h, "C-2. in vivo マウス皮下注入試験（最重要・目玉）",
       ["・香港大 Sang-Jin Lee先生との共同研究",
        "・PG4-0125(0.25mL)をマウス背部皮下へ注入",
        "・抵抗なく注入→生体内で即座に自己修復",

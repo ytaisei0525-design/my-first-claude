@@ -83,64 +83,54 @@
 <rect x="289.6666666666667" y="677.5" width="261.6666666666667" height="259.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="289.6666666666667" y="677.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
 <rect x="289.6666666666667" y="687.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="692.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">架橋点の同定｜GCアセチル化〔新〕</text>
-<text x="296.6666666666667" y="711.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・GCアミノ基を部分N-アセチル化</text>
-<text x="296.6666666666667" y="724.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・DA↑でゲル化遅延(16.7%:1.5h→90%:80h)</text>
-<text x="296.6666666666667" y="736.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ アミノ基が主架橋点と化学的に証明</text>
+<text x="296.6666666666667" y="692.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">③ in vitro 分解性〔新〕</text>
+<text x="296.6666666666667" y="711.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中で分解、滞留期間を制御</text>
+<text x="296.6666666666667" y="724.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG3-1:3日 / PG4-025:25日</text>
+<text x="296.6666666666667" y="736.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 数日〜数週間で任意に制御</text>
 <rect x="296.6666666666667" y="762.5" width="247.66666666666669" height="167.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
 <line x1="296.6666666666667" y1="762.5" x2="544.3333333333334" y2="930.0" stroke="#b0bcc7" stroke-width="0.8"/>
 <line x1="296.6666666666667" y1="930.0" x2="544.3333333333334" y2="762.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="850.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: DA vs ゲル化時間 / NMR</text>
-<rect x="561.3333333333334" y="408" width="261.6666666666667" height="259.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<text x="420.5" y="850.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線</text>
+<rect x="561.3333333333334" y="408" width="261.6666666666667" height="529" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="561.3333333333334" y="408" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
 <rect x="561.3333333333334" y="418" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">③ in vitro 分解性〔新〕</text>
-<text x="568.3333333333334" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中で分解、滞留期間を制御</text>
-<text x="568.3333333333334" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG3-1:3日 / PG4-025:25日</text>
-<text x="568.3333333333334" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 数日〜数週間で任意に制御</text>
-<rect x="568.3333333333334" y="493.0" width="247.66666666666669" height="167.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="493.0" x2="816.0" y2="660.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="660.5" x2="816.0" y2="493.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="580.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線</text>
-<rect x="561.3333333333334" y="677.5" width="261.6666666666667" height="259.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="677.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="561.3333333333334" y="687.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="692.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">生体適合性｜Live/Dead〔新〕</text>
-<text x="568.3333333333334" y="711.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞を3次元包埋し培養</text>
-<text x="568.3333333333334" y="724.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・1/5/9日とも死細胞ほぼ無し</text>
-<text x="568.3333333333334" y="736.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 化学架橋剤なしで高生存率</text>
-<rect x="568.3333333333334" y="762.5" width="247.66666666666669" height="167.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="762.5" x2="816.0" y2="930.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="930.0" x2="816.0" y2="762.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="850.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 蛍光像(PG3-1/4-025/4-0125)</text>
+<text x="568.3333333333334" y="423" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">④ 生体適合性｜Live/Dead〔新〕</text>
+<text x="568.3333333333334" y="442" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞を3次元ゲル内に包埋し培養</text>
+<text x="568.3333333333334" y="454.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・1/5/9日とも死細胞はほぼ観察されず</text>
+<text x="568.3333333333334" y="467.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・溶解後も毒性なし</text>
+<text x="568.3333333333334" y="479.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 化学架橋剤なしで高い細胞生存率</text>
+<rect x="568.3333333333334" y="517" width="247.66666666666669" height="413" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="517" x2="816.0" y2="930" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="930" x2="816.0" y2="517" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="727.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: Live/Dead 蛍光像 (PG3-1 / PG4-025 / PG4-0125 × 1・5・9日)</text>
 <rect x="18" y="947" width="805" height="158" rx="8" fill="#fbf3ee" stroke="#ea580c" stroke-width="2"/>
 <rect x="18" y="947" width="805" height="22" rx="8" fill="#33506b"/>
 <rect x="18" y="959" width="805" height="10" fill="#33506b"/>
 <text x="30" y="963" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">C. 実用性評価 ｜ 注入試験（In vitro → In vivo）〔新データ・目玉〕</text>
-<rect x="26" y="975" width="388.5" height="122" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="26" y="975" width="388.5" height="20" rx="6" fill="#2563eb"/>
-<rect x="26" y="985" width="388.5" height="10" fill="#2563eb"/>
+<rect x="26" y="975" width="326.34" height="122" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="26" y="975" width="326.34" height="20" rx="6" fill="#2563eb"/>
+<rect x="26" y="985" width="326.34" height="10" fill="#2563eb"/>
 <text x="33" y="990" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">C-1. in vitro 注入試験</text>
 <text x="33" y="1009" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・赤色化PG4-0125をシリンジから吐出</text>
 <text x="33" y="1021.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・針内で高せん断→ゾル化(シアシニング)</text>
 <text x="33" y="1034.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・吐出直後に即ゲル化、液だれせず形状保持</text>
 <text x="33" y="1046.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ レオロジーの挙動を実機操作で可視化</text>
-<rect x="33" y="1046" width="374.5" height="44" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="33" y1="1046" x2="407.5" y2="1090" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="33" y1="1090" x2="407.5" y2="1046" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="220.25" y="1072.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入の連続写真</text>
-<rect x="426.5" y="975" width="388.5" height="122" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="426.5" y="975" width="388.5" height="20" rx="6" fill="#ea580c"/>
-<rect x="426.5" y="985" width="388.5" height="10" fill="#ea580c"/>
-<text x="433.5" y="990" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">C-2. in vivo マウス皮下注入試験（最重要）</text>
-<text x="433.5" y="1009" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・香港大 Sang-Jin Lee先生との共同研究</text>
-<text x="433.5" y="1021.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG4-0125(0.25mL)をマウス背部皮下へ注入</text>
-<text x="433.5" y="1034.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・抵抗なく注入→生体内で即座に自己修復</text>
-<text x="433.5" y="1046.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 局所に明瞭なドーム状デポを形成し実用性実証</text>
-<rect x="433.5" y="1046" width="374.5" height="44" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="433.5" y1="1046" x2="808.0" y2="1090" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="433.5" y1="1090" x2="808.0" y2="1046" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="620.75" y="1072.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vivo マウス皮下デポ写真(大きく)</text>
+<rect x="33" y="1046" width="312.34" height="44" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="33" y1="1046" x2="345.34" y2="1090" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="33" y1="1090" x2="345.34" y2="1046" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="189.17" y="1072.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入の連続写真</text>
+<rect x="364.34" y="975" width="450.65999999999997" height="122" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="364.34" y="975" width="450.65999999999997" height="20" rx="6" fill="#ea580c"/>
+<rect x="364.34" y="985" width="450.65999999999997" height="10" fill="#ea580c"/>
+<text x="371.34" y="990" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">C-2. in vivo マウス皮下注入試験（最重要・目玉）</text>
+<text x="371.34" y="1009" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・香港大 Sang-Jin Lee先生との共同研究</text>
+<text x="371.34" y="1021.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG4-0125(0.25mL)をマウス背部皮下へ注入</text>
+<text x="371.34" y="1034.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・抵抗なく注入→生体内で即座に自己修復</text>
+<text x="371.34" y="1046.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 局所に明瞭なドーム状デポを形成し実用性実証</text>
+<rect x="371.34" y="1046" width="436.65999999999997" height="44" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="371.34" y1="1046" x2="808.0" y2="1090" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="371.34" y1="1090" x2="808.0" y2="1046" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="589.67" y="1072.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vivo マウス皮下デポ写真(大きく)</text>
 <rect x="18" y="1115" width="805" height="56" rx="6" fill="#d8f3dc" stroke="#2d6a4f" stroke-width="1.2"/>
 <text x="28" y="1133" font-family="IPAGothic, sans-serif" font-size="11" fill="#1d3a2a" font-weight="bold" text-anchor="start">Conclusion:</text>
 <text x="113" y="1133" font-family="IPAGothic, sans-serif" font-size="9.3" fill="#1d3a2a" font-weight="normal" text-anchor="start">単分散PGD G4を確立 → 水素結合で超分子ゲル形成（自己修復・分解性を制御, 高生体適合性） → in vivoで局所デポを形成し実用性を実証</text>
