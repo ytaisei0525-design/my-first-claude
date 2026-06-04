@@ -204,41 +204,33 @@ panel(dx1, yb, colw, ph, "③ in vitro 分解性〔新〕",
        "・→ 数日〜数週間で任意に制御"],
       C_VITRO, C_VITRO_BAR, fig_caption="図: 分解曲線", fig_h=fh)
 
-# Col3: 生体適合性 Live/Dead(縦長1枚・蛍光像グリッドを大きく)
-panel(dx2, yt, colw, data_h, "④ 生体適合性｜Live/Dead〔新〕",
+# Col3: Live/Dead + in vitro 注入試験
+panel(dx2, yt, colw, ph, "④ 生体適合性｜Live/Dead〔新〕",
       ["・D1細胞を3次元ゲル内に包埋し培養",
-       "・1/5/9日とも死細胞はほぼ観察されず",
-       "・溶解後も毒性なし",
-       "・→ 化学架橋剤なしで高い細胞生存率"],
-      C_VITRO, C_VITRO_BAR,
-      fig_caption="図: Live/Dead 蛍光像\n(PG3-1 / PG4-025 / PG4-0125 × 1・5・9日)", fig_h=data_h-58)
-
-# --- C. 実用性評価: 注入試験(全幅・独立帯, In vitro→In vivo)---
-box(M, inj_y, cw, band_inject_h, RGBColor(0xfb,0xf3,0xee), line=C_VIVO_BAR, line_w=2.0)
-box(M, inj_y, cw, 11, C_SEC, line=None, rounded=False)
-textbox(M+4, inj_y, cw-8, 11,
-        [("C. 実用性評価 ｜ 注入試験（In vitro → In vivo）〔新データ・目玉〕", 17, C_WHITE, True)],
-        anchor=MSO_ANCHOR.MIDDLE)
-inj_iy = inj_y + 13
-inj_ih = band_inject_h - 16
-# In vivoを広めに: 左42% / 右58%
-usable = cw - 4 - 5
-w_l = usable * 0.42; w_r = usable * 0.58
-ix0 = M + 2; ix1 = M + 2 + w_l + 5
-# 左: In vitro 注入(青)
-panel(ix0, inj_iy, w_l, inj_ih, "C-1. in vitro 注入試験",
+       "・1/5/9日とも死細胞はほぼ無し",
+       "・→ 化学架橋剤なしで高生存率"],
+      C_VITRO, C_VITRO_BAR, fig_caption="図: Live/Dead 蛍光像", fig_h=fh)
+panel(dx2, yb, colw, ph, "⑤ in vitro 注入試験〔新〕",
       ["・赤色化PG4-0125をシリンジから吐出",
-       "・針内で高せん断 → ゾル化(シアシニング)",
-       "・吐出直後に即ゲル化、液だれせず形状保持",
-       "→ レオロジー挙動を実機操作で可視化"],
-      C_VITRO, C_VITRO_BAR, fig_caption="図: in vitro 注入の連続写真", fig_h=inj_ih-52)
-# 右: In vivo 注入(オレンジ・目玉・広め)
-panel(ix1, inj_iy, w_r, inj_ih, "C-2. in vivo マウス皮下注入試験（最重要・目玉）",
-      ["・香港大 Sang-Jin Lee 先生との共同研究",
-       "・PG4-0125(0.25 mL)をマウス背部皮下へ注入",
-       "・抵抗なく注入 → 生体内で即座に自己修復",
-       "→ 局所に明瞭なドーム状デポを形成し実用性を実証"],
-      C_VIVO, C_VIVO_BAR, fig_caption="図: in vivo マウス皮下デポ写真(大きく)", fig_h=inj_ih-52)
+       "・針内でゾル化 → 吐出後に即ゲル化",
+       "・→ 液だれせず形状を保持(自己修復)"],
+      C_VITRO, C_VITRO_BAR, fig_caption="図: in vitro 注入の連続写真", fig_h=fh)
+
+# --- C. In vivo マウス皮下注入試験(全幅・単独・目玉)---
+box(M, inj_y, cw, band_inject_h, C_VIVO, line=C_VIVO_BAR, line_w=2.0)
+box(M, inj_y, cw, 11, C_VIVO_BAR, line=None, rounded=False)
+textbox(M+4, inj_y, cw-8, 11,
+        [("C. In vivo マウス皮下注入試験（実用性・目玉）〔新データ〕", 17, C_WHITE, True)],
+        anchor=MSO_ANCHOR.MIDDLE)
+textbox(M+5, inj_y+13, cw*0.56, band_inject_h-15,
+        [("・香港大 Sang-Jin Lee 先生との共同研究", 13, C_DARK, False),
+         ("・PG4-0125(0.25 mL)をマウス背部皮下へ注入", 13, C_DARK, False),
+         ("・シアシニング性により抵抗なくスムーズに注入", 13, C_DARK, False),
+         ("・皮下で即座に超分子ネットワークを再構築(自己修復)", 13, C_DARK, False),
+         ("→ 局所に明瞭なドーム状デポを形成し定着", 13, C_DARK, True),
+         ("→ 低侵襲な局所投与キャリアとしての実用性を実証", 13, C_DARK, True)],
+        space_after=3)
+figph(M+cw*0.60, inj_y+15, cw*0.38, band_inject_h-20, "図: in vivo マウス皮下デポ写真(大きく)")
 
 # --- Conclusion(薄い帯)---
 box(M, conc_y, cw, band_conc_h, C_CONC, line=C_CONC_BAR, line_w=1.2)
