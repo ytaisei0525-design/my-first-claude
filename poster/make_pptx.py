@@ -132,7 +132,7 @@ textbox(M, M+46, cw, 12,
 iy = M + hh + gap
 sectionbar(M, iy, cw, "Introduction ｜ 背景・着眼点・目的", C_HEADER, size=20)
 sub_y = iy + 14
-sub_h = 150
+sub_h = 116
 sub_gap = 5
 sub_w = (cw - 2*sub_gap) / 3
 sx0 = M; sx1 = M + sub_w + sub_gap; sx2 = M + 2*(sub_w+sub_gap)
@@ -142,29 +142,29 @@ panel(sx0, sub_y, sub_w, sub_h, "化学療法の課題",
        "・PTXは水溶解度 < 0.5 µg/mL",
        "・可溶化剤 Cremophor EL が重篤毒性",
        "→ 無毒可溶化＋局所投与のDDSが必要"],
-      C_INTRO, C_INTRO_BAR, fig_caption="図: PTX/CrEL構造・0.7%模式図", fig_h=58)
+      C_INTRO, C_INTRO_BAR, fig_caption="図: PTX/CrEL構造・0.7%模式図", fig_h=40)
 panel(sx1, sub_y, sub_w, sub_h, "着眼点: 2機能を1材料で",
       ["・PGD: 単分散・中間水・生体適合性",
        "・単分子ハイドロトロープ機能",
        "  → PTXを高可溶化(PEG400の約10倍)",
        "・shear-thinning型: 注入後に自己修復",
        "  → 液だれせず患部に留まる"],
-      C_INTRO, C_INTRO_BAR, fig_caption="図: PGD構造 / 溶解度 / shear機構", fig_h=58)
+      C_INTRO, C_INTRO_BAR, fig_caption="図: PGD構造 / 溶解度 / shear機構", fig_h=40)
 panel(sx2, sub_y, sub_w, sub_h, "目的・戦略",
       ["目的: ハイドロトロープ機能と自己修復性を",
        "両立した注入ゲルの開発",
        "戦略: PGD＋GCの水素結合(物理架橋)で",
        "自発形成する超分子ハイドロゲルを利用",
        "→ PGDがPTXを高濃度保持し局所徐放"],
-      C_INTRO, C_INTRO_BAR, fig_caption="図: PGD＋GC 超分子ゲル形成(中心図)", fig_h=58)
+      C_INTRO, C_INTRO_BAR, fig_caption="図: PGD＋GC 超分子ゲル形成(中心図)", fig_h=40)
 
 # --- Results & Discussion ---
 ry = sub_y + sub_h + gap
 sectionbar(M, ry, cw, "Results & Discussion ｜ データ（左→右で研究の流れ）", C_SEC, size=20)
 
 # 下部バンド位置を確保
-band_conc_h = 38
-band_inject_h = 108   # 実用性評価(注入試験 In vitro→In vivo)を全幅で
+band_conc_h = 34
+band_inject_h = 190   # In vivoを全幅で大きく
 conc_y = 1189 - M - band_conc_h
 inj_y = conc_y - gap - band_inject_h
 
