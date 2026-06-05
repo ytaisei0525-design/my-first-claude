@@ -119,7 +119,17 @@ dx0 = cx
 dx1 = cx + colw + gap
 dx2 = cx + 2*(colw + gap)
 
-data_y = ry + 32
+# --- 列ごとの見出しバー ---
+head_y = ry + 32
+head_h = 17
+def colhead(x, label, color):
+    add(f'<rect x="{x}" y="{head_y}" width="{colw}" height="{head_h}" rx="4" fill="{color}"/>')
+    text(x+colw/2, head_y+12.5, label, size=12, color="#ffffff", weight="bold", anchor="middle")
+colhead(dx0, "材料合成・インジェクタブル特性", "#33506b")
+colhead(dx1, "In vitro 生体適合性評価", C_VITRO_BAR)
+colhead(dx2, "実用性評価 (In vitro / In vivo)", C_VIVO_BAR)
+
+data_y = head_y + head_h + 7
 data_bottom = conc_y - gap
 data_h = data_bottom - data_y
 

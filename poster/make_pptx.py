@@ -169,7 +169,18 @@ conc_y = 1189 - M - band_conc_h
 colw = (cw - 2*gap) / 3
 dx0 = M; dx1 = M + colw + gap; dx2 = M + 2*(colw+gap)
 
-data_y = ry + 14
+# --- 列ごとの見出しバー ---
+head_y = ry + 14
+head_h = 10
+def colhead(x, label, color):
+    box(x, head_y, colw, head_h, color, line=None, rounded=False)
+    textbox(x, head_y, colw, head_h, [(label, 15, C_WHITE, True)],
+            align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+colhead(dx0, "材料合成・インジェクタブル特性", C_SEC)
+colhead(dx1, "In vitro 生体適合性評価", C_VITRO_BAR)
+colhead(dx2, "実用性評価 (In vitro / In vivo)", C_VIVO_BAR)
+
+data_y = head_y + head_h + 4
 data_h = conc_y - gap - data_y
 
 # 左列=3枚, 中列=2枚, 右列=2枚
