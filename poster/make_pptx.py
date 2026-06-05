@@ -221,20 +221,23 @@ panel(dx1, data_y+ph2+gap, colw, ph2, "⑤ In vitro 分解性〔新〕",
        "・→ 数日〜数週間で任意に制御可能"],
       C_VITRO, C_VITRO_BAR, fig_caption="図: 分解曲線 (重量比 vs 時間)", fig_h=f2)
 
-# ---- 右列: 注入試験(In vitro & In vivo) → In vivo 分解試験(H&E) ----
-panel(dx2, data_y, colw, ph2, "⑥ 注入試験 (In vitro & In vivo)〔新〕",
+# ---- 右列: 注入試験(小) → In vivo 組織学的評価 H&E(大) ----
+ph_rt = (data_h - gap) * 0.36
+ph_rb = (data_h - gap) * 0.64
+panel(dx2, data_y, colw, ph_rt, "⑥ 注入試験 (In vitro & In vivo)〔新〕",
       ["・in vitro: 赤色化ゲルをシリンジ吐出→即ゲル化",
        "・in vivo: マウス背部皮下へ注入(0.25 mL)",
-       "・抵抗なく注入→局所にドーム状デポを形成",
-       "・香港大 Sang-Jin Lee 先生と共同研究"],
+       "・抵抗なく注入→液漏れせずドーム状デポ形成"],
       C_VIVO, C_VIVO_BAR,
-      fig_caption="図: in vitro 注入写真 / in vivo マウス皮下デポ写真", fig_h=f2)
-panel(dx2, data_y+ph2+gap, colw, ph2, "⑦ In vivo 分解試験 (H&E染色)〔要データ〕",
-      ["・皮下デポの経時的な分解・吸収を評価",
-       "・H&E染色で組織反応・分解挙動を観察",
-       "・(生分解性・生体適合性を組織学的に確認)",
-       "※元データは別途ご提供をお願いします"],
-      C_VIVO, C_VIVO_BAR, fig_caption="図: H&E染色 組織像 (経時)", fig_h=f2)
+      fig_caption="図: in vitro 注入写真 / in vivo マウス皮下デポ写真", fig_h=ph_rt-44)
+panel(dx2, data_y+ph_rt+gap, colw, ph_rb, "⑦ In vivo 組織学的評価 H&E染色〔考察・新〕",
+      ["・Day 0/5/14で皮下デポを採取しH&E評価",
+       "・ゲル辺縁から宿主細胞が内部へ浸潤(矢印)",
+       "・Day5→14で浸潤進行 → 緩やかに生分解・組織置換",
+       "・14日後もデポ残存。重度の炎症・壊死なし(高適合性)",
+       "・in vitro分解(≈25日)と整合 → 局所貯留に好適"],
+      C_VIVO, C_VIVO_BAR,
+      fig_caption="図: 実験スキーム / Optical(デポ) / H&E組織像\n(Native vs PG4-025 ×0・5・14日)", fig_h=ph_rb-58)
 
 # --- Conclusion(薄い帯)---
 box(M, conc_y, cw, band_conc_h, C_CONC, line=C_CONC_BAR, line_w=1.2)

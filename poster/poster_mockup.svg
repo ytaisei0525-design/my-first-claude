@@ -110,30 +110,30 @@
 <line x1="296.6666666666667" y1="846.5" x2="544.3333333333334" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
 <line x1="296.6666666666667" y1="1104.0" x2="544.3333333333334" y2="846.5" stroke="#b0bcc7" stroke-width="0.8"/>
 <text x="420.5" y="979.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線 (重量比 vs 時間)</text>
-<rect x="561.3333333333334" y="402" width="261.6666666666667" height="349.5" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="561.3333333333334" y="402" width="261.6666666666667" height="251.64" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="561.3333333333334" y="402" width="261.6666666666667" height="20" rx="6" fill="#ea580c"/>
 <rect x="561.3333333333334" y="412" width="261.6666666666667" height="10" fill="#ea580c"/>
 <text x="568.3333333333334" y="417" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑥ 注入試験 (In vitro &amp; In vivo)〔新〕</text>
 <text x="568.3333333333334" y="436" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・in vitro: 赤色化ゲルをシリンジ吐出→即ゲル化</text>
 <text x="568.3333333333334" y="448.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・in vivo: マウス背部皮下へ注入(0.25 mL)</text>
-<text x="568.3333333333334" y="461.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・抵抗なく注入→局所にドーム状デポを形成</text>
-<text x="568.3333333333334" y="473.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・香港大 Sang-Jin Lee先生と共同研究</text>
-<rect x="568.3333333333334" y="487.0" width="247.66666666666669" height="257.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="487.0" x2="816.0" y2="744.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="744.5" x2="816.0" y2="487.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="619.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入写真 / in vivo マウス皮下デポ写真</text>
-<rect x="561.3333333333334" y="761.5" width="261.6666666666667" height="349.5" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="761.5" width="261.6666666666667" height="20" rx="6" fill="#ea580c"/>
-<rect x="561.3333333333334" y="771.5" width="261.6666666666667" height="10" fill="#ea580c"/>
-<text x="568.3333333333334" y="776.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑦ In vivo 分解試験 (H&amp;E染色)〔要データ〕</text>
-<text x="568.3333333333334" y="795.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・皮下デポの経時的な分解・吸収を評価</text>
-<text x="568.3333333333334" y="808.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・H&amp;E染色で組織反応・分解挙動を観察</text>
-<text x="568.3333333333334" y="820.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・(生分解性・生体適合性を組織学的に確認)</text>
-<text x="568.3333333333334" y="833.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">※元データは別途提供をお願いします</text>
-<rect x="568.3333333333334" y="846.5" width="247.66666666666669" height="257.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="846.5" x2="816.0" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="1104.0" x2="816.0" y2="846.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="979.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: H&amp;E染色 組織像 (経時)</text>
+<text x="568.3333333333334" y="461.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・抵抗なく注入→液漏れせずドーム状デポ形成</text>
+<rect x="568.3333333333334" y="473.0" width="247.66666666666669" height="173.64" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="473.0" x2="816.0" y2="646.64" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="646.64" x2="816.0" y2="473.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="563.8199999999999" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入写真 / in vivo マウス皮下デポ写真</text>
+<rect x="561.3333333333334" y="663.64" width="261.6666666666667" height="447.36" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="561.3333333333334" y="663.64" width="261.6666666666667" height="20" rx="6" fill="#ea580c"/>
+<rect x="561.3333333333334" y="673.64" width="261.6666666666667" height="10" fill="#ea580c"/>
+<text x="568.3333333333334" y="678.64" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑦ In vivo 組織学的評価 H&amp;E染色〔考察・新〕</text>
+<text x="568.3333333333334" y="697.64" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Day 0/5/14で皮下デポを採取しH&amp;E評価</text>
+<text x="568.3333333333334" y="710.14" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・ゲル辺縁から宿主細胞が内部へ浸潤(矢印)</text>
+<text x="568.3333333333334" y="722.64" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Day5→14で浸潤進行 → 緩やかに生分解・組織置換</text>
+<text x="568.3333333333334" y="735.14" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・14日後もデポ残存。重度の炎症・壊死なし(高適合性)</text>
+<text x="568.3333333333334" y="747.64" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・in vitro分解(≈25日)と整合 → 局所貯留に好適</text>
+<rect x="568.3333333333334" y="761.64" width="247.66666666666669" height="342.36" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="761.64" x2="816.0" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="1104.0" x2="816.0" y2="761.64" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="936.8199999999999" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 実験スキーム / Optical(デポ) / H&amp;E組織像 (Native vs PG4-025 ×0・5・14日)</text>
 <rect x="18" y="1121" width="805" height="50" rx="6" fill="#d8f3dc" stroke="#2d6a4f" stroke-width="1.2"/>
 <text x="28" y="1139" font-family="IPAGothic, sans-serif" font-size="11" fill="#1d3a2a" font-weight="bold" text-anchor="start">Conclusion:</text>
 <text x="113" y="1139" font-family="IPAGothic, sans-serif" font-size="9.3" fill="#1d3a2a" font-weight="normal" text-anchor="start">単分散PGD G4を確立 → 水素結合で超分子ゲル形成（自己修復・分解性を制御, 高生体適合性） → in vivoで局所デポを形成し実用性を実証</text>
