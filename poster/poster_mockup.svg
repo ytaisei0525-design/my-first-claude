@@ -6,7 +6,7 @@
 <text x="420.5" y="88" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#cfe0f0" font-weight="normal" text-anchor="middle">〇山道 大誠¹  Cho Iksung²³  田中 賢²³ （九州大学 工学部／工学府／先導物質化学研究所）</text>
 <rect x="18" y="116" width="805" height="26" rx="5" fill="#0d3b66"/>
 <text x="30" y="134" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Introduction ｜ 背景・着眼点・目的</text>
-<rect x="18" y="148" width="261.6666666666667" height="166" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="18" y="148" width="261.6666666666667" height="188" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="18" y="148" width="261.6666666666667" height="20" rx="6" fill="#4a6178"/>
 <rect x="18" y="158" width="261.6666666666667" height="10" fill="#4a6178"/>
 <text x="25" y="163" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">化学療法の課題</text>
@@ -15,11 +15,11 @@
 <text x="25" y="207.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PTXは水溶解度&lt;0.5µg/mL</text>
 <text x="25" y="219.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・可溶化剤Cremophor ELが重篤毒性</text>
 <text x="25" y="232.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ 無毒可溶化+局所投与のDDSが必要</text>
-<rect x="25" y="255" width="247.66666666666669" height="52" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="255" x2="272.6666666666667" y2="307" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="307" x2="272.6666666666667" y2="255" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="285.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PTX/CrEL構造・0.7%模式図</text>
-<rect x="289.6666666666667" y="148" width="261.6666666666667" height="166" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="25" y="263" width="247.66666666666669" height="66" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="263" x2="272.6666666666667" y2="329" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="329" x2="272.6666666666667" y2="263" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="300.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PTX/CrEL構造・0.7%模式図</text>
+<rect x="289.6666666666667" y="148" width="261.6666666666667" height="188" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="289.6666666666667" y="148" width="261.6666666666667" height="20" rx="6" fill="#4a6178"/>
 <rect x="289.6666666666667" y="158" width="261.6666666666667" height="10" fill="#4a6178"/>
 <text x="296.6666666666667" y="163" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">着眼点: 2機能を1材料で</text>
@@ -28,11 +28,11 @@
 <text x="296.6666666666667" y="207.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  → PTXを高可溶化(PEG400の約10倍)</text>
 <text x="296.6666666666667" y="219.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・shear-thinning型: 注入後に自己修復</text>
 <text x="296.6666666666667" y="232.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">  → 液だれせず患部に留まる</text>
-<rect x="296.6666666666667" y="255" width="247.66666666666669" height="52" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="255" x2="544.3333333333334" y2="307" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="307" x2="544.3333333333334" y2="255" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="285.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PGD構造 / 溶解度 / shear機構</text>
-<rect x="561.3333333333334" y="148" width="261.6666666666667" height="166" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="296.6666666666667" y="263" width="247.66666666666669" height="66" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="296.6666666666667" y1="263" x2="544.3333333333334" y2="329" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="296.6666666666667" y1="329" x2="544.3333333333334" y2="263" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="420.5" y="300.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PGD構造 / 溶解度 / shear機構</text>
+<rect x="561.3333333333334" y="148" width="261.6666666666667" height="188" rx="6" fill="#e8eef5" stroke="#90a4b5" stroke-width="1.2"/>
 <rect x="561.3333333333334" y="148" width="261.6666666666667" height="20" rx="6" fill="#4a6178"/>
 <rect x="561.3333333333334" y="158" width="261.6666666666667" height="10" fill="#4a6178"/>
 <text x="568.3333333333334" y="163" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">目的・戦略</text>
@@ -41,92 +41,93 @@
 <text x="568.3333333333334" y="207.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">戦略: PGD+GCの水素結合(物理架橋)で</text>
 <text x="568.3333333333334" y="219.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">自発形成する超分子ハイドロゲルを利用</text>
 <text x="568.3333333333334" y="232.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">→ PGDがPTXを高濃度保持し局所徐放</text>
-<rect x="568.3333333333334" y="255" width="247.66666666666669" height="52" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="255" x2="816.0" y2="307" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="307" x2="816.0" y2="255" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="285.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PGD+GC 超分子ゲル形成(中心図)</text>
-<rect x="18" y="324" width="805" height="26" rx="5" fill="#33506b"/>
-<text x="30" y="342" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Results &amp; Discussion ｜ データ（左→右で研究の流れ）</text>
-<rect x="18" y="356" width="261.6666666666667" height="242.5" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="18" y="356" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
-<rect x="18" y="366" width="261.6666666666667" height="10" fill="#c9962a"/>
-<text x="25" y="371" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">① PGD G4 の精密合成〔新〕</text>
-<text x="25" y="390" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法(全8段階)で単分散PGD G4を合成</text>
-<text x="25" y="402.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・撹拌強化+反応時間2倍で高世代を最適化</text>
-<text x="25" y="415.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・収率90%, MALDI単一ピーク[M+Na]+=3488</text>
-<rect x="25" y="441.0" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="441.0" x2="272.6666666666667" y2="591.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="591.5" x2="272.6666666666667" y2="441.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="520.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(最適化前後) / 収率表</text>
-<rect x="18" y="608.5" width="261.6666666666667" height="242.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="18" y="608.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="18" y="618.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="25" y="623.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">レオロジー｜自己修復性 (In vitro・目玉)</text>
-<text x="25" y="642.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・G'&gt;G'' 安定なゲルネットワーク</text>
-<text x="25" y="655.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・大歪500%でゾル化→低歪で即G'回復</text>
-<text x="25" y="667.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・複数サイクルで再現 → 自己修復を実証</text>
-<rect x="25" y="693.5" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="25" y1="693.5" x2="272.6666666666667" y2="844.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="25" y1="844.0" x2="272.6666666666667" y2="693.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="148.83333333333334" y="772.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: Time sweep / ステップ歪み</text>
-<rect x="289.6666666666667" y="356" width="261.6666666666667" height="242.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="289.6666666666667" y="356" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="289.6666666666667" y="366" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="371" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">② ゲル化時間の制御 (In vitro)</text>
-<text x="296.6666666666667" y="390" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・世代↑・PGD比↑でゲル化時間を短縮</text>
-<text x="296.6666666666667" y="402.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG4-025: 2分 / PG3-1: 67分</text>
-<text x="296.6666666666667" y="415.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・架橋点密度に依存</text>
-<rect x="296.6666666666667" y="441.0" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="441.0" x2="544.3333333333334" y2="591.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="591.5" x2="544.3333333333334" y2="441.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="520.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ゲル化時間 vs アミノ基比</text>
-<rect x="289.6666666666667" y="608.5" width="261.6666666666667" height="242.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="289.6666666666667" y="608.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="289.6666666666667" y="618.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="296.6666666666667" y="623.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">③ in vitro 分解性〔新〕</text>
-<text x="296.6666666666667" y="642.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中で分解、滞留期間を制御</text>
-<text x="296.6666666666667" y="655.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG3-1:3日 / PG4-025:25日</text>
-<text x="296.6666666666667" y="667.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 数日〜数週間で任意に制御</text>
-<rect x="296.6666666666667" y="693.5" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="296.6666666666667" y1="693.5" x2="544.3333333333334" y2="844.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="296.6666666666667" y1="844.0" x2="544.3333333333334" y2="693.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="420.5" y="772.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線</text>
-<rect x="561.3333333333334" y="356" width="261.6666666666667" height="242.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="356" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="561.3333333333334" y="366" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="371" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">④ 生体適合性｜Live/Dead〔新〕</text>
-<text x="568.3333333333334" y="390" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞を3次元ゲル内に包埋し培養</text>
-<text x="568.3333333333334" y="402.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・1/5/9日とも死細胞はほぼ無し</text>
-<text x="568.3333333333334" y="415.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 化学架橋剤なしで高生存率</text>
-<rect x="568.3333333333334" y="441.0" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="441.0" x2="816.0" y2="591.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="591.5" x2="816.0" y2="441.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="520.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: Live/Dead 蛍光像</text>
-<rect x="561.3333333333334" y="608.5" width="261.6666666666667" height="242.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
-<rect x="561.3333333333334" y="608.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
-<rect x="561.3333333333334" y="618.5" width="261.6666666666667" height="10" fill="#2563eb"/>
-<text x="568.3333333333334" y="623.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑤ in vitro 注入試験〔新〕</text>
-<text x="568.3333333333334" y="642.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・赤色化PG4-0125をシリンジから吐出</text>
-<text x="568.3333333333334" y="655.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・針内でゾル化→吐出後に即ゲル化</text>
-<text x="568.3333333333334" y="667.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 液だれせず形状を保持(自己修復)</text>
-<rect x="568.3333333333334" y="693.5" width="247.66666666666669" height="150.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="568.3333333333334" y1="693.5" x2="816.0" y2="844.0" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="568.3333333333334" y1="844.0" x2="816.0" y2="693.5" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="692.1666666666667" y="772.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入の連続写真</text>
-<rect x="18" y="861" width="805" height="250" rx="8" fill="#ffe3d3" stroke="#ea580c" stroke-width="2"/>
-<rect x="18" y="861" width="805" height="22" rx="8" fill="#ea580c"/>
-<rect x="18" y="873" width="805" height="10" fill="#ea580c"/>
-<text x="30" y="877" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">C. In vivo マウス皮下注入試験（実用性・目玉）〔新データ〕</text>
-<text x="32" y="903" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">・香港大 Sang-Jin Lee 先生との共同研究</text>
-<text x="32" y="920" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">・PG4-0125(0.25 mL)をマウス背部皮下へ注入</text>
-<text x="32" y="937" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">・シアシニング性により抵抗なくスムーズに注入</text>
-<text x="32" y="954" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">・皮下で即座に超分子ネットワークを再構築(自己修復)</text>
-<text x="32" y="971" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">→ 局所に明瞭なドーム状デポを形成し定着</text>
-<text x="32" y="988" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#222" font-weight="normal" text-anchor="start">→ 低侵襲な局所投与キャリアとしての実用性を実証</text>
-<rect x="487.0" y="891" width="322.0" height="210" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
-<line x1="487.0" y1="891" x2="809.0" y2="1101" stroke="#b0bcc7" stroke-width="0.8"/>
-<line x1="487.0" y1="1101" x2="809.0" y2="891" stroke="#b0bcc7" stroke-width="0.8"/>
-<text x="648.0" y="1000.0" font-family="IPAGothic, sans-serif" font-size="10" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vivo マウス皮下デポ写真(大きく)</text>
+<rect x="568.3333333333334" y="263" width="247.66666666666669" height="66" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="263" x2="816.0" y2="329" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="329" x2="816.0" y2="263" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="300.0" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: PGD+GC 超分子ゲル形成(中心図)</text>
+<rect x="18" y="346" width="805" height="26" rx="5" fill="#33506b"/>
+<text x="30" y="364" font-family="IPAGothic, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="start">Results &amp; Discussion ｜ データ（左→右で研究の流れ）</text>
+<rect x="18" y="378" width="261.6666666666667" height="237.66666666666666" rx="6" fill="#fdf0d5" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="18" y="378" width="261.6666666666667" height="20" rx="6" fill="#c9962a"/>
+<rect x="18" y="388" width="261.6666666666667" height="10" fill="#c9962a"/>
+<text x="25" y="393" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">① PGD G4 の精密合成〔新〕</text>
+<text x="25" y="412" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・Divergent法(全8段階)で単分散PGD G4を合成</text>
+<text x="25" y="424.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・撹拌強化+反応時間2倍で高世代を最適化</text>
+<text x="25" y="437.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・収率90%, MALDI単一ピーク[M+Na]+=3488</text>
+<rect x="25" y="449.0" width="247.66666666666669" height="159.66666666666666" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="449.0" x2="272.6666666666667" y2="608.6666666666666" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="608.6666666666666" x2="272.6666666666667" y2="449.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="532.8333333333334" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: MALDI(最適化前後) / 収率表</text>
+<rect x="18" y="625.6666666666666" width="261.6666666666667" height="237.66666666666666" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="18" y="625.6666666666666" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="18" y="635.6666666666666" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="25" y="640.6666666666666" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">② 自己修復性 (レオロジー)〔目玉〕</text>
+<text x="25" y="659.6666666666666" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・せん断除去で G' が即座に回復</text>
+<text x="25" y="672.1666666666666" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・元の強固なゲル構造へ再構築</text>
+<text x="25" y="684.6666666666666" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・複数サイクルで再現性よく回復</text>
+<rect x="25" y="696.6666666666666" width="247.66666666666669" height="159.66666666666666" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="696.6666666666666" x2="272.6666666666667" y2="856.3333333333333" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="856.3333333333333" x2="272.6666666666667" y2="696.6666666666666" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="780.5" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: ステップ歪みサイクル (G'/G'')</text>
+<rect x="18" y="873.3333333333333" width="261.6666666666667" height="237.66666666666666" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="18" y="873.3333333333333" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="18" y="883.3333333333333" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="25" y="888.3333333333333" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">③ シアシニング性 (レオロジー)</text>
+<text x="25" y="907.3333333333333" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・高せん断でゲルが流動化(ゾル化)</text>
+<text x="25" y="919.8333333333333" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・粘度が急低下 → 注射針を通過可能</text>
+<text x="25" y="932.3333333333333" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・大歪500%で G'&lt;G''</text>
+<rect x="25" y="944.3333333333334" width="247.66666666666669" height="159.66666666666666" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="25" y1="944.3333333333334" x2="272.6666666666667" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="25" y1="1104.0" x2="272.6666666666667" y2="944.3333333333334" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="148.83333333333334" y="1028.1666666666667" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: せん断速度-粘度 / 大歪での G'低下</text>
+<rect x="289.6666666666667" y="378" width="261.6666666666667" height="361.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="289.6666666666667" y="378" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="289.6666666666667" y="388" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="296.6666666666667" y="393" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">④ In vitro 安全性｜Live/Dead〔新〕</text>
+<text x="296.6666666666667" y="412" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・D1細胞を3次元ゲル内に包埋し培養</text>
+<text x="296.6666666666667" y="424.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・1/5/9日とも死細胞はほぼ観察されず</text>
+<text x="296.6666666666667" y="437.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・溶解後も毒性なし</text>
+<text x="296.6666666666667" y="449.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 化学架橋剤なしで高い細胞生存率</text>
+<rect x="296.6666666666667" y="463.0" width="247.66666666666669" height="269.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="296.6666666666667" y1="463.0" x2="544.3333333333334" y2="732.5" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="296.6666666666667" y1="732.5" x2="544.3333333333334" y2="463.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="420.5" y="601.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: Live/Dead 蛍光像 (PG3-1 / PG4-025 / PG4-0125 ×1・5・9日)</text>
+<rect x="289.6666666666667" y="749.5" width="261.6666666666667" height="361.5" rx="6" fill="#dbeafe" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="289.6666666666667" y="749.5" width="261.6666666666667" height="20" rx="6" fill="#2563eb"/>
+<rect x="289.6666666666667" y="759.5" width="261.6666666666667" height="10" fill="#2563eb"/>
+<text x="296.6666666666667" y="764.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑤ In vitro 分解性〔新〕</text>
+<text x="296.6666666666667" y="783.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・37℃ PBS中の重量変化で分解を評価</text>
+<text x="296.6666666666667" y="796.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・PG3-1:3日 / PG4-0125:4日 / PG4-025:25日</text>
+<text x="296.6666666666667" y="808.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・世代・混合比で滞留期間を制御</text>
+<text x="296.6666666666667" y="821.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・→ 数日〜数週間で任意に制御可能</text>
+<rect x="296.6666666666667" y="834.5" width="247.66666666666669" height="269.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="296.6666666666667" y1="834.5" x2="544.3333333333334" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="296.6666666666667" y1="1104.0" x2="544.3333333333334" y2="834.5" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="420.5" y="973.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: 分解曲線 (重量比 vs 時間)</text>
+<rect x="561.3333333333334" y="378" width="261.6666666666667" height="361.5" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="561.3333333333334" y="378" width="261.6666666666667" height="20" rx="6" fill="#ea580c"/>
+<rect x="561.3333333333334" y="388" width="261.6666666666667" height="10" fill="#ea580c"/>
+<text x="568.3333333333334" y="393" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑥ 注入試験 (In vitro &amp; In vivo)〔新〕</text>
+<text x="568.3333333333334" y="412" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・in vitro: 赤色化ゲルをシリンジ吐出→即ゲル化</text>
+<text x="568.3333333333334" y="424.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・in vivo: マウス背部皮下へ注入(0.25 mL)</text>
+<text x="568.3333333333334" y="437.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・抵抗なく注入→局所にドーム状デポを形成</text>
+<text x="568.3333333333334" y="449.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・香港大 Sang-Jin Lee先生と共同研究</text>
+<rect x="568.3333333333334" y="463.0" width="247.66666666666669" height="269.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="463.0" x2="816.0" y2="732.5" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="732.5" x2="816.0" y2="463.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="601.75" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: in vitro 注入写真 / in vivo マウス皮下デポ写真</text>
+<rect x="561.3333333333334" y="749.5" width="261.6666666666667" height="361.5" rx="6" fill="#ffe3d3" stroke="#90a4b5" stroke-width="1.2"/>
+<rect x="561.3333333333334" y="749.5" width="261.6666666666667" height="20" rx="6" fill="#ea580c"/>
+<rect x="561.3333333333334" y="759.5" width="261.6666666666667" height="10" fill="#ea580c"/>
+<text x="568.3333333333334" y="764.5" font-family="IPAGothic, sans-serif" font-size="10.5" fill="#ffffff" font-weight="bold" text-anchor="start">⑦ In vivo 分解試験 (H&amp;E染色)〔要データ〕</text>
+<text x="568.3333333333334" y="783.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・皮下デポの経時的な分解・吸収を評価</text>
+<text x="568.3333333333334" y="796.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・H&amp;E染色で組織反応・分解挙動を観察</text>
+<text x="568.3333333333334" y="808.5" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">・(生分解性・生体適合性を組織学的に確認)</text>
+<text x="568.3333333333334" y="821.0" font-family="IPAGothic, sans-serif" font-size="9.2" fill="#222" font-weight="normal" text-anchor="start">※元データは別途提供をお願いします</text>
+<rect x="568.3333333333334" y="834.5" width="247.66666666666669" height="269.5" rx="3" fill="#ffffff" stroke="#b0bcc7" stroke-width="1"/>
+<line x1="568.3333333333334" y1="834.5" x2="816.0" y2="1104.0" stroke="#b0bcc7" stroke-width="0.8"/>
+<line x1="568.3333333333334" y1="1104.0" x2="816.0" y2="834.5" stroke="#b0bcc7" stroke-width="0.8"/>
+<text x="692.1666666666667" y="973.25" font-family="IPAGothic, sans-serif" font-size="8.6" fill="#6b7884" font-weight="normal" text-anchor="middle">図: H&amp;E染色 組織像 (経時)</text>
 <rect x="18" y="1121" width="805" height="50" rx="6" fill="#d8f3dc" stroke="#2d6a4f" stroke-width="1.2"/>
 <text x="28" y="1139" font-family="IPAGothic, sans-serif" font-size="11" fill="#1d3a2a" font-weight="bold" text-anchor="start">Conclusion:</text>
 <text x="113" y="1139" font-family="IPAGothic, sans-serif" font-size="9.3" fill="#1d3a2a" font-weight="normal" text-anchor="start">単分散PGD G4を確立 → 水素結合で超分子ゲル形成（自己修復・分解性を制御, 高生体適合性） → in vivoで局所デポを形成し実用性を実証</text>

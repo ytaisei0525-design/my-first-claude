@@ -74,7 +74,7 @@ cw = W - 2*M
 
 # ===== Introduction(全幅・上部)=====
 iy = hy + hh + gap
-ih = 198
+ih = 220
 sectionbar(cx, iy, cw, "Introduction ｜ 背景・着眼点・目的", C_HEADER)
 sub_y = iy + 32
 sub_h = ih - 32
@@ -89,31 +89,29 @@ panel(sx0, sub_y, sub_w, sub_h, "化学療法の課題",
        "・PTXは水溶解度<0.5µg/mL",
        "・可溶化剤Cremophor ELが重篤毒性",
        "→ 無毒可溶化+局所投与のDDSが必要"],
-      C_INTRO, bar="#4a6178", fig="図: PTX/CrEL構造・0.7%模式図", fig_h=52)
+      C_INTRO, bar="#4a6178", fig="図: PTX/CrEL構造・0.7%模式図", fig_h=66)
 panel(sx1, sub_y, sub_w, sub_h, "着眼点: 2機能を1材料で",
       ["・PGD: 単分散・中間水・生体適合性",
        "・単分子ハイドロトロープ機能",
        "  → PTXを高可溶化(PEG400の約10倍)",
        "・shear-thinning型: 注入後に自己修復",
        "  → 液だれせず患部に留まる"],
-      C_INTRO, bar="#4a6178", fig="図: PGD構造 / 溶解度 / shear機構", fig_h=52)
+      C_INTRO, bar="#4a6178", fig="図: PGD構造 / 溶解度 / shear機構", fig_h=66)
 panel(sx2, sub_y, sub_w, sub_h, "目的・戦略",
       ["目的: ハイドロトロープ機能と自己修復性を",
        "両立した注入ゲルの開発",
        "戦略: PGD+GCの水素結合(物理架橋)で",
        "自発形成する超分子ハイドロゲルを利用",
        "→ PGDがPTXを高濃度保持し局所徐放"],
-      C_INTRO, bar="#4a6178", fig="図: PGD+GC 超分子ゲル形成(中心図)", fig_h=52)
+      C_INTRO, bar="#4a6178", fig="図: PGD+GC 超分子ゲル形成(中心図)", fig_h=66)
 
 # ===== Results & Discussion(データ)=====
 ry = iy + ih + gap
 sectionbar(cx, ry, cw, "Results & Discussion ｜ データ（左→右で研究の流れ）", "#33506b")
 
-# 下部バンドの位置を先に確保
-band_conc_h = 50      # 結論は薄い帯に縮小
-band_inject_h = 250   # In vivoを全幅で大きく
+# 下部は薄い結論帯のみ(In vivo帯は廃止)
+band_conc_h = 50
 conc_y = H - M - band_conc_h
-inj_y = conc_y - gap - band_inject_h
 
 # データ用カラム領域
 colw = (cw - 2*gap) / 3
@@ -122,76 +120,57 @@ dx1 = cx + colw + gap
 dx2 = cx + 2*(colw + gap)
 
 data_y = ry + 32
-data_bottom = inj_y - gap
+data_bottom = conc_y - gap
 data_h = data_bottom - data_y
 
-# --- 各列2枚ずつ(計6枚)で高さを均等化 ---
-ph = (data_h - gap) / 2
-fh = ph - 92  # 各パネルの図枠高さ(本文3〜4行ぶんを上に確保)
-yt = data_y
-yb = data_y + ph + gap
+# 左列=3枚, 中列=2枚, 右列=2枚
+ph3 = (data_h - 2*gap) / 3
+ph2 = (data_h - gap) / 2
 
-# Col1: 合成 + レオロジー(自己修復)
-panel(dx0, yt, colw, ph, "① PGD G4 の精密合成〔新〕",
+# ---- 左列: 合成 → 自己修復性 → シアシニング ----
+panel(dx0, data_y, colw, ph3, "① PGD G4 の精密合成〔新〕",
       ["・Divergent法(全8段階)で単分散PGD G4を合成",
        "・撹拌強化+反応時間2倍で高世代を最適化",
        "・収率90%, MALDI単一ピーク[M+Na]+=3488"],
-      C_MAT, bar="#c9962a", fig="図: MALDI(最適化前後) / 収率表", fig_h=fh)
-panel(dx0, yb, colw, ph, "レオロジー｜自己修復性 (In vitro・目玉)",
-      ["・G'>G'' 安定なゲルネットワーク",
-       "・大歪500%でゾル化→低歪で即G'回復",
-       "・複数サイクルで再現 → 自己修復を実証"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: Time sweep / ステップ歪み", fig_h=fh)
+      C_MAT, bar="#c9962a", fig="図: MALDI(最適化前後) / 収率表", fig_h=ph3-78)
+panel(dx0, data_y+ph3+gap, colw, ph3, "② 自己修復性 (レオロジー)〔目玉〕",
+      ["・せん断除去で G' が即座に回復",
+       "・元の強固なゲル構造へ再構築",
+       "・複数サイクルで再現性よく回復"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: ステップ歪みサイクル (G'/G'')", fig_h=ph3-78)
+panel(dx0, data_y+2*(ph3+gap), colw, ph3, "③ シアシニング性 (レオロジー)",
+      ["・高せん断でゲルが流動化(ゾル化)",
+       "・粘度が急低下 → 注射針を通過可能",
+       "・大歪500%で G'<G''"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: せん断速度-粘度 / 大歪での G'低下", fig_h=ph3-78)
 
-# Col2: ゲル化時間 + 分解性
-panel(dx1, yt, colw, ph, "② ゲル化時間の制御 (In vitro)",
-      ["・世代↑・PGD比↑でゲル化時間を短縮",
-       "・PG4-025: 2分 / PG3-1: 67分",
-       "・架橋点密度に依存"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: ゲル化時間 vs アミノ基比", fig_h=fh)
-panel(dx1, yb, colw, ph, "③ in vitro 分解性〔新〕",
-      ["・37℃ PBS中で分解、滞留期間を制御",
-       "・PG3-1:3日 / PG4-025:25日",
-       "・→ 数日〜数週間で任意に制御"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線", fig_h=fh)
-
-# Col3: Live/Dead + in vitro 注入試験
-panel(dx2, yt, colw, ph, "④ 生体適合性｜Live/Dead〔新〕",
+# ---- 中列: In vitro 安全性 → 分解性 ----
+panel(dx1, data_y, colw, ph2, "④ In vitro 安全性｜Live/Dead〔新〕",
       ["・D1細胞を3次元ゲル内に包埋し培養",
-       "・1/5/9日とも死細胞はほぼ無し",
-       "・→ 化学架橋剤なしで高生存率"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: Live/Dead 蛍光像", fig_h=fh)
-panel(dx2, yb, colw, ph, "⑤ in vitro 注入試験〔新〕",
-      ["・赤色化PG4-0125をシリンジから吐出",
-       "・針内でゾル化→吐出後に即ゲル化",
-       "・→ 液だれせず形状を保持(自己修復)"],
-      C_VITRO, bar=C_VITRO_BAR, fig="図: in vitro 注入の連続写真", fig_h=fh)
+       "・1/5/9日とも死細胞はほぼ観察されず",
+       "・溶解後も毒性なし",
+       "・→ 化学架橋剤なしで高い細胞生存率"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: Live/Dead 蛍光像 (PG3-1 / PG4-025 / PG4-0125 ×1・5・9日)", fig_h=ph2-92)
+panel(dx1, data_y+ph2+gap, colw, ph2, "⑤ In vitro 分解性〔新〕",
+      ["・37℃ PBS中の重量変化で分解を評価",
+       "・PG3-1:3日 / PG4-0125:4日 / PG4-025:25日",
+       "・世代・混合比で滞留期間を制御",
+       "・→ 数日〜数週間で任意に制御可能"],
+      C_VITRO, bar=C_VITRO_BAR, fig="図: 分解曲線 (重量比 vs 時間)", fig_h=ph2-92)
 
-# ===== C. In vivo マウス皮下注入試験(全幅・単独・目玉)=====
-rect(cx, inj_y, cw, band_inject_h, C_VIVO, stroke=C_VIVO_BAR, rx=8, sw=2)
-add(f'<rect x="{cx}" y="{inj_y}" width="{cw}" height="22" rx="8" fill="{C_VIVO_BAR}"/>')
-add(f'<rect x="{cx}" y="{inj_y+12}" width="{cw}" height="10" fill="{C_VIVO_BAR}"/>')
-text(cx+12, inj_y+16, "C. In vivo マウス皮下注入試験（実用性・目玉）〔新データ〕",
-     size=14, color="#ffffff", weight="bold")
-# 左テキスト
-vtx = cx + 14
-ty = inj_y + 42
-for ln in ["・香港大 Sang-Jin Lee 先生との共同研究",
-           "・PG4-0125(0.25 mL)をマウス背部皮下へ注入",
-           "・シアシニング性により抵抗なくスムーズに注入",
-           "・皮下で即座に超分子ネットワークを再構築(自己修復)",
-           "→ 局所に明瞭なドーム状デポを形成し定着",
-           "→ 低侵襲な局所投与キャリアとしての実用性を実証"]:
-    text(vtx, ty, ln, size=10.5, color="#222"); ty += 17
-# 右に大きな図枠
-fvw = cw * 0.40
-fvx = cx + cw - fvw - 14
-fvy = inj_y + 30
-fvh = band_inject_h - 40
-rect(fvx, fvy, fvw, fvh, C_FIG, stroke=C_FIGB, rx=3, sw=1)
-add(f'<line x1="{fvx}" y1="{fvy}" x2="{fvx+fvw}" y2="{fvy+fvh}" stroke="{C_FIGB}" stroke-width="0.8"/>')
-add(f'<line x1="{fvx}" y1="{fvy+fvh}" x2="{fvx+fvw}" y2="{fvy}" stroke="{C_FIGB}" stroke-width="0.8"/>')
-text(fvx+fvw/2, fvy+fvh/2+4, "図: in vivo マウス皮下デポ写真(大きく)", size=10, color="#6b7884", anchor="middle")
+# ---- 右列: 注入試験(In vitro & In vivo) → In vivo 分解試験(H&E) ----
+panel(dx2, data_y, colw, ph2, "⑥ 注入試験 (In vitro & In vivo)〔新〕",
+      ["・in vitro: 赤色化ゲルをシリンジ吐出→即ゲル化",
+       "・in vivo: マウス背部皮下へ注入(0.25 mL)",
+       "・抵抗なく注入→局所にドーム状デポを形成",
+       "・香港大 Sang-Jin Lee先生と共同研究"],
+      C_VIVO, bar=C_VIVO_BAR, fig="図: in vitro 注入写真 / in vivo マウス皮下デポ写真", fig_h=ph2-92)
+panel(dx2, data_y+ph2+gap, colw, ph2, "⑦ In vivo 分解試験 (H&E染色)〔要データ〕",
+      ["・皮下デポの経時的な分解・吸収を評価",
+       "・H&E染色で組織反応・分解挙動を観察",
+       "・(生分解性・生体適合性を組織学的に確認)",
+       "※元データは別途提供をお願いします"],
+      C_VIVO, bar=C_VIVO_BAR, fig="図: H&E染色 組織像 (経時)", fig_h=ph2-92)
 
 # ===== Conclusion(最下段・全幅・薄い帯)=====
 rect(cx, conc_y, cw, band_conc_h, C_CONC, stroke="#2d6a4f", rx=6, sw=1.2)
