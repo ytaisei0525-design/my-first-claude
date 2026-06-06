@@ -127,7 +127,7 @@ panel(sxs[2], sub_y, sw3, sub_h, "目的・戦略",
 ry = iy + ih + gap
 sectionbar(cx, ry, cw, "Results & Discussion", SEC)
 
-band_conc_h = 52
+band_conc_h = 66
 conc_y = H - M - band_conc_h
 
 colw = (cw - 2*gap)/3
@@ -206,6 +206,13 @@ text(cx+95, conc_y+18, "単分散PGD G4を確立 → 水素結合で超分子ゲ
 text(cx+10, conc_y+38, "Future:", size=10, color=SEC, weight="bold")
 text(cx+62, conc_y+38, "PTX徐放定量(HPLC) / 担がんマウスで抗腫瘍効果 / PGD G5合成 / DSCで中間水評価",
      size=8.8, color="#3a4a55")
+# 謝辞 + 参考文献(最下行・小フォント)
+add(f'<line x1="{cx+10}" y1="{conc_y+46}" x2="{cx+cw-10}" y2="{conc_y+46}" stroke="#bcd0bf" stroke-width="0.8"/>')
+text(cx+10, conc_y+59, "謝辞:", size=8.5, color="#2d6a4f", weight="bold")
+text(cx+44, conc_y+59,
+     "本研究の in vivo 試験は香港大学 Sang-Jin Lee 先生との共同研究による。"
+     "　　Ref: Ooya, Gels 2022 / Cho & Ooya, Chem. Asian J. 2018 / Yamazaki, Langmuir 2021 ほか",
+     size=8, color="#3a4a55")
 
 add('</svg>')
 open("poster/poster_v2.svg","w",encoding="utf-8").write("\n".join(svg))
