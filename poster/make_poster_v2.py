@@ -210,7 +210,7 @@ text(cx+62, conc_y+38, "PTX徐放定量(HPLC) / 担がんマウスで抗腫瘍�
 add(f'<line x1="{cx+10}" y1="{conc_y+46}" x2="{cx+cw-10}" y2="{conc_y+46}" stroke="#bcd0bf" stroke-width="0.8"/>')
 text(cx+10, conc_y+59, "謝辞:", size=8.5, color="#2d6a4f", weight="bold")
 text(cx+44, conc_y+59,
-     "本研究の in vivo 試験は香港大学 Sang-Jin Lee 先生との共同研究による。"
+     "in vivo 試験にご協力いただいた香港大学 Sang-Jin Lee 先生に深く感謝いたします。"
      "　　Ref: Ooya, Gels 2022 / Cho & Ooya, Chem. Asian J. 2018 / Yamazaki, Langmuir 2021 ほか",
      size=8, color="#3a4a55")
 
